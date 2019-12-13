@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="h1tler's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="CTF中的web总结基础知识Mysql,Oracle,Mssql,Access等SQL语法的细微区别熟悉和掌握手工sql注入所使用的语句学会PHP,Java,JavaScript,Python,Python,Lua等编程中的一种或多种学会配置Tomcat,IIS,Apache,Nginx等web服务器，了解配置信息及一些漏洞。 web基础简介一、爆破，包括md5、爆破随机数、验证码识别等二、绕WA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CTF中的web总结">
+<meta property="og:url" content="http://www.cuittk.cn/2018/11/10/CTF中的web总结/index.html">
+<meta property="og:site_name" content="h1tler&#39;s blog">
+<meta property="og:description" content="CTF中的web总结基础知识Mysql,Oracle,Mssql,Access等SQL语法的细微区别熟悉和掌握手工sql注入所使用的语句学会PHP,Java,JavaScript,Python,Python,Lua等编程中的一种或多种学会配置Tomcat,IIS,Apache,Nginx等web服务器，了解配置信息及一些漏洞。 web基础简介一、爆破，包括md5、爆破随机数、验证码识别等二、绕WA">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-10T09:12:32.158Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CTF中的web总结">
+<meta name="twitter:description" content="CTF中的web总结基础知识Mysql,Oracle,Mssql,Access等SQL语法的细微区别熟悉和掌握手工sql注入所使用的语句学会PHP,Java,JavaScript,Python,Python,Lua等编程中的一种或多种学会配置Tomcat,IIS,Apache,Nginx等web服务器，了解配置信息及一些漏洞。 web基础简介一、爆破，包括md5、爆破随机数、验证码识别等二、绕WA">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.cuittk.cn/2018/11/10/CTF中的web总结/"/>
+
+
+
+
+
+  <title>CTF中的web总结 | h1tler's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">h1tler's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/CTF中的web总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="h1tler">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/2.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="h1tler's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CTF中的web总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-10T17:12:32+08:00">
+                2018-11-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web安全/" itemprop="url" rel="index">
+                    <span itemprop="name">web安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="CTF中的web总结"><a href="#CTF中的web总结" class="headerlink" title="CTF中的web总结"></a>CTF中的web总结</h2><h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><p>Mysql,Oracle,Mssql,Access等SQL语法的细微区别<br>熟悉和掌握手工sql注入所使用的语句<br>学会PHP,Java,JavaScript,Python,Python,Lua等编程中的一种或多种<br>学会配置Tomcat,IIS,Apache,Nginx等web服务器，了解配置信息及一些漏洞。</p>
+<h3 id="web基础简介"><a href="#web基础简介" class="headerlink" title="web基础简介"></a>web基础简介</h3><p>一、爆破，包括md5、爆破随机数、验证码识别等<br>二、绕WAF，包括花式绕Mysql、绕文件读取关键词检测之类拦截等<br>三、花式玩弄几个PHP特性，包括弱类型，strpos和===，反序列化+destruct、\0截断、iconv截断等<br>四、密码题，包括hash长度扩展、异或、移位加密各种变形、32位随机数过小、CBC翻转攻击等<br>五、各种找源码技巧，包括git、svn、xxx.php.swp、ww w.(zip|tar.gz|rar|7z)、xxx.php.bak、.git、.DS_Store<br>六、文件上传，包括花式文件后缀 .php345 .inc .phtml .phpt .phps、各种文件内容检测&lt;?php &lt;? &lt;% &lt;\script language=php&gt;、花式解析漏洞<br>七、Mysql类型差异，包括和PHP弱类型类似的特性,0x、0b、0e之类，varchar和integer相互转换,非strict模式截断等<br>八、open_basedir、disable_functions花式绕过技巧，包括dl、mail、imagick、bash漏洞、DirectoryIterator及各种二进制选手插足的方法<br>九、条件竞争，包括竞争删除前生成shell、竞争数据库无锁多扣钱<br>十、社工，包括花式查社工库、微博、QQ签名、whois<br>十一、windows特性，包括文件名、IIS解析漏洞、NTFS文件系统通配符、::$DATA，冒号截断<br>十二、SSRF，包括花式探测端口，302跳转、花式协议利用、gophar直接取shell等<br>十三、XSS，各种浏览器auditor绕过、富文本过滤黑白名单绕过、flash xss、CSP绕过<br>十四、XXE，各种XML存在地方（rss/word/流媒体）、各种XXE利用方法（SSRF、文件读取）<br>十五、协议，花式IP伪造 X-Forwarded-For/X-Client-IP/X-Real-IP/CDN-Src-IP、花式改UA，花式藏FLAG、花式分析数据包  </p>
+<h3 id="web总结"><a href="#web总结" class="headerlink" title="web总结"></a>web总结</h3><h4 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h4><ul>
+<li>robot.txt</li>
+<li>vim_swap_file</li>
+<li>-.pyc</li>
+<li>.DS_Store</li>
+<li>.git</li>
+<li>.svn</li>
+<li>bak file</li>
+<li>comment</li>
+</ul>
+<p>为什么找源码是CTF比赛必备技巧？<br>《出题人心理学》<br>    代码审计类题目<br>    获取源码的过程也是考点之一<br>    题目脑洞太大，不得不给源码<br>哪些极其可能存在源码泄露的题（套）目（路）</p>
+<ul>
+<li>一个登陆框</li>
+<li>页面只有一两行字</li>
+<li>页面中包含Powered by XXX</li>
+</ul>
+<h4 id="waf"><a href="#waf" class="headerlink" title="waf"></a>waf</h4><ul>
+<li>整数溢出过waf<br><a href="https://github.com/Bypass007/vuln/blob/master/OpenResty/OpenResty%20uri%E5%8F%82%E6%95%B0%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9E.md" target="_blank" rel="external">https://github.com/Bypass007/vuln/blob/master/OpenResty/OpenResty%20uri%E5%8F%82%E6%95%B0%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9E.md</a></li>
+<li>字符替换空型waf<br>绕过:ununionion、UniON</li>
+<li>特殊字符（串）拦截型waf<br>绕过：&amp;&amp;、Mysql注释符:/<em>*/,/\</em>!条件注释*,–,;%00</li>
+</ul>
+<h4 id="CTF-Trick"><a href="#CTF-Trick" class="headerlink" title="CTF Trick"></a>CTF Trick</h4><p>PHP弱类型<br>序列化/反序列化<br>XSS+CSRF+SSRF+RCE+Upload<br>源码审计</p>
+<h5 id="PHP弱类型"><a href="#PHP弱类型" class="headerlink" title="PHP弱类型"></a>PHP弱类型</h5><p>第一层<br>var_dump(“0e321” == “00e123”);//bool(true)<br>只要md5是0e开头。后面纯数字的情况才会把字符串转成科学计数法，0的N次方=0<br>md5(‘240610708’) //0e462097431906509019562988736854<br>md5(‘QNKCDZO’) //0e830400451993494058024219903391<br>第二层<br>s1[]=1&amp;s2[]=2<br>第三层<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;!--</div><div class="line">	if((string)$_POST[&apos;param1&apos;]!==(string)$_POST[&apos;param2&apos;] &amp;&amp; md5($_POST[&apos;param1&apos;])===md5($_POST[&apos;param2&apos;]))&#123;</div><div class="line">			die(&quot;success!);</div><div class="line">		&#125;</div><div class="line">--&gt;</div></pre></td></tr></table></figure></p>
+<p>使用强字符串转换，听说是去年的BKPCTF改的一题（没做过）<br>传URLencode后的二进制,payload:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Param1=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2</div><div class="line">Param2=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2</div></pre></td></tr></table></figure></p>
+<h5 id="序列化-反序列化"><a href="#序列化-反序列化" class="headerlink" title="序列化/反序列化"></a>序列化/反序列化</h5><p>serialize($data)/unserialize($data)<br>preg_match( “/^{$token}:[0-9]+:/s”, $data );正则绕过+8=8</p>
+<h5 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h5><ol>
+<li>反射型XSS</li>
+<li>存储型XSS</li>
+<li>Dom-XSS</li>
+<li>跨域问题</li>
+<li>同源</li>
+</ol>
+<h5 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h5><p>html css flash</p>
+<h4 id="SQLi"><a href="#SQLi" class="headerlink" title="SQLi"></a>SQLi</h4><h4 id="文件包含和文件上传"><a href="#文件包含和文件上传" class="headerlink" title="文件包含和文件上传"></a>文件包含和文件上传</h4><p>伪协议</p>
+<ul>
+<li>php://filter/convert.base64-encode/resource=index.php</li>
+<li>php://input</li>
+<li>zip://archive.zip#dir/file.txt</li>
+<li>zlib://</li>
+<li>ftp://</li>
+<li>data:image/png;base64,PD9waH==</li>
+</ul>
+<p>花式文件后缀<br>.php345 .inc .phtml .phpt .phps<br>各种文件内容检测&lt;?php &lt;? &lt;% &lt;\script language=php&gt; &lt;?=<br>花式解析漏洞.php.jpg<br>各种校验<br>.htaccess文件</p>
+<h4 id="危险函数"><a href="#危险函数" class="headerlink" title="危险函数"></a>危险函数</h4><h5 id="PHP代码执行相关函数"><a href="#PHP代码执行相关函数" class="headerlink" title="PHP代码执行相关函数"></a>PHP代码执行相关函数</h5><p>eval &amp; assert &amp; preg_replace &amp; call_user_func &amp; create_function &amp; array_map</p>
+<h6 id="eval-函数——把字符串作为PHP代码执行"><a href="#eval-函数——把字符串作为PHP代码执行" class="headerlink" title="eval()函数——把字符串作为PHP代码执行"></a>eval()函数——把字符串作为PHP代码执行</h6><h6 id="assert-函数——检查一个断言是否为-FALSE。（把字符串-assertion-作为PHP代码执行）"><a href="#assert-函数——检查一个断言是否为-FALSE。（把字符串-assertion-作为PHP代码执行）" class="headerlink" title="assert()函数——检查一个断言是否为 FALSE。（把字符串 $assertion 作为PHP代码执行）"></a>assert()函数——检查一个断言是否为 FALSE。（把字符串 $assertion 作为PHP代码执行）</h6><h6 id="preg-replace-函数——-e-修正符使-preg-replace-将-replacement-参数当作-PHP-代码"><a href="#preg-replace-函数——-e-修正符使-preg-replace-将-replacement-参数当作-PHP-代码" class="headerlink" title="preg_replace()函数——/e 修正符使 preg_replace() 将 replacement 参数当作 PHP 代码"></a>preg_replace()函数——/e 修正符使 preg_replace() 将 replacement 参数当作 PHP 代码</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">preg_replace(&quot;/test/e&quot;,$_GET[&quot;h&quot;],&quot;jutst test&quot;);</div></pre></td></tr></table></figure>
+<p>7.0.0不再支持 /e修饰符。 请用 preg_replace_callback() 代替。<br>5.5.0 /e 修饰符已经被弃用了。使用 preg_replace_callback() 代替。</p>
+<h6 id="call-user-func-函数"><a href="#call-user-func-函数" class="headerlink" title="call_user_func()函数"></a>call_user_func()函数</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mixed call_user_func ( callable $callback [, mixed $parameter [, mixed $... ]] )</div></pre></td></tr></table></figure>
+<p>第一个参数 callback 是被调用的回调函数，其余参数是回调函数的参数。 传入call_user_func()的参数不能为引用传递。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">	call_user_func($_GET[&apos;hello&apos;],$_GET[&apos;world&apos;]);</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
+<p>http:127.0.0.1:/index.php?hello=assert&amp;world=phpinfo()</p>
+<h6 id="call-user-func-array-函数"><a href="#call-user-func-array-函数" class="headerlink" title="call_user_func_array()函数"></a>call_user_func_array()函数</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mixed call_user_func_array ( callable $callback , array $param_arr )</div></pre></td></tr></table></figure>
+<p>把第一个参数作为回调函数（callback）调用，把参数数组作（param_arr）为回调函数的的参数传入。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">	call_user_func_array($_GET[&apos;hello&apos;],$_GET[&apos;world&apos;]);</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
+<p>http:127.0.0.1:/index.php?hello=assert&amp;world[]=phpinfo()</p>
+<h6 id="create-function-函数——创建一个匿名函数"><a href="#create-function-函数——创建一个匿名函数" class="headerlink" title="create_function()函数——创建一个匿名函数"></a>create_function()函数——创建一个匿名函数</h6><p>创建一个匿名函数，并返回独一无二的函数名。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">//index.php?id=2;&#125;phpinfo();//</div><div class="line">$id=$_GET[&apos;id&apos;];</div><div class="line">$str2=&apos;echo  &apos;.$a.&apos;test&apos;.$id.&quot;;&quot;;</div><div class="line">echo $str2;</div><div class="line">echo &quot;&lt;br/&gt;&quot;;</div><div class="line">echo &quot;==============================&quot;;</div><div class="line">echo &quot;&lt;br/&gt;&quot;;</div><div class="line">$f1 = create_function(&apos;$a&apos;,$str2);</div><div class="line">echo &quot;&lt;br/&gt;&quot;;</div><div class="line">echo &quot;==============================&quot;;</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
+<p><a href="http://127.0.0.1/index.php?id=2;}phpinfo();//" target="_blank" rel="external">http://127.0.0.1/index.php?id=2;}phpinfo();//</a></p>
+<h6 id="array-map"><a href="#array-map" class="headerlink" title="array_map()"></a>array_map()</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">array array_map ( callable $callback , array $array1 [, array $... ] )</div></pre></td></tr></table></figure>
+<p>作用是为数组的每个元素应用回调函数 。其返回值为数组，是为 array1 每个元素应用 callback函数之后的数组。 callback 函数形参的数量和传给 array_map() 数组数量，两者必须一样。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">	$array = array(0,1,2,3,4,5);</div><div class="line">	array_map($_GET[&apos;chybeta&apos;],$array);</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
+<p><a href="http://127.0.0.1/index.php?chybeta=phpinfo" target="_blank" rel="external">http://127.0.0.1/index.php?chybeta=phpinfo</a></p>
+<h5 id="系统命令执行相关函数"><a href="#系统命令执行相关函数" class="headerlink" title="系统命令执行相关函数"></a>系统命令执行相关函数</h5><p>system &amp; passthru</p>
+<h6 id="system"><a href="#system" class="headerlink" title="system()"></a>system()</h6><p>system(“whoami”);</p>
+<h6 id="passthru"><a href="#passthru" class="headerlink" title="passthru()"></a>passthru()</h6><p>passthru(“whoami”);</p>
+<h6 id="exec"><a href="#exec" class="headerlink" title="exec()"></a>exec()</h6><p>echo exec(“whoami”);</p>
+<h6 id="pcntl-exec"><a href="#pcntl-exec" class="headerlink" title="pcntl_exec()"></a>pcntl_exec()</h6><p>pcntl_exec ( “/bin/bash” , array(“whoami”));</p>
+<h6 id="shell-exec"><a href="#shell-exec" class="headerlink" title="shell_exec()"></a>shell_exec()</h6><p>echo shell_exec(“whoami”);</p>
+<h6 id="popen"><a href="#popen" class="headerlink" title="popen()"></a>popen()</h6><p>打开一个指向进程的管道，该进程由派生给定的 command 命令执行而产生。 后面的mode，当为 ‘r’，返回的文件指针等于命令的 STDOUT，当为 ‘w’，返回的文件指针等于命令的 STDIN。<br>$handle = popen(“/bin/ls”, “r”);</p>
+<h6 id="proc-open"><a href="#proc-open" class="headerlink" title="proc_open()"></a>proc_open()</h6><p>cmd是要执行的命令，其余见<a href="http://php.net/manual/zh/function.proc-open.php" target="_blank" rel="external">文档</a></p>
+<h6 id="反单引号"><a href="#反单引号" class="headerlink" title="`(反单引号)"></a>`(反单引号)</h6><p>在php中称之为<strong>执行运算符</strong>，<strong>PHP 将尝试将反引号中的内容作为 shell 命令来执行</strong>，并将其输出信息返回（即，可以赋给一个变量而不是简单地丢弃到标准输出，使用反引号运算符“`”的效果与函数 shell_exec() 相同。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;?php echo `whoami`;?&gt;</div></pre></td></tr></table></figure></p>
+<h6 id="ob-start"><a href="#ob-start" class="headerlink" title="ob_start()"></a>ob_start()</h6><p>此函数将打开输出缓冲。当输出缓冲激活后，脚本将不会输出内容（除http标头外），相反需要输出的内容被存储在内部缓冲区中。想要输出存储在内部缓冲区中的内容，可以使用 ob_end_flush() 函数。</p>
+<p>可选参数 output_callback 函数可以被指定。 此函数把一个字符串当作参数并返回一个字符串。 当输出缓冲区被( ob_flush(), ob_clean() 或者相似的函数)冲刷（送出）或者被清洗的时候；或者在请求结束之际输出缓冲区内容被冲刷到浏览器的时候该函数将会被调用。 当调用 output_callback 时，它将收到输出缓冲区的内容作为参数 并预期返回一个新的输出缓冲区作为结果，这个新返回的输出缓冲区内容将被送到浏览器。</p>
+<p>下面的代码，由于调用了ob_end_flush()，所以会调用ob_start(cmd)中的cmd，把我们输入的_GET[a]作为cmd的参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">	$cmd = &apos;system&apos;;</div><div class="line">	ob_start($cmd);</div><div class="line">	echo &quot;$_GET[a]&quot;;</div><div class="line">	ob_end_flush();</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
+<p><a href="http://127.0.0.1/index.php?a=whoami" target="_blank" rel="external">http://127.0.0.1/index.php?a=whoami</a></p>
+<h5 id="php-mail"><a href="#php-mail" class="headerlink" title="php mail()"></a>php mail()</h5><p><a href="http://php.net/manual/zh/function.mail.php" target="_blank" rel="external">mail 文档</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">bool mail (</div><div class="line">	string $to ,</div><div class="line">	string $subject ,</div><div class="line">	string $message [,</div><div class="line">	string $additional_headers [,</div><div class="line">	string $additional_parameters ]]</div><div class="line">)</div></pre></td></tr></table></figure></p>
+<p>要使用mail()函数，需要配置对应的服务器等，在php.ini中有两个选项：</p>
+<ul>
+<li>配置SMTP服务器的主机名和端口</li>
+<li>配置PHP用作邮件传输代理（MTA）的文件路径</li>
+</ul>
+<p>当PHP配置了第二个选项时，对该mail()函数的调用将导致执行配置对MTA程序。虽然PHP内部使用escapeshellcmd()用于程序调用，防止新的shell命令注入，但第5个参数$additional_parameters中mail()允许添加的新程序。因此，攻击者可以附加程序标志，在某些MTA中可以创建具有用户控制内容的文件。</p>
+<p>实例：<a href="http://blog.nsfocus.net/tag/php-mail%E5%87%BD%E6%95%B0%E5%BC%95%E5%8F%91%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-%E6%BC%8F%E6%B4%9E/" target="_blank" rel="external">多个PHP mail函数引发的命令执行漏洞分析</a><br>参考：<a href="http://www.91ri.org/17039.html" target="_blank" rel="external">为什么mail()函数在PHP中是危险的</a></p>
+<h5 id="LD-PRELOAD绕过"><a href="#LD-PRELOAD绕过" class="headerlink" title="LD_PRELOAD绕过"></a>LD_PRELOAD绕过</h5><p>实例：<a href="https://bbs.ichunqiu.com/forum.php?mod=viewthread&amp;tid=25351&amp;extra=page%3D1%26filter%3Dtypeid%26typeid%3D146" target="_blank" rel="external">第十届全国大学生信息安全技能赛PHP execise</a><br>参考: <a href="http://wooyun.jozxing.cc/static/drops/tips-16054.html" target="_blank" rel="external">利用环境变量LD_PRELOAD来绕过php disable_function执行系统命令</a></p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p>CTF比赛总是输？你还差点Tricks!<a href="https://www.leavesongs.com/SHARE/some-ctf-tricks-ppt.html" target="_blank" rel="external">https://www.leavesongs.com/SHARE/some-ctf-tricks-ppt.html</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/10/CSCMS_v4.1正式版任意文件删除漏洞/" rel="next" title="CSCMS_v4.1正式版任意文件删除漏洞">
+                <i class="fa fa-chevron-left"></i> CSCMS_v4.1正式版任意文件删除漏洞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/10/CTF总结/" rel="prev" title="CTF总结">
+                CTF总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="vcomments"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/images/2.gif"
+              alt="h1tler" />
+          
+            <p class="site-author-name" itemprop="name">h1tler</p>
+            <p class="site-description motion-element" itemprop="description">Youth is wholly experimental</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sancrane.top/" title="sancrane" target="_blank">sancrane</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://myclass.azurewebsites.net/" title="OurClass" target="_blank">OurClass</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://ph0rse.me/" title="ph0rse" target="_blank">ph0rse</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://grassgrass.top/" title="grassgrass" target="_blank">grassgrass</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CTF中的web总结"><span class="nav-number">1.</span> <span class="nav-text">CTF中的web总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础知识"><span class="nav-number">1.1.</span> <span class="nav-text">基础知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web基础简介"><span class="nav-number">1.2.</span> <span class="nav-text">web基础简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web总结"><span class="nav-number">1.3.</span> <span class="nav-text">web总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#源代码"><span class="nav-number">1.3.1.</span> <span class="nav-text">源代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#waf"><span class="nav-number">1.3.2.</span> <span class="nav-text">waf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CTF-Trick"><span class="nav-number">1.3.3.</span> <span class="nav-text">CTF Trick</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#PHP弱类型"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">PHP弱类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#序列化-反序列化"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">序列化/反序列化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#XSS"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">XSS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CSRF"><span class="nav-number">1.3.3.4.</span> <span class="nav-text">CSRF</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQLi"><span class="nav-number">1.3.4.</span> <span class="nav-text">SQLi</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件包含和文件上传"><span class="nav-number">1.3.5.</span> <span class="nav-text">文件包含和文件上传</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#危险函数"><span class="nav-number">1.3.6.</span> <span class="nav-text">危险函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#PHP代码执行相关函数"><span class="nav-number">1.3.6.1.</span> <span class="nav-text">PHP代码执行相关函数</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#eval-函数——把字符串作为PHP代码执行"><span class="nav-number">1.3.6.1.1.</span> <span class="nav-text">eval()函数——把字符串作为PHP代码执行</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#assert-函数——检查一个断言是否为-FALSE。（把字符串-assertion-作为PHP代码执行）"><span class="nav-number">1.3.6.1.2.</span> <span class="nav-text">assert()函数——检查一个断言是否为 FALSE。（把字符串 $assertion 作为PHP代码执行）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#preg-replace-函数——-e-修正符使-preg-replace-将-replacement-参数当作-PHP-代码"><span class="nav-number">1.3.6.1.3.</span> <span class="nav-text">preg_replace()函数——/e 修正符使 preg_replace() 将 replacement 参数当作 PHP 代码</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#call-user-func-函数"><span class="nav-number">1.3.6.1.4.</span> <span class="nav-text">call_user_func()函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#call-user-func-array-函数"><span class="nav-number">1.3.6.1.5.</span> <span class="nav-text">call_user_func_array()函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#create-function-函数——创建一个匿名函数"><span class="nav-number">1.3.6.1.6.</span> <span class="nav-text">create_function()函数——创建一个匿名函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#array-map"><span class="nav-number">1.3.6.1.7.</span> <span class="nav-text">array_map()</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#系统命令执行相关函数"><span class="nav-number">1.3.6.2.</span> <span class="nav-text">系统命令执行相关函数</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#system"><span class="nav-number">1.3.6.2.1.</span> <span class="nav-text">system()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#passthru"><span class="nav-number">1.3.6.2.2.</span> <span class="nav-text">passthru()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#exec"><span class="nav-number">1.3.6.2.3.</span> <span class="nav-text">exec()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#pcntl-exec"><span class="nav-number">1.3.6.2.4.</span> <span class="nav-text">pcntl_exec()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#shell-exec"><span class="nav-number">1.3.6.2.5.</span> <span class="nav-text">shell_exec()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#popen"><span class="nav-number">1.3.6.2.6.</span> <span class="nav-text">popen()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#proc-open"><span class="nav-number">1.3.6.2.7.</span> <span class="nav-text">proc_open()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#反单引号"><span class="nav-number">1.3.6.2.8.</span> <span class="nav-text">`(反单引号)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ob-start"><span class="nav-number">1.3.6.2.9.</span> <span class="nav-text">ob_start()</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#php-mail"><span class="nav-number">1.3.6.3.</span> <span class="nav-text">php mail()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#LD-PRELOAD绕过"><span class="nav-number">1.3.6.4.</span> <span class="nav-text">LD_PRELOAD绕过</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考链接"><span class="nav-number">1.4.</span> <span class="nav-text">参考链接</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">h1tler</span>
+
+  
+  
+  
+</div>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1264590843&web_id=1264590843" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#vcomments' ,
+        verify: false,
+        notify: false,
+        appId: 'MpjYiGHS1d0QlJPiqPcvHDY1-gzGzoHsz',
+        appKey: 'anlgXscWqVHMh6r0MiUOvmBN',
+        placeholder: '请在此输入您的留言'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+	<!-- 页面点击小红心 -->
+	<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>

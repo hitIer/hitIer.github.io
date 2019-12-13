@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MarkDown," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="h1tler's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Windows下快速书写MarkDown可以说是完全借鉴大佬写的（只为能够简单，） Hexo + 七牛API七牛官网注册个人账户，经过支付宝认证之后可以获得10G的免费储存空间。然后创建两个对象储存空间，分别作为分享图片和文档的仓库 下载软件然后准备软件部分，有一个ID为“骑兵程序员”的编程大佬自己写了一个软件，下载地址在这里，下载之后无需安装，直接点开exe就可以使用。 打开之后先升级到最新版本">
+<meta name="keywords" content="MarkDown">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows下快速书写MarkDown">
+<meta property="og:url" content="http://www.cuittk.cn/2018/11/10/Windows下快速书写MarkDown/index.html">
+<meta property="og:site_name" content="h1tler&#39;s blog">
+<meta property="og:description" content="Windows下快速书写MarkDown可以说是完全借鉴大佬写的（只为能够简单，） Hexo + 七牛API七牛官网注册个人账户，经过支付宝认证之后可以获得10G的免费储存空间。然后创建两个对象储存空间，分别作为分享图片和文档的仓库 下载软件然后准备软件部分，有一个ID为“骑兵程序员”的编程大佬自己写了一个软件，下载地址在这里，下载之后无需安装，直接点开exe就可以使用。 打开之后先升级到最新版本">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ovc0f0a85.bkt.clouddn.com/03x8u9ulrja46lmt97jyo1aotu.png">
+<meta property="og:image" content="http://ovc0f0a85.bkt.clouddn.com/ljxvnz16ipco9vea65uo9g4qs3.png">
+<meta property="og:image" content="http://ovc0f0a85.bkt.clouddn.com/oy0pdxfe1tvdv97r5em58zd1gu.png">
+<meta property="og:updated_time" content="2018-11-10T09:12:33.231Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Windows下快速书写MarkDown">
+<meta name="twitter:description" content="Windows下快速书写MarkDown可以说是完全借鉴大佬写的（只为能够简单，） Hexo + 七牛API七牛官网注册个人账户，经过支付宝认证之后可以获得10G的免费储存空间。然后创建两个对象储存空间，分别作为分享图片和文档的仓库 下载软件然后准备软件部分，有一个ID为“骑兵程序员”的编程大佬自己写了一个软件，下载地址在这里，下载之后无需安装，直接点开exe就可以使用。 打开之后先升级到最新版本">
+<meta name="twitter:image" content="http://ovc0f0a85.bkt.clouddn.com/03x8u9ulrja46lmt97jyo1aotu.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.cuittk.cn/2018/11/10/Windows下快速书写MarkDown/"/>
+
+
+
+
+
+  <title>Windows下快速书写MarkDown | h1tler's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">h1tler's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/Windows下快速书写MarkDown/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="h1tler">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/2.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="h1tler's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Windows下快速书写MarkDown</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-10T17:12:33+08:00">
+                2018-11-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/借鉴/" itemprop="url" rel="index">
+                    <span itemprop="name">借鉴</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Windows下快速书写MarkDown"><a href="#Windows下快速书写MarkDown" class="headerlink" title="Windows下快速书写MarkDown"></a>Windows下快速书写MarkDown</h1><p>可以说是完全借鉴大佬写的（只为能够简单，）</p>
+<h2 id="Hexo-七牛API"><a href="#Hexo-七牛API" class="headerlink" title="Hexo + 七牛API"></a>Hexo + 七牛API</h2><p><a href="https://www.qiniu.com/" target="_blank" rel="external">七牛官网</a>注册个人账户，经过支付宝认证之后可以获得10G的免费储存空间。<br>然后创建两个对象储存空间，分别作为分享图片和文档的仓库</p>
+<h2 id="下载软件"><a href="#下载软件" class="headerlink" title="下载软件"></a>下载软件</h2><p>然后准备软件部分，有一个ID为“骑兵程序员”的编程大佬自己写了一个软件，下载地址在<a href="https://pan.baidu.com/s/1eQEw1Wm" target="_blank" rel="external">这里</a>，下载之后无需安装，直接点开exe就可以使用。</p>
+<p>打开之后先升级到最新版本<br>然后点开系统设置，根据你的七牛账号的内容进行填写：<br><img src="http://ovc0f0a85.bkt.clouddn.com/03x8u9ulrja46lmt97jyo1aotu.png" alt=""><br>其中前两个密钥可以在 个人面板-》密钥管理 中获得<br>如果你运气好的话，到这里就可以直接使用了，Ctrl+C，Ctrl+V就可以自动上传图片到图床上，并生成插入语句在文档中<br>，就像这样<br><img src="http://ovc0f0a85.bkt.clouddn.com/ljxvnz16ipco9vea65uo9g4qs3.png" alt=""></p>
+<h2 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h2><p>无法 Ctrl+C,Ctrl+V,这就很尬了。<br>(来自<a href="http://ph0rse.me/2017/08/27/Windows%E4%B8%8B%E4%BC%98%E9%9B%85%E5%9C%B0%E4%B9%A6%E5%86%99MarkDown/" target="_blank" rel="external">大佬</a>的智慧，我就无耻的引用了，连图片我也一块用了)<br>由于在七牛的官方文档中uphost为非必填项，脚本中使用的是默认值<a href="http://up.qiniu.com,有时当与你空间所在机房不匹配时便会无法上传，" target="_blank" rel="external">http://up.qiniu.com,有时当与你空间所在机房不匹配时便会无法上传，</a> 这时，找到app\modules\studio\clound.js，在40-50行左右，修改以下位置：<br><img src="http://ovc0f0a85.bkt.clouddn.com/oy0pdxfe1tvdv97r5em58zd1gu.png" alt=""></p>
+<p>其他功能请咨询大佬文章<br><a href="http://ph0rse.me/2017/08/27/Windows%E4%B8%8B%E4%BC%98%E9%9B%85%E5%9C%B0%E4%B9%A6%E5%86%99MarkDown/" target="_blank" rel="external">http://ph0rse.me/2017/08/27/Windows%E4%B8%8B%E4%BC%98%E9%9B%85%E5%9C%B0%E4%B9%A6%E5%86%99MarkDown/</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MarkDown/" rel="tag"># MarkDown</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/10/Windows下Pytesser安装/" rel="next" title="Windows下Pytesser安装">
+                <i class="fa fa-chevron-left"></i> Windows下Pytesser安装
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/10/XXE漏洞攻击与防御/" rel="prev" title="XXE漏洞攻击与防御">
+                XXE漏洞攻击与防御 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="vcomments"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/images/2.gif"
+              alt="h1tler" />
+          
+            <p class="site-author-name" itemprop="name">h1tler</p>
+            <p class="site-description motion-element" itemprop="description">Youth is wholly experimental</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sancrane.top/" title="sancrane" target="_blank">sancrane</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://myclass.azurewebsites.net/" title="OurClass" target="_blank">OurClass</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://ph0rse.me/" title="ph0rse" target="_blank">ph0rse</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://grassgrass.top/" title="grassgrass" target="_blank">grassgrass</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Windows下快速书写MarkDown"><span class="nav-number">1.</span> <span class="nav-text">Windows下快速书写MarkDown</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo-七牛API"><span class="nav-number">1.1.</span> <span class="nav-text">Hexo + 七牛API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载软件"><span class="nav-number">1.2.</span> <span class="nav-text">下载软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到问题"><span class="nav-number">1.3.</span> <span class="nav-text">遇到问题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">h1tler</span>
+
+  
+  
+  
+</div>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1264590843&web_id=1264590843" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#vcomments' ,
+        verify: false,
+        notify: false,
+        appId: 'MpjYiGHS1d0QlJPiqPcvHDY1-gzGzoHsz',
+        appKey: 'anlgXscWqVHMh6r0MiUOvmBN',
+        placeholder: '请在此输入您的留言'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+	<!-- 页面点击小红心 -->
+	<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>

@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="h1tler's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="android渗透测试从0开始apktool安装与使用安装apktool反编译apktool d test.apk -o test    反编译出代码到test文件夹反编译报错：1234567891011121314151617181920212223I: Using Apktool 2.4.1 on xxx.apkI: Loading resource table...I: Decoding A">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android渗透测试从0开始">
+<meta property="og:url" content="http://www.cuittk.cn/2019/12/13/android渗透测试从0开始/index.html">
+<meta property="og:site_name" content="h1tler&#39;s blog">
+<meta property="og:description" content="android渗透测试从0开始apktool安装与使用安装apktool反编译apktool d test.apk -o test    反编译出代码到test文件夹反编译报错：1234567891011121314151617181920212223I: Using Apktool 2.4.1 on xxx.apkI: Loading resource table...I: Decoding A">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/0zi1vb1uxynidx1vmi7estznnr.png">
+<meta property="og:updated_time" content="2019-12-13T08:24:57.350Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android渗透测试从0开始">
+<meta name="twitter:description" content="android渗透测试从0开始apktool安装与使用安装apktool反编译apktool d test.apk -o test    反编译出代码到test文件夹反编译报错：1234567891011121314151617181920212223I: Using Apktool 2.4.1 on xxx.apkI: Loading resource table...I: Decoding A">
+<meta name="twitter:image" content="http://img.cdn.cuittk.cn/0zi1vb1uxynidx1vmi7estznnr.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.cuittk.cn/2019/12/13/android渗透测试从0开始/"/>
+
+
+
+
+
+  <title>android渗透测试从0开始 | h1tler's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">h1tler's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2019/12/13/android渗透测试从0开始/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="h1tler">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/2.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="h1tler's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">android渗透测试从0开始</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-13T15:57:44+08:00">
+                2019-12-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web安全/" itemprop="url" rel="index">
+                    <span itemprop="name">web安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="android渗透测试从0开始"><a href="#android渗透测试从0开始" class="headerlink" title="android渗透测试从0开始"></a>android渗透测试从0开始</h2><h3 id="apktool安装与使用"><a href="#apktool安装与使用" class="headerlink" title="apktool安装与使用"></a>apktool安装与使用</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><h4 id="apktool反编译"><a href="#apktool反编译" class="headerlink" title="apktool反编译"></a>apktool反编译</h4><p><code>apktool d test.apk -o test</code>    反编译出代码到test文件夹<br>反编译报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">I: Using Apktool 2.4.1 on xxx.apk</div><div class="line">I: Loading resource table...</div><div class="line">I: Decoding AndroidManifest.xml with resources...</div><div class="line">I: Loading resource table from file: C:\Users\Administrator\AppData\Local\apktool\framework\1.apk</div><div class="line">I: Regular manifest package...</div><div class="line">I: Decoding file-resources...</div><div class="line">I: Decoding values */* XMLs...</div><div class="line">I: Baksmaling classes.dex...</div><div class="line">I: Baksmaling classes2.dex...</div><div class="line">I: Baksmaling assets/A3AEECD8.dex...</div><div class="line">Exception in thread &quot;main&quot; org.jf.dexlib2.dexbacked.DexBackedDexFile$NotADexFile: Not a valid dex magic value: cf 77 4c c7 9b 21 01 cd</div><div class="line">        at org.jf.dexlib2.util.DexUtil.verifyDexHeader(DexUtil.java:93)</div><div class="line">        at org.jf.dexlib2.dexbacked.DexBackedDexFile.getVersion(DexBackedDexFile.java:111)</div><div class="line">        at org.jf.dexlib2.dexbacked.DexBackedDexFile.&lt;init&gt;(DexBackedDexFile.java:78)</div><div class="line">        at org.jf.dexlib2.dexbacked.DexBackedDexFile.&lt;init&gt;(DexBackedDexFile.java:138)</div><div class="line">        at org.jf.dexlib2.dexbacked.ZipDexContainer$1.getDexFile(ZipDexContainer.java:181)</div><div class="line">        at brut.androlib.src.SmaliDecoder.decode(SmaliDecoder.java:90)</div><div class="line">        at brut.androlib.src.SmaliDecoder.decode(SmaliDecoder.java:39)</div><div class="line">        at brut.androlib.Androlib.decodeSourcesSmali(Androlib.java:96)</div><div class="line">        at brut.androlib.ApkDecoder.decode(ApkDecoder.java:164)</div><div class="line">        at brut.apktool.Main.cmdDecode(Main.java:170)</div><div class="line">        at brut.apktool.Main.main(Main.java:76)</div><div class="line">Press any key to continue . . .</div></pre></td></tr></table></figure></p>
+<p>解决办法：<br>增加 <code>d --only-main-classe</code> 即可<br><code>apktool d --only-main-classe test.apk -o test</code></p>
+<h4 id="修改代码"><a href="#修改代码" class="headerlink" title="修改代码"></a>修改代码</h4><h4 id="apktool编译成apk"><a href="#apktool编译成apk" class="headerlink" title="apktool编译成apk"></a>apktool编译成apk</h4><p><code>apktool b test -o test2.apk</code></p>
+<h3 id="apk签名"><a href="#apk签名" class="headerlink" title="apk签名"></a>apk签名</h3><h4 id="去除签名"><a href="#去除签名" class="headerlink" title="去除签名"></a>去除签名</h4><p>其实很简单，用WinRAR打开apk，找到META-INF文件夹，删除MANIFEST.MF之外的所有其他文件即可。</p>
+<h4 id="生成keystore文件"><a href="#生成keystore文件" class="headerlink" title="生成keystore文件"></a>生成keystore文件</h4><p>首先，签名需要keystore文件，可以使用keytool工具生成，一般Java环境都带有keytool命令。<br>要使用管理员权限运行cmd，不然会报错。<br><code>cd C:\Program Files\Java\jdk1.8.0_231\bin</code><br><code>keytool -genkey -alias demo.keystore -keyalg RSA -validity 40000 -keystore demo.keystore</code><br>各个参数解释如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-genkey 产生证书文件</div><div class="line">-alias 产生别名</div><div class="line">-keystore 指定密钥库的.keystore文件中</div><div class="line">-keyalg 指定密钥的算法,这里指定为RSA(非对称密钥算法)</div><div class="line">-validity 为证书有效天数，这里我们写的是40000天</div></pre></td></tr></table></figure></p>
+<p><img src="http://img.cdn.cuittk.cn/0zi1vb1uxynidx1vmi7estznnr.png" alt=""></p>
+<h4 id="jarsigner签名apk"><a href="#jarsigner签名apk" class="headerlink" title="jarsigner签名apk"></a>jarsigner签名apk</h4><p>jarsigner也存在于Java JDK的安装包当中，所以安装好了Java环境的话，可以直接在命令行使用。<br><code>jarsigner -verbose -keystore demo.keystore demo.apk demo.keystore</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-verbose 指定生成详细输出</div><div class="line">-keystore 指定数字证书存储路径</div></pre></td></tr></table></figure></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://ibotpeaches.github.io/Apktool/install/" target="_blank" rel="external">apktool安装</a><br><a href="https://haozi.moe/2019/12/09/%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%8A%93%E5%8C%85%E7%A0%B4%E8%A7%A3/" target="_blank" rel="external">apktool反编译报错</a><br><a href="https://blog.csdn.net/s13383754499/article/details/84108475" target="_blank" rel="external">apk去掉签名</a><br><a href="https://blog.csdn.net/sxk874890728/article/details/80486223" target="_blank" rel="external">一步一步带你反编译apk，并教你修改smali和重新打包</a><br><a href="https://blog.csdn.net/dreamer2020/article/details/52761606" target="_blank" rel="external">apk签名教程</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/07/ssrf之深度利用/" rel="next" title="ssrf之深度利用">
+                <i class="fa fa-chevron-left"></i> ssrf之深度利用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="vcomments"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/images/2.gif"
+              alt="h1tler" />
+          
+            <p class="site-author-name" itemprop="name">h1tler</p>
+            <p class="site-description motion-element" itemprop="description">Youth is wholly experimental</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sancrane.top/" title="sancrane" target="_blank">sancrane</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://myclass.azurewebsites.net/" title="OurClass" target="_blank">OurClass</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://ph0rse.me/" title="ph0rse" target="_blank">ph0rse</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://grassgrass.top/" title="grassgrass" target="_blank">grassgrass</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#android渗透测试从0开始"><span class="nav-number">1.</span> <span class="nav-text">android渗透测试从0开始</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#apktool安装与使用"><span class="nav-number">1.1.</span> <span class="nav-text">apktool安装与使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装"><span class="nav-number">1.1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#apktool反编译"><span class="nav-number">1.1.2.</span> <span class="nav-text">apktool反编译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改代码"><span class="nav-number">1.1.3.</span> <span class="nav-text">修改代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#apktool编译成apk"><span class="nav-number">1.1.4.</span> <span class="nav-text">apktool编译成apk</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#apk签名"><span class="nav-number">1.2.</span> <span class="nav-text">apk签名</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#去除签名"><span class="nav-number">1.2.1.</span> <span class="nav-text">去除签名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成keystore文件"><span class="nav-number">1.2.2.</span> <span class="nav-text">生成keystore文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jarsigner签名apk"><span class="nav-number">1.2.3.</span> <span class="nav-text">jarsigner签名apk</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">1.3.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">h1tler</span>
+
+  
+  
+  
+</div>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1264590843&web_id=1264590843" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#vcomments' ,
+        verify: false,
+        notify: false,
+        appId: 'MpjYiGHS1d0QlJPiqPcvHDY1-gzGzoHsz',
+        appKey: 'anlgXscWqVHMh6r0MiUOvmBN',
+        placeholder: '请在此输入您的留言'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+	<!-- 页面点击小红心 -->
+	<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>

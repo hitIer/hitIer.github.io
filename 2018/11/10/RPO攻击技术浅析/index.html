@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="h1tler's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="RPO（Relative Path Overwrite）相对路径覆盖，是一种新型攻击技术，主要是利用浏览器的一些特性和部分服务端的配置差异导致的漏洞，通过一些技巧，我们可以通过相对路径来引入其他的资源文件，以至于达成我们想要的目的。 什么是RPO攻击？RPO（Relative Path Overwrite）相对路径覆盖，是一种新型攻击技术，最早由Gareth Heyes在其发表的文章中提出。主要是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RPO攻击技术浅析">
+<meta property="og:url" content="http://www.cuittk.cn/2018/11/10/RPO攻击技术浅析/index.html">
+<meta property="og:site_name" content="h1tler&#39;s blog">
+<meta property="og:description" content="RPO（Relative Path Overwrite）相对路径覆盖，是一种新型攻击技术，主要是利用浏览器的一些特性和部分服务端的配置差异导致的漏洞，通过一些技巧，我们可以通过相对路径来引入其他的资源文件，以至于达成我们想要的目的。 什么是RPO攻击？RPO（Relative Path Overwrite）相对路径覆盖，是一种新型攻击技术，最早由Gareth Heyes在其发表的文章中提出。主要是">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/isxhjmhpp6jkb87i04hbi06rh3.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/xcpz6cqijtoz8a1exxiyjg36je.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/9vhipgqp4kwngk7i0ooftnnvu0.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/1hzfbnhuae1ury1wbhnojzsyk3.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/5v96jok1x1nbqu3uwce91zy4d9.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/lmk3olawvf2mxjn7zqhebb3n2k.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/v1rxkjn9k8adcj2ri9uhhrfqol.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/gq3010c77u0ltbr5xm6h1y9fi5.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/24tncev139olmn1riqtzci41xx.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/luvlfl82uvjz61gfs18r7pyhhy.png">
+<meta property="og:updated_time" content="2018-11-10T09:12:32.802Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RPO攻击技术浅析">
+<meta name="twitter:description" content="RPO（Relative Path Overwrite）相对路径覆盖，是一种新型攻击技术，主要是利用浏览器的一些特性和部分服务端的配置差异导致的漏洞，通过一些技巧，我们可以通过相对路径来引入其他的资源文件，以至于达成我们想要的目的。 什么是RPO攻击？RPO（Relative Path Overwrite）相对路径覆盖，是一种新型攻击技术，最早由Gareth Heyes在其发表的文章中提出。主要是">
+<meta name="twitter:image" content="http://img.cdn.cuittk.cn/isxhjmhpp6jkb87i04hbi06rh3.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.cuittk.cn/2018/11/10/RPO攻击技术浅析/"/>
+
+
+
+
+
+  <title>RPO攻击技术浅析 | h1tler's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">h1tler's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/RPO攻击技术浅析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="h1tler">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/2.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="h1tler's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">RPO攻击技术浅析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-10T17:12:32+08:00">
+                2018-11-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web安全/" itemprop="url" rel="index">
+                    <span itemprop="name">web安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>RPO（Relative Path Overwrite）相对路径覆盖，是一种新型攻击技术，主要是利用浏览器的一些特性和部分服务端的配置差异导致的漏洞，通过一些技巧，我们可以通过相对路径来引入其他的资源文件，以至于达成我们想要的目的。</p>
+<h3 id="什么是RPO攻击？"><a href="#什么是RPO攻击？" class="headerlink" title="什么是RPO攻击？"></a>什么是RPO攻击？</h3><p>RPO（Relative Path Overwrite）相对路径覆盖，是一种新型攻击技术，最早由Gareth Heyes在其发表的文章中提出。主要是利用浏览器的一些特性和部分服务端的配置差异导致的漏洞，通过一些技巧，我们可以通过相对路径来引入其他的资源文件，以至于达成我们想要的目的。<br>这个攻击依赖于浏览器和网络服务器的反应，利用服务器的Web缓存技术和配置差异，以及服务器和客户端浏览器的解析差异，利用前端代码中加载的css/js的相对路径来加载其他文件，最终浏览器将服务器返回的不是css/js的文件当做css/js来解析，从而导致XSS，信息泄露等漏洞产生。</p>
+<h3 id="技术分析"><a href="#技术分析" class="headerlink" title="技术分析"></a>技术分析</h3><p>在分析RPO攻击技术之前，首先我们得先了解几个关于服务器和客户端浏览器在解析和识别上的差异性基础知识。</p>
+<h4 id="第一个差异化"><a href="#第一个差异化" class="headerlink" title="第一个差异化"></a>第一个差异化</h4><p>在apache和Nginx环境下，正常情况访问如下：<br><img src="http://img.cdn.cuittk.cn/isxhjmhpp6jkb87i04hbi06rh3.png" alt=""><br><img src="http://img.cdn.cuittk.cn/xcpz6cqijtoz8a1exxiyjg36je.png" alt=""><br>在Apache中将/编码为%2f后，服务器无法识别url，返回404，但是在Nginx中将/编码为%2f后，服务器可以识别编码后的url，返回200：<br><img src="http://img.cdn.cuittk.cn/9vhipgqp4kwngk7i0ooftnnvu0.png" alt=""><br><img src="http://img.cdn.cuittk.cn/1hzfbnhuae1ury1wbhnojzsyk3.png" alt=""><br>不同web服务器对url的识别是不一样的。</p>
+<h4 id="第二个差异化"><a href="#第二个差异化" class="headerlink" title="第二个差异化"></a>第二个差异化</h4><p>在Nginx中，编码后的url服务器可以正常识别，也就是说服务器在加载文件时会解码后找到具体文件返回返回客户端。<br>但是在客户端识别url时是不会解码的，正常情况下解码%2f解码后应该加载的是rpo/xxx/../x.js，最后也就是rpo/x.js文件；而这里加载的是/x.js，所以浏览器是没有解码%2f的。<br><img src="http://img.cdn.cuittk.cn/5v96jok1x1nbqu3uwce91zy4d9.png" alt=""><br>实际上通过测试，客户端浏览器在加载相对路径文件时是以最后一个/为相对目录加载具体资源文件的。</p>
+<h3 id="实战解析"><a href="#实战解析" class="headerlink" title="实战解析"></a>实战解析</h3><h4 id="第一个场景：加载任意目录下静态资源文件"><a href="#第一个场景：加载任意目录下静态资源文件" class="headerlink" title="第一个场景：加载任意目录下静态资源文件"></a>第一个场景：加载任意目录下静态资源文件</h4><p>我们看看下面一个测试环境：<br>/rpo/111/1.php文件中通过相对路径加载了上层目录既/rpo/x.js和/rpo/x.css文件。<br><img src="http://img.cdn.cuittk.cn/lmk3olawvf2mxjn7zqhebb3n2k.png" alt=""><br>然后有一个/rpo/222/x.js文件，x.js文件中内容为alert(1)<br><img src="http://img.cdn.cuittk.cn/v1rxkjn9k8adcj2ri9uhhrfqol.png" alt=""><br>问题：</p>
+<p>如果/rpo/222/x.js文件中的内容是我们可控的，但是有过滤不能写入\<script\>等标签内容，那么如何利用此跨站漏洞呢？</script\></p>
+<p>有没有办法使1.php加载到其他目录的静态资源文件，比如这里让1.php加载到/rpo/222/x.js文件，这样就可以直接执行js代码了。</p>
+<p>比如我们输入如下url</p>
+<p>/rpo/222/2.php%2f..%2f..%2f111/1.php</p>
+<p>服务器端识别为：</p>
+<p>/rpo/222/2.php/../../111/1.php 实际上也就是/rpo/111/1.php</p>
+<p>客户端识别为：</p>
+<p>/rpo/222/2.php%2f..%2f..%2f111/1.php，把2.php%2f..%2f..%2f111当成一个目录，然后在加载静态资源文件时，比如这里加载../x.js时，就会跳转到上一级目录222目录下，最后加载的静态文件为/rpo/222/x.js。</p>
+<p>此时成功加载到了其他目录下的文件。<br><img src="http://img.cdn.cuittk.cn/gq3010c77u0ltbr5xm6h1y9fi5.png" alt=""><br>加载静态css文件也是一样的原理，比如这里我们加载/rpo/222/x.css文件，使返回的内容变成红色。</p>
+<h4 id="第二个场景：将返回内容按静态文件解析"><a href="#第二个场景：将返回内容按静态文件解析" class="headerlink" title="第二个场景：将返回内容按静态文件解析"></a>第二个场景：将返回内容按静态文件解析</h4><p>在很多使用了url_rewrite的php 开发框架以及python web框架中，经常使用相对路径来加载静态资源文件，而且url都有一个特征：<br>比如/rpo/user/id/1，这里表示使用参数为id，值为1的内容访问user接口；<br>比如/rpo/user.php /name/tester，这里表示使用参数name，内容为tester的内容访问user.php 文件等。<br>那么下面我们看看，如果在这些情况下，使用相对路径加载静态资源文件会有什么问题发生呢？<br>现在有如下环境：<br>我们可以提交内容，然后内容会显示到当前页面，而且使用相对路径加载静态文件style.css和script.js文件，这两个文件原本内容为空，此时我们访问：<br><a href="http://127.0.0.1:8888/RPO_HACK/user/2" target="_blank" rel="external">http://127.0.0.1:8888/RPO_HACK/user/2</a><br><img src="http://img.cdn.cuittk.cn/24tncev139olmn1riqtzci41xx.png" alt=""><br>这里表示使用2作为参数请求user接口，此时加载静态文件为：<br><a href="http://127.0.0.1:8888/RPO_HACK/user/style.css" target="_blank" rel="external">http://127.0.0.1:8888/RPO_HACK/user/style.css</a><br><a href="http://127.0.0.1:8888/RPO_HACK/user/script.js" target="_blank" rel="external">http://127.0.0.1:8888/RPO_HACK/user/script.js</a><br>然后我们提交一段css内容：{} * {color:red;}<br>当我们访问：<a href="http://127.0.0.1:8888/RPO_HACK/user/2/xxx时：" target="_blank" rel="external">http://127.0.0.1:8888/RPO_HACK/user/2/xxx时：</a><br><img src="http://img.cdn.cuittk.cn/luvlfl82uvjz61gfs18r7pyhhy.png" alt=""><br>这里表示我们使用2/xxx作为参数访问user接口，返回的内容和使用参数2访问返回的内容相同。</p>
+<p>但是浏览器客户端认为2是目录，然后加载的静态文件为:</p>
+<p><a href="http://127.0.0.1:8888/RPO_HACK/user/2/style.css" target="_blank" rel="external">http://127.0.0.1:8888/RPO_HACK/user/2/style.css</a></p>
+<p><a href="http://127.0.0.1:8888/RPO_HACK/user/2/script.js" target="_blank" rel="external">http://127.0.0.1:8888/RPO_HACK/user/2/script.js</a></p>
+<p>所以此时加载静态文件返回的内容也是同使用参数2访问时返回内容相同，但是此时浏览器认为这里加载的是样式文件和脚本文件，从而将返回内容解析为css或者js，所以我们提交的css内容：{} * {color:red;} 成功解析为css，将页面渲染成红色。</p>
+<p>TIPS3：</p>
+<p>这里用到了CSS解析器的一个特性：浏览器在解析CSS样式时，会忽略非法的部分，直到找到正确的开始然后进行解析一直到结束。所以我们上面植入CSS代码，欺骗CSS解析器忽略之前不合法的语法内容，从而加载我们注入的CSS内容，最终页面变成渲染后的红色。</p>
+<p>当然这里除了可以使用CSS样式之外，还可以输入payload为CSS XSS向量，例如：</p>
+<p>#header { background:url(javascript:alert(‘1’));}</p>
+<p>{}*{x:expression(alert(1))}<br>具体的exp见:<br><a href="https://github.com/eboda/34c3ctf/blob/master/urlstorage/exploit/exploit.php" target="_blank" rel="external">https://github.com/eboda/34c3ctf/blob/master/urlstorage/exploit/exploit.php</a></p>
+<h3 id="外传"><a href="#外传" class="headerlink" title="外传"></a>外传</h3><p>Web 服务器欺骗请求:</p>
+<p>当目标网站存在负载服务器时，访问当前页面下，事实上并不存在的 css 等静态文件时，会在缓存服务器中缓存下存在用户账号密码的静态文件页面，让攻击者可以直接访问用户账号。<br>可用于缓存的文件后缀列表：</p>
+<p>aif，aiff，au，avi，bin，bmp，cab，carb，cct，cdf，class，css，doc，dcr，dtd，gcf，gff，gif，grv，hdml，hqx，ico，ini，jpeg，jpg， js，mov，mp3，nc，pct，ppc，pws，swa，swf，txt，vbs，w32，wav，wbmp，wml，wmlc，wmls，wmlsc，xsd，zip</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="http://www.beesfun.com/2017/03/27/RPO%E6%94%BB%E5%87%BB/" target="_blank" rel="external">http://www.beesfun.com/2017/03/27/RPO%E6%94%BB%E5%87%BB/</a></p>
+<p><a href="http://www.thespanner.co.uk/2014/03/21/rpo/" target="_blank" rel="external">http://www.thespanner.co.uk/2014/03/21/rpo/</a></p>
+<p><a href="https://lorexxar.cn/2018/01/02/34c3-writeup/#CSS-RPO" target="_blank" rel="external">https://lorexxar.cn/2018/01/02/34c3-writeup/#CSS-RPO</a></p>
+<p><a href="https://github.com/eboda/34c3ctf/tree/master/urlstorage" target="_blank" rel="external">https://github.com/eboda/34c3ctf/tree/master/urlstorage</a></p>
+<p><a href="https://open.appscan.io/article-462.html" target="_blank" rel="external">https://open.appscan.io/article-462.html</a></p>
+<h3 id="防护方案"><a href="#防护方案" class="headerlink" title="防护方案"></a>防护方案</h3><p>在页面中避免直接使用相对路径进行静态文件的加载。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/10/pwnhub会员日/" rel="next" title="pwnhub会员日">
+                <i class="fa fa-chevron-left"></i> pwnhub会员日
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/10/SCTF2018“线下赛”/" rel="prev" title="SCTF2018“线下赛”write up">
+                SCTF2018“线下赛”write up <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="vcomments"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/images/2.gif"
+              alt="h1tler" />
+          
+            <p class="site-author-name" itemprop="name">h1tler</p>
+            <p class="site-description motion-element" itemprop="description">Youth is wholly experimental</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sancrane.top/" title="sancrane" target="_blank">sancrane</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://myclass.azurewebsites.net/" title="OurClass" target="_blank">OurClass</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://ph0rse.me/" title="ph0rse" target="_blank">ph0rse</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://grassgrass.top/" title="grassgrass" target="_blank">grassgrass</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是RPO攻击？"><span class="nav-number">1.</span> <span class="nav-text">什么是RPO攻击？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#技术分析"><span class="nav-number">2.</span> <span class="nav-text">技术分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一个差异化"><span class="nav-number">2.1.</span> <span class="nav-text">第一个差异化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二个差异化"><span class="nav-number">2.2.</span> <span class="nav-text">第二个差异化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实战解析"><span class="nav-number">3.</span> <span class="nav-text">实战解析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一个场景：加载任意目录下静态资源文件"><span class="nav-number">3.1.</span> <span class="nav-text">第一个场景：加载任意目录下静态资源文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二个场景：将返回内容按静态文件解析"><span class="nav-number">3.2.</span> <span class="nav-text">第二个场景：将返回内容按静态文件解析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外传"><span class="nav-number">4.</span> <span class="nav-text">外传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考链接"><span class="nav-number">5.</span> <span class="nav-text">参考链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#防护方案"><span class="nav-number">6.</span> <span class="nav-text">防护方案</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">h1tler</span>
+
+  
+  
+  
+</div>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1264590843&web_id=1264590843" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#vcomments' ,
+        verify: false,
+        notify: false,
+        appId: 'MpjYiGHS1d0QlJPiqPcvHDY1-gzGzoHsz',
+        appKey: 'anlgXscWqVHMh6r0MiUOvmBN',
+        placeholder: '请在此输入您的留言'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+	<!-- 页面点击小红心 -->
+	<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>

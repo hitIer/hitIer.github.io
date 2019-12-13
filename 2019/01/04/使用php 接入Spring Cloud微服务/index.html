@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="h1tler's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="使用php 接入Spring Cloud微服务微服务很火，实验室要求大部分语言接入微服务，比如:.NET、JAVA、前端、PHP。微服务本来就是JAVA的，作为一个phper，只有想办法接入微服务。网上可以参考的东西不多，但还是找到了可利用的东西。先实现php注册到Spring Cloud的注册中心：http://eureka.springcloud.cn/ 把php应用部署到openresty">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用php 接入Spring Cloud微服务">
+<meta property="og:url" content="http://www.cuittk.cn/2019/01/04/使用php 接入Spring Cloud微服务/index.html">
+<meta property="og:site_name" content="h1tler&#39;s blog">
+<meta property="og:description" content="使用php 接入Spring Cloud微服务微服务很火，实验室要求大部分语言接入微服务，比如:.NET、JAVA、前端、PHP。微服务本来就是JAVA的，作为一个phper，只有想办法接入微服务。网上可以参考的东西不多，但还是找到了可利用的东西。先实现php注册到Spring Cloud的注册中心：http://eureka.springcloud.cn/ 把php应用部署到openresty">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/u439vuq7ls3e44269fg46hnz5m.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/m1h9vah8ltk2os85ulq8ttvs4i.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/033oleh1itlqh4tezivfbc2pam.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/hqdsgu3mr6bt91zq0o6vuzwljt.png">
+<meta property="og:updated_time" content="2019-01-04T16:08:41.151Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用php 接入Spring Cloud微服务">
+<meta name="twitter:description" content="使用php 接入Spring Cloud微服务微服务很火，实验室要求大部分语言接入微服务，比如:.NET、JAVA、前端、PHP。微服务本来就是JAVA的，作为一个phper，只有想办法接入微服务。网上可以参考的东西不多，但还是找到了可利用的东西。先实现php注册到Spring Cloud的注册中心：http://eureka.springcloud.cn/ 把php应用部署到openresty">
+<meta name="twitter:image" content="http://img.cdn.cuittk.cn/u439vuq7ls3e44269fg46hnz5m.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.cuittk.cn/2019/01/04/使用php 接入Spring Cloud微服务/"/>
+
+
+
+
+
+  <title>使用php 接入Spring Cloud微服务 | h1tler's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">h1tler's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2019/01/04/使用php 接入Spring Cloud微服务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="h1tler">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/2.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="h1tler's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">使用php 接入Spring Cloud微服务</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-04T23:06:14+08:00">
+                2019-01-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="使用php-接入Spring-Cloud微服务"><a href="#使用php-接入Spring-Cloud微服务" class="headerlink" title="使用php 接入Spring Cloud微服务"></a>使用php 接入Spring Cloud微服务</h2><p>微服务很火，实验室要求大部分语言接入微服务，比如:.NET、JAVA、前端、PHP。微服务本来就是JAVA的，作为一个phper，只有想办法接入微服务。<br>网上可以参考的东西不多，但还是找到了可利用的东西。<br>先实现php注册到Spring Cloud的注册中心：<a href="http://eureka.springcloud.cn/" target="_blank" rel="external">http://eureka.springcloud.cn/</a></p>
+<h3 id="把php应用部署到openresty-PHP（FPM）"><a href="#把php应用部署到openresty-PHP（FPM）" class="headerlink" title="把php应用部署到openresty + PHP（FPM）"></a>把php应用部署到openresty + PHP（FPM）</h3><p>注册工具SpringCloudOpenresty</p>
+<h4 id="前提：安装openresty和php-7-0和FPM"><a href="#前提：安装openresty和php-7-0和FPM" class="headerlink" title="前提：安装openresty和php 7.0和FPM"></a>前提：安装openresty和php 7.0和FPM</h4><p>使用的系统：ubuntu14.04</p>
+<h5 id="安装openresty"><a href="#安装openresty" class="headerlink" title="安装openresty"></a>安装openresty</h5><p>源码包下载：<a href="http://openresty.org/cn/download.html" target="_blank" rel="external">http://openresty.org/cn/download.html</a><br>找个目录放源码：cd /root<br><code>wegt https://openresty.org/download/openresty-1.13.6.2.tar.gz</code><br>相关依赖包的安装<br><code>apt-get install libreadline-dev libncurses5-dev libpcre3-dev libssl-dev perl make build-essential</code><br>解压源码，安装openresty<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">tar -xzvf openresty-1.13.6.2.tar.gz</div><div class="line">cd openresty-1.13.6.2</div><div class="line">./configure</div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure></p>
+<p>验证安装成功<br><code>curl 127.0.0.1</code><br>返回一段html代码<br><img src="http://img.cdn.cuittk.cn/u439vuq7ls3e44269fg46hnz5m.png" alt=""></p>
+<h5 id="安装php7-0"><a href="#安装php7-0" class="headerlink" title="安装php7.0"></a>安装php7.0</h5><p>前期准备<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 更新 apt-get</div><div class="line">sudo apt-get update</div><div class="line"></div><div class="line"># 解决有可能存在的语言问题</div><div class="line">sudo apt-get install -y language-pack-en-base</div></pre></td></tr></table></figure></p>
+<p>安装完成之后，运行：<br><code>locale-gen en_US.UTF-8</code><br>安装Php7.0，本教程采用ppa方式安装php7.0，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 添加php的仓库</div><div class="line">sudo apt-get install software-properties-common</div><div class="line">#&gt; 中途按下回车</div><div class="line">sudo LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php</div></pre></td></tr></table></figure></p>
+<p>安装完成之后，运行<code>sudo apt-get update</code>更新安装包，把刚才添加的包拉取下来。 运行<code>apt-cache search php7.0</code>搜索php7.0开头的包检验是否安装成功，输出如下：<br><img src="http://img.cdn.cuittk.cn/m1h9vah8ltk2os85ulq8ttvs4i.png" alt=""><br>安装php7.0:<br><code>sudo apt-get -y install php7.0</code><br>安装成功后运行<code>php -v</code>查看是否安装成功，成功的话会输出类似如下信息：<br><img src="http://img.cdn.cuittk.cn/033oleh1itlqh4tezivfbc2pam.png" alt=""></p>
+<h5 id="安装-fpm"><a href="#安装-fpm" class="headerlink" title="安装 fpm"></a>安装 fpm</h5><p><code>sudo apt-get install php7.0-fpm</code></p>
+<h4 id="使用serviceRegistry工具"><a href="#使用serviceRegistry工具" class="headerlink" title="使用serviceRegistry工具"></a>使用serviceRegistry工具</h4><p>下载serviceRegistry到root目录下<br><a href="https://github.com/tangaiyun/SpringCloudOpenrestyPHP" target="_blank" rel="external">https://github.com/tangaiyun/SpringCloudOpenrestyPHP</a><br>对于Spring cloud：<br>1.将serviceRegistry/consul/lualib中的所有文件（包含目录）复制到你的openresty lualib目录中/usr/local/openresty/lualib<br><code>cp -r /root/serviceRegistry/eureka/lualib/* /usr/local/openresty/lualib</code><br>2.更改你的nginx.conf文件和serviceRegistry/consul/conf/nginx.conf一样，请注意块<br><code>cp -r /root/serviceRegistry/eureka/conf/* /usr/local/openresty/nginx/conf</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">init_worker_by_lua_block &#123;</div><div class="line">        if 0 == ngx.worker.id() then </div><div class="line">            local workservice = require &apos;eureka.workerservice&apos;</div><div class="line">            local filePath = &apos;/usr/local/openresty/nginx/conf/serviceInstance.json&apos;</div><div class="line">            eurekaHost = &apos;10.100.23.69&apos;</div><div class="line">            eurekaPort = 8761</div><div class="line">	    local file1 = io.input(filePath)</div><div class="line">        </div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>可将“filePath”更改为您自己的服务配置位置。<br>eurekaHost填写注册中心ip或者域名。比如Spring Cloud的注册中心：<code>eureka.springcloud.cn</code><br>eurekaPort填写注册中心的端口。比如Spring Cloud的注册中心端口：<code>80</code><br>3.将serviceInstance.json更改为你的环境，例如：<br><code>/usr/local/openresty/nginx/conf/serviceInstance.json</code>中的ip改为自己环境的ip，比如192.168.211.22<br>4.将serviceRegistry/eureka/html中的文件复制到你的Web根目录。<br><code>cp -r /root/serviceRegistry/eureka/html/* /usr/local/openresty/nginx/html</code></p>
+<h4 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h4><p>Openresty nginx服务命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/usr/local/openresty/nginx/sbin/nginx #启动</div><div class="line">/usr/local/openresty/nginx/sbin/nginx -s stop #停止</div><div class="line">/usr/local/openresty/nginx/sbin/nginx -s reload #重启</div></pre></td></tr></table></figure></p>
+<p>启动php7.0-fpm服务<br><code>service php7.0-fpm start</code><br>开启openresty以及php7.0-fpm，可以发现在注册中心已经注册成功。<br><img src="http://img.cdn.cuittk.cn/hqdsgu3mr6bt91zq0o6vuzwljt.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/02/CVE-2018-11776漏洞从搭建到复现/" rel="next" title="CVE-2018-11776漏洞从搭建到复现">
+                <i class="fa fa-chevron-left"></i> CVE-2018-11776漏洞从搭建到复现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/09/使用ab压测工具/" rel="prev" title="使用ab压测工具">
+                使用ab压测工具 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="vcomments"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/images/2.gif"
+              alt="h1tler" />
+          
+            <p class="site-author-name" itemprop="name">h1tler</p>
+            <p class="site-description motion-element" itemprop="description">Youth is wholly experimental</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sancrane.top/" title="sancrane" target="_blank">sancrane</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://myclass.azurewebsites.net/" title="OurClass" target="_blank">OurClass</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://ph0rse.me/" title="ph0rse" target="_blank">ph0rse</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://grassgrass.top/" title="grassgrass" target="_blank">grassgrass</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用php-接入Spring-Cloud微服务"><span class="nav-number">1.</span> <span class="nav-text">使用php 接入Spring Cloud微服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#把php应用部署到openresty-PHP（FPM）"><span class="nav-number">1.1.</span> <span class="nav-text">把php应用部署到openresty + PHP（FPM）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#前提：安装openresty和php-7-0和FPM"><span class="nav-number">1.1.1.</span> <span class="nav-text">前提：安装openresty和php 7.0和FPM</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#安装openresty"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">安装openresty</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装php7-0"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">安装php7.0</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装-fpm"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">安装 fpm</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用serviceRegistry工具"><span class="nav-number">1.1.2.</span> <span class="nav-text">使用serviceRegistry工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命令"><span class="nav-number">1.1.3.</span> <span class="nav-text">命令</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">h1tler</span>
+
+  
+  
+  
+</div>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1264590843&web_id=1264590843" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#vcomments' ,
+        verify: false,
+        notify: false,
+        appId: 'MpjYiGHS1d0QlJPiqPcvHDY1-gzGzoHsz',
+        appKey: 'anlgXscWqVHMh6r0MiUOvmBN',
+        placeholder: '请在此输入您的留言'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+	<!-- 页面点击小红心 -->
+	<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>

