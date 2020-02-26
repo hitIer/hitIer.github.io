@@ -71,18 +71,18 @@
 
 
 
-<meta name="description" content="android渗透测试从0开始apktool安装与使用安装apktool反编译apktool d test.apk -o test    反编译出代码到test文件夹反编译报错：1234567891011121314151617181920212223I: Using Apktool 2.4.1 on xxx.apkI: Loading resource table...I: Decoding A">
+<meta name="description" content="android渗透测试从0开始apktool安装与使用安装apktool反编译反编译出代码到test文件夹 apktool d test.apk -o test  反编译报错： I: Using Apktool 2.4.1 on xxx.apk I: Loading resource table... I: Decoding AndroidManifest.xml with resources..">
 <meta property="og:type" content="article">
 <meta property="og:title" content="android渗透测试从0开始">
-<meta property="og:url" content="http://www.cuittk.cn/2019/12/13/android渗透测试从0开始/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2019/12/13/android渗透测试从0开始/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
-<meta property="og:description" content="android渗透测试从0开始apktool安装与使用安装apktool反编译apktool d test.apk -o test    反编译出代码到test文件夹反编译报错：1234567891011121314151617181920212223I: Using Apktool 2.4.1 on xxx.apkI: Loading resource table...I: Decoding A">
+<meta property="og:description" content="android渗透测试从0开始apktool安装与使用安装apktool反编译反编译出代码到test文件夹 apktool d test.apk -o test  反编译报错： I: Using Apktool 2.4.1 on xxx.apk I: Loading resource table... I: Decoding AndroidManifest.xml with resources..">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/0zi1vb1uxynidx1vmi7estznnr.png">
-<meta property="og:updated_time" content="2019-12-13T15:51:09.552Z">
+<meta property="og:updated_time" content="2020-02-26T08:12:17.362Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android渗透测试从0开始">
-<meta name="twitter:description" content="android渗透测试从0开始apktool安装与使用安装apktool反编译apktool d test.apk -o test    反编译出代码到test文件夹反编译报错：1234567891011121314151617181920212223I: Using Apktool 2.4.1 on xxx.apkI: Loading resource table...I: Decoding A">
+<meta name="twitter:description" content="android渗透测试从0开始apktool安装与使用安装apktool反编译反编译出代码到test文件夹 apktool d test.apk -o test  反编译报错： I: Using Apktool 2.4.1 on xxx.apk I: Loading resource table... I: Decoding AndroidManifest.xml with resources..">
 <meta name="twitter:image" content="http://img.cdn.cuittk.cn/0zi1vb1uxynidx1vmi7estznnr.png">
 
 
@@ -113,12 +113,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2019/12/13/android渗透测试从0开始/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2019/12/13/android渗透测试从0开始/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>android渗透测试从0开始 | h1tler's blog</title>
   
 
@@ -256,7 +256,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2019/12/13/android渗透测试从0开始/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2019/12/13/android渗透测试从0开始/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -350,13 +350,58 @@
       
 
       
-        <h2 id="android渗透测试从0开始"><a href="#android渗透测试从0开始" class="headerlink" title="android渗透测试从0开始"></a>android渗透测试从0开始</h2><h3 id="apktool安装与使用"><a href="#apktool安装与使用" class="headerlink" title="apktool安装与使用"></a>apktool安装与使用</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><h4 id="apktool反编译"><a href="#apktool反编译" class="headerlink" title="apktool反编译"></a>apktool反编译</h4><p><code>apktool d test.apk -o test</code>    反编译出代码到test文件夹<br>反编译报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">I: Using Apktool 2.4.1 on xxx.apk</div><div class="line">I: Loading resource table...</div><div class="line">I: Decoding AndroidManifest.xml with resources...</div><div class="line">I: Loading resource table from file: C:\Users\Administrator\AppData\Local\apktool\framework\1.apk</div><div class="line">I: Regular manifest package...</div><div class="line">I: Decoding file-resources...</div><div class="line">I: Decoding values */* XMLs...</div><div class="line">I: Baksmaling classes.dex...</div><div class="line">I: Baksmaling classes2.dex...</div><div class="line">I: Baksmaling assets/A3AEECD8.dex...</div><div class="line">Exception in thread &quot;main&quot; org.jf.dexlib2.dexbacked.DexBackedDexFile$NotADexFile: Not a valid dex magic value: cf 77 4c c7 9b 21 01 cd</div><div class="line">        at org.jf.dexlib2.util.DexUtil.verifyDexHeader(DexUtil.java:93)</div><div class="line">        at org.jf.dexlib2.dexbacked.DexBackedDexFile.getVersion(DexBackedDexFile.java:111)</div><div class="line">        at org.jf.dexlib2.dexbacked.DexBackedDexFile.&lt;init&gt;(DexBackedDexFile.java:78)</div><div class="line">        at org.jf.dexlib2.dexbacked.DexBackedDexFile.&lt;init&gt;(DexBackedDexFile.java:138)</div><div class="line">        at org.jf.dexlib2.dexbacked.ZipDexContainer$1.getDexFile(ZipDexContainer.java:181)</div><div class="line">        at brut.androlib.src.SmaliDecoder.decode(SmaliDecoder.java:90)</div><div class="line">        at brut.androlib.src.SmaliDecoder.decode(SmaliDecoder.java:39)</div><div class="line">        at brut.androlib.Androlib.decodeSourcesSmali(Androlib.java:96)</div><div class="line">        at brut.androlib.ApkDecoder.decode(ApkDecoder.java:164)</div><div class="line">        at brut.apktool.Main.cmdDecode(Main.java:170)</div><div class="line">        at brut.apktool.Main.main(Main.java:76)</div><div class="line">Press any key to continue . . .</div></pre></td></tr></table></figure></p>
-<p>解决办法：<br>增加 <code>d --only-main-classe</code> 即可<br><code>apktool d --only-main-classe test.apk -o test</code></p>
-<h4 id="修改代码"><a href="#修改代码" class="headerlink" title="修改代码"></a>修改代码</h4><h4 id="apktool编译成apk"><a href="#apktool编译成apk" class="headerlink" title="apktool编译成apk"></a>apktool编译成apk</h4><p><code>apktool b test -o test2.apk</code></p>
+        <h2 id="android渗透测试从0开始"><a href="#android渗透测试从0开始" class="headerlink" title="android渗透测试从0开始"></a>android渗透测试从0开始</h2><h3 id="apktool安装与使用"><a href="#apktool安装与使用" class="headerlink" title="apktool安装与使用"></a>apktool安装与使用</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><h4 id="apktool反编译"><a href="#apktool反编译" class="headerlink" title="apktool反编译"></a>apktool反编译</h4><p>反编译出代码到test文件夹</p>
+<pre><code class="language-html">apktool d test.apk -o test
+</code></pre>
+<p>反编译报错：</p>
+<pre><code class="language-html">I: Using Apktool 2.4.1 on xxx.apk
+I: Loading resource table...
+I: Decoding AndroidManifest.xml with resources...
+I: Loading resource table from file: C:\Users\Administrator\AppData\Local\apktool\framework\1.apk
+I: Regular manifest package...
+I: Decoding file-resources...
+I: Decoding values */* XMLs...
+I: Baksmaling classes.dex...
+I: Baksmaling classes2.dex...
+I: Baksmaling assets/A3AEECD8.dex...
+Exception in thread &quot;main&quot; org.jf.dexlib2.dexbacked.DexBackedDexFile$NotADexFile: Not a valid dex magic value: cf 77 4c c7 9b 21 01 cd
+        at org.jf.dexlib2.util.DexUtil.verifyDexHeader(DexUtil.java:93)
+        at org.jf.dexlib2.dexbacked.DexBackedDexFile.getVersion(DexBackedDexFile.java:111)
+        at org.jf.dexlib2.dexbacked.DexBackedDexFile.&lt;init&gt;(DexBackedDexFile.java:78)
+        at org.jf.dexlib2.dexbacked.DexBackedDexFile.&lt;init&gt;(DexBackedDexFile.java:138)
+        at org.jf.dexlib2.dexbacked.ZipDexContainer$1.getDexFile(ZipDexContainer.java:181)
+        at brut.androlib.src.SmaliDecoder.decode(SmaliDecoder.java:90)
+        at brut.androlib.src.SmaliDecoder.decode(SmaliDecoder.java:39)
+        at brut.androlib.Androlib.decodeSourcesSmali(Androlib.java:96)
+        at brut.androlib.ApkDecoder.decode(ApkDecoder.java:164)
+        at brut.apktool.Main.cmdDecode(Main.java:170)
+        at brut.apktool.Main.main(Main.java:76)
+Press any key to continue . . .
+</code></pre>
+<p>解决办法：<br>增加 <code>d --only-main-classe</code> 即可</p>
+<pre><code class="language-html">apktool d --only-main-classe test.apk -o test
+</code></pre>
+<h4 id="修改代码"><a href="#修改代码" class="headerlink" title="修改代码"></a>修改代码</h4><h4 id="apktool编译成apk"><a href="#apktool编译成apk" class="headerlink" title="apktool编译成apk"></a>apktool编译成apk</h4><pre><code class="language-html">apktool b test -o test2.apk
+</code></pre>
 <h3 id="apk签名"><a href="#apk签名" class="headerlink" title="apk签名"></a>apk签名</h3><h4 id="去除签名"><a href="#去除签名" class="headerlink" title="去除签名"></a>去除签名</h4><p>其实很简单，用WinRAR打开apk，找到META-INF文件夹，删除MANIFEST.MF之外的所有其他文件即可。</p>
-<h4 id="生成keystore文件"><a href="#生成keystore文件" class="headerlink" title="生成keystore文件"></a>生成keystore文件</h4><p>首先，签名需要keystore文件，可以使用keytool工具生成，一般Java环境都带有keytool命令。<br>要使用管理员权限运行cmd，不然会报错。<br><code>cd C:\Program Files\Java\jdk1.8.0_231\bin</code><br><code>keytool -genkey -alias demo.keystore -keyalg RSA -validity 40000 -keystore demo.keystore</code><br>各个参数解释如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-genkey 产生证书文件</div><div class="line">-alias 产生别名</div><div class="line">-keystore 指定密钥库的.keystore文件中</div><div class="line">-keyalg 指定密钥的算法,这里指定为RSA(非对称密钥算法)</div><div class="line">-validity 为证书有效天数，这里我们写的是40000天</div></pre></td></tr></table></figure></p>
+<h4 id="生成keystore文件"><a href="#生成keystore文件" class="headerlink" title="生成keystore文件"></a>生成keystore文件</h4><p>首先，签名需要keystore文件，可以使用keytool工具生成，一般Java环境都带有keytool命令。<br>要使用管理员权限运行cmd，不然会报错。</p>
+<pre><code class="language-html">cd C:\Program Files\Java\jdk1.8.0_231\bin
+keytool -genkey -alias demo.keystore -keyalg RSA -validity 40000 -keystore demo.keystore
+</code></pre>
+<p>各个参数解释如下：</p>
+<pre><code class="language-html">-genkey 产生证书文件
+-alias 产生别名
+-keystore 指定密钥库的.keystore文件中
+-keyalg 指定密钥的算法,这里指定为RSA(非对称密钥算法)
+-validity 为证书有效天数，这里我们写的是40000天
+</code></pre>
 <p><img src="http://img.cdn.cuittk.cn/0zi1vb1uxynidx1vmi7estznnr.png" alt=""></p>
-<h4 id="jarsigner签名apk"><a href="#jarsigner签名apk" class="headerlink" title="jarsigner签名apk"></a>jarsigner签名apk</h4><p>jarsigner也存在于Java JDK的安装包当中，所以安装好了Java环境的话，可以直接在命令行使用。<br><code>jarsigner -verbose -keystore demo.keystore demo.apk demo.keystore</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-verbose 指定生成详细输出</div><div class="line">-keystore 指定数字证书存储路径</div></pre></td></tr></table></figure></p>
+<h4 id="jarsigner签名apk"><a href="#jarsigner签名apk" class="headerlink" title="jarsigner签名apk"></a>jarsigner签名apk</h4><p>jarsigner也存在于Java JDK的安装包当中，所以安装好了Java环境的话，可以直接在命令行使用。</p>
+<pre><code class="language-html">jarsigner -verbose -keystore demo.keystore demo.apk demo.keystore
+</code></pre>
+<pre><code class="language-html">-verbose 指定生成详细输出
+-keystore 指定数字证书存储路径
+</code></pre>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://ibotpeaches.github.io/Apktool/install/" target="_blank" rel="external">apktool安装</a><br><a href="https://haozi.moe/2019/12/09/%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%8A%93%E5%8C%85%E7%A0%B4%E8%A7%A3/" target="_blank" rel="external">apktool反编译报错</a><br><a href="https://blog.csdn.net/s13383754499/article/details/84108475" target="_blank" rel="external">apk去掉签名</a><br><a href="https://blog.csdn.net/sxk874890728/article/details/80486223" target="_blank" rel="external">一步一步带你反编译apk，并教你修改smali和重新打包</a><br><a href="https://blog.csdn.net/dreamer2020/article/details/52761606" target="_blank" rel="external">apk签名教程</a></p>
 
       
@@ -476,7 +521,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -604,7 +649,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

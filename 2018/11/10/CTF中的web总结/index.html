@@ -74,11 +74,11 @@
 <meta name="description" content="CTF中的web总结基础知识Mysql,Oracle,Mssql,Access等SQL语法的细微区别熟悉和掌握手工sql注入所使用的语句学会PHP,Java,JavaScript,Python,Python,Lua等编程中的一种或多种学会配置Tomcat,IIS,Apache,Nginx等web服务器，了解配置信息及一些漏洞。 web基础简介一、爆破，包括md5、爆破随机数、验证码识别等二、绕WA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CTF中的web总结">
-<meta property="og:url" content="http://www.cuittk.cn/2018/11/10/CTF中的web总结/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2018/11/10/CTF中的web总结/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
 <meta property="og:description" content="CTF中的web总结基础知识Mysql,Oracle,Mssql,Access等SQL语法的细微区别熟悉和掌握手工sql注入所使用的语句学会PHP,Java,JavaScript,Python,Python,Lua等编程中的一种或多种学会配置Tomcat,IIS,Apache,Nginx等web服务器，了解配置信息及一些漏洞。 web基础简介一、爆破，包括md5、爆破随机数、验证码识别等二、绕WA">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-10T09:12:32.158Z">
+<meta property="og:updated_time" content="2020-02-26T10:45:22.239Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CTF中的web总结">
 <meta name="twitter:description" content="CTF中的web总结基础知识Mysql,Oracle,Mssql,Access等SQL语法的细微区别熟悉和掌握手工sql注入所使用的语句学会PHP,Java,JavaScript,Python,Python,Lua等编程中的一种或多种学会配置Tomcat,IIS,Apache,Nginx等web服务器，了解配置信息及一些漏洞。 web基础简介一、爆破，包括md5、爆破随机数、验证码识别等二、绕WA">
@@ -111,12 +111,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2018/11/10/CTF中的web总结/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2018/11/10/CTF中的web总结/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>CTF中的web总结 | h1tler's blog</title>
   
 
@@ -254,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/CTF中的web总结/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/CTF中的web总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -368,14 +368,27 @@
 </ul>
 <h4 id="waf"><a href="#waf" class="headerlink" title="waf"></a>waf</h4><ul>
 <li>整数溢出过waf<br><a href="https://github.com/Bypass007/vuln/blob/master/OpenResty/OpenResty%20uri%E5%8F%82%E6%95%B0%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9E.md" target="_blank" rel="external">https://github.com/Bypass007/vuln/blob/master/OpenResty/OpenResty%20uri%E5%8F%82%E6%95%B0%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9E.md</a></li>
-<li>字符替换空型waf<br>绕过:ununionion、UniON</li>
-<li>特殊字符（串）拦截型waf<br>绕过：&amp;&amp;、Mysql注释符:/<em>*/,/\</em>!条件注释*,–,;%00</li>
-</ul>
+<li><p>字符替换空型waf<br>绕过:ununionion、UniON</p>
+</li>
+<li><p>特殊字符（串）拦截型waf</p>
+<pre><code class="language-html">绕过：&amp;&amp;、Mysql注释符:/**/,/\*!条件注释*,--,;%00
+</code></pre>
 <h4 id="CTF-Trick"><a href="#CTF-Trick" class="headerlink" title="CTF Trick"></a>CTF Trick</h4><p>PHP弱类型<br>序列化/反序列化<br>XSS+CSRF+SSRF+RCE+Upload<br>源码审计</p>
-<h5 id="PHP弱类型"><a href="#PHP弱类型" class="headerlink" title="PHP弱类型"></a>PHP弱类型</h5><p>第一层<br>var_dump(“0e321” == “00e123”);//bool(true)<br>只要md5是0e开头。后面纯数字的情况才会把字符串转成科学计数法，0的N次方=0<br>md5(‘240610708’) //0e462097431906509019562988736854<br>md5(‘QNKCDZO’) //0e830400451993494058024219903391<br>第二层<br>s1[]=1&amp;s2[]=2<br>第三层<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;!--</div><div class="line">	if((string)$_POST[&apos;param1&apos;]!==(string)$_POST[&apos;param2&apos;] &amp;&amp; md5($_POST[&apos;param1&apos;])===md5($_POST[&apos;param2&apos;]))&#123;</div><div class="line">			die(&quot;success!);</div><div class="line">		&#125;</div><div class="line">--&gt;</div></pre></td></tr></table></figure></p>
-<p>使用强字符串转换，听说是去年的BKPCTF改的一题（没做过）<br>传URLencode后的二进制,payload:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Param1=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2</div><div class="line">Param2=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2</div></pre></td></tr></table></figure></p>
+<h5 id="PHP弱类型"><a href="#PHP弱类型" class="headerlink" title="PHP弱类型"></a>PHP弱类型</h5><p>第一层<br>var_dump(“0e321” == “00e123”);//bool(true)<br>只要md5是0e开头。后面纯数字的情况才会把字符串转成科学计数法，0的N次方=0<br>md5(‘240610708’) //0e462097431906509019562988736854<br>md5(‘QNKCDZO’) //0e830400451993494058024219903391<br>第二层<br>s1[]=1&amp;s2[]=2<br>第三层</p>
+<pre><code class="language-html">&lt;!--
+  if((string)$_POST[&#39;param1&#39;]!==(string)$_POST[&#39;param2&#39;] &amp;&amp; md5($_POST[&#39;param1&#39;])===md5($_POST[&#39;param2&#39;])){
+          die(&quot;success!);
+      }
+--&gt;
+</code></pre>
+<p>使用强字符串转换，听说是去年的BKPCTF改的一题（没做过）<br>传URLencode后的二进制,payload:</p>
+<pre><code class="language-html">Param1=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2
+Param2=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2
+</code></pre>
 <h5 id="序列化-反序列化"><a href="#序列化-反序列化" class="headerlink" title="序列化/反序列化"></a>序列化/反序列化</h5><p>serialize($data)/unserialize($data)<br>preg_match( “/^{$token}:[0-9]+:/s”, $data );正则绕过+8=8</p>
-<h5 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h5><ol>
+<h5 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h5></li>
+</ul>
+<ol>
 <li>反射型XSS</li>
 <li>存储型XSS</li>
 <li>Dom-XSS</li>
@@ -394,18 +407,48 @@
 </ul>
 <p>花式文件后缀<br>.php345 .inc .phtml .phpt .phps<br>各种文件内容检测&lt;?php &lt;? &lt;% &lt;\script language=php&gt; &lt;?=<br>花式解析漏洞.php.jpg<br>各种校验<br>.htaccess文件</p>
 <h4 id="危险函数"><a href="#危险函数" class="headerlink" title="危险函数"></a>危险函数</h4><h5 id="PHP代码执行相关函数"><a href="#PHP代码执行相关函数" class="headerlink" title="PHP代码执行相关函数"></a>PHP代码执行相关函数</h5><p>eval &amp; assert &amp; preg_replace &amp; call_user_func &amp; create_function &amp; array_map</p>
-<h6 id="eval-函数——把字符串作为PHP代码执行"><a href="#eval-函数——把字符串作为PHP代码执行" class="headerlink" title="eval()函数——把字符串作为PHP代码执行"></a>eval()函数——把字符串作为PHP代码执行</h6><h6 id="assert-函数——检查一个断言是否为-FALSE。（把字符串-assertion-作为PHP代码执行）"><a href="#assert-函数——检查一个断言是否为-FALSE。（把字符串-assertion-作为PHP代码执行）" class="headerlink" title="assert()函数——检查一个断言是否为 FALSE。（把字符串 $assertion 作为PHP代码执行）"></a>assert()函数——检查一个断言是否为 FALSE。（把字符串 $assertion 作为PHP代码执行）</h6><h6 id="preg-replace-函数——-e-修正符使-preg-replace-将-replacement-参数当作-PHP-代码"><a href="#preg-replace-函数——-e-修正符使-preg-replace-将-replacement-参数当作-PHP-代码" class="headerlink" title="preg_replace()函数——/e 修正符使 preg_replace() 将 replacement 参数当作 PHP 代码"></a>preg_replace()函数——/e 修正符使 preg_replace() 将 replacement 参数当作 PHP 代码</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">preg_replace(&quot;/test/e&quot;,$_GET[&quot;h&quot;],&quot;jutst test&quot;);</div></pre></td></tr></table></figure>
+<h6 id="eval-函数——把字符串作为PHP代码执行"><a href="#eval-函数——把字符串作为PHP代码执行" class="headerlink" title="eval()函数——把字符串作为PHP代码执行"></a>eval()函数——把字符串作为PHP代码执行</h6><h6 id="assert-函数——检查一个断言是否为-FALSE。（把字符串-assertion-作为PHP代码执行）"><a href="#assert-函数——检查一个断言是否为-FALSE。（把字符串-assertion-作为PHP代码执行）" class="headerlink" title="assert()函数——检查一个断言是否为 FALSE。（把字符串 $assertion 作为PHP代码执行）"></a>assert()函数——检查一个断言是否为 FALSE。（把字符串 $assertion 作为PHP代码执行）</h6><h6 id="preg-replace-函数——-e-修正符使-preg-replace-将-replacement-参数当作-PHP-代码"><a href="#preg-replace-函数——-e-修正符使-preg-replace-将-replacement-参数当作-PHP-代码" class="headerlink" title="preg_replace()函数——/e 修正符使 preg_replace() 将 replacement 参数当作 PHP 代码"></a>preg_replace()函数——/e 修正符使 preg_replace() 将 replacement 参数当作 PHP 代码</h6><pre><code class="language-html">preg_replace(&quot;/test/e&quot;,$_GET[&quot;h&quot;],&quot;jutst test&quot;);
+</code></pre>
 <p>7.0.0不再支持 /e修饰符。 请用 preg_replace_callback() 代替。<br>5.5.0 /e 修饰符已经被弃用了。使用 preg_replace_callback() 代替。</p>
-<h6 id="call-user-func-函数"><a href="#call-user-func-函数" class="headerlink" title="call_user_func()函数"></a>call_user_func()函数</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mixed call_user_func ( callable $callback [, mixed $parameter [, mixed $... ]] )</div></pre></td></tr></table></figure>
-<p>第一个参数 callback 是被调用的回调函数，其余参数是回调函数的参数。 传入call_user_func()的参数不能为引用传递。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">	call_user_func($_GET[&apos;hello&apos;],$_GET[&apos;world&apos;]);</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
+<h6 id="call-user-func-函数"><a href="#call-user-func-函数" class="headerlink" title="call_user_func()函数"></a>call_user_func()函数</h6><pre><code class="language-html">mixed call_user_func ( callable $callback [, mixed $parameter [, mixed $... ]] )
+</code></pre>
+<p>第一个参数 callback 是被调用的回调函数，其余参数是回调函数的参数。 传入call_user_func()的参数不能为引用传递。</p>
+<pre><code class="language-php">&lt;?php
+    call_user_func($_GET[&#39;hello&#39;],$_GET[&#39;world&#39;]);
+?&gt;
+</code></pre>
 <p>http:127.0.0.1:/index.php?hello=assert&amp;world=phpinfo()</p>
-<h6 id="call-user-func-array-函数"><a href="#call-user-func-array-函数" class="headerlink" title="call_user_func_array()函数"></a>call_user_func_array()函数</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mixed call_user_func_array ( callable $callback , array $param_arr )</div></pre></td></tr></table></figure>
-<p>把第一个参数作为回调函数（callback）调用，把参数数组作（param_arr）为回调函数的的参数传入。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">	call_user_func_array($_GET[&apos;hello&apos;],$_GET[&apos;world&apos;]);</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
+<h6 id="call-user-func-array-函数"><a href="#call-user-func-array-函数" class="headerlink" title="call_user_func_array()函数"></a>call_user_func_array()函数</h6><pre><code class="language-html">mixed call_user_func_array ( callable $callback , array $param_arr )
+</code></pre>
+<p>把第一个参数作为回调函数（callback）调用，把参数数组作（param_arr）为回调函数的的参数传入。</p>
+<pre><code class="language-php">&lt;?php
+    call_user_func_array($_GET[&#39;hello&#39;],$_GET[&#39;world&#39;]);
+?&gt;
+</code></pre>
 <p>http:127.0.0.1:/index.php?hello=assert&amp;world[]=phpinfo()</p>
-<h6 id="create-function-函数——创建一个匿名函数"><a href="#create-function-函数——创建一个匿名函数" class="headerlink" title="create_function()函数——创建一个匿名函数"></a>create_function()函数——创建一个匿名函数</h6><p>创建一个匿名函数，并返回独一无二的函数名。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">//index.php?id=2;&#125;phpinfo();//</div><div class="line">$id=$_GET[&apos;id&apos;];</div><div class="line">$str2=&apos;echo  &apos;.$a.&apos;test&apos;.$id.&quot;;&quot;;</div><div class="line">echo $str2;</div><div class="line">echo &quot;&lt;br/&gt;&quot;;</div><div class="line">echo &quot;==============================&quot;;</div><div class="line">echo &quot;&lt;br/&gt;&quot;;</div><div class="line">$f1 = create_function(&apos;$a&apos;,$str2);</div><div class="line">echo &quot;&lt;br/&gt;&quot;;</div><div class="line">echo &quot;==============================&quot;;</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
+<h6 id="create-function-函数——创建一个匿名函数"><a href="#create-function-函数——创建一个匿名函数" class="headerlink" title="create_function()函数——创建一个匿名函数"></a>create_function()函数——创建一个匿名函数</h6><p>创建一个匿名函数，并返回独一无二的函数名。</p>
+<pre><code class="language-php">&lt;?php
+//index.php?id=2;}phpinfo();//
+$id=$_GET[&#39;id&#39;];
+$str2=&#39;echo  &#39;.$a.&#39;test&#39;.$id.&quot;;&quot;;
+echo $str2;
+echo &quot;&lt;br/&gt;&quot;;
+echo &quot;==============================&quot;;
+echo &quot;&lt;br/&gt;&quot;;
+$f1 = create_function(&#39;$a&#39;,$str2);
+echo &quot;&lt;br/&gt;&quot;;
+echo &quot;==============================&quot;;
+?&gt;
+</code></pre>
 <p><a href="http://127.0.0.1/index.php?id=2;}phpinfo();//" target="_blank" rel="external">http://127.0.0.1/index.php?id=2;}phpinfo();//</a></p>
-<h6 id="array-map"><a href="#array-map" class="headerlink" title="array_map()"></a>array_map()</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">array array_map ( callable $callback , array $array1 [, array $... ] )</div></pre></td></tr></table></figure>
-<p>作用是为数组的每个元素应用回调函数 。其返回值为数组，是为 array1 每个元素应用 callback函数之后的数组。 callback 函数形参的数量和传给 array_map() 数组数量，两者必须一样。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">	$array = array(0,1,2,3,4,5);</div><div class="line">	array_map($_GET[&apos;chybeta&apos;],$array);</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
+<h6 id="array-map"><a href="#array-map" class="headerlink" title="array_map()"></a>array_map()</h6><pre><code class="language-html">array array_map ( callable $callback , array $array1 [, array $... ] )
+</code></pre>
+<p>作用是为数组的每个元素应用回调函数 。其返回值为数组，是为 array1 每个元素应用 callback函数之后的数组。 callback 函数形参的数量和传给 array_map() 数组数量，两者必须一样。</p>
+<pre><code class="language-php">&lt;?php
+    $array = array(0,1,2,3,4,5);
+    array_map($_GET[&#39;chybeta&#39;],$array);
+?&gt;
+</code></pre>
 <p><a href="http://127.0.0.1/index.php?chybeta=phpinfo" target="_blank" rel="external">http://127.0.0.1/index.php?chybeta=phpinfo</a></p>
 <h5 id="系统命令执行相关函数"><a href="#系统命令执行相关函数" class="headerlink" title="系统命令执行相关函数"></a>系统命令执行相关函数</h5><p>system &amp; passthru</p>
 <h6 id="system"><a href="#system" class="headerlink" title="system()"></a>system()</h6><p>system(“whoami”);</p>
@@ -415,12 +458,29 @@
 <h6 id="shell-exec"><a href="#shell-exec" class="headerlink" title="shell_exec()"></a>shell_exec()</h6><p>echo shell_exec(“whoami”);</p>
 <h6 id="popen"><a href="#popen" class="headerlink" title="popen()"></a>popen()</h6><p>打开一个指向进程的管道，该进程由派生给定的 command 命令执行而产生。 后面的mode，当为 ‘r’，返回的文件指针等于命令的 STDOUT，当为 ‘w’，返回的文件指针等于命令的 STDIN。<br>$handle = popen(“/bin/ls”, “r”);</p>
 <h6 id="proc-open"><a href="#proc-open" class="headerlink" title="proc_open()"></a>proc_open()</h6><p>cmd是要执行的命令，其余见<a href="http://php.net/manual/zh/function.proc-open.php" target="_blank" rel="external">文档</a></p>
-<h6 id="反单引号"><a href="#反单引号" class="headerlink" title="`(反单引号)"></a>`(反单引号)</h6><p>在php中称之为<strong>执行运算符</strong>，<strong>PHP 将尝试将反引号中的内容作为 shell 命令来执行</strong>，并将其输出信息返回（即，可以赋给一个变量而不是简单地丢弃到标准输出，使用反引号运算符“`”的效果与函数 shell_exec() 相同。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;?php echo `whoami`;?&gt;</div></pre></td></tr></table></figure></p>
+<h6 id="反单引号"><a href="#反单引号" class="headerlink" title="`(反单引号)"></a>`(反单引号)</h6><p>在php中称之为<strong>执行运算符</strong>，<strong>PHP 将尝试将反引号中的内容作为 shell 命令来执行</strong>，并将其输出信息返回（即，可以赋给一个变量而不是简单地丢弃到标准输出，使用反引号运算符“`”的效果与函数 shell_exec() 相同。</p>
+<pre><code class="language-php">&lt;?php echo `whoami`;?&gt;
+</code></pre>
 <h6 id="ob-start"><a href="#ob-start" class="headerlink" title="ob_start()"></a>ob_start()</h6><p>此函数将打开输出缓冲。当输出缓冲激活后，脚本将不会输出内容（除http标头外），相反需要输出的内容被存储在内部缓冲区中。想要输出存储在内部缓冲区中的内容，可以使用 ob_end_flush() 函数。</p>
 <p>可选参数 output_callback 函数可以被指定。 此函数把一个字符串当作参数并返回一个字符串。 当输出缓冲区被( ob_flush(), ob_clean() 或者相似的函数)冲刷（送出）或者被清洗的时候；或者在请求结束之际输出缓冲区内容被冲刷到浏览器的时候该函数将会被调用。 当调用 output_callback 时，它将收到输出缓冲区的内容作为参数 并预期返回一个新的输出缓冲区作为结果，这个新返回的输出缓冲区内容将被送到浏览器。</p>
-<p>下面的代码，由于调用了ob_end_flush()，所以会调用ob_start(cmd)中的cmd，把我们输入的_GET[a]作为cmd的参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">	$cmd = &apos;system&apos;;</div><div class="line">	ob_start($cmd);</div><div class="line">	echo &quot;$_GET[a]&quot;;</div><div class="line">	ob_end_flush();</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
+<p>下面的代码，由于调用了ob_end_flush()，所以会调用ob_start(cmd)中的cmd，把我们输入的_GET[a]作为cmd的参数。</p>
+<pre><code class="language-php">&lt;?php
+    $cmd = &#39;system&#39;;
+    ob_start($cmd);
+    echo &quot;$_GET[a]&quot;;
+    ob_end_flush();
+?&gt;
+</code></pre>
 <p><a href="http://127.0.0.1/index.php?a=whoami" target="_blank" rel="external">http://127.0.0.1/index.php?a=whoami</a></p>
-<h5 id="php-mail"><a href="#php-mail" class="headerlink" title="php mail()"></a>php mail()</h5><p><a href="http://php.net/manual/zh/function.mail.php" target="_blank" rel="external">mail 文档</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">bool mail (</div><div class="line">	string $to ,</div><div class="line">	string $subject ,</div><div class="line">	string $message [,</div><div class="line">	string $additional_headers [,</div><div class="line">	string $additional_parameters ]]</div><div class="line">)</div></pre></td></tr></table></figure></p>
+<h5 id="php-mail"><a href="#php-mail" class="headerlink" title="php mail()"></a>php mail()</h5><p><a href="http://php.net/manual/zh/function.mail.php" target="_blank" rel="external">mail 文档</a></p>
+<pre><code class="language-php">bool mail (
+    string $to ,
+    string $subject ,
+    string $message [,
+    string $additional_headers [,
+    string $additional_parameters ]]
+)
+</code></pre>
 <p>要使用mail()函数，需要配置对应的服务器等，在php.ini中有两个选项：</p>
 <ul>
 <li>配置SMTP服务器的主机名和端口</li>
@@ -548,7 +608,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -676,7 +736,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

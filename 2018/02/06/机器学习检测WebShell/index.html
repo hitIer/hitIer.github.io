@@ -75,7 +75,7 @@
 <meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习检测WebShell">
-<meta property="og:url" content="http://www.cuittk.cn/2018/02/06/机器学习检测WebShell/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2018/02/06/机器学习检测WebShell/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
 <meta property="og:description" content="简介最近刷完了吴恩达（Andrew Ng）的Machine Learning课程，恰巧实验室有相关的需求，看了几个前辈的机器学习检测PHP Webshell 的文章，便打算自己也抄起袖子，在实战中求真知。本文会详细的介绍实现机器学习检测PHP Webshell的思路和过程，一步一步和大家一起完成这个检测的工具，文章末尾会放出已经写好的下载链接。 背景知识php基础知识（PHP opcode）php">
 <meta property="og:locale" content="zh-Hans">
@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://img.cdn.cuittk.cn/f46smct1t4oswnxglvqdtr6s6p.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/ptksyikg73bita82twzc3rgytl.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/nlslpngk8x5hfd0gd673y4iy66.png">
-<meta property="og:updated_time" content="2018-11-10T09:12:33.526Z">
+<meta property="og:updated_time" content="2020-02-26T10:41:34.020Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习检测WebShell">
 <meta name="twitter:description" content="简介最近刷完了吴恩达（Andrew Ng）的Machine Learning课程，恰巧实验室有相关的需求，看了几个前辈的机器学习检测PHP Webshell 的文章，便打算自己也抄起袖子，在实战中求真知。本文会详细的介绍实现机器学习检测PHP Webshell的思路和过程，一步一步和大家一起完成这个检测的工具，文章末尾会放出已经写好的下载链接。 背景知识php基础知识（PHP opcode）php">
@@ -124,12 +124,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2018/02/06/机器学习检测WebShell/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2018/02/06/机器学习检测WebShell/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>机器学习检测WebShell | h1tler's blog</title>
   
 
@@ -267,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/02/06/机器学习检测WebShell/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/02/06/机器学习检测WebShell/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -365,8 +365,13 @@
 <h2 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h2><p>php基础知识（PHP opcode）<br>php Webshell<br>Python（scikit-learn）</p>
 <h3 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h3><p>PHP：世界上最好的编程语言，这个不多说了。<br>PHP opcode：PHP opcode 是脚本编译后的中间语言，就如同Java 的Bytecode、.NET 的MSL。<br>PHP Webshell：可以简单的理解为 网页后门。<br>Python scikit-learn：<br><img src="http://img.cdn.cuittk.cn/87ak0n1usmfpf5dftsrs1tsw6o.png" alt=""><br>（翻译为：用起来美滋滋的Python 机器学习包）</p>
 <h2 id="可行性分析"><a href="#可行性分析" class="headerlink" title="可行性分析"></a>可行性分析</h2><p>PHP Webshell本质上也是一段PHP的代码，在没有深入研究前，也知道PHP Webshell 必然有一些规律，比如执行了某些操作（执行获取到的命令、列出目录文件、上传文件、查看文件等等）。如果直接用PHP 的源代码分析，会出现很多的噪音，比如注释内容、花操作等等。如果我们将PHPWebshell 的源代码转化成仅含执行语句操作的内容，就会一定程度上，过滤掉这些噪音。所以，我们使用PHPopcode 进行分析。<br>针对opcode这种类型的数据内容，我们可以采用词袋，词频等方法来进行提取关键特征。最后使用分类的算法来进行训练。<br>根据上面的简单“分析”，知道咱们在大体思路上，是可以行得通的。</p>
-<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><h3 id="第一步：准备环境"><a href="#第一步：准备环境" class="headerlink" title="第一步：准备环境"></a>第一步：准备环境</h3><p>要获取到PHP opcode，需要添加一个PHP 的插件 VLD，我们拿Windows环境来进行举例。<br>插件下载地址：<a href="http://pecl.php.net/package/vld" target="_blank" rel="external">传送门</a><br>点击DLL下载windows版本<br><img src="http://img.cdn.cuittk.cn/iw85etkq5523aafmbu60v675y7.png" alt=""><br>选择对应的php版本进行下载<br><img src="http://img.cdn.cuittk.cn/yznirdny2ox39dlrcdttjz8uji.png" alt=""><br>下载好后，放入到PHP 安装目录下的ext文件夹内，我使用的是PHPstudy环境。<br><img src="http://img.cdn.cuittk.cn/sf3z7j85yk384i4oyjr1ocumim.png" alt=""><br>然后编辑php.ini文件，在最后一行添加内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">; vld</div><div class="line">extension=php_vld.dll</div></pre></td></tr></table></figure></p>
-<p>测试是否安装成功：<br>测试文件1.php<br><img src="http://img.cdn.cuittk.cn/f3vy8llsuxnfunia5ucledjoig.png" alt=""><br>执行命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php -dvld.active=1 -dvld.execute=0 1.php</div></pre></td></tr></table></figure></p>
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><h3 id="第一步：准备环境"><a href="#第一步：准备环境" class="headerlink" title="第一步：准备环境"></a>第一步：准备环境</h3><p>要获取到PHP opcode，需要添加一个PHP 的插件 VLD，我们拿Windows环境来进行举例。<br>插件下载地址：<a href="http://pecl.php.net/package/vld" target="_blank" rel="external">传送门</a><br>点击DLL下载windows版本<br><img src="http://img.cdn.cuittk.cn/iw85etkq5523aafmbu60v675y7.png" alt=""><br>选择对应的php版本进行下载<br><img src="http://img.cdn.cuittk.cn/yznirdny2ox39dlrcdttjz8uji.png" alt=""><br>下载好后，放入到PHP 安装目录下的ext文件夹内，我使用的是PHPstudy环境。<br><img src="http://img.cdn.cuittk.cn/sf3z7j85yk384i4oyjr1ocumim.png" alt=""><br>然后编辑php.ini文件，在最后一行添加内容：</p>
+<pre><code class="language-html">; vld
+extension=php_vld.dll
+</code></pre>
+<p>测试是否安装成功：<br>测试文件1.php<br><img src="http://img.cdn.cuittk.cn/f3vy8llsuxnfunia5ucledjoig.png" alt=""><br>执行命令：</p>
+<pre><code class="language-html"> php -dvld.active=1 -dvld.execute=0 1.php
+</code></pre>
 <p> <img src="http://img.cdn.cuittk.cn/fev7jro92ne9udsya1w1k5shpk.png" alt=""><br> 如果显示内容是差不多一样的，那我们的环境配置就成功了。<br>我们需要的就是这段输出中的<br><img src="http://img.cdn.cuittk.cn/i8z328jxqx5hfqdzrwr3styet5.png" alt=""><br>ECHO 、RETURN<br>这样的opcode。<br>到这里，我们的PHP环境配置基本完成了。</p>
 <h3 id="第二步：准备数据"><a href="#第二步：准备数据" class="headerlink" title="第二步：准备数据"></a>第二步：准备数据</h3><p>进行机器学习前，我们很关键的一步是要准备数据，样本的数量和质量直接影响到了我们最后的成果。</p>
 <h4 id="下载数据"><a href="#下载数据" class="headerlink" title="下载数据"></a>下载数据</h4><p>这里需要准备的数据分为两类，【白名单数据】、【黑名单数据】。<br>白名单数据指我们正常的PHP程序，黑名单数据指的是PHP Webshell程序。数据源还是我们的老朋友 github.com<br>在github上搜索PHP，可以得到很多的PHP的项目，咱们筛选几个比较知名和常用的。<br>白名单列表（一小部分）：</p>
@@ -384,9 +389,96 @@
 <li><a href="https://github.com/xl7dev/WebShell" target="_blank" rel="external">https://github.com/xl7dev/WebShell</a></li>
 </ul>
 <h4 id="创建工程"><a href="#创建工程" class="headerlink" title="创建工程"></a>创建工程</h4><p>创建工程文件夹【MLCheckWebshell】，并在目录下创建【black-list】【white-list】文件夹。用于存放黑名单文件和白名单文件。</p>
-<h4 id="提取opcode"><a href="#提取opcode" class="headerlink" title="提取opcode"></a>提取opcode</h4><p>我们创建一个utils.py 文件，用来编写提取opcode的工具函数。<br>工具函数1：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">defload_php_opcode(phpfilename):</div><div class="line">    &quot;&quot;&quot;</div><div class="line">    获取php opcode 信息</div><div class="line">    :param phpfilename:</div><div class="line">    :return:</div><div class="line">    &quot;&quot;&quot;</div><div class="line">    try:</div><div class="line">        output = subprocess.check_output([&apos;php.exe&apos;, &apos;-dvld.active=1&apos;, &apos;-dvld.execute=0&apos;, phpfilename], stderr=subprocess.STDOUT)</div><div class="line">        tokens = re.findall(r&apos;\s(\b[A-Z_]+\b)\s&apos;, output)</div><div class="line">        t = &quot; &quot;.join(tokens)</div><div class="line">        return t</div><div class="line">    except:</div><div class="line">        return&quot; &quot;</div></pre></td></tr></table></figure></p>
-<p>方法load_php_opcode 解读：<br>用Python的subprocess 模块来进行执行系统操作，获取其所有输出，并用正则提取opcode，再用空格来连接起来<br>工具函数2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">defrecursion_load_php_file_opcode(dir):</div><div class="line">    &quot;&quot;&quot;</div><div class="line">    递归获取 phpopcde</div><div class="line">    :param dir: 目录文件</div><div class="line">    :return:</div><div class="line">    &quot;&quot;&quot;</div><div class="line">    files_list = []</div><div class="line">    for root, dirs, files in os.walk(dir):</div><div class="line">        for filename in files:</div><div class="line">            iffilename.endswith(&apos;.php&apos;):</div><div class="line">                try:</div><div class="line">                    full_path = os.path.join(root,filename)</div><div class="line">                    file_content =load_php_opcode(full_path)</div><div class="line">                    print&quot;[Gensuccess] &#123;&#125;&quot;.format(full_path)</div><div class="line">                    print&apos;--&apos; * 20</div><div class="line">                   files_list.append(file_content)</div><div class="line">                except:</div><div class="line">                    continue</div><div class="line">    return files_list</div></pre></td></tr></table></figure></p>
-<p>工具方法2 recursion_load_php_file_opcode 的作用是遍历目标文件夹内的所有的PHP文件并生成opcode，最后生成一个列表，并返回。<br>然后我们在工程目录下，创建train.py文件。<br>编写prepare_data() 函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">defprepare_data():</div><div class="line">    &quot;&quot;&quot;</div><div class="line">    生成需要使用的数据，写入文件后，以供后面应用</div><div class="line">    :return:</div><div class="line">    &quot;&quot;&quot;</div><div class="line">    # 生成数据并写入文件</div><div class="line">    if os.path.exists(&apos;white_opcodes.txt&apos;) isFalse:</div><div class="line">        print&apos;[Info] Whiteopcodes doesnt exists ... generating opcode ..&apos;</div><div class="line">        white_opcodes_list =recursion_load_php_file_opcode(&apos;.\\white-list\\&apos;)</div><div class="line">        withopen(&apos;white_opcodes.txt&apos;, &apos;w&apos;) as f:</div><div class="line">            for line inwhite_opcodes_list:</div><div class="line">                f.write(line + &apos;\n&apos;)</div><div class="line">    else:</div><div class="line">        print&apos;[Info] Whiteopcodes exists&apos;</div><div class="line"> </div><div class="line">    if os.path.exists(&apos;black_opcodes.txt&apos;) isFalse:</div><div class="line">        black_opcodes_list = recursion_load_php_file_opcode(&apos;.\\black-list\\&apos;)</div><div class="line">        withopen(&apos;black_opcodes.txt&apos;, &apos;w&apos;) as f:</div><div class="line">            for line inblack_opcodes_list:</div><div class="line">                f.write(line + &apos;\n&apos;)</div><div class="line">    else:</div><div class="line">        print&apos;[Info] blackopcodes exists&apos;</div><div class="line"> </div><div class="line">    # 使用数据</div><div class="line"> </div><div class="line">    white_file_list = []</div><div class="line">    black_file_list = []</div><div class="line"> </div><div class="line">    withopen(&apos;black_opcodes.txt&apos;, &apos;r&apos;) as f:</div><div class="line">        for line in f:</div><div class="line">            black_file_list.append(line.strip(&apos;\n&apos;))</div><div class="line"> </div><div class="line">    withopen(&apos;white_opcodes.txt&apos;, &apos;r&apos;) as f:</div><div class="line">        for line in f:</div><div class="line">            white_file_list.append(line.strip(&apos;\n&apos;))</div><div class="line"> </div><div class="line">    len_white_file_list = len(white_file_list)</div><div class="line">    len_black_file_list = len(black_file_list)</div><div class="line"> </div><div class="line">    y_white = [0] *len_white_file_list</div><div class="line">    y_black = [1] *len_black_file_list</div><div class="line"> </div><div class="line">    X = white_file_list + black_file_list</div><div class="line">    y = y_white + y_black</div><div class="line"> </div><div class="line">    print&apos;[Data status]... ↓&apos;</div><div class="line">    print&apos;[Data status] Xlength : &#123;&#125;&apos;.format(len_white_file_list + len_black_file_list)</div><div class="line">    print&apos;[Data status]White list length : &#123;&#125;&apos;.format(len_white_file_list)</div><div class="line">    print&apos;[Data status]black list length : &#123;&#125;&apos;.format(len_black_file_list)</div><div class="line">    # X raw data</div><div class="line">    # y label</div><div class="line">    return X, y</div></pre></td></tr></table></figure></p>
+<h4 id="提取opcode"><a href="#提取opcode" class="headerlink" title="提取opcode"></a>提取opcode</h4><p>我们创建一个utils.py 文件，用来编写提取opcode的工具函数。<br>工具函数1：</p>
+<pre><code class="language-html">defload_php_opcode(phpfilename):
+    &quot;&quot;&quot;
+    获取php opcode 信息
+    :param phpfilename:
+    :return:
+    &quot;&quot;&quot;
+    try:
+        output = subprocess.check_output([&#39;php.exe&#39;, &#39;-dvld.active=1&#39;, &#39;-dvld.execute=0&#39;, phpfilename], stderr=subprocess.STDOUT)
+        tokens = re.findall(r&#39;\s(\b[A-Z_]+\b)\s&#39;, output)
+        t = &quot; &quot;.join(tokens)
+        return t
+    except:
+        return&quot; &quot;
+</code></pre>
+<p>方法load_php_opcode 解读：<br>用Python的subprocess 模块来进行执行系统操作，获取其所有输出，并用正则提取opcode，再用空格来连接起来<br>工具函数2:</p>
+<pre><code class="language-html">defrecursion_load_php_file_opcode(dir):
+    &quot;&quot;&quot;
+    递归获取 phpopcde
+    :param dir: 目录文件
+    :return:
+    &quot;&quot;&quot;
+    files_list = []
+    for root, dirs, files in os.walk(dir):
+        for filename in files:
+            iffilename.endswith(&#39;.php&#39;):
+                try:
+                    full_path = os.path.join(root,filename)
+                    file_content =load_php_opcode(full_path)
+                    print&quot;[Gensuccess] {}&quot;.format(full_path)
+                    print&#39;--&#39; * 20
+                   files_list.append(file_content)
+                except:
+                    continue
+    return files_list
+</code></pre>
+<p>工具方法2 recursion_load_php_file_opcode 的作用是遍历目标文件夹内的所有的PHP文件并生成opcode，最后生成一个列表，并返回。<br>然后我们在工程目录下，创建train.py文件。<br>编写prepare_data() 函数</p>
+<pre><code class="language-html">defprepare_data():
+    &quot;&quot;&quot;
+    生成需要使用的数据，写入文件后，以供后面应用
+    :return:
+    &quot;&quot;&quot;
+    # 生成数据并写入文件
+    if os.path.exists(&#39;white_opcodes.txt&#39;) isFalse:
+        print&#39;[Info] Whiteopcodes doesnt exists ... generating opcode ..&#39;
+        white_opcodes_list =recursion_load_php_file_opcode(&#39;.\\white-list\\&#39;)
+        withopen(&#39;white_opcodes.txt&#39;, &#39;w&#39;) as f:
+            for line inwhite_opcodes_list:
+                f.write(line + &#39;\n&#39;)
+    else:
+        print&#39;[Info] Whiteopcodes exists&#39;
+
+    if os.path.exists(&#39;black_opcodes.txt&#39;) isFalse:
+        black_opcodes_list = recursion_load_php_file_opcode(&#39;.\\black-list\\&#39;)
+        withopen(&#39;black_opcodes.txt&#39;, &#39;w&#39;) as f:
+            for line inblack_opcodes_list:
+                f.write(line + &#39;\n&#39;)
+    else:
+        print&#39;[Info] blackopcodes exists&#39;
+
+    # 使用数据
+
+    white_file_list = []
+    black_file_list = []
+
+    withopen(&#39;black_opcodes.txt&#39;, &#39;r&#39;) as f:
+        for line in f:
+            black_file_list.append(line.strip(&#39;\n&#39;))
+
+    withopen(&#39;white_opcodes.txt&#39;, &#39;r&#39;) as f:
+        for line in f:
+            white_file_list.append(line.strip(&#39;\n&#39;))
+
+    len_white_file_list = len(white_file_list)
+    len_black_file_list = len(black_file_list)
+
+    y_white = [0] *len_white_file_list
+    y_black = [1] *len_black_file_list
+
+    X = white_file_list + black_file_list
+    y = y_white + y_black
+
+    print&#39;[Data status]... ↓&#39;
+    print&#39;[Data status] Xlength : {}&#39;.format(len_white_file_list + len_black_file_list)
+    print&#39;[Data status]White list length : {}&#39;.format(len_white_file_list)
+    print&#39;[Data status]black list length : {}&#39;.format(len_black_file_list)
+    # X raw data
+    # y label
+    return X, y
+</code></pre>
 <p>prepare_data 做了以下几个事：</p>
 <ol>
 <li>把黑名单和白名单中的PHP     opcode 统一生成并分别写入到两个不同的文件中。</li>
@@ -403,7 +495,31 @@
 <li>train_test_split</li>
 <li>GaussianNB</li>
 </ol>
-<p>CountVectorizer 的作用是把一些列文档的集合转化成数值矩阵。<br>TfidfTransformer 的作用是把数值矩阵规范化为 tf或 tf-idf 。<br>train_test_split的作用是“随机”分配训练集和测试集。这里的随机不是每次都随机，在参数确定的时候，每次随机的结果都是相同的。有时，为了增加训练结果的有效性，我们会用到交叉验证（cross validations）。<br>GaussianNB ：Scikit-learn 对朴素贝叶斯算法的实现。朴素贝叶斯算法是常用的监督型算法。<br>先上写好的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">defmethod1():</div><div class="line">    &quot;&quot;&quot;</div><div class="line">    countVectorizer + TF-IDF 整理数据</div><div class="line">    朴素贝叶斯算法生成</div><div class="line">    :return: None</div><div class="line">    &quot;&quot;&quot;</div><div class="line">    X, y = prepare_data()</div><div class="line"> </div><div class="line">    cv = CountVectorizer(ngram_range=(3, 3), decode_error=&quot;ignore&quot;, token_pattern=r&apos;\b\w+\b&apos;)</div><div class="line">    X = cv.fit_transform(X).toarray()</div><div class="line"> </div><div class="line">    transformer = TfidfTransformer(smooth_idf=False)</div><div class="line">    X = transformer.fit_transform(X).toarray()</div><div class="line"> </div><div class="line">    x_train, x_test, y_train, y_test =train_test_split(X, y, test_size=0.4, random_state=0)</div><div class="line"> </div><div class="line">    gnb = GaussianNB()</div><div class="line">    gnb.fit(x_train, y_train)</div><div class="line">    joblib.dump(gnb, &apos;save/gnb.pkl&apos;)</div><div class="line">    y_pred = gnb.predict(x_test)</div><div class="line"> </div><div class="line">    print&apos;Accuracy :&#123;&#125;&apos;.format(metrics.accuracy_score(y_test,y_pred))</div><div class="line">    printmetrics.confusion_matrix(y_test, y_pred)</div></pre></td></tr></table></figure></p>
+<p>CountVectorizer 的作用是把一些列文档的集合转化成数值矩阵。<br>TfidfTransformer 的作用是把数值矩阵规范化为 tf或 tf-idf 。<br>train_test_split的作用是“随机”分配训练集和测试集。这里的随机不是每次都随机，在参数确定的时候，每次随机的结果都是相同的。有时，为了增加训练结果的有效性，我们会用到交叉验证（cross validations）。<br>GaussianNB ：Scikit-learn 对朴素贝叶斯算法的实现。朴素贝叶斯算法是常用的监督型算法。<br>先上写好的代码：</p>
+<pre><code class="language-html">defmethod1():
+    &quot;&quot;&quot;
+    countVectorizer + TF-IDF 整理数据
+    朴素贝叶斯算法生成
+    :return: None
+    &quot;&quot;&quot;
+    X, y = prepare_data()
+
+    cv = CountVectorizer(ngram_range=(3, 3), decode_error=&quot;ignore&quot;, token_pattern=r&#39;\b\w+\b&#39;)
+    X = cv.fit_transform(X).toarray()
+
+    transformer = TfidfTransformer(smooth_idf=False)
+    X = transformer.fit_transform(X).toarray()
+
+    x_train, x_test, y_train, y_test =train_test_split(X, y, test_size=0.4, random_state=0)
+
+    gnb = GaussianNB()
+    gnb.fit(x_train, y_train)
+    joblib.dump(gnb, &#39;save/gnb.pkl&#39;)
+    y_pred = gnb.predict(x_test)
+
+    print&#39;Accuracy :{}&#39;.format(metrics.accuracy_score(y_test,y_pred))
+    printmetrics.confusion_matrix(y_test, y_pred)
+</code></pre>
 <p> 代码介绍：<br>首先，我们用了刚才写的prepare_data()函数来获取我们的数据集。然后，创建了一个CountVectorizer对象，初始化的过程中，我们告诉CountVectorizer对象，ngram的上下限为(3,3) 【ngram_range=(3,3)】，当出现解码错误的时候，直接忽略【decode_error=”ignore”】，匹配token的方式是【r”\b\w+\b”】，这样匹配我们之前用空格来隔离每个opcode的值。<br>然后我们用 cv.fit_transform(X).toarray() 来“格式化”我们的结果，最终是一个矩阵。<br>接着创建一个TfidfTransformer对象，用同样的方式处理一次我们刚才得到的总数据值。<br>然后使用train_test_split函数来获取打乱的随机的测试集和训练集。这时候，黑名单中的文件和白名单中的文件排列顺序就被随机打乱了，但是X[i] 和 y[i] 的对应关系没有改变，训练集和测试集在总数聚集中分别占比60%和40%。<br>接下来，创建一个GaussianNB 对象，在Scikit-learn中，已经内置好的算法对象可以直接进行训练，输入内容为训练集的数据（X_train） 和 训练集的标签（y_train）。<br>gnb.fit(X_train, y_train)<br>执行完上面这个语句以后，我们就会得到一个已经训练完成的gnb训练对象，我们用测试集(X_test) 去预测得到我们的y_pred 值（预测出来的类型）。<br>然后我们对比原本的 y_test 和 用训练算法得到的结果 y_pred。<br>metrics.accuracy_score(y_test, y_pred)<br>结果即为在此训练集和测试集下的准确率。<br><img src="http://img.cdn.cuittk.cn/fo98spof998gp32v8setnov2nj.png" alt=""><br>约为97.42%<br>还需要计算混淆矩阵来评估分类的准确性。<br>metrics.confusion_matrix(y_test, y_pred)<br>输出结果见上图。<br>编写训练函数到这里已经初具雏形。并可以拿来简单的使用了。</p>
 <h3 id="第四步：持久化-amp-应用"><a href="#第四步：持久化-amp-应用" class="headerlink" title="第四步：持久化&amp;应用"></a>第四步：持久化&amp;应用</h3><p>编写完训练函数，现在我们可以拿新的Webshell来挑战一下我们刚才已经训练好的gnb。<br>但是，如果每次检测之前，都要重新训练一次，那速度就非常的慢了，我们需要持久化我们的训练结果。<br>在Scikit-learn中，我们用joblib.dump() 方法来持久化我们的训练结果，细心的读者应该发现，在method1() 中有个被注释掉的语句<br>joblib.dump(gnb, ‘save/gnb.pkl’)<br>这个操作就是把我们训练好的gnb保存到save文件夹内的gnb.pkl文件中。<br>方面下次使用。<br>创建check.py<br>理一下思路：先实例化我们之前保存的内容，然后将新的检测内容放到gnb中进行检测，判断类型并输出。<br>核心代码：<br><img src="http://img.cdn.cuittk.cn/f46smct1t4oswnxglvqdtr6s6p.png" alt=""><br>最后根据标签来判断结果，0 为 正常程序， 1 为Webshell。<br>我们来进行一个简单的测试。<br><img src="http://img.cdn.cuittk.cn/ptksyikg73bita82twzc3rgytl.png" alt=""><br><img src="http://img.cdn.cuittk.cn/nlslpngk8x5hfd0gd673y4iy66.png" alt=""><br>那么，一个简单的通过朴素贝叶斯训练算法判断Webshell的小程序就完成了。</p>
 <h2 id="下一步？"><a href="#下一步？" class="headerlink" title="下一步？"></a>下一步？</h2><p>这个小程序只是一个简单的应用，还有很多的地方可以根据需求去改进<br>如：<br>在准备数据时：</p>
@@ -429,7 +545,7 @@
 <li>找到合适的算法，进行训练</li>
 <li>检查是否符合心中预期，会不会出现过度拟合等常见的问题。</li>
 <li>提供更多更精准的数据，或更换算法。</li>
-<li>重复1~4</li>
+<li>重复<code>1~4</code></li>
 </ol>
 <p>本人也是小菜鸡，在此分享一下简单的思路和方法。希望能抛砖引玉。<br>项目下载地址：<br><a href="https://github.com/hi-WenR0/MLCheckWebshell" target="_blank" rel="external">https://github.com/hi-WenR0/MLCheckWebshell</a></p>
 <p>参考链接：<br><a href="https://mp.weixin.qq.com/s?__biz=MzIwNjEwNTQ4Mw==&amp;mid=2651577090&amp;idx=1&amp;sn=924b14ba842f57c34f06995416a98360&amp;chksm=8cd9c5e6bbae4cf0e3eed6192133c6c87de47cfcc911fca90d86f1383d5ec2f6f1cf661aaeb6&amp;mpshare=1&amp;srcid=0118yl2ryPVxJto00p3uvrhy&amp;scene=21#wechat_redirect" target="_blank" rel="external">基于机器学习的 Webshell 发现技术探索</a></p>
@@ -554,7 +670,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -682,7 +798,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

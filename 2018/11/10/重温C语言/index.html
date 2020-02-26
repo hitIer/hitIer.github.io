@@ -71,17 +71,17 @@
 
 
 
-<meta name="description" content="重温C语言scanf问题：要求输入19 * 打印19 *12345678#include&amp;lt;stdio.h&amp;gt;main()&amp;#123;	int n;	char a;	scanf(&amp;quot;%d %c&amp;quot;,&amp;amp;n,&amp;amp;a);	printf(&amp;quot;%d %c&amp;quot;,n,a);&amp;#125; 如果是scanf(“%d%c”,&amp;amp;n,&amp;amp;a); 输入 1">
+<meta name="description" content="重温C语言scanf问题：要求输入19 * 打印19 * #include&amp;lt;stdio.h&amp;gt; main() {     int n;     char a;     scanf(&amp;quot;%d %c&amp;quot;,&amp;amp;n,&amp;amp;a);     printf(&amp;quot;%d %c&amp;quot;,n,a); }  如果是scanf(&amp;quot;%d%c&amp;quot;,&amp;amp;n,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="重温C语言">
-<meta property="og:url" content="http://www.cuittk.cn/2018/11/10/重温C语言/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2018/11/10/重温C语言/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
-<meta property="og:description" content="重温C语言scanf问题：要求输入19 * 打印19 *12345678#include&amp;lt;stdio.h&amp;gt;main()&amp;#123;	int n;	char a;	scanf(&amp;quot;%d %c&amp;quot;,&amp;amp;n,&amp;amp;a);	printf(&amp;quot;%d %c&amp;quot;,n,a);&amp;#125; 如果是scanf(“%d%c”,&amp;amp;n,&amp;amp;a); 输入 1">
+<meta property="og:description" content="重温C语言scanf问题：要求输入19 * 打印19 * #include&amp;lt;stdio.h&amp;gt; main() {     int n;     char a;     scanf(&amp;quot;%d %c&amp;quot;,&amp;amp;n,&amp;amp;a);     printf(&amp;quot;%d %c&amp;quot;,n,a); }  如果是scanf(&amp;quot;%d%c&amp;quot;,&amp;amp;n,">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-11T17:14:51.444Z">
+<meta property="og:updated_time" content="2020-02-26T09:03:49.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重温C语言">
-<meta name="twitter:description" content="重温C语言scanf问题：要求输入19 * 打印19 *12345678#include&amp;lt;stdio.h&amp;gt;main()&amp;#123;	int n;	char a;	scanf(&amp;quot;%d %c&amp;quot;,&amp;amp;n,&amp;amp;a);	printf(&amp;quot;%d %c&amp;quot;,n,a);&amp;#125; 如果是scanf(“%d%c”,&amp;amp;n,&amp;amp;a); 输入 1">
+<meta name="twitter:description" content="重温C语言scanf问题：要求输入19 * 打印19 * #include&amp;lt;stdio.h&amp;gt; main() {     int n;     char a;     scanf(&amp;quot;%d %c&amp;quot;,&amp;amp;n,&amp;amp;a);     printf(&amp;quot;%d %c&amp;quot;,n,a); }  如果是scanf(&amp;quot;%d%c&amp;quot;,&amp;amp;n,">
 
 
 
@@ -111,12 +111,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2018/11/10/重温C语言/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2018/11/10/重温C语言/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>重温C语言 | h1tler's blog</title>
   
 
@@ -254,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/重温C语言/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/重温C语言/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -348,8 +348,17 @@
       
 
       
-        <p>重温C语言<br>scanf问题：要求输入19 * 打印19 *<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#include&lt;stdio.h&gt;</div><div class="line">main()</div><div class="line">&#123;</div><div class="line">	int n;</div><div class="line">	char a;</div><div class="line">	scanf(&quot;%d %c&quot;,&amp;n,&amp;a);</div><div class="line">	printf(&quot;%d %c&quot;,n,a);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>如果是scanf(“%d%c”,&amp;n,&amp;a); 输入 19 * 空格会输入到a中，打印不出 *</p>
+        <p>重温C语言<br>scanf问题：要求输入19 * 打印19 *</p>
+<pre><code class="language-C">#include&lt;stdio.h&gt;
+main()
+{
+    int n;
+    char a;
+    scanf(&quot;%d %c&quot;,&amp;n,&amp;a);
+    printf(&quot;%d %c&quot;,n,a);
+}
+</code></pre>
+<p>如果是<code>scanf(&quot;%d%c&quot;,&amp;n,&amp;a);</code>输入19 12空格会输入到a中，打印不出12</p>
 
       
     </div>
@@ -459,7 +468,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -571,7 +580,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

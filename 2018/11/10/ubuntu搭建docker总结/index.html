@@ -71,20 +71,20 @@
 
 
 
-<meta name="description" content="ubuntu搭建docker总结选择系统使用腾讯云Docker容器：在Ubuntu Server 12.04 LTS 64位上集成软件:docker 1.8.2不用再搭建docker，docker daemon将自动运行，而无需配置docker命令:1234docker ps 列出所有运行中的容器docker ps -a 列出所有容器（含沉睡镜像）docker images 列出本地所有镜像doc">
+<meta name="description" content="ubuntu搭建docker总结选择系统使用腾讯云Docker容器：在Ubuntu Server 12.04 LTS 64位上集成软件:docker 1.8.2不用再搭建docker，docker daemon将自动运行，而无需配置docker命令: docker ps 列出所有运行中的容器 docker ps -a 列出所有容器（含沉睡镜像） docker images 列出本地所有镜像 doc">
 <meta name="keywords" content="docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ubuntu搭建docker总结">
-<meta property="og:url" content="http://www.cuittk.cn/2018/11/10/ubuntu搭建docker总结/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2018/11/10/ubuntu搭建docker总结/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
-<meta property="og:description" content="ubuntu搭建docker总结选择系统使用腾讯云Docker容器：在Ubuntu Server 12.04 LTS 64位上集成软件:docker 1.8.2不用再搭建docker，docker daemon将自动运行，而无需配置docker命令:1234docker ps 列出所有运行中的容器docker ps -a 列出所有容器（含沉睡镜像）docker images 列出本地所有镜像doc">
+<meta property="og:description" content="ubuntu搭建docker总结选择系统使用腾讯云Docker容器：在Ubuntu Server 12.04 LTS 64位上集成软件:docker 1.8.2不用再搭建docker，docker daemon将自动运行，而无需配置docker命令: docker ps 列出所有运行中的容器 docker ps -a 列出所有容器（含沉睡镜像） docker images 列出本地所有镜像 doc">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/txwhmuj5f254grlzsvwol5uo0q.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/noglmwhsl4d3gmuxpmsvt7is8m.png">
-<meta property="og:updated_time" content="2019-11-11T17:12:05.131Z">
+<meta property="og:updated_time" content="2020-02-26T09:05:51.638Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ubuntu搭建docker总结">
-<meta name="twitter:description" content="ubuntu搭建docker总结选择系统使用腾讯云Docker容器：在Ubuntu Server 12.04 LTS 64位上集成软件:docker 1.8.2不用再搭建docker，docker daemon将自动运行，而无需配置docker命令:1234docker ps 列出所有运行中的容器docker ps -a 列出所有容器（含沉睡镜像）docker images 列出本地所有镜像doc">
+<meta name="twitter:description" content="ubuntu搭建docker总结选择系统使用腾讯云Docker容器：在Ubuntu Server 12.04 LTS 64位上集成软件:docker 1.8.2不用再搭建docker，docker daemon将自动运行，而无需配置docker命令: docker ps 列出所有运行中的容器 docker ps -a 列出所有容器（含沉睡镜像） docker images 列出本地所有镜像 doc">
 <meta name="twitter:image" content="http://img.cdn.cuittk.cn/txwhmuj5f254grlzsvwol5uo0q.png">
 
 
@@ -115,12 +115,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2018/11/10/ubuntu搭建docker总结/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2018/11/10/ubuntu搭建docker总结/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>ubuntu搭建docker总结 | h1tler's blog</title>
   
 
@@ -258,7 +258,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/ubuntu搭建docker总结/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/ubuntu搭建docker总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -352,11 +352,18 @@
       
 
       
-        <h3 id="ubuntu搭建docker总结"><a href="#ubuntu搭建docker总结" class="headerlink" title="ubuntu搭建docker总结"></a>ubuntu搭建docker总结</h3><h4 id="选择系统"><a href="#选择系统" class="headerlink" title="选择系统"></a>选择系统</h4><p>使用腾讯云Docker容器：<br>在Ubuntu Server 12.04 LTS 64位上集成软件:docker 1.8.2<br><img src="http://img.cdn.cuittk.cn/txwhmuj5f254grlzsvwol5uo0q.png" alt=""><br>不用再搭建docker，docker daemon将自动运行，而无需配置<br>docker命令:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">docker ps 列出所有运行中的容器</div><div class="line">docker ps -a 列出所有容器（含沉睡镜像）</div><div class="line">docker images 列出本地所有镜像</div><div class="line">docker pull 从 Docker Hub 中拉取或者更新指定镜像</div></pre></td></tr></table></figure></p>
+        <h3 id="ubuntu搭建docker总结"><a href="#ubuntu搭建docker总结" class="headerlink" title="ubuntu搭建docker总结"></a>ubuntu搭建docker总结</h3><h4 id="选择系统"><a href="#选择系统" class="headerlink" title="选择系统"></a>选择系统</h4><p>使用腾讯云Docker容器：<br>在Ubuntu Server 12.04 LTS 64位上集成软件:docker 1.8.2<br><img src="http://img.cdn.cuittk.cn/txwhmuj5f254grlzsvwol5uo0q.png" alt=""><br>不用再搭建docker，docker daemon将自动运行，而无需配置<br>docker命令:</p>
+<pre><code class="language-html">docker ps 列出所有运行中的容器
+docker ps -a 列出所有容器（含沉睡镜像）
+docker images 列出本地所有镜像
+docker pull 从 Docker Hub 中拉取或者更新指定镜像
+</code></pre>
 <h4 id="搭建过程"><a href="#搭建过程" class="headerlink" title="搭建过程"></a>搭建过程</h4><p>首先docker images,docker ps 都是没有任何东西的</p>
-<h5 id="第一步下载镜像："><a href="#第一步下载镜像：" class="headerlink" title="第一步下载镜像："></a>第一步下载镜像：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull chriswayg/apache-php 下载一个apache-php环境的镜像</div></pre></td></tr></table></figure>
+<h5 id="第一步下载镜像："><a href="#第一步下载镜像：" class="headerlink" title="第一步下载镜像："></a>第一步下载镜像：</h5><pre><code class="language-html">docker pull chriswayg/apache-php 下载一个apache-php环境的镜像
+</code></pre>
 <p>有其他需要可以下载其他的镜像</p>
-<h5 id="创建docker容器"><a href="#创建docker容器" class="headerlink" title="创建docker容器"></a>创建docker容器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run --name group4_80 -p 0.0.0.0:4000:80 -d -it chriswayg/apache-php /bin/bash</div></pre></td></tr></table></figure>
+<h5 id="创建docker容器"><a href="#创建docker容器" class="headerlink" title="创建docker容器"></a>创建docker容器</h5><pre><code class="language-html">docker run --name group4_80 -p 0.0.0.0:4000:80 -d -it chriswayg/apache-php /bin/bash
+</code></pre>
 <ul>
 <li>-p 0.0.0.0:主机端口:虚拟机端口</li>
 <li>-name 容器名字</li>
@@ -365,15 +372,52 @@
 <li>-t: 为容器重新分配一个伪输入终端，通常与 -i 同时使用</li>
 </ul>
 <p>命令解释：使用镜像chriswayg/apache-php以交互模式启动一个容器,在容器内执行/bin/bash命令。</p>
-<h5 id="运行docker容器"><a href="#运行docker容器" class="headerlink" title="运行docker容器"></a>运行docker容器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">docker start group4_80</div><div class="line">#docker stop group4_80 //关闭容器</div><div class="line">#docker restart group4_80 //重启容器</div><div class="line">#docker rm group4_80 //删除容器</div><div class="line">#docker pause group4_80 //暂停容器的所有进程</div><div class="line">#docker unpause group4_80 //恢复容器的所有进程。</div></pre></td></tr></table></figure>
-<h5 id="进入docker容器"><a href="#进入docker容器" class="headerlink" title="进入docker容器"></a>进入docker容器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker attach group4_80</div></pre></td></tr></table></figure>
-<h5 id="docker-cp-用于容器与主机之间的数据拷贝"><a href="#docker-cp-用于容器与主机之间的数据拷贝" class="headerlink" title="docker cp 用于容器与主机之间的数据拷贝"></a>docker cp 用于容器与主机之间的数据拷贝</h5><p>实例<br>将主机/var/www目录拷贝到容器a81b15bb20ab的/var/www/html目录下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker cp /var/www a81b15bb20ab:/var/www/html</div></pre></td></tr></table></figure></p>
-<p>将容器a81b15bb20ab的/www目录拷贝到主机的/tmp目录中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker cp  a81b15bb20ab:/www /tmp/</div></pre></td></tr></table></figure></p>
+<h5 id="运行docker容器"><a href="#运行docker容器" class="headerlink" title="运行docker容器"></a>运行docker容器</h5><pre><code class="language-html">docker start group4_80
+#docker stop group4_80 //关闭容器
+#docker restart group4_80 //重启容器
+#docker rm group4_80 //删除容器
+#docker pause group4_80 //暂停容器的所有进程
+#docker unpause group4_80 //恢复容器的所有进程。
+</code></pre>
+<h5 id="进入docker容器"><a href="#进入docker容器" class="headerlink" title="进入docker容器"></a>进入docker容器</h5><pre><code class="language-html">docker attach group4_80
+</code></pre>
+<h5 id="docker-cp-用于容器与主机之间的数据拷贝"><a href="#docker-cp-用于容器与主机之间的数据拷贝" class="headerlink" title="docker cp 用于容器与主机之间的数据拷贝"></a>docker cp 用于容器与主机之间的数据拷贝</h5><p>实例<br>将主机/var/www目录拷贝到容器a81b15bb20ab的/var/www/html目录下</p>
+<pre><code class="language-html">docker cp /var/www a81b15bb20ab:/var/www/html
+</code></pre>
+<p>将容器a81b15bb20ab的/www目录拷贝到主机的/tmp目录中。</p>
+<pre><code class="language-html">docker cp  a81b15bb20ab:/www /tmp/
+</code></pre>
 <p>如何查看容器ID<br>docker ps<br><img src="http://img.cdn.cuittk.cn/noglmwhsl4d3gmuxpmsvt7is8m.png" alt=""></p>
-<h5 id="后续步骤"><a href="#后续步骤" class="headerlink" title="后续步骤"></a>后续步骤</h5><p>当访问ip:4000 时连接被拒绝。原因是没有开启apache<br>进入docker后开启apache:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/apache2 start  #restart|stop</div><div class="line">#service httpd start</div></pre></td></tr></table></figure></p>
-<p>docker容器返回错误：<br>docker E: Unable to locate package nginx<br>在使用docker容器时，有时候里边没有安装vim，敲vim命令时提示说：vim: command not found，这个时候就需要安装vim，可是当你敲apt-get install vim命令时，提示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Reading package lists... Done</div><div class="line">Building dependency tree       </div><div class="line">Reading state information... Done</div><div class="line">E: Unable to locate package vim</div><div class="line">这时候需要敲：apt-get update</div></pre></td></tr></table></figure></p>
-<p>这个命令的作用是：同步 /etc/apt/sources.list 和 /etc/apt/sources.list.d 中列出的源的索引，这样才能获取到最新的软件包。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">等更新完毕以后再敲命令：apt-get install vim命令即可</div></pre></td></tr></table></figure></p>
-<p>移动当前目录下所有的文件到上一级目录<br>mv * ../<br>强制删除没有权限删除的文件 cb文件夹是一个目录,可用rm -rf cb删除<br>chmod修改目录权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">chmod [ u / g / o / a ] [ + / - / = ] [ r / w / x ] file</div><div class="line">其中 ：</div><div class="line">u表示User，是文件的所有者</div><div class="line">g表示跟User同Group的用户</div><div class="line">o表示Other，即其他用户</div><div class="line">a表示ALL，所有用户</div><div class="line">-------------------------------------</div><div class="line">+表示增加权限</div><div class="line">-表示取消权限</div><div class="line">=表示取消之前的权限，并给予唯一的权限</div><div class="line">-------------------------------------</div><div class="line">r表示Read，即读文件</div><div class="line">w表示Write，即写文件</div><div class="line">x表示运行文件</div></pre></td></tr></table></figure></p>
+<h5 id="后续步骤"><a href="#后续步骤" class="headerlink" title="后续步骤"></a>后续步骤</h5><p>当访问ip:4000 时连接被拒绝。原因是没有开启apache<br>进入docker后开启apache:</p>
+<pre><code class="language-html">/etc/init.d/apache2 start  #restart|stop
+#service httpd start
+</code></pre>
+<p>docker容器返回错误：<br>docker E: Unable to locate package nginx<br>在使用docker容器时，有时候里边没有安装vim，敲vim命令时提示说：vim: command not found，这个时候就需要安装vim，可是当你敲apt-get install vim命令时，提示：</p>
+<pre><code class="language-html">        Reading package lists... Done
+        Building dependency tree       
+        Reading state information... Done
+        E: Unable to locate package vim
+        这时候需要敲：apt-get update
+</code></pre>
+<p>这个命令的作用是：同步 /etc/apt/sources.list 和 /etc/apt/sources.list.d 中列出的源的索引，这样才能获取到最新的软件包。</p>
+<pre><code class="language-html">        等更新完毕以后再敲命令：apt-get install vim命令即可
+</code></pre>
+<p>移动当前目录下所有的文件到上一级目录<br>mv * ../<br>强制删除没有权限删除的文件 cb文件夹是一个目录,可用rm -rf cb删除<br>chmod修改目录权限</p>
+<pre><code class="language-html">chmod [ u / g / o / a ] [ + / - / = ] [ r / w / x ] file
+其中 ：
+u表示User，是文件的所有者
+g表示跟User同Group的用户
+o表示Other，即其他用户
+a表示ALL，所有用户
+-------------------------------------
++表示增加权限
+-表示取消权限
+=表示取消之前的权限，并给予唯一的权限
+-------------------------------------
+r表示Read，即读文件
+w表示Write，即写文件
+x表示运行文件
+</code></pre>
 <p>取消其他用户的写的权限： chmod o-w html<br>linux命令:<br>编辑并创建文件vi index.php   按i编辑，按esc退出编辑，输入:wq退出并保存<br>删除 rm index.html<br>创建目录 mkdir images<br>重命名 mv 2.php 2.jpg</p>
 
       
@@ -499,7 +543,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -627,7 +671,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

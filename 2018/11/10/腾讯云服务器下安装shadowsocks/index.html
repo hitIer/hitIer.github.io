@@ -71,19 +71,19 @@
 
 
 
-<meta name="description" content="搭建过程真是一把辛酸一把泪啊（从开始到成功，搭了两星期）服务器系统：CentOS 7 在 CentOS 7 下安装配置 shadowsocks安装 pip（可能不需要）pip是 python 的包管理工具。在本文中将使用 python 版本的 shadowsocks，此版本的 shadowsocks 已发布到 pip 上，因此我们需要通过 pip 命令来安装。在控制台执行以下命令安装 pip：12">
+<meta name="description" content="搭建过程真是一把辛酸一把泪啊（从开始到成功，搭了两星期）服务器系统：CentOS 7 在 CentOS 7 下安装配置 shadowsocks安装 pip（可能不需要）pip是 python 的包管理工具。在本文中将使用 python 版本的 shadowsocks，此版本的 shadowsocks 已发布到 pip 上，因此我们需要通过 pip 命令来安装。在控制台执行以下命令安装 pip： c">
 <meta name="keywords" content="shadowsocks">
 <meta property="og:type" content="article">
 <meta property="og:title" content="腾讯云服务器下CentOS 7搭建shadowsocks">
-<meta property="og:url" content="http://www.cuittk.cn/2018/11/10/腾讯云服务器下安装shadowsocks/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2018/11/10/腾讯云服务器下安装shadowsocks/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
-<meta property="og:description" content="搭建过程真是一把辛酸一把泪啊（从开始到成功，搭了两星期）服务器系统：CentOS 7 在 CentOS 7 下安装配置 shadowsocks安装 pip（可能不需要）pip是 python 的包管理工具。在本文中将使用 python 版本的 shadowsocks，此版本的 shadowsocks 已发布到 pip 上，因此我们需要通过 pip 命令来安装。在控制台执行以下命令安装 pip：12">
+<meta property="og:description" content="搭建过程真是一把辛酸一把泪啊（从开始到成功，搭了两星期）服务器系统：CentOS 7 在 CentOS 7 下安装配置 shadowsocks安装 pip（可能不需要）pip是 python 的包管理工具。在本文中将使用 python 版本的 shadowsocks，此版本的 shadowsocks 已发布到 pip 上，因此我们需要通过 pip 命令来安装。在控制台执行以下命令安装 pip： c">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/6rd3zsbbrkucvoc1wjau5d3b1q.png">
-<meta property="og:updated_time" content="2018-11-10T09:12:33.704Z">
+<meta property="og:updated_time" content="2020-02-26T10:42:19.896Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="腾讯云服务器下CentOS 7搭建shadowsocks">
-<meta name="twitter:description" content="搭建过程真是一把辛酸一把泪啊（从开始到成功，搭了两星期）服务器系统：CentOS 7 在 CentOS 7 下安装配置 shadowsocks安装 pip（可能不需要）pip是 python 的包管理工具。在本文中将使用 python 版本的 shadowsocks，此版本的 shadowsocks 已发布到 pip 上，因此我们需要通过 pip 命令来安装。在控制台执行以下命令安装 pip：12">
+<meta name="twitter:description" content="搭建过程真是一把辛酸一把泪啊（从开始到成功，搭了两星期）服务器系统：CentOS 7 在 CentOS 7 下安装配置 shadowsocks安装 pip（可能不需要）pip是 python 的包管理工具。在本文中将使用 python 版本的 shadowsocks，此版本的 shadowsocks 已发布到 pip 上，因此我们需要通过 pip 命令来安装。在控制台执行以下命令安装 pip： c">
 <meta name="twitter:image" content="http://img.cdn.cuittk.cn/6rd3zsbbrkucvoc1wjau5d3b1q.png">
 
 
@@ -114,12 +114,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2018/11/10/腾讯云服务器下安装shadowsocks/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2018/11/10/腾讯云服务器下安装shadowsocks/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>腾讯云服务器下CentOS 7搭建shadowsocks | h1tler's blog</title>
   
 
@@ -257,7 +257,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/腾讯云服务器下安装shadowsocks/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/腾讯云服务器下安装shadowsocks/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -352,28 +352,68 @@
 
       
         <p>搭建过程真是一把辛酸一把泪啊（从开始到成功，搭了两星期）<br>服务器系统：CentOS 7</p>
-<h2 id="在-CentOS-7-下安装配置-shadowsocks"><a href="#在-CentOS-7-下安装配置-shadowsocks" class="headerlink" title="在 CentOS 7 下安装配置 shadowsocks"></a>在 CentOS 7 下安装配置 shadowsocks</h2><h3 id="安装-pip（可能不需要）"><a href="#安装-pip（可能不需要）" class="headerlink" title="安装 pip（可能不需要）"></a>安装 pip（可能不需要）</h3><p>pip是 python 的包管理工具。在本文中将使用 python 版本的 shadowsocks，此版本的 shadowsocks 已发布到 pip 上，因此我们需要通过 pip 命令来安装。<br>在控制台执行以下命令安装 pip：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl &quot;https://bootstrap.pypa.io/get-pip.py&quot; -o &quot;get-pip.py&quot;</div><div class="line">python get-pip.py</div></pre></td></tr></table></figure></p>
-<h3 id="安装配置-shadowsocks"><a href="#安装配置-shadowsocks" class="headerlink" title="安装配置 shadowsocks"></a>安装配置 shadowsocks</h3><h4 id="服务端安装"><a href="#服务端安装" class="headerlink" title="服务端安装"></a>服务端安装</h4><p>在控制台执行以下命令安装 shadowsocks：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pip install --upgrade pip</div><div class="line">pip install shadowsocks</div></pre></td></tr></table></figure></p>
-<p>安装完成后，需要创建配置文件/etc/shadowsocks.json，内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;server&quot;: &quot;0.0.0.0&quot;,</div><div class="line">  &quot;server_port&quot;: 8388,</div><div class="line">  &quot;password&quot;: &quot;uzon57jd0v869t7w&quot;,</div><div class="line">  &quot;method&quot;: &quot;aes-256-cfb&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="在-CentOS-7-下安装配置-shadowsocks"><a href="#在-CentOS-7-下安装配置-shadowsocks" class="headerlink" title="在 CentOS 7 下安装配置 shadowsocks"></a>在 CentOS 7 下安装配置 shadowsocks</h2><h3 id="安装-pip（可能不需要）"><a href="#安装-pip（可能不需要）" class="headerlink" title="安装 pip（可能不需要）"></a>安装 pip（可能不需要）</h3><p>pip是 python 的包管理工具。在本文中将使用 python 版本的 shadowsocks，此版本的 shadowsocks 已发布到 pip 上，因此我们需要通过 pip 命令来安装。<br>在控制台执行以下命令安装 pip：</p>
+<pre><code class="language-html">curl &quot;https://bootstrap.pypa.io/get-pip.py&quot; -o &quot;get-pip.py&quot;
+python get-pip.py
+</code></pre>
+<h3 id="安装配置-shadowsocks"><a href="#安装配置-shadowsocks" class="headerlink" title="安装配置 shadowsocks"></a>安装配置 shadowsocks</h3><h4 id="服务端安装"><a href="#服务端安装" class="headerlink" title="服务端安装"></a>服务端安装</h4><p>在控制台执行以下命令安装 shadowsocks：</p>
+<pre><code class="language-html">pip install --upgrade pip
+pip install shadowsocks
+</code></pre>
+<p>安装完成后，需要创建配置文件/etc/shadowsocks.json，内容如下：</p>
+<pre><code class="language-html">{
+  &quot;server&quot;: &quot;0.0.0.0&quot;,
+  &quot;server_port&quot;: 8388,
+  &quot;password&quot;: &quot;uzon57jd0v869t7w&quot;,
+  &quot;method&quot;: &quot;aes-256-cfb&quot;
+}
+</code></pre>
 <p>说明：</p>
 <ul>
 <li>server 代理地址，默认本机为0.0.0.0</li>
 <li>server_port：服务监听端口</li>
 <li>password：连接密码</li>
 <li>method：加密方法，可选aes-128-cfb, aes-192-cfb, aes-256-cfb, bf-cfb, cast5-cfb, des-cfb, rc4-md5,<br>,chacha20, salsa20, rc4, table</li>
-<li>以上信息在配置 shadowsocks 客户端时需要配置一致，具体说明可查看 shadowsocks 的帮助文档。<h4 id="配置自启动"><a href="#配置自启动" class="headerlink" title="配置自启动"></a>配置自启动</h4>新建启动脚本文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /etc/systemd/system/shadowsocks.service</div></pre></td></tr></table></figure>
-</li>
+<li>以上信息在配置 shadowsocks 客户端时需要配置一致，具体说明可查看 shadowsocks 的帮助文档。<h4 id="配置自启动"><a href="#配置自启动" class="headerlink" title="配置自启动"></a>配置自启动</h4>新建启动脚本文件<pre><code class="language-html">vi /etc/systemd/system/shadowsocks.service
+</code></pre>
+内容如下：<pre><code class="language-html">[Unit]
+Description=Shadowsocks
+[Service]
+TimeoutStartSec=0
+ExecStart=/usr/bin/ssserver -c /etc/shadowsocks.json
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+执行以下命令将 shadowsocks 服务加入自启动<pre><code class="language-html">systemctl enable shadowsocks
+</code></pre>
+启动服务：<pre><code class="language-html">systemctl start shadowsocks
+</code></pre>
+查看服务状态检查是否加入自启动成功：<pre><code class="language-html">systemctl status shadowsocks -l
+</code></pre>
+如果显示类似信息，则说明已经成功了<pre><code class="language-html">shadowsocks.service - Shadowsocks
+ Loaded: loaded (/etc/systemd/system/shadowsocks.service; enabled; vendor preset: disabled)
+ Active: active (running) since Mon 2015-12-21 23:51:48 CST; 11min ago
+Main PID: 19334 (ssserver)
+ CGroup: /system.slice/shadowsocks.service
+         └─19334 /usr/bin/python /usr/bin/ssserver -c /etc/shadowsocks.json
+Dec 21 23:51:48 morning.work systemd[1]: Started Shadowsocks.
+Dec 21 23:51:48 morning.work systemd[1]: Starting Shadowsocks...
+Dec 21 23:51:48 morning.work ssserver[19334]: INFO: loading config from /etc/shadowsocks.json
+Dec 21 23:51:48 morning.work ssserver[19334]: 2015-12-21 23:51:48 INFO     loading libcrypto from libcrypto.so.10
+Dec 21 23:51:48 morning.work ssserver[19334]: 2015-12-21 23:51:48 INFO     starting server at 0.0.0.0:8388
+</code></pre>
+<h3 id="配置-Shadowsocks-Windows-客户端（Windows）"><a href="#配置-Shadowsocks-Windows-客户端（Windows）" class="headerlink" title="配置 Shadowsocks Windows 客户端（Windows）"></a>配置 Shadowsocks Windows 客户端（Windows）</h3>点击下载 <a href="https://github.com/shadowsocks/shadowsocks-windows/releases/download/2.5.8/Shadowsocks-2.5.8.zip" target="_blank" rel="external">Shadowsocks Windows</a> 客户端 最新版</li>
 </ul>
-<p>内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[Unit]</div><div class="line">Description=Shadowsocks</div><div class="line">[Service]</div><div class="line">TimeoutStartSec=0</div><div class="line">ExecStart=/usr/bin/ssserver -c /etc/shadowsocks.json</div><div class="line">[Install]</div><div class="line">WantedBy=multi-user.target</div></pre></td></tr></table></figure></p>
-<p>执行以下命令将 shadowsocks 服务加入自启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl enable shadowsocks</div></pre></td></tr></table></figure></p>
-<p>启动服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start shadowsocks</div></pre></td></tr></table></figure></p>
-<p>查看服务状态检查是否加入自启动成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl status shadowsocks -l</div></pre></td></tr></table></figure></p>
-<p>如果显示类似信息，则说明已经成功了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">shadowsocks.service - Shadowsocks</div><div class="line">   Loaded: loaded (/etc/systemd/system/shadowsocks.service; enabled; vendor preset: disabled)</div><div class="line">   Active: active (running) since Mon 2015-12-21 23:51:48 CST; 11min ago</div><div class="line"> Main PID: 19334 (ssserver)</div><div class="line">   CGroup: /system.slice/shadowsocks.service</div><div class="line">           └─19334 /usr/bin/python /usr/bin/ssserver -c /etc/shadowsocks.json</div><div class="line">Dec 21 23:51:48 morning.work systemd[1]: Started Shadowsocks.</div><div class="line">Dec 21 23:51:48 morning.work systemd[1]: Starting Shadowsocks...</div><div class="line">Dec 21 23:51:48 morning.work ssserver[19334]: INFO: loading config from /etc/shadowsocks.json</div><div class="line">Dec 21 23:51:48 morning.work ssserver[19334]: 2015-12-21 23:51:48 INFO     loading libcrypto from libcrypto.so.10</div><div class="line">Dec 21 23:51:48 morning.work ssserver[19334]: 2015-12-21 23:51:48 INFO     starting server at 0.0.0.0:8388</div></pre></td></tr></table></figure></p>
-<h3 id="配置-Shadowsocks-Windows-客户端（Windows）"><a href="#配置-Shadowsocks-Windows-客户端（Windows）" class="headerlink" title="配置 Shadowsocks Windows 客户端（Windows）"></a>配置 Shadowsocks Windows 客户端（Windows）</h3><p>点击下载 <a href="https://github.com/shadowsocks/shadowsocks-windows/releases/download/2.5.8/Shadowsocks-2.5.8.zip" target="_blank" rel="external">Shadowsocks Windows</a> 客户端 最新版</p>
 <p>输入你自己主机的x.x.x.x地址 + 端口 + 密码，确定<br>右键小飞机–启用系统代理–系统代理模式PCA或全局</p>
-<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><h4 id="连上了还是上不了google-可能-firewalld-防火墙没有运行"><a href="#连上了还是上不了google-可能-firewalld-防火墙没有运行" class="headerlink" title="连上了还是上不了google: 可能 firewalld 防火墙没有运行"></a>连上了还是上不了google: 可能 firewalld 防火墙没有运行</h4><p>防火墙需要开启对应端口<br>先开启防火墙<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start firewalld</div></pre></td></tr></table></figure></p>
-<p>无法开启，则安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install firewalld firewall-config</div></pre></td></tr></table></figure></p>
-<p>开放端口：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">firewall-cmd --permanent --add-port=8388/tcp</div></pre></td></tr></table></figure></p>
+<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><h4 id="连上了还是上不了google-可能-firewalld-防火墙没有运行"><a href="#连上了还是上不了google-可能-firewalld-防火墙没有运行" class="headerlink" title="连上了还是上不了google: 可能 firewalld 防火墙没有运行"></a>连上了还是上不了google: 可能 firewalld 防火墙没有运行</h4><p>防火墙需要开启对应端口<br>先开启防火墙</p>
+<pre><code class="language-html">systemctl start firewalld
+</code></pre>
+<p>无法开启，则安装</p>
+<pre><code class="language-html">yum install firewalld firewall-config
+</code></pre>
+<p>开放端口：</p>
+<pre><code class="language-html">firewall-cmd --permanent --add-port=8388/tcp
+</code></pre>
 <h4 id="有上述信息，但是客户端无法访问google"><a href="#有上述信息，但是客户端无法访问google" class="headerlink" title="有上述信息，但是客户端无法访问google"></a>有上述信息，但是客户端无法访问google</h4><p>端口没开<br>腾讯云服务器需要配置安全组<br>添加规则，开放相应端口<br><img src="http://img.cdn.cuittk.cn/6rd3zsbbrkucvoc1wjau5d3b1q.png" alt=""></p>
 
       
@@ -499,7 +539,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -627,7 +667,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

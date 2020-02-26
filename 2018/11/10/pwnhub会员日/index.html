@@ -71,13 +71,13 @@
 
 
 
-<meta name="description" content="pwnhub会员日复现访问题目地址：一个登陆页面弱口令admin,admin登陆下载源码，进行审计profile.php的id参数存在注入：在profile.php里发现，id只过滤了. ( ) _，然后可以子查询，id=0 union select 1,2,3,4,5源码中有：12345678CREATE TABLE `users` (  `id` int(5) NOT NULL AUTO_IN">
+<meta name="description" content="pwnhub会员日复现访问题目地址：一个登陆页面弱口令admin,admin登陆下载源码，进行审计profile.php的id参数存在注入：在profile.php里发现，id只过滤了. ( ) _，然后可以子查询，id=0 union select 1,2,3,4,5源码中有： CREATE TABLE `users` (   `id` int(5) NOT NULL AUTO_INCREMEN">
 <meta name="keywords" content="pwnhub">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pwnhub会员日">
-<meta property="og:url" content="http://www.cuittk.cn/2018/11/10/pwnhub会员日/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2018/11/10/pwnhub会员日/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
-<meta property="og:description" content="pwnhub会员日复现访问题目地址：一个登陆页面弱口令admin,admin登陆下载源码，进行审计profile.php的id参数存在注入：在profile.php里发现，id只过滤了. ( ) _，然后可以子查询，id=0 union select 1,2,3,4,5源码中有：12345678CREATE TABLE `users` (  `id` int(5) NOT NULL AUTO_IN">
+<meta property="og:description" content="pwnhub会员日复现访问题目地址：一个登陆页面弱口令admin,admin登陆下载源码，进行审计profile.php的id参数存在注入：在profile.php里发现，id只过滤了. ( ) _，然后可以子查询，id=0 union select 1,2,3,4,5源码中有： CREATE TABLE `users` (   `id` int(5) NOT NULL AUTO_INCREMEN">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/at6wo5jf13e4sjjkt57iraz41j.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/5peljfdl772sai4x385fa3ui8u.png">
@@ -85,10 +85,10 @@
 <meta property="og:image" content="http://img.cdn.cuittk.cn/cedy9nx15smoy3swomu0hgkq08.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/q0hilcf1tgshsf5c4je2iadkro.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/rabg3qqfcelv7uz12h9hnjt027.png">
-<meta property="og:updated_time" content="2018-11-10T09:12:32.758Z">
+<meta property="og:updated_time" content="2020-02-26T10:46:02.163Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pwnhub会员日">
-<meta name="twitter:description" content="pwnhub会员日复现访问题目地址：一个登陆页面弱口令admin,admin登陆下载源码，进行审计profile.php的id参数存在注入：在profile.php里发现，id只过滤了. ( ) _，然后可以子查询，id=0 union select 1,2,3,4,5源码中有：12345678CREATE TABLE `users` (  `id` int(5) NOT NULL AUTO_IN">
+<meta name="twitter:description" content="pwnhub会员日复现访问题目地址：一个登陆页面弱口令admin,admin登陆下载源码，进行审计profile.php的id参数存在注入：在profile.php里发现，id只过滤了. ( ) _，然后可以子查询，id=0 union select 1,2,3,4,5源码中有： CREATE TABLE `users` (   `id` int(5) NOT NULL AUTO_INCREMEN">
 <meta name="twitter:image" content="http://img.cdn.cuittk.cn/at6wo5jf13e4sjjkt57iraz41j.png">
 
 
@@ -119,12 +119,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2018/11/10/pwnhub会员日/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2018/11/10/pwnhub会员日/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>pwnhub会员日 | h1tler's blog</title>
   
 
@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/pwnhub会员日/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/pwnhub会员日/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -356,8 +356,28 @@
       
 
       
-        <h3 id="pwnhub会员日"><a href="#pwnhub会员日" class="headerlink" title="pwnhub会员日"></a>pwnhub会员日</h3><h4 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h4><p>访问题目地址：一个登陆页面<br><img src="http://img.cdn.cuittk.cn/at6wo5jf13e4sjjkt57iraz41j.png" alt=""><br>弱口令admin,admin登陆<br><img src="http://img.cdn.cuittk.cn/5peljfdl772sai4x385fa3ui8u.png" alt=""><br>下载源码，进行审计<br><img src="http://img.cdn.cuittk.cn/9sz2ovbnbij54olt0dm88a4a62.png" alt=""><br>profile.php的id参数存在注入：<br><img src="http://img.cdn.cuittk.cn/cedy9nx15smoy3swomu0hgkq08.png" alt=""><br>在profile.php里发现，id只过滤了. ( ) _，然后可以子查询，id=0 union select 1,2,3,4,5<br>源码中有：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE `users` (</div><div class="line">  `id` int(5) NOT NULL AUTO_INCREMENT,</div><div class="line">  `user` varchar(20) DEFAULT NULL,</div><div class="line">  `pass` varchar(32) DEFAULT NULL,</div><div class="line">  `$secret` varchar(36) DEFAULT NULL,</div><div class="line">  `count` int(3) DEFAULT NULL,</div><div class="line">  PRIMARY KEY (`id`)</div><div class="line">)</div></pre></td></tr></table></figure></p>
-<p>$secret在第4个字段，然后使用order by 注入<br>id有查询次数限制<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">if($row[&apos;count&apos;] == 140)</div><div class="line">        &#123;</div><div class="line">            </div><div class="line">            if(mysql_query(&quot;update users set $secret=&apos;&#123;$duihuanma&#125;&apos; where user=&apos;$username&apos;;&quot;))</div><div class="line">            &#123;</div><div class="line">                mysql_query(&quot;update users set count=0 where user=&apos;$username&apos;;&quot;);</div><div class="line">                die(&quot;&lt;center&gt;&lt;br&gt;&lt;h3&gt;尝试次数过多，兑换码已经重置&lt;/h3&gt;&lt;/center&gt;&quot;);</div><div class="line">            &#125;</div><div class="line">            return $duihuanma;</div><div class="line">        &#125;</div></pre></td></tr></table></figure></p>
+        <h3 id="pwnhub会员日"><a href="#pwnhub会员日" class="headerlink" title="pwnhub会员日"></a>pwnhub会员日</h3><h4 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h4><p>访问题目地址：一个登陆页面<br><img src="http://img.cdn.cuittk.cn/at6wo5jf13e4sjjkt57iraz41j.png" alt=""><br>弱口令admin,admin登陆<br><img src="http://img.cdn.cuittk.cn/5peljfdl772sai4x385fa3ui8u.png" alt=""><br>下载源码，进行审计<br><img src="http://img.cdn.cuittk.cn/9sz2ovbnbij54olt0dm88a4a62.png" alt=""><br>profile.php的id参数存在注入：<br><img src="http://img.cdn.cuittk.cn/cedy9nx15smoy3swomu0hgkq08.png" alt=""><br>在profile.php里发现，id只过滤了. ( ) _，然后可以子查询，id=0 union select 1,2,3,4,5<br>源码中有：</p>
+<pre><code class="language-html">CREATE TABLE `users` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `user` varchar(20) DEFAULT NULL,
+  `pass` varchar(32) DEFAULT NULL,
+  `$secret` varchar(36) DEFAULT NULL,
+  `count` int(3) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)
+</code></pre>
+<p>$secret在第4个字段，然后使用order by 注入<br>id有查询次数限制</p>
+<pre><code class="language-html">if($row[&#39;count&#39;] == 140)
+        {
+
+            if(mysql_query(&quot;update users set $secret=&#39;{$duihuanma}&#39; where user=&#39;$username&#39;;&quot;))
+            {
+                mysql_query(&quot;update users set count=0 where user=&#39;$username&#39;;&quot;);
+                die(&quot;&lt;center&gt;&lt;br&gt;&lt;h3&gt;尝试次数过多，兑换码已经重置&lt;/h3&gt;&lt;/center&gt;&quot;);
+            }
+            return $duihuanma;
+        }
+</code></pre>
 <p>本地进行复现，有注册页面，注册一个h1tler，其id为2<br><img src="http://img.cdn.cuittk.cn/q0hilcf1tgshsf5c4je2iadkro.png" alt=""><br>但是，当登录admin<br><img src="http://img.cdn.cuittk.cn/rabg3qqfcelv7uz12h9hnjt027.png" alt=""></p>
 
       
@@ -483,7 +503,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -611,7 +631,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

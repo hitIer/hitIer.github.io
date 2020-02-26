@@ -71,17 +71,17 @@
 
 
 
-<meta name="description" content="专属链接题目地址：http://116.85.48.102:5050/welcom/8acb825dsc139s4f1bsb16es14f7875f8f23右键源码：1&amp;lt;link href=&amp;quot;/image/banner/ZmF2aWNvbi5pY28=&amp;quot; rel=&amp;quot;shortcut icon&amp;quot;&amp;gt; 访问/image/banner/ZmF2aWNvb">
+<meta name="description" content="专属链接题目地址：http://116.85.48.102:5050/welcom/8acb825dsc139s4f1bsb16es14f7875f8f23右键源码： &amp;lt;link href=&amp;quot;/image/banner/ZmF2aWNvbi5pY28=&amp;quot; rel=&amp;quot;shortcut icon&amp;quot;&amp;gt; 访问/image/banner/ZmF2aWNvb">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DDCTF2018 专属链接 writeup">
-<meta property="og:url" content="http://www.cuittk.cn/2018/04/26/DDCTF2018 专属链接 writeup/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2018/04/26/DDCTF2018 专属链接 writeup/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
-<meta property="og:description" content="专属链接题目地址：http://116.85.48.102:5050/welcom/8acb825dsc139s4f1bsb16es14f7875f8f23右键源码：1&amp;lt;link href=&amp;quot;/image/banner/ZmF2aWNvbi5pY28=&amp;quot; rel=&amp;quot;shortcut icon&amp;quot;&amp;gt; 访问/image/banner/ZmF2aWNvb">
+<meta property="og:description" content="专属链接题目地址：http://116.85.48.102:5050/welcom/8acb825dsc139s4f1bsb16es14f7875f8f23右键源码： &amp;lt;link href=&amp;quot;/image/banner/ZmF2aWNvbi5pY28=&amp;quot; rel=&amp;quot;shortcut icon&amp;quot;&amp;gt; 访问/image/banner/ZmF2aWNvb">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-11T17:09:39.394Z">
+<meta property="og:updated_time" content="2020-02-26T10:18:20.900Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DDCTF2018 专属链接 writeup">
-<meta name="twitter:description" content="专属链接题目地址：http://116.85.48.102:5050/welcom/8acb825dsc139s4f1bsb16es14f7875f8f23右键源码：1&amp;lt;link href=&amp;quot;/image/banner/ZmF2aWNvbi5pY28=&amp;quot; rel=&amp;quot;shortcut icon&amp;quot;&amp;gt; 访问/image/banner/ZmF2aWNvb">
+<meta name="twitter:description" content="专属链接题目地址：http://116.85.48.102:5050/welcom/8acb825dsc139s4f1bsb16es14f7875f8f23右键源码： &amp;lt;link href=&amp;quot;/image/banner/ZmF2aWNvbi5pY28=&amp;quot; rel=&amp;quot;shortcut icon&amp;quot;&amp;gt; 访问/image/banner/ZmF2aWNvb">
 
 
 
@@ -111,12 +111,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2018/04/26/DDCTF2018 专属链接 writeup/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2018/04/26/DDCTF2018 专属链接 writeup/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>DDCTF2018 专属链接 writeup | h1tler's blog</title>
   
 
@@ -254,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/04/26/DDCTF2018 专属链接 writeup/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/04/26/DDCTF2018 专属链接 writeup/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -348,9 +348,180 @@
       
 
       
-        <h3 id="专属链接"><a href="#专属链接" class="headerlink" title="专属链接"></a>专属链接</h3><p>题目地址：<a href="http://116.85.48.102:5050/welcom/8acb825dsc139s4f1bsb16es14f7875f8f23" target="_blank" rel="external">http://116.85.48.102:5050/welcom/8acb825dsc139s4f1bsb16es14f7875f8f23</a><br>右键源码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;link href=&quot;/image/banner/ZmF2aWNvbi5pY28=&quot; rel=&quot;shortcut icon&quot;&gt;</div></pre></td></tr></table></figure></p>
-<p>访问/image/banner/ZmF2aWNvbi5pY28=，下载下来favicon.ico,存在任意文件下载。<br>考虑到这是一道Java Web题，访问内容并不是以实体文件形式展开，而是class和url映射，所以第一个问题就是找到到底下载什么文件。在经过一系列测试，我终于下载到了第一个文件：web.xml，位置在./../../WEB-INF/web.xml中，将它进行base64编码放到href中，就可以下载了。<br>web.xml:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div></pre></td><td class="code"><pre><div class="line">&lt;web-app version=&quot;2.4&quot;</div><div class="line">         xmlns=&quot;http://java.sun.com/xml/ns/j2ee&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</div><div class="line">         xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/j2ee</div><div class="line">	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd&quot;&gt;</div><div class="line"></div><div class="line">    &lt;display-name&gt;Spring MVC Application&lt;/display-name&gt;</div><div class="line"></div><div class="line">    &lt;context-param&gt;</div><div class="line">        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</div><div class="line">        &lt;param-value&gt;WEB-INF/applicationContext.xml&lt;/param-value&gt;</div><div class="line">    &lt;/context-param&gt;</div><div class="line">    &lt;listener&gt;</div><div class="line">        &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;</div><div class="line">    &lt;/listener&gt;</div><div class="line"></div><div class="line">    &lt;!--&lt;listener&gt;--&gt;</div><div class="line">        &lt;!--&lt;listener-class&gt;com.didichuxing.ctf.listener.InitListener&lt;/listener-class&gt;--&gt;</div><div class="line">    &lt;!--&lt;/listener&gt;--&gt;</div><div class="line"></div><div class="line">    &lt;context-param&gt;</div><div class="line">        &lt;param-name&gt;log4jconfigLocation&lt;/param-name&gt;</div><div class="line">        &lt;param-value&gt;WEB-INF/log4j.properties&lt;/param-value&gt;</div><div class="line">    &lt;/context-param&gt;</div><div class="line">    &lt;listener&gt;</div><div class="line">        &lt;listener-class&gt;org.springframework.web.util.Log4jConfigListener&lt;/listener-class&gt;</div><div class="line">    &lt;/listener&gt;</div><div class="line">    &lt;servlet&gt;</div><div class="line"></div><div class="line">        &lt;servlet-name&gt;mvc-dispatcher&lt;/servlet-name&gt;</div><div class="line">        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;</div><div class="line">        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</div><div class="line"></div><div class="line">    &lt;/servlet&gt;</div><div class="line"></div><div class="line">    &lt;servlet-mapping&gt;</div><div class="line">        &lt;servlet-name&gt;mvc-dispatcher&lt;/servlet-name&gt;</div><div class="line">        &lt;url-pattern&gt;/&lt;/url-pattern&gt;</div><div class="line">    &lt;/servlet-mapping&gt;</div><div class="line"></div><div class="line">    &lt;servlet-mapping&gt;</div><div class="line">        &lt;servlet-name&gt;default&lt;/servlet-name&gt;</div><div class="line">        &lt;url-pattern&gt;*.jpg&lt;/url-pattern&gt;</div><div class="line">    &lt;/servlet-mapping&gt;</div><div class="line"></div><div class="line">    &lt;servlet-mapping&gt;</div><div class="line">        &lt;servlet-name&gt;default&lt;/servlet-name&gt;</div><div class="line">        &lt;url-pattern&gt;*.png&lt;/url-pattern&gt;</div><div class="line">    &lt;/servlet-mapping&gt;</div><div class="line"></div><div class="line">    &lt;servlet-mapping&gt;</div><div class="line">        &lt;servlet-name&gt;default&lt;/servlet-name&gt;</div><div class="line">        &lt;url-pattern&gt;*.js&lt;/url-pattern&gt;</div><div class="line">    &lt;/servlet-mapping&gt;</div><div class="line"></div><div class="line">    &lt;servlet-mapping&gt;</div><div class="line">        &lt;servlet-name&gt;default&lt;/servlet-name&gt;</div><div class="line">        &lt;url-pattern&gt;*.css&lt;/url-pattern&gt;</div><div class="line">    &lt;/servlet-mapping&gt;</div><div class="line"></div><div class="line">    &lt;servlet-mapping&gt;</div><div class="line">        &lt;servlet-name&gt;default&lt;/servlet-name&gt;</div><div class="line">        &lt;url-pattern&gt;*.woff&lt;/url-pattern&gt;</div><div class="line">    &lt;/servlet-mapping&gt;</div><div class="line">    &lt;servlet-mapping&gt;</div><div class="line">        &lt;servlet-name&gt;default&lt;/servlet-name&gt;</div><div class="line">        &lt;url-pattern&gt;*.woff2&lt;/url-pattern&gt;</div><div class="line">    &lt;/servlet-mapping&gt;</div><div class="line">    &lt;servlet-mapping&gt;</div><div class="line">        &lt;servlet-name&gt;default&lt;/servlet-name&gt;</div><div class="line">        &lt;url-pattern&gt;*.map&lt;/url-pattern&gt;</div><div class="line">    &lt;/servlet-mapping&gt;</div><div class="line">    &lt;servlet-mapping&gt;</div><div class="line">        &lt;servlet-name&gt;default&lt;/servlet-name&gt;</div><div class="line">        &lt;url-pattern&gt;*.ttf&lt;/url-pattern&gt;</div><div class="line">    &lt;/servlet-mapping&gt;</div><div class="line">    &lt;servlet-mapping&gt;</div><div class="line">        &lt;servlet-name&gt;default&lt;/servlet-name&gt;</div><div class="line">        &lt;url-pattern&gt;*.svg&lt;/url-pattern&gt;</div><div class="line">    &lt;/servlet-mapping&gt;</div><div class="line"></div><div class="line">    &lt;session-config&gt;</div><div class="line">        &lt;session-timeout&gt;</div><div class="line">            30</div><div class="line">        &lt;/session-timeout&gt;</div><div class="line">    &lt;/session-config&gt;</div><div class="line">    &lt;filter&gt;</div><div class="line">        &lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;</div><div class="line">        &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;</div><div class="line">        &lt;init-param&gt;</div><div class="line">            &lt;param-name&gt;encoding&lt;/param-name&gt;</div><div class="line">            &lt;param-value&gt;UTF-8&lt;/param-value&gt;</div><div class="line">        &lt;/init-param&gt;</div><div class="line">        &lt;init-param&gt;</div><div class="line">            &lt;param-name&gt;forceEncoding&lt;/param-name&gt;</div><div class="line">            &lt;param-value&gt;true&lt;/param-value&gt;</div><div class="line">        &lt;/init-param&gt;</div><div class="line">    &lt;/filter&gt;</div><div class="line"></div><div class="line">    &lt;filter-mapping&gt;</div><div class="line">        &lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;</div><div class="line">        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</div><div class="line">    &lt;/filter-mapping&gt;</div><div class="line"></div><div class="line">    &lt;error-page&gt;</div><div class="line">        &lt;error-code&gt;404&lt;/error-code&gt;</div><div class="line">        &lt;location&gt;/WEB-INF/pages/404.jsp&lt;/location&gt;</div><div class="line">    &lt;/error-page&gt;</div><div class="line">&lt;/web-app&gt;</div></pre></td></tr></table></figure></p>
-<p>从web.xml中可知是Spring MVC框架，以及applicationContext.xml的位置（网上搭建Sping MVC的教程默认都是在WEB-INF下）。还可以知道一个监听器的类地址com.didichuxing.ctf.listener.InitListener<br>java web 中不能直接访问webroot目录以外的文件，但是在webroot/WEB-INF/classes/下放着编译生成的class文件，下载下来还原成java文件。<br>applicationContext.xml：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</div><div class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</div><div class="line">       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</div><div class="line">      xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;</div><div class="line">    &lt;context:annotation-config/&gt;</div><div class="line">    &lt;context:component-scan base-package=&quot;com.didichuxing.ctf.*&quot;/&gt;</div><div class="line">    &lt;!--导入数据连接池配置文件--&gt;</div><div class="line">    &lt;bean id=&quot;propertyConfigurer&quot; class=&quot;org.springframework.beans.factory.config.PropertyPlaceholderConfigurer&quot;&gt;</div><div class="line">        &lt;property name=&quot;location&quot; value=&quot;classpath:properties/db.properties&quot;/&gt;</div><div class="line">        &lt;property name=&quot;fileEncoding&quot; value=&quot;utf-8&quot;/&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line">    &lt;!--数据连接池配置--&gt;</div><div class="line">    &lt;bean id=&quot;dataSource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot;&gt;</div><div class="line">        &lt;property name=&quot;driverClassName&quot; value=&quot;$&#123;driverClassName&#125;&quot;/&gt;</div><div class="line">        &lt;property name=&quot;url&quot; value=&quot;$&#123;url&#125;&quot;/&gt;</div><div class="line">        &lt;property name=&quot;username&quot; value=&quot;$&#123;username&#125;&quot;/&gt;</div><div class="line">        &lt;property name=&quot;password&quot; value=&quot;$&#123;password&#125;&quot;/&gt;</div><div class="line">        &lt;!-- 初始化连接大小 --&gt;</div><div class="line">        &lt;property name=&quot;initialSize&quot; value=&quot;$&#123;initialSize&#125;&quot;/&gt;</div><div class="line">        &lt;!-- 连接池最大数量 --&gt;</div><div class="line">        &lt;property name=&quot;maxActive&quot; value=&quot;$&#123;maxActive&#125;&quot;/&gt;</div><div class="line">        &lt;!-- 连接池最大空闲 --&gt;</div><div class="line">        &lt;property name=&quot;maxIdle&quot; value=&quot;$&#123;maxIdle&#125;&quot;/&gt;</div><div class="line">        &lt;!-- 连接池最小空闲 --&gt;</div><div class="line">        &lt;property name=&quot;minIdle&quot; value=&quot;$&#123;minIdle&#125;&quot;/&gt;</div><div class="line">        &lt;!-- 获取连接最大等待时间 --&gt;</div><div class="line">        &lt;property name=&quot;maxWait&quot; value=&quot;$&#123;maxWait&#125;&quot;/&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line">    &lt;!--Spring Mybatis整合--&gt;</div><div class="line">    &lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;</div><div class="line">        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;</div><div class="line">        &lt;!--&lt;property name=&quot;mapperLocations&quot; value=&quot;classpath:mapper/*.xml&quot;/&gt;--&gt;</div><div class="line">        &lt;property name=&quot;configLocation&quot; value=&quot;classpath:mybatis/config.xml&quot;/&gt;</div><div class="line">        &lt;property name=&quot;typeAliasesPackage&quot; value=&quot;com.didichuxing.ctf.model&quot;/&gt;</div><div class="line">        &lt;property name=&quot;plugins&quot;&gt;</div><div class="line">            &lt;array&gt;</div><div class="line">                &lt;bean class=&quot;com.github.pagehelper.PageHelper&quot;&gt;</div><div class="line">                    &lt;property name=&quot;properties&quot;&gt;</div><div class="line">                        &lt;value&gt;</div><div class="line">                            reasonable=true</div><div class="line">                        &lt;/value&gt;</div><div class="line">                    &lt;/property&gt;</div><div class="line">                &lt;/bean&gt;</div><div class="line">            &lt;/array&gt;</div><div class="line">        &lt;/property&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line">    &lt;!-- DAO接口所在包名，Spring会自动查找其下的类 --&gt;</div><div class="line">    &lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;</div><div class="line">        &lt;property name=&quot;basePackage&quot; value=&quot;com.didichuxing.ctf.dao&quot;/&gt;</div><div class="line">        &lt;property name=&quot;sqlSessionFactoryBeanName&quot; value=&quot;sqlSessionFactory&quot;/&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line">    &lt;!-- (事务管理)transaction manager, use JtaTransactionManager for global tx --&gt;</div><div class="line">    &lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;</div><div class="line">        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line">    &lt;!-- (init) --&gt;</div><div class="line">    &lt;bean id=&quot;initListener&quot; class=&quot;com.didichuxing.ctf.listener.InitListener&quot;&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure></p>
+        <h3 id="专属链接"><a href="#专属链接" class="headerlink" title="专属链接"></a>专属链接</h3><p>题目地址：<a href="http://116.85.48.102:5050/welcom/8acb825dsc139s4f1bsb16es14f7875f8f23" target="_blank" rel="external">http://116.85.48.102:5050/welcom/8acb825dsc139s4f1bsb16es14f7875f8f23</a><br>右键源码：</p>
+<pre><code>&lt;link href=&quot;/image/banner/ZmF2aWNvbi5pY28=&quot; rel=&quot;shortcut icon&quot;&gt;
+</code></pre><p>访问/image/banner/ZmF2aWNvbi5pY28=，下载下来favicon.ico,存在任意文件下载。<br>考虑到这是一道Java Web题，访问内容并不是以实体文件形式展开，而是class和url映射，所以第一个问题就是找到到底下载什么文件。在经过一系列测试，我终于下载到了第一个文件：web.xml，位置在./../../WEB-INF/web.xml中，将它进行base64编码放到href中，就可以下载了。<br>web.xml:</p>
+<pre><code class="language-java">&lt;web-app version=&quot;2.4&quot;
+         xmlns=&quot;http://java.sun.com/xml/ns/j2ee&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/j2ee
+    http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd&quot;&gt;
+
+    &lt;display-name&gt;Spring MVC Application&lt;/display-name&gt;
+
+    &lt;context-param&gt;
+        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+        &lt;param-value&gt;WEB-INF/applicationContext.xml&lt;/param-value&gt;
+    &lt;/context-param&gt;
+    &lt;listener&gt;
+        &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+    &lt;/listener&gt;
+
+    &lt;!--&lt;listener&gt;--&gt;
+        &lt;!--&lt;listener-class&gt;com.didichuxing.ctf.listener.InitListener&lt;/listener-class&gt;--&gt;
+    &lt;!--&lt;/listener&gt;--&gt;
+
+    &lt;context-param&gt;
+        &lt;param-name&gt;log4jconfigLocation&lt;/param-name&gt;
+        &lt;param-value&gt;WEB-INF/log4j.properties&lt;/param-value&gt;
+    &lt;/context-param&gt;
+    &lt;listener&gt;
+        &lt;listener-class&gt;org.springframework.web.util.Log4jConfigListener&lt;/listener-class&gt;
+    &lt;/listener&gt;
+    &lt;servlet&gt;
+
+        &lt;servlet-name&gt;mvc-dispatcher&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+
+    &lt;/servlet&gt;
+
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;mvc-dispatcher&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;default&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;*.jpg&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;default&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;*.png&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;default&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;*.js&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;default&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;*.css&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;default&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;*.woff&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;default&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;*.woff2&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;default&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;*.map&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;default&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;*.ttf&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;default&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;*.svg&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+
+    &lt;session-config&gt;
+        &lt;session-timeout&gt;
+            30
+        &lt;/session-timeout&gt;
+    &lt;/session-config&gt;
+    &lt;filter&gt;
+        &lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;
+        &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;encoding&lt;/param-name&gt;
+            &lt;param-value&gt;UTF-8&lt;/param-value&gt;
+        &lt;/init-param&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;forceEncoding&lt;/param-name&gt;
+            &lt;param-value&gt;true&lt;/param-value&gt;
+        &lt;/init-param&gt;
+    &lt;/filter&gt;
+
+    &lt;filter-mapping&gt;
+        &lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;
+        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+    &lt;/filter-mapping&gt;
+
+    &lt;error-page&gt;
+        &lt;error-code&gt;404&lt;/error-code&gt;
+        &lt;location&gt;/WEB-INF/pages/404.jsp&lt;/location&gt;
+    &lt;/error-page&gt;
+&lt;/web-app&gt;
+</code></pre>
+<p>从web.xml中可知是Spring MVC框架，以及applicationContext.xml的位置（网上搭建Sping MVC的教程默认都是在WEB-INF下）。还可以知道一个监听器的类地址com.didichuxing.ctf.listener.InitListener<br>java web 中不能直接访问webroot目录以外的文件，但是在webroot/WEB-INF/classes/下放着编译生成的class文件，下载下来还原成java文件。<br>applicationContext.xml：</p>
+<pre><code class="language-java">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+      xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
+    &lt;context:annotation-config/&gt;
+    &lt;context:component-scan base-package=&quot;com.didichuxing.ctf.*&quot;/&gt;
+    &lt;!--导入数据连接池配置文件--&gt;
+    &lt;bean id=&quot;propertyConfigurer&quot; class=&quot;org.springframework.beans.factory.config.PropertyPlaceholderConfigurer&quot;&gt;
+        &lt;property name=&quot;location&quot; value=&quot;classpath:properties/db.properties&quot;/&gt;
+        &lt;property name=&quot;fileEncoding&quot; value=&quot;utf-8&quot;/&gt;
+    &lt;/bean&gt;
+    &lt;!--数据连接池配置--&gt;
+    &lt;bean id=&quot;dataSource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot;&gt;
+        &lt;property name=&quot;driverClassName&quot; value=&quot;${driverClassName}&quot;/&gt;
+        &lt;property name=&quot;url&quot; value=&quot;${url}&quot;/&gt;
+        &lt;property name=&quot;username&quot; value=&quot;${username}&quot;/&gt;
+        &lt;property name=&quot;password&quot; value=&quot;${password}&quot;/&gt;
+        &lt;!-- 初始化连接大小 --&gt;
+        &lt;property name=&quot;initialSize&quot; value=&quot;${initialSize}&quot;/&gt;
+        &lt;!-- 连接池最大数量 --&gt;
+        &lt;property name=&quot;maxActive&quot; value=&quot;${maxActive}&quot;/&gt;
+        &lt;!-- 连接池最大空闲 --&gt;
+        &lt;property name=&quot;maxIdle&quot; value=&quot;${maxIdle}&quot;/&gt;
+        &lt;!-- 连接池最小空闲 --&gt;
+        &lt;property name=&quot;minIdle&quot; value=&quot;${minIdle}&quot;/&gt;
+        &lt;!-- 获取连接最大等待时间 --&gt;
+        &lt;property name=&quot;maxWait&quot; value=&quot;${maxWait}&quot;/&gt;
+    &lt;/bean&gt;
+    &lt;!--Spring Mybatis整合--&gt;
+    &lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
+        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;
+        &lt;!--&lt;property name=&quot;mapperLocations&quot; value=&quot;classpath:mapper/*.xml&quot;/&gt;--&gt;
+        &lt;property name=&quot;configLocation&quot; value=&quot;classpath:mybatis/config.xml&quot;/&gt;
+        &lt;property name=&quot;typeAliasesPackage&quot; value=&quot;com.didichuxing.ctf.model&quot;/&gt;
+        &lt;property name=&quot;plugins&quot;&gt;
+            &lt;array&gt;
+                &lt;bean class=&quot;com.github.pagehelper.PageHelper&quot;&gt;
+                    &lt;property name=&quot;properties&quot;&gt;
+                        &lt;value&gt;
+                            reasonable=true
+                        &lt;/value&gt;
+                    &lt;/property&gt;
+                &lt;/bean&gt;
+            &lt;/array&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+    &lt;!-- DAO接口所在包名，Spring会自动查找其下的类 --&gt;
+    &lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
+        &lt;property name=&quot;basePackage&quot; value=&quot;com.didichuxing.ctf.dao&quot;/&gt;
+        &lt;property name=&quot;sqlSessionFactoryBeanName&quot; value=&quot;sqlSessionFactory&quot;/&gt;
+    &lt;/bean&gt;
+    &lt;!-- (事务管理)transaction manager, use JtaTransactionManager for global tx --&gt;
+    &lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;
+    &lt;/bean&gt;
+    &lt;!-- (init) --&gt;
+    &lt;bean id=&quot;initListener&quot; class=&quot;com.didichuxing.ctf.listener.InitListener&quot;&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>DDCTF提供的这一道java web 题有了开始对java web 安全的认识，一个方向。</p>
 
       
@@ -470,7 +641,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -598,7 +769,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

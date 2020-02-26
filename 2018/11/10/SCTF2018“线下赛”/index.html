@@ -74,7 +74,7 @@
 <meta name="description" content="由于一些原因，线下赛改为打线上赛了。（本来不想写wp的，这个就是找poc打，满地找flag，没有什么意义）下午的时候也是没有外网的，先连个外网，搜exp，再连上内网打。。。最后我们队做了10道题。（本来想：第3名稳了，最后时刻吴哥来个。。。太强了，满分，掉第4了，充电宝还是可以的。）平台关了，水一波wp 题目一、海洋CMS（seaCMS ）题目描述是不可能有的。请看上面的第一张图。3个flag f">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SCTF2018“线下赛”write up">
-<meta property="og:url" content="http://www.cuittk.cn/2018/11/10/SCTF2018“线下赛”/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2018/11/10/SCTF2018“线下赛”/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
 <meta property="og:description" content="由于一些原因，线下赛改为打线上赛了。（本来不想写wp的，这个就是找poc打，满地找flag，没有什么意义）下午的时候也是没有外网的，先连个外网，搜exp，再连上内网打。。。最后我们队做了10道题。（本来想：第3名稳了，最后时刻吴哥来个。。。太强了，满分，掉第4了，充电宝还是可以的。）平台关了，水一波wp 题目一、海洋CMS（seaCMS ）题目描述是不可能有的。请看上面的第一张图。3个flag f">
 <meta property="og:locale" content="zh-Hans">
@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://img.cdn.cuittk.cn/ee4clrnnsl3an2nzgdeaww9i9t.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/QQ%E6%88%AA%E5%9B%BE20180710003409.jpg">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/QQ%E6%88%AA%E5%9B%BE20180710003438.jpg">
-<meta property="og:updated_time" content="2018-11-10T09:12:32.895Z">
+<meta property="og:updated_time" content="2020-02-26T10:46:19.487Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SCTF2018“线下赛”write up">
 <meta name="twitter:description" content="由于一些原因，线下赛改为打线上赛了。（本来不想写wp的，这个就是找poc打，满地找flag，没有什么意义）下午的时候也是没有外网的，先连个外网，搜exp，再连上内网打。。。最后我们队做了10道题。（本来想：第3名稳了，最后时刻吴哥来个。。。太强了，满分，掉第4了，充电宝还是可以的。）平台关了，水一波wp 题目一、海洋CMS（seaCMS ）题目描述是不可能有的。请看上面的第一张图。3个flag f">
@@ -127,12 +127,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2018/11/10/SCTF2018“线下赛”/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2018/11/10/SCTF2018“线下赛”/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>SCTF2018“线下赛”write up | h1tler's blog</title>
   
 
@@ -270,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2018/11/10/SCTF2018“线下赛”/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2018/11/10/SCTF2018“线下赛”/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -366,10 +366,15 @@
       
         <p>由于一些原因，线下赛改为打线上赛了。<br>（本来不想写wp的，这个就是找poc打，满地找flag，没有什么意义）<br>下午的时候也是没有外网的，先连个外网，搜exp，再连上内网打。。。<br>最后我们队做了10道题。（本来想：第3名稳了，最后时刻吴哥来个。。。太强了，满分，掉第4了，充电宝还是可以的。）<br><img src="http://img.cdn.cuittk.cn/1vu2dr1yxohl4wr0ju9ngrwfje.png" alt=""><br>平台关了，水一波wp</p>
 <h3 id="题目一、海洋CMS（seaCMS-）"><a href="#题目一、海洋CMS（seaCMS-）" class="headerlink" title="题目一、海洋CMS（seaCMS ）"></a>题目一、海洋CMS（seaCMS ）</h3><p>题目描述是不可能有的。请看上面的第一张图。<br>3个flag</p>
-<h4 id="flag1"><a href="#flag1" class="headerlink" title="flag1"></a>flag1</h4><p>应该是海洋CMS 6.54版<br><a href="http://www.freebuf.com/vuls/150042.html" target="_blank" rel="external">poc</a><br>poc就不贴了。<br>webshell后就是满地找flag<br>首先，一个目录一个目录下没有，就使用linux命令找：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep -r -n &quot;flag&quot; ./*</div></pre></td></tr></table></figure></p>
-<p><img src="http://img.cdn.cuittk.cn/kacl9xte8aug1lurt53aoqadcx.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">flag1&#123;ac727d1a3130e4093b3665120a3240a5&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="flag1"><a href="#flag1" class="headerlink" title="flag1"></a>flag1</h4><p>应该是海洋CMS 6.54版<br><a href="http://www.freebuf.com/vuls/150042.html" target="_blank" rel="external">poc</a><br>poc就不贴了。<br>webshell后就是满地找flag<br>首先，一个目录一个目录下没有，就使用linux命令找：</p>
+<pre><code class="language-html">grep -r -n &quot;flag&quot; ./*
+</code></pre>
+<p><img src="http://img.cdn.cuittk.cn/kacl9xte8aug1lurt53aoqadcx.png" alt=""></p>
+<pre><code class="language-html">flag1{ac727d1a3130e4093b3665120a3240a5}
+</code></pre>
 <p>知道命名规则，接着找flag2</p>
-<h4 id="flag2"><a href="#flag2" class="headerlink" title="flag2"></a>flag2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep -r -n &quot;flag2&quot; ./*</div></pre></td></tr></table></figure>
+<h4 id="flag2"><a href="#flag2" class="headerlink" title="flag2"></a>flag2</h4><pre><code class="language-html">grep -r -n &quot;flag2&quot; ./*
+</code></pre>
 <p><img src="http://img.cdn.cuittk.cn/3smuihca5bwewv0dsciemve56d.png" alt=""><br>再去其他目录找<br>在/home/key/下面有一个</p>
 <h4 id="flag3"><a href="#flag3" class="headerlink" title="flag3"></a>flag3</h4><p>还有在/usr/share/目录下面的哪个文件忘了</p>
 <h3 id="题目二、齐博CMS整站系统"><a href="#题目二、齐博CMS整站系统" class="headerlink" title="题目二、齐博CMS整站系统"></a>题目二、齐博CMS整站系统</h3><p>题目描述是不可能有的。请看上面的第一张图。<br><img src="http://img.cdn.cuittk.cn/QQ%E6%88%AA%E5%9B%BE20180710003706.jpg" alt=""><br>开局竟然是这样的。（不知道是网络问题还是题目本身）</p>
@@ -379,7 +384,9 @@
 <h4 id="flag1-1"><a href="#flag1-1" class="headerlink" title="flag1"></a>flag1</h4><p>扫目录，发现有个使用说明.txt<br><img src="http://img.cdn.cuittk.cn/QQ%E6%88%AA%E5%9B%BE20180710003304.jpg" alt=""><br>使用说明下提示的安装目录很可疑。<br><img src="http://img.cdn.cuittk.cn/QQ%E6%88%AA%E5%9B%BE20180710003344.jpg" alt=""><br>打开/webrock/install，显示一个目录，目录下有一个html文件，里面有flag</p>
 <h4 id="flag4"><a href="#flag4" class="headerlink" title="flag4"></a>flag4</h4><p>队友找到一个webshell方法，后台上传图片，管理修改图片后缀为php。<br>webshell后得到<br><img src="http://img.cdn.cuittk.cn/9h7bv3grus9ssmp615r5j7adob.png" alt=""></p>
 <h4 id="flag5"><a href="#flag5" class="headerlink" title="flag5"></a>flag5</h4><p>系统是windows的<br>flag5在C:/Program Files/下<br><img src="http://img.cdn.cuittk.cn/ad74ei7sje2kexc5g2y7f1ljo4.png" alt=""></p>
-<h4 id="flag3-1"><a href="#flag3-1" class="headerlink" title="flag3"></a>flag3</h4><p>flag3找了半天，使用windows下与grep 像似的命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">findstr /s /i &quot;flag3&quot; *.*</div></pre></td></tr></table></figure></p>
+<h4 id="flag3-1"><a href="#flag3-1" class="headerlink" title="flag3"></a>flag3</h4><p>flag3找了半天，使用windows下与grep 像似的命令</p>
+<pre><code class="language-html">findstr /s /i &quot;flag3&quot; *.*
+</code></pre>
 <p>在C:\Program Files\phpStudy\MySQL\data\flag\下的flag.MYD<br><img src="http://img.cdn.cuittk.cn/lbdzq8co6p7xe4oah2bz0g0ttk.png" alt=""><br>菜刀上打开没有flag，下载下来打开<br><img src="http://img.cdn.cuittk.cn/ee4clrnnsl3an2nzgdeaww9i9t.png" alt=""></p>
 <h3 id="题目四、织梦CMS（dede）"><a href="#题目四、织梦CMS（dede）" class="headerlink" title="题目四、织梦CMS（dede）"></a>题目四、织梦CMS（dede）</h3><p>一个假的前台，没有连接可点<br><img src="http://img.cdn.cuittk.cn/QQ%E6%88%AA%E5%9B%BE20180710003409.jpg" alt=""></p>
 <h4 id="flag1-2"><a href="#flag1-2" class="headerlink" title="flag1"></a>flag1</h4><p>扫目录<br>发现有个robots.txt文件。<br><img src="http://img.cdn.cuittk.cn/QQ%E6%88%AA%E5%9B%BE20180710003438.jpg" alt=""></p>
@@ -501,7 +508,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -629,7 +636,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>

